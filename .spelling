@@ -1,0 +1,29 @@
+# markdown-spellcheck spelling configuration file
+# Format - lines beginning # are comments
+# global dictionary is at the start, file overrides afterwards
+# one word per line, to define a file override use ' - filename'
+# where filename is relative to this configuration file
+npm
+config
+browserify
+browserlist
+stylelint
+bithound
+jsdoc
+ - readme.md
+init
+2
+es2015
+JS
+xo
+Ava
+tap-nyan
+hopsdoc
+css-modulesify
+2017
+Gregor
+readme.md
+package.json
+Github
+_mixins.pug
+cssnext
