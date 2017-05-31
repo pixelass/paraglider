@@ -16,6 +16,8 @@ const PLUGIN_DEFAULTS = {
   loop: false,
   classNames: {
     pluginLoaded: 'pluginLoaded',
+    slide: 'slide',
+    slides: 'slides',
     back: 'back',
     active: 'active',
     init: 'init',
@@ -33,7 +35,6 @@ const PLUGIN_DEFAULTS = {
 const animate = (speed, from, to, callback) => {
   const now = Date.now()
   const step = (to - from) / speed
-
   const loop = () => {
     const then = Date.now()
     const diff = then - now
@@ -41,10 +42,11 @@ const animate = (speed, from, to, callback) => {
 
     if (timeLeft > 0) {
       global.requestAnimationFrame(loop)
-      return callback(from + (step * diff))
+      callback(from + (step * diff))
+    } else {
+      global.cancelAnimationFrame(loop)
+      callback(to)
     }
-    global.cancelAnimationFrame(loop)
-    return callback(to)
   }
   return loop()
 }
@@ -68,8 +70,9 @@ class Glider {
   init(el) {
     const {classNames} = this.options
     this.el = el
+    this.slidesWrapper = el.querySelector(`.${classNames.slides}`)
     this.addListeners()
-    this.slides = Array.from(this.el.querySelectorAll(`.${classNames.slide}`))
+    this.slides = Array.from(this.slidesWrapper.querySelectorAll(`.${classNames.slide}`))
     this.addSides()
     this.addInitClassNames()
   }
@@ -81,25 +84,23 @@ class Glider {
       requestEventListener('touchmove', this.handleMove.bind(this)),
       requestEventListener('touchend', this.handleUp.bind(this))
     ]
-    this.el.addEventListener('mousedown', this.handleDown)
-    this.el.addEventListener('touchstart', this.handleDown)
+    this.slidesWrapper.addEventListener('mousedown', this.handleDown)
+    this.slidesWrapper.addEventListener('touchstart', this.handleDown)
   }
 
   removeListeners() {
     this.listeners.forEach(cancelListener => cancelListener())
-    this.el.removeEventListener('mousedown', this.handleDown)
-    this.el.removeEventListener('touchstart', this.handleDown)
+    this.slidesWrapper.removeEventListener('mousedown', this.handleDown)
+    this.slidesWrapper.removeEventListener('touchstart', this.handleDown)
   }
 
-  addClassNames(back) {
+  addClassNames() {
     const {currentSlide, previousSlide, nextSlide} = this.state
-    const {classNames} = this.options
+    const {active, next, previous} = this.options.classNames
     this.slides.forEach((slide, index) => {
-      const movesBack = Boolean(back && ((index === previousSlide) || (index === nextSlide) || (index === currentSlide)))
-      slide.classList.toggle(classNames.active, index === currentSlide)
-      slide.classList.toggle(classNames.next, index === nextSlide)
-      slide.classList.toggle(classNames.previous, index === previousSlide)
-      slide.classList.toggle(classNames.back, movesBack)
+      slide.classList.toggle(active, index === currentSlide)
+      slide.classList.toggle(next, index === nextSlide)
+      slide.classList.toggle(previous, index === previousSlide)
     })
   }
 
@@ -130,12 +131,14 @@ class Glider {
   }
 
   addSides() {
-    const {currentSlide} = this.state
+    const {currentSlide, requestedNext, requestedPrevious} = this.state
     const {length} = this.slides
+    const nextSlide = requestedNext === 0 ? 0 : (requestedNext || ((currentSlide + 1) % length))
+    const previousSlide = requestedPrevious === 0 ? 0 : (requestedPrevious || ((currentSlide - 1 + length) % length))
     this.state = {
       ...this.state,
-      nextSlide: (currentSlide + 1) % length,
-      previousSlide: (currentSlide - 1 + length) % length
+      nextSlide,
+      previousSlide
     }
   }
 
@@ -174,12 +177,10 @@ class Glider {
   }
 
   nextSlide() {
-    this.state.down = false
     this.spring(0, 1, this.options.speed)
   }
 
   prevSlide() {
-    this.state.down = false
     this.spring(0, -1, this.options.speed)
   }
 
@@ -188,10 +189,14 @@ class Glider {
    */
   goTo(n) {
     if (n > this.state.currentSlide) {
-      this.state.nextSlide = n
+      this.state.requestedNext = n
+      this.addSides()
       this.nextSlide()
+      this.addClassNames()
     } else if (n < this.state.currentSlide) {
-      this.state.previousSlide = n
+      this.state.requestedPrevious = n
+      this.addSides()
+      this.addClassNames()
       this.prevSlide()
     }
   }
@@ -208,23 +213,24 @@ class Glider {
         currentSlide: this.state.nextSlide
       }
     }
+    this.state = {
+      ...this.state,
+      requestedNext: null,
+      requestedPrevious: null
+    }
     const {onEnd} = this.options
     this.addSides()
     this.addClassNames()
     if (typeof onEnd === 'function') {
       const {currentSlide, previousSlide, nextSlide} = this.state
-      onEnd(this.slides[currentSlide], this.slides[nextSlide], this.slides[previousSlide])
+      onEnd(this.slides[nextSlide], this.slides[previousSlide], this.slides[currentSlide])
     }
   }
 
   spring(progress, end, duration) {
     animate(duration, progress, end,
       p => {
-        const x = p * this.el.offsetWidth
-        this.state = {
-          ...this.state,
-          x
-        }
+        this.state.x = p * this.el.offsetWidth
         if (p === end) {
           this.handleEnd(end)
         } else {
@@ -238,11 +244,7 @@ class Glider {
     const {down, xStart} = this.state
     if (down) {
       const clientX = this.getClientX(e)
-      const x = xStart - clientX
-      this.state = {
-        ...this.state,
-        x
-      }
+      this.state.x = xStart - clientX
       this.handleProgress()
     }
   }
@@ -250,14 +252,18 @@ class Glider {
   handleProgress() {
     const {onSlide} = this.options
     const {currentSlide, nextSlide, previousSlide, x} = this.state
-
     const progress = x / this.el.offsetWidth
     if (typeof onSlide === 'function') {
+      const right = 1 - progress
+      const left = 2 - right
+      const current = this.slides[currentSlide]
+      const next = left < right ? null : this.slides[nextSlide]
+      const prev = left > right ? null : this.slides[previousSlide]
       onSlide(
         {
-          left: Math.max(-1, -1 - progress) * -1,
-          right: Math.min(1, 1 - progress)
-        }, this.slides[nextSlide], this.slides[previousSlide], this.slides[currentSlide]
+          right,
+          left
+        }, next, prev, current
       )
     }
   }
