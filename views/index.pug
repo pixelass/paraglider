@@ -12,7 +12,7 @@ block content
   - const colors = ['red', 'green', 'yellow', 'blue', 'pink']
   - let slides = 0
   - let couter = slides
-  .glider
+  .glider.ex1
     - slides = 4
     .pagers
       .prev
@@ -30,7 +30,7 @@ block content
                       style={'background-image': `url("assets/${counter}.jpg")`})
           h2 Slide #{counter}
           .log This element has a parallax effect
-  .glider
+  .glider.ex1
     - slides = 5
     .pagers
       .prev
@@ -48,7 +48,25 @@ block content
                       style={'background-image': `url("assets/${counter}.jpg")`})
           h2 Slide #{counter}
           .log This element has a parallax effect
-  .glider
+  .glider.ex1
+    - slides = 2
+    .pagers
+      .prev
+        +arrow('prev')
+      .next
+        +arrow('next')
+      .dots
+        - counter = 0
+        while ++counter <= slides
+          .dot
+    .slides.jsWrapper
+      - counter = 0
+      while ++counter <= slides
+        .slide.jsHook(class=colors[counter % colors.length]
+                      style={'background-image': `url("assets/${counter}.jpg")`})
+          h2 Slide #{counter}
+          .log This element has a parallax effect
+  .glider.ex2
     - slides = 2
     .pagers
       .prev

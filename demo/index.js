@@ -3,7 +3,7 @@ import {easeInBack, easeOutSine, easeInOutElastic} from 'easing-utils'
 import Glider from '../src/glider'
 import styles from './main.css' // eslint-disable-line import/no-unassigned-import
 
-const gliders = Array.from(document.querySelectorAll('.glider'))
+const gliders = Array.from(document.querySelectorAll('.ex1'))
 
 const classNames = {
   pluginLoaded: styles.pluginLoaded,
@@ -134,4 +134,66 @@ gliders.forEach((glider, index) => {
   })
   nextSlide.addEventListener('click', instance.nextSlide)
   prevSlide.addEventListener('click', instance.prevSlide)
+})
+
+const paraBand = (glider, opts) => {
+  const slides = Array.from(glider.querySelectorAll('.slide') || [])
+  const pagers = Array.from(glider.querySelectorAll('.dot') || [])
+  const nextSlide = glider.querySelector('.next')
+  const prevSlide = glider.querySelector('.prev')
+  const options = {
+    classNames,
+    snapBackAt: 0.5,
+    ...opts,
+    onSlide({left, right}, next, prev, current) {
+      if (prev) {
+        prev.style.transform = `translate3d(${left * -100}%,0,0)`
+      } else if (next) {
+        next.style.transform = `translate3d(${right * 100}%,0,0)`
+      }
+      current.style.transform = `translate3d(${(right * 100) - 100}%,0,0)`
+      opts.onSlide({left, right}, next, prev, current)
+    },
+    onEnd(next, prev, current) {
+      pagers.forEach((pager, i) => {
+        pager.classList.toggle(styles.activePager, i === slides.indexOf(current))
+      })
+      slides.forEach(slide => {
+        slide.style.transform = ''
+      })
+      opts.onEnd(next, prev, current)
+    }
+  }
+  const instance = new Glider(options)
+  instance.init(glider)
+  pagers.forEach((pager, i) => {
+    const goto = () => instance.goTo(i)
+    pager.addEventListener('click', goto)
+    pager.classList.toggle(styles.activePager, i === (opts.initialSlide || 0))
+  })
+  nextSlide.addEventListener('click', instance.nextSlide)
+  prevSlide.addEventListener('click', instance.prevSlide)
+}
+
+const ex2 = document.querySelector('.ex2')
+const ex2Logs = Array.from(ex2.querySelectorAll('.log') || [])
+paraBand(ex2, {
+  onSlide({left, right}, next, prev, current) {
+    ex2Logs.forEach(log => {
+      if (log.parentNode === next) {
+        log.style.transform = `translate3d(${easeInBack(right) * 100}%,0,0)`
+      } else if (log.parentNode === prev) {
+        log.style.transform = `translate3d(${easeInBack(left) * -100}%,0,0)`
+      } else if (log.parentNode === current) {
+        log.style.transform = `translate3d(${(easeInBack(right) * 100) - 100}%,0,0)`
+      }
+    })
+  },
+  onEnd(next, prev, current) {
+    ex2Logs.forEach(log => {
+      if (log.parentNode === current) {
+        log.style.transform = ''
+      }
+    })
+  }
 })
