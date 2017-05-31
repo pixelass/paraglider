@@ -1,6 +1,8 @@
 # paraglider
 
-> A Slider with parallax API
+A Slider with parallax API.  
+This slider does not do anything except for adding classNames to the current, previous and next slide.  
+With the help of callbacks however, you can implement any imaginable effect.
 
 [![npm](https://img.shields.io/npm/v/paraglider.svg?style=flat-square)](https://www.npmjs.com/package/paraglider)
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-44aa44.svg?style=flat-square)](https://github.com/conventional-changelog/standard-version)
