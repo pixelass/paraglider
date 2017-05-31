@@ -1,7 +1,15 @@
 extends _layout.pug
 
+
 block content
-  h1=name
-  h2=fileName
-  p=description
-  #app
+  - const colors = ['red', 'green', 'yellow', 'orange', 'pink']
+  .glider
+    .pagers
+      .next ▶︎
+      .prev ◀︎
+    - const slides = 20
+    - let counter = 0
+    while ++counter <= slides
+      .slide.jsHook(class=colors[counter % colors.length])
+        h2 Slide #{counter}
+        .log

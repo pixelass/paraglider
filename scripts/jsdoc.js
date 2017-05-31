@@ -1,5 +1,5 @@
 import path from 'path'
-import rm from 'rm-r'
+import rm from 'rimraf'
 import mkdirp from 'mkdirp'
 import config from '../jsdoc.json' // eslint-disable-line import/extensions
 

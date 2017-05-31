@@ -11,11 +11,155 @@ body {
   box-sizing: border-box;
 }
 
-.a {
+.glider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 300px;
+  margin: 30px auto;
+  background: #222;
+  color: #fff;
+}
+
+.slide {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px 50px;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+  z-index: 0;
+  border: 5px solid red;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
+.yellow {
+  background: #d69833;
+}
+
+.red {
+  background: #d53f42;
+}
+
+.green {
+  background: #43dd55;
+}
+
+.orange {
+  background: #d67422;
+}
+
+.pink {
+  background: #d660d2;
+}
+
+.pagers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  z-index: 5;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  width: 2em;
+  height: 2em;
+  font-size: 25px;
+  border-radius: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background: #222;
+  color: #fff;
+  border: 2px solid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  visibility: visible;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.a .slide {
+  border-color: #222;
+}
+
+.jsHook {
+  /* slide */
+}
+
 .b {
-  color: red;
+  -webkit-transform: translate3d(0%, 0, 0);
+          transform: translate3d(0%, 0, 0);
+  z-index: 2;
 }
+
+.c,
+.d {
+  z-index: 3;
+}
+
+.c {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+
+.d {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+
+.b,
+.d,
+.e {
+}
+
+.b.f,
+  .b.f.g,
+  .d.f,
+  .d.f.g,
+  .e.f,
+  .e.f.g {
+  transition: none;
+}
+
+.log {
+  /* log element */
+  background: black;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 20px;
+  width: calc(100% - 40px);
+}
+

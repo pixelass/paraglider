@@ -32,9 +32,8 @@
 <!-- tocstop -->
 
 ## Links
-* [Github Page](https://pixelass/.github.io/paraglider/)
+* [Demo](https://pixelass.github.io/paraglider/)
 * [Documentation](https://pixelass/.github.io/paraglider/api/)
-* [Demo](https://pixelass/.github.io/paraglider/demo.html)
 
 
 ## Developing
