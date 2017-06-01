@@ -1,24 +1,5 @@
-import {requestEventListener} from '../event-listeners'
 import {PLUGIN_DEFAULTS} from '../config'
-
-const animate = (speed, from, to, callback) => {
-  const now = Date.now()
-  const step = (to - from) / speed
-  const loop = () => {
-    const then = Date.now()
-    const diff = then - now
-    const timeLeft = speed - diff
-
-    if (timeLeft > 0) {
-      global.requestAnimationFrame(loop)
-      callback(from + (step * diff))
-    } else {
-      global.cancelAnimationFrame(loop)
-      callback(to)
-    }
-  }
-  return loop()
-}
+import {animate} from '../helpers'
 
 class Glider {
   constructor(options) {
@@ -33,6 +14,8 @@ class Glider {
     this.prevSlide = this.prevSlide.bind(this)
     this.goTo = this.goTo.bind(this)
     this.handleDown = this.handleDown.bind(this)
+    this.handleMove = this.handleMove.bind(this)
+    this.handleUp = this.handleUp.bind(this)
     this.getClientX = this.getClientX.bind(this)
   }
 
@@ -47,18 +30,19 @@ class Glider {
   }
 
   addListeners() {
-    this.listeners = [
-      requestEventListener('mousemove', this.handleMove.bind(this)),
-      requestEventListener('mouseup', this.handleUp.bind(this)),
-      requestEventListener('touchmove', this.handleMove.bind(this)),
-      requestEventListener('touchend', this.handleUp.bind(this))
-    ]
+    global.addEventListener('mousemove', this.handleMove)
+    global.addEventListener('mouseup', this.handleUp)
+    global.addEventListener('touchmove', this.handleMove)
+    global.addEventListener('touchend', this.handleUp)
     this.slidesWrapper.addEventListener('mousedown', this.handleDown)
     this.slidesWrapper.addEventListener('touchstart', this.handleDown)
   }
 
   removeListeners() {
-    this.listeners.forEach(cancelListener => cancelListener())
+    global.removeEventListener('mousemove', this.handleMove)
+    global.removeEventListener('mouseup', this.handleUp)
+    global.removeEventListener('touchmove', this.handleMove)
+    global.removeEventListener('touchend', this.handleUp)
     this.slidesWrapper.removeEventListener('mousedown', this.handleDown)
     this.slidesWrapper.removeEventListener('touchstart', this.handleDown)
   }
@@ -212,9 +196,12 @@ class Glider {
   handleMove(e) {
     const {down, xStart} = this.state
     if (down) {
+      if (Math.abs(this.state.x) > 10) {
+        e.preventDefault()
+        this.handleProgress()
+      }
       const clientX = this.getClientX(e)
       this.state.x = xStart - clientX
-      this.handleProgress()
     }
   }
 
