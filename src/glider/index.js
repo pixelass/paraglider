@@ -129,23 +129,23 @@ class Glider {
   }
 
   nextSlide() {
+    this.addSides()
+    this.addClassNames()
     this.spring(0, 1, this.options.speed)
   }
 
   prevSlide() {
+    this.addSides()
+    this.addClassNames()
     this.spring(0, -1, this.options.speed)
   }
 
   goTo(n) {
     if (n > this.state.currentSlide) {
       this.state.requestedNext = n
-      this.addSides()
-      this.addClassNames()
       this.nextSlide()
     } else if (n < this.state.currentSlide) {
       this.state.requestedPrevious = n
-      this.addSides()
-      this.addClassNames()
       this.prevSlide()
     }
   }
