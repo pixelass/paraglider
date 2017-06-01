@@ -75,11 +75,12 @@ coverRightCustom(ex2, {
   speed: 1000,
   spring: 500,
   onSlide({left, right}, next, prev) {
+    console.log(left)
     ex2Logs.forEach(log => {
       if (log.parentNode === next) {
         log.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
       } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${100 - (easeOutQuad(left) * 100)}%,0,0)`
+        log.style.transform = `translate3d(${100 + (easeOutQuad(Math.abs(left)) * -100)}%,0,0)`
       }
     })
   },
