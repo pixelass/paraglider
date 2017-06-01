@@ -1,36 +1,5 @@
 import {requestEventListener} from '../event-listeners'
-
-/**
- * Default plugin settings
- * @type {object}
- * @prop {string} type One of:
- *                     * carousel: A carousel that moves as an entire strip.
- *                     * cover: Cover the current slide with the new slide.
- *                     * uncover: Uncover the new slide below current the slide.
- *                     * custom: Don't apply styles. Work with API instead.
- *                       This can be used to implement any transition (e.g. fade)
- * @prop {boolean} loop Loop the slides or stop at the first and last slide.
- */
-const PLUGIN_DEFAULTS = {
-  type: 'cover',
-  loop: false,
-  classNames: {
-    pluginLoaded: 'pluginLoaded',
-    slide: 'slide',
-    slides: 'slides',
-    back: 'back',
-    active: 'active',
-    init: 'init',
-    previous: 'previous',
-    next: 'next'
-  },
-  onSlide: null,
-  onEnd: null,
-  speed: 250,
-  spring: 100,
-  snapBackAt: 0.25,
-  initialSlide: 0
-}
+import {PLUGIN_DEFAULTS} from '../config'
 
 const animate = (speed, from, to, callback) => {
   const now = Date.now()
@@ -96,9 +65,9 @@ class Glider {
 
   addClassNames() {
     const {currentSlide, previousSlide, nextSlide} = this.state
-    const {active, next, previous} = this.options.classNames
+    const {current, next, previous} = this.options.classNames
     this.slides.forEach((slide, index) => {
-      slide.classList.toggle(active, index === currentSlide)
+      slide.classList.toggle(current, index === currentSlide)
       slide.classList.toggle(next, index === nextSlide)
       slide.classList.toggle(previous, index === previousSlide)
     })
@@ -254,8 +223,8 @@ class Glider {
     const {currentSlide, nextSlide, previousSlide, x} = this.state
     const progress = x / this.el.offsetWidth
     if (typeof onSlide === 'function') {
-      const right = 1 - progress
-      const left = 2 - right
+      const right = progress * -1
+      const left = progress
       const current = this.slides[currentSlide]
       const next = left < right ? null : this.slides[nextSlide]
       const prev = left > right ? null : this.slides[previousSlide]
