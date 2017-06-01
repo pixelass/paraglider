@@ -136,6 +136,7 @@ li.l0li.l1li.l2li.l3li.l5li.l6li.l7li.l8 {
       -ms-user-select: none;
           user-select: none;
   background-size: cover;
+  background-position: 50% 50%;
   background-blend-mode: multiply /* stylelint-disable-line plugin/no-unsupported-browser-features */
 }
 
@@ -158,6 +159,21 @@ li.l0li.l1li.l2li.l3li.l5li.l6li.l7li.l8 {
 .slide.c {
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0);
+}
+
+.ex2 .slide {
+}
+
+.ex2 .slide .b {
+  z-index: 1;
+}
+
+.ex2 .slide .a {
+  z-index: 2;
+}
+
+.ex2 .slide .c {
+  z-index: 3;
 }
 
 .yellow {
@@ -298,6 +314,10 @@ li.l0li.l1li.l2li.l3li.l5li.l6li.l7li.l8 {
 
 .e .slide {
   /* plugin loaded */
+}
+
+.f {
+  /* plugin initialized */
 }
 
 .jsHook {
