@@ -63,7 +63,6 @@ class Glider {
     this.slides.forEach(slide => {
       slide.classList.add(classNames.init)
     })
-    this.addSides()
     this.addClassNames()
   }
 
@@ -137,15 +136,12 @@ class Glider {
     this.spring(0, -1, this.options.speed)
   }
 
-  /**
-   * @todo This does not work
-   */
   goTo(n) {
     if (n > this.state.currentSlide) {
       this.state.requestedNext = n
       this.addSides()
-      this.nextSlide()
       this.addClassNames()
+      this.nextSlide()
     } else if (n < this.state.currentSlide) {
       this.state.requestedPrevious = n
       this.addSides()
@@ -215,12 +211,7 @@ class Glider {
       const current = this.slides[currentSlide]
       const next = left < right ? null : this.slides[nextSlide]
       const prev = left > right ? null : this.slides[previousSlide]
-      onSlide(
-        {
-          right,
-          left
-        }, next, prev, current
-      )
+      onSlide({right: right * -1, left: left * -1}, next, prev, current)
     }
   }
 }
