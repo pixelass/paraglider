@@ -8,6 +8,8 @@ html
     title= `${fileName} | ${name} | ${description}`
     link(rel="icon"  type="image/png"  href="favico.png")
     link(rel="stylesheet" href=`${fileName}.css?${timestamp}`)
+    script(src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js")
   body
-    block content
+    main
+      block content
     script(src=`${fileName}.js?${timestamp}`)

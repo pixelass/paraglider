@@ -8,79 +8,136 @@ mixin arrow(dir)
     svg(style="width:1em;height:1em" viewBox="0 0 24 24")
        path(fill="currentcolor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z")
 
+mixin pagers()
+  .pagers
+    .prev.jsPrev
+      +arrow('prev')
+    .next.jsNext
+      +arrow('next')
+
+mixin dots(n)
+  .dots
+    - counter = 0
+    while ++counter <= n
+      .dot.jsDot
+
+mixin slides(n, log)
+  .slides.jsWrapper
+    - let counter = 0
+    while ++counter <= n
+      .slide.jsHook(class=colors[counter % colors.length]
+                    style={'background-image': `url("assets/${(counter % 5) + 1}.jpg")`})
+        h2 Slide #{counter}
+        if log
+          .log This element has a parallax effect
+
 block content
   - const colors = ['red', 'green', 'yellow', 'blue', 'pink']
-  - let slides = 0
-  - let couter = slides
+  h2 Preset: belt
+  .glider.belt
+    +pagers()
+    +dots(2)
+    +slides(2)
+  pre.prettyprint.
+    belt(element, options)
+
+  h2 Preset: cover-left-right
+  .glider.coverLeftRight
+    +pagers()
+    +dots(3)
+    +slides(3)
+  pre.prettyprint.
+    coverLeftRight(element, options)
+
+  h2 Preset: cover-right
+  .glider.coverRight
+    +pagers()
+    +dots(4)
+    +slides(4)
+  pre.prettyprint.
+    coverRight(element, options)
+
+  h2 Preset: cover-left
+  .glider.coverLeft
+    +pagers()
+    +dots(5)
+    +slides(5)
+  pre.prettyprint.
+    coverLeft(element, options)
+
+  h2 Preset: belt
+  h3 With parallax
   .glider.ex1
-    - slides = 4
-    .pagers
-      .prev
-        +arrow('prev')
-      .next
-        +arrow('next')
-      .dots
-        - counter = 0
-        while ++counter <= slides
-          .dot
-    .slides.jsWrapper
-      - counter = 0
-      while ++counter <= slides
-        .slide.jsHook(class=colors[counter % colors.length]
-                      style={'background-image': `url("assets/${counter}.jpg")`})
-          h2 Slide #{counter}
-          .log This element has a parallax effect
-  .glider.ex1
-    - slides = 5
-    .pagers
-      .prev
-        +arrow('prev')
-      .next
-        +arrow('next')
-      .dots
-        - counter = 0
-        while ++counter <= slides
-          .dot
-    .slides.jsWrapper
-      - counter = 0
-      while ++counter <= slides
-        .slide.jsHook(class=colors[counter % colors.length]
-                      style={'background-image': `url("assets/${counter}.jpg")`})
-          h2 Slide #{counter}
-          .log This element has a parallax effect
-  .glider.ex1
-    - slides = 2
-    .pagers
-      .prev
-        +arrow('prev')
-      .next
-        +arrow('next')
-      .dots
-        - counter = 0
-        while ++counter <= slides
-          .dot
-    .slides.jsWrapper
-      - counter = 0
-      while ++counter <= slides
-        .slide.jsHook(class=colors[counter % colors.length]
-                      style={'background-image': `url("assets/${counter}.jpg")`})
-          h2 Slide #{counter}
-          .log This element has a parallax effect
+    +pagers()
+    +dots(6)
+    +slides(6, true)
+  pre.prettyprint.
+    belt(element, {
+      initialSlide: 3,
+      onSlide({left, right}, next, prev, current) {
+        parallaxItems.forEach(item => {
+          if (item.parentNode === next) {
+            item.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+          } else if (item.parentNode === prev) {
+            item.style.transform = `translate3d(${-100 - (easeOutSine(left) * 100)}%,0,0)`
+          } else if (item.parentNode === current) {
+            item.style.transform = `translate3d(${(easeOutSine(right) * 100)}%,0,0)`
+          }
+        })
+      },
+      onEnd(next, prev, current) {
+        parallaxItems.forEach(item => {
+          if (item.parentNode === current) {
+            item.style.transform = ''
+          }
+        })
+      }
+    })
+
+  h2 Custom: cover-right with easing
+  h3 With parallax
   .glider.ex2
-    - slides = 2
-    .pagers
-      .prev
-        +arrow('prev')
-      .next
-        +arrow('next')
-      .dots
-        - counter = 0
-        while ++counter <= slides
-          .dot
-    .slides.jsWrapper
-      - counter = 0
-      while ++counter <= slides
-        .slide.jsHook(class=colors[counter % colors.length]
-                      style={'background-image': `url("assets/${counter}.jpg")`})
-          h2 Slide #{counter}
-          .log This element has a parallax effect
+    +pagers()
+    +dots(7)
+    +slides(7, true)
+  pre.prettyprint.
+    const coverRightCustom = (glider, opts) => wrapper(glider, {
+      ...opts,
+      onSlide({left, right}, next, prev, current) {
+        if (prev) {
+          prev.style.transform = `translate3d(${100 + (easeOutSine(left) * 100)}%,0,0)`
+        } else if (next) {
+          next.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+        }
+        if (typeof opts.onSlide === 'function') {
+          opts.onSlide({left, right}, next, prev, current)
+        }
+      },
+      onEnd(next, prev, current) {
+        if (typeof opts.onEnd === 'function') {
+          opts.onEnd(next, prev, current)
+        }
+      }
+    })
+
+    coverRightCustom(element, {
+      initialSlide: 2,
+      speed: 1000,
+      spring: 500,
+      onSlide({left, right}, next, prev, current) {
+        parallaxItems.forEach(item => {
+          if (item.parentNode === next) {
+            item.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
+          } else if (item.parentNode === prev) {
+            item.style.transform = `translate3d(${100 - (easeInQuad(left) * 100)}%,0,0)`
+          }
+        })
+      },
+      onEnd(next, prev, current) {
+        parallaxItems.forEach(item => {
+          if (item.parentNode === current) {
+            item.style.transform = ''
+          }
+        })
+      }
+    })

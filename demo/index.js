@@ -1,191 +1,85 @@
 /* global document */
-import {easeInBack, easeOutSine, easeInOutElastic} from 'easing-utils'
-import Glider from '../src/glider'
-import styles from './main.css' // eslint-disable-line import/no-unassigned-import
-
-const gliders = Array.from(document.querySelectorAll('.ex1'))
+import {easeOutSine, easeInQuad, easeOutQuad} from 'easing-utils'
+import {
+  belt,
+  coverLeft,
+  coverRight,
+  coverLeftRight
+} from '../src/presets'
+import wrapper from '../src/presets/wrapper'
+import styles from './main.css'
 
 const classNames = {
   pluginLoaded: styles.pluginLoaded,
-  active: styles.active,
+  current: styles.current,
   previous: styles.previous,
   next: styles.next,
   init: styles.init,
+  active: styles.active,
   slides: 'jsWrapper',
-  slide: 'jsHook'
+  slide: 'jsHook',
+  dot: 'jsDot',
+  prevButton: 'jsPrev',
+  nextButton: 'jsNext'
 }
 
-const options = (index, slides, pagers, logs) => [
-  {
-    classNames,
-    speed: 500,
-    spring: 250,
-    onSlide({left, right}, next, prev) {
-      if (prev) {
-        prev.style.transform = `translate3d(${easeInBack(left) * 100}%,0,0)`
-      } else if (next) {
-        next.style.transform = `translate3d(${easeInBack(right) * 100}%,0,0)`
+const ex1 = document.querySelector('.ex1')
+const ex1Logs = Array.from(ex1.querySelectorAll('.log') || [])
+belt(ex1, {
+  classNames,
+  initialSlide: 3,
+  onSlide({left, right}, next, prev, current) {
+    ex1Logs.forEach(log => {
+      if (log.parentNode === next) {
+        log.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+      } else if (log.parentNode === prev) {
+        log.style.transform = `translate3d(${-100 - (easeOutSine(left) * 100)}%,0,0)`
+      } else if (log.parentNode === current) {
+        log.style.transform = `translate3d(${(easeOutSine(right) * 100)}%,0,0)`
       }
-      logs.forEach(log => {
-        if (log.parentNode === next) {
-          log.style.transform = `translate3d(${easeOutSine(right) * 100}%,0,0)`
-        } else if (log.parentNode === prev) {
-          log.style.transform = `translate3d(${easeOutSine(left) * 100}%,0,0)`
-        }
-      })
-    },
-    onEnd(next, prev, current) {
-      pagers.forEach((pager, i) => {
-        pager.classList.toggle(styles.activePager, i === slides.indexOf(current))
-      })
-      slides.forEach(slide => {
-        slide.style.transform = ''
-      })
-      logs.forEach(log => {
-        if (log.parentNode === current) {
-          log.style.transform = ''
-        }
-      })
-    }
+    })
   },
-  {
-    classNames,
-    speed: 300,
-    spring: 150,
-    initialSlide: 1,
-    snapBackAt: 0.1,
-    onSlide({left, right}, next, prev) {
-      if (prev) {
-        prev.style.transform = `translate3d(${easeInBack(left) * -100}%,0,0)`
-      } else if (next) {
-        next.style.transform = `translate3d(${easeInBack(right) * 100}%,0,0)`
+  onEnd(next, prev, current) {
+    ex1Logs.forEach(log => {
+      if (log.parentNode === current) {
+        log.style.transform = ''
       }
-      logs.forEach(log => {
-        if (log.parentNode === next) {
-          log.style.transform = `translate3d(${easeInOutElastic(right) * 100}%,0,0)`
-        } else if (log.parentNode === prev) {
-          log.style.transform = `translate3d(${easeInOutElastic(left) * -100}%,0,0)`
-        }
-      })
-    },
-    onEnd(next, prev, current) {
-      pagers.forEach((pager, i) => {
-        pager.classList.toggle(styles.activePager, i === slides.indexOf(current))
-      })
-      slides.forEach(slide => {
-        slide.style.transform = ''
-      })
-      logs.forEach(log => {
-        if (log.parentNode === current) {
-          log.style.transform = ''
-        }
-      })
-    }
-  },
-  {
-    classNames,
-    snapBackAt: 0.5,
-    onSlide({left, right}, next, prev, current) {
-      if (prev) {
-        prev.style.transform = `translate3d(${left * -100}%,0,0)`
-      } else if (next) {
-        next.style.transform = `translate3d(${right * 100}%,0,0)`
-      }
-      current.style.transform = `translate3d(${(right * 100) - 100}%,0,0)`
-      logs.forEach(log => {
-        if (log.parentNode === next) {
-          log.style.transform = `translate3d(${easeInBack(right) * 100}%,0,0)`
-        } else if (log.parentNode === prev) {
-          log.style.transform = `translate3d(${easeInBack(left) * -100}%,0,0)`
-        } else if (log.parentNode === current) {
-          log.style.transform = `translate3d(${(easeInBack(right) * 100) - 100}%,0,0)`
-        }
-      })
-    },
-    onEnd(next, prev, current) {
-      pagers.forEach((pager, i) => {
-        pager.classList.toggle(styles.activePager, i === slides.indexOf(current))
-      })
-      slides.forEach(slide => {
-        slide.style.transform = ''
-      })
-      logs.forEach(log => {
-        if (log.parentNode === current) {
-          log.style.transform = ''
-        }
-      })
-    }
+    })
   }
-][index]
-
-gliders.forEach((glider, index) => {
-  const slides = Array.from(glider.querySelectorAll('.slide') || [])
-  const logs = Array.from(glider.querySelectorAll('.log') || [])
-  const pagers = Array.from(glider.querySelectorAll('.dot') || [])
-  const nextSlide = glider.querySelector('.next')
-  const prevSlide = glider.querySelector('.prev')
-  const opts = options(index, slides, pagers, logs)
-  const instance = new Glider(opts)
-  instance.init(glider)
-  pagers.forEach((pager, i) => {
-    const goto = () => instance.goTo(i)
-    pager.addEventListener('click', goto)
-    pager.classList.toggle(styles.activePager, i === (opts.initialSlide || 0))
-  })
-  nextSlide.addEventListener('click', instance.nextSlide)
-  prevSlide.addEventListener('click', instance.prevSlide)
 })
 
-const paraBand = (glider, opts) => {
-  const slides = Array.from(glider.querySelectorAll('.slide') || [])
-  const pagers = Array.from(glider.querySelectorAll('.dot') || [])
-  const nextSlide = glider.querySelector('.next')
-  const prevSlide = glider.querySelector('.prev')
-  const options = {
-    classNames,
-    snapBackAt: 0.5,
-    ...opts,
-    onSlide({left, right}, next, prev, current) {
-      if (prev) {
-        prev.style.transform = `translate3d(${left * -100}%,0,0)`
-      } else if (next) {
-        next.style.transform = `translate3d(${right * 100}%,0,0)`
-      }
-      current.style.transform = `translate3d(${(right * 100) - 100}%,0,0)`
+const coverRightCustom = (glider, opts) => wrapper(glider, {
+  ...opts,
+  onSlide({left, right}, next, prev, current) {
+    if (prev) {
+      prev.style.transform = `translate3d(${100 + (easeOutSine(left) * 100)}%,0,0)`
+    } else if (next) {
+      next.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+    }
+    if (typeof opts.onSlide === 'function') {
       opts.onSlide({left, right}, next, prev, current)
-    },
-    onEnd(next, prev, current) {
-      pagers.forEach((pager, i) => {
-        pager.classList.toggle(styles.activePager, i === slides.indexOf(current))
-      })
-      slides.forEach(slide => {
-        slide.style.transform = ''
-      })
+    }
+  },
+  onEnd(next, prev, current) {
+    if (typeof opts.onEnd === 'function') {
       opts.onEnd(next, prev, current)
     }
   }
-  const instance = new Glider(options)
-  instance.init(glider)
-  pagers.forEach((pager, i) => {
-    const goto = () => instance.goTo(i)
-    pager.addEventListener('click', goto)
-    pager.classList.toggle(styles.activePager, i === (opts.initialSlide || 0))
-  })
-  nextSlide.addEventListener('click', instance.nextSlide)
-  prevSlide.addEventListener('click', instance.prevSlide)
-}
+})
 
 const ex2 = document.querySelector('.ex2')
 const ex2Logs = Array.from(ex2.querySelectorAll('.log') || [])
-paraBand(ex2, {
-  onSlide({left, right}, next, prev, current) {
+coverRightCustom(ex2, {
+  classNames,
+  initialSlide: 2,
+  speed: 1000,
+  spring: 500,
+  onSlide({left, right}, next, prev) {
     ex2Logs.forEach(log => {
       if (log.parentNode === next) {
-        log.style.transform = `translate3d(${easeInBack(right) * 100}%,0,0)`
+        log.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
       } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${easeInBack(left) * -100}%,0,0)`
-      } else if (log.parentNode === current) {
-        log.style.transform = `translate3d(${(easeInBack(right) * 100) - 100}%,0,0)`
+        log.style.transform = `translate3d(${100 - (easeOutQuad(left) * 100)}%,0,0)`
       }
     })
   },
@@ -197,3 +91,8 @@ paraBand(ex2, {
     })
   }
 })
+
+belt(document.querySelector('.belt'), {classNames})
+coverLeftRight(document.querySelector('.coverLeftRight'), {classNames})
+coverRight(document.querySelector('.coverRight'), {classNames})
+coverLeft(document.querySelector('.coverLeft'), {classNames})

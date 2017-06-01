@@ -1,6 +1,6 @@
 
 :root {
-  --theme-bg: #fc1e52;
+  --theme-bg: #222;
   --theme-color: #fff;
   --log-color: rgba(0, 0, 0, 0.2);
   --padding: 1rem;
@@ -10,9 +10,84 @@
 
 body {
   margin: 0;
+  font-family: sans-serif;
+  min-width: 320px;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: var(--padding);
   background: var(--theme-bg);
   color: var(--theme-color);
-  font-family: sans-serif;
+}
+
+/* desert scheme ported from vim to google prettify */
+:global(pre.prettyprint) {
+  display: block;
+  background-color: #333;
+}
+
+:global(pre .nocode) {
+  background-color: none;
+  color: #000;
+} /* no-code          - black        */
+
+:global(pre .str) {
+  color: #ffa0a0;
+} /* string           - pink         */
+
+:global(pre .kwd) {
+  color: #f0e68c;
+  font-weight: bold;
+} /* keyword         - lightyellow   */
+
+:global(pre .com) {
+  color: #87ceeb;
+} /* comment         - skyblue       */
+
+:global(pre .typ) {
+  color: #98fb98;
+} /* type            - lightgreen    */
+
+:global(pre .lit) {
+  color: #cd5c5c;
+} /* literal         - darkred       */
+
+:global(pre .pun) {
+  color: #fff;
+} /* punctuation      - white        */
+
+:global(pre .pln) {
+  color: #fff;
+} /* plaintext        - white        */
+
+:global(pre .tag) {
+  color: #f0e68c;
+  font-weight: bold;
+} /* html/xml tag     - lightyellow  */
+
+:global(pre .atn) {
+  color: #bdb76b;
+  font-weight: bold;
+} /* attribute name   - khaki        */
+
+:global(pre .atv) {
+  color: #ffa0a0;
+} /* attribute value  - pink          */
+
+:global(pre .dec) {
+  color: #98fb98;
+} /* decimal          - lightgreen    */
+
+:global(ol.linenums) {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #aeaeae;
+} /* linenums         - lightgrey      */
+
+:global(li.l0,li.l1,li.l2,li.l3,li.l5,li.l6,li.l7,li.l8) {
+  list-style-type: none;
 }
 
 *,
@@ -56,6 +131,24 @@ body {
   flex-direction: column;
   background-size: cover;
   background-blend-mode: multiply; /* stylelint-disable-line plugin/no-unsupported-browser-features */
+
+  &.current {
+    transform: translate3d(0%, 0, 0);
+    z-index: 1;
+  }
+
+  &.previous,
+  &.next {
+    z-index: 2;
+  }
+
+  &.previous {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &.next {
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 :global(.yellow) {
@@ -85,7 +178,7 @@ body {
   right: 0;
   bottom: 0;
   visibility: hidden;
-  z-index: 5;
+  z-index: 2;
 }
 
 :global(.dots) {
@@ -94,7 +187,9 @@ body {
   right: 0;
   bottom: 0;
   display: flex;
+  visibility: hidden;
   justify-content: center;
+  z-index: 2;
 }
 
 :global(.dot) {
@@ -122,7 +217,7 @@ body {
     background: rgba(0, 0, 0, 0.3);
   }
 
-  &.activePager::before {
+  &.active::before {
     content: '';
     background: rgba(255, 255, 255, 0.8);
   }
@@ -181,31 +276,16 @@ body {
   /* slide */
 }
 
-.active {
-  transform: translate3d(0%, 0, 0);
-  z-index: 1;
+:global(.jsDot) {
+  /* dot */
 }
 
-.previous,
-.next {
-  z-index: 2;
+:global(.jsNext) {
+  /* next */
 }
 
-.previous {
-  transform: translate3d(-100%, 0, 0);
-}
-
-.next {
-  transform: translate3d(100%, 0, 0);
-}
-
-.active,
-.next,
-.prev {
-  &.init,
-  &.init.back {
-    transition: none;
-  }
+:global(.jsPrev) {
+  /* prev */
 }
 
 :global(.slide) h2,
