@@ -31,11 +31,11 @@ belt(ex1, {
   onSlide({left, right}, next, prev, current) {
     ex1Logs.forEach(log => {
       if (log.parentNode === next) {
-        log.style.transform = `translate3d(${-100 + (easeOutSine(right) * 100)}%,0,0)`
+        log.style.transform = `translate3d(${100 - (easeOutSine(right) * 100)}%,0,0)`
       } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${100 - (easeOutSine(left) * 100)}%,0,0)`
+        log.style.transform = `translate3d(${-100 + (easeOutSine(left) * 100)}%,0,0)`
       } else if (log.parentNode === current) {
-        log.style.transform = `translate3d(${(easeOutSine(right) * 100)}%,0,0)`
+        log.style.transform = `translate3d(${(easeOutSine(right) * -100)}%,0,0)`
       }
     })
   },
