@@ -31,9 +31,9 @@ belt(ex1, {
   onSlide({left, right}, next, prev, current) {
     ex1Logs.forEach(log => {
       if (log.parentNode === next) {
-        log.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+        log.style.transform = `translate3d(${-100 + (easeOutSine(right) * 100)}%,0,0)`
       } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${-100 - (easeOutSine(left) * 100)}%,0,0)`
+        log.style.transform = `translate3d(${100 - (easeOutSine(left) * 100)}%,0,0)`
       } else if (log.parentNode === current) {
         log.style.transform = `translate3d(${(easeOutSine(right) * 100)}%,0,0)`
       }
@@ -52,9 +52,9 @@ const coverRightCustom = (glider, opts) => wrapper(glider, {
   ...opts,
   onSlide({left, right}, next, prev, current) {
     if (prev) {
-      prev.style.transform = `translate3d(${100 + (easeOutSine(left) * 100)}%,0,0)`
+      prev.style.transform = `translate3d(${100 - (easeOutSine(left) * 100)}%,0,0)`
     } else if (next) {
-      next.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+      next.style.transform = `translate3d(${100 - (easeOutSine(right) * 100)}%,0,0)`
     }
     if (typeof opts.onSlide === 'function') {
       opts.onSlide({left, right}, next, prev, current)
@@ -72,15 +72,14 @@ const ex2Logs = Array.from(ex2.querySelectorAll('.log') || [])
 coverRightCustom(ex2, {
   classNames,
   initialSlide: 2,
-  speed: 1000,
-  spring: 500,
+  speed: 600,
+  spring: 300,
   onSlide({left, right}, next, prev) {
-    console.log(left)
     ex2Logs.forEach(log => {
       if (log.parentNode === next) {
         log.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
       } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${100 + (easeOutQuad(Math.abs(left)) * -100)}%,0,0)`
+        log.style.transform = `translate3d(${100 - (easeOutQuad(left) * 100)}%,0,0)`
       }
     })
   },

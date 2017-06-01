@@ -77,9 +77,9 @@ block content
       onSlide({left, right}, next, prev, current) {
         parallaxItems.forEach(item => {
           if (item.parentNode === next) {
-            item.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+            item.style.transform = `translate3d(${-100 + (easeOutSine(right) * 100)}%,0,0)`
           } else if (item.parentNode === prev) {
-            item.style.transform = `translate3d(${-100 - (easeOutSine(left) * 100)}%,0,0)`
+            item.style.transform = `translate3d(${100 - (easeOutSine(left) * 100)}%,0,0)`
           } else if (item.parentNode === current) {
             item.style.transform = `translate3d(${(easeOutSine(right) * 100)}%,0,0)`
           }
@@ -105,9 +105,9 @@ block content
       ...opts,
       onSlide({left, right}, next, prev, current) {
         if (prev) {
-          prev.style.transform = `translate3d(${100 + (easeOutSine(left) * 100)}%,0,0)`
+          prev.style.transform = `translate3d(${100 - (easeOutSine(left) * 100)}%,0,0)`
         } else if (next) {
-          next.style.transform = `translate3d(${100 + (easeOutSine(right) * 100)}%,0,0)`
+          next.style.transform = `translate3d(${100 - (easeOutSine(right) * 100)}%,0,0)`
         }
         if (typeof opts.onSlide === 'function') {
           opts.onSlide({left, right}, next, prev, current)
@@ -122,14 +122,14 @@ block content
 
     coverRightCustom(element, {
       initialSlide: 2,
-      speed: 1000,
-      spring: 500,
+      speed: 600,
+      spring: 300,
       onSlide({left, right}, next, prev, current) {
         parallaxItems.forEach(item => {
           if (item.parentNode === next) {
             item.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
           } else if (item.parentNode === prev) {
-            item.style.transform = `translate3d(${100 - (easeInQuad(left) * 100)}%,0,0)`
+            item.style.transform = `translate3d(${100 - (easeOutQuad(left) * 100)}%,0,0)`
           }
         })
       },
