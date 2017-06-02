@@ -1,45 +1,15 @@
 extends _layout.pug
 
-mixin arrow(dir)
-  if dir == 'next'
-     svg(style="width:1em;height:1em" viewBox="0 0 24 24")
-       path(fill="currentcolor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z")
-  else if dir == 'prev'
-    svg(style="width:1em;height:1em" viewBox="0 0 24 24")
-       path(fill="currentcolor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z")
-
-mixin pagers()
-  .pagers
-    .prev.jsPrev
-      +arrow('prev')
-    .next.jsNext
-      +arrow('next')
-
-mixin dots(n)
-  .dots
-    - counter = 0
-    while ++counter <= n
-      .dot.jsDot
-
-mixin slides(n, log)
-  .slides.jsWrapper
-    - let counter = 0
-    while ++counter <= n
-      .slide.jsHook(class=colors[counter % colors.length]
-                    style={'background-image': `url("assets/${(counter % 5) + 1}.jpg")`})
-        h2 Slide #{counter}
-        if log
-          .log This element has a parallax effect
+include _mixins.pug
 
 block content
-  - const colors = ['red', 'green', 'yellow', 'blue', 'pink']
   h2 Preset: belt
   .glider.belt
     +pagers()
     +dots(2)
     +slides(2)
   pre.prettyprint.
-    belt(element, options)
+    belt(element)
 
   h2 Preset: cover-left-right
   .glider.coverLeftRight
@@ -47,7 +17,7 @@ block content
     +dots(3)
     +slides(3)
   pre.prettyprint.
-    coverLeftRight(element, options)
+    coverLeftRight(element)
 
   h2 Preset: cover-right
   .glider.coverRight
@@ -55,7 +25,7 @@ block content
     +dots(4)
     +slides(4)
   pre.prettyprint.
-    coverRight(element, options)
+    coverRight(element)
 
   h2 Preset: cover-left
   .glider.coverLeft
@@ -63,7 +33,7 @@ block content
     +dots(5)
     +slides(5)
   pre.prettyprint.
-    coverLeft(element, options)
+    coverLeft(element)
 
   h2 Preset: belt
   h3 With parallax

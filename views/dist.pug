@@ -1,0 +1,28 @@
+extends _layout.pug
+
+include _mixins.pug
+
+block content
+  h2 Preset: belt
+  .glider.belt
+    +pagers()
+    +dots(2)
+    +slides(2)
+  pre.prettyprint.
+    belt(element)
+
+  h2 Preset: cover-left
+  .glider.coverLeft
+    +pagers()
+    +dots(5)
+    +slides(5)
+  pre.prettyprint.
+    coverLeft(element)
+
+  h2 Preset: cover-right
+  .glider.coverRight
+    +pagers()
+    +dots(7)
+    +slides(7)
+  pre.prettyprint.
+    coverRight(element)

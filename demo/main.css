@@ -1,8 +1,8 @@
 
 :root {
-  --theme-bg: #222;
-  --theme-color: #fff;
-  --log-color: rgba(0, 0, 0, 0.2);
+  --theme-bg: #fff;
+  --theme-color: #111;
+  --log-color: rgba(255, 255, 255, 0.5);
   --padding: 1rem;
   --nav-size: 3rem;
   --pager-size: 2rem;
@@ -29,7 +29,7 @@ main {
   display: block;
   background-color: #333;
   overflow: auto;
-  max-height: 300px;
+  font-size: 16px;
 }
 
 :global(pre .nocode) {
@@ -137,7 +137,6 @@ main {
   user-select: none;
   background-size: cover;
   background-position: 50% 50%;
-  background-blend-mode: multiply; /* stylelint-disable-line plugin/no-unsupported-browser-features */
 
   &.current {
     transform: translate3d(0%, 0, 0);
@@ -172,26 +171,6 @@ main {
   }
 }
 
-:global(.yellow) {
-  background-color: #d69833;
-}
-
-:global(.red) {
-  background-color: #d50035;
-}
-
-:global(.green) {
-  background-color: #43dd55;
-}
-
-:global(.blue) {
-  background-color: #261fd9;
-}
-
-:global(.pink) {
-  background-color: #b425d9;
-}
-
 :global(.pagers) {
   position: absolute;
   top: 0;
@@ -208,9 +187,10 @@ main {
   right: 0;
   bottom: 0;
   display: flex;
-  visibility: hidden;
   justify-content: center;
   z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 :global(.dot) {
@@ -222,6 +202,7 @@ main {
   border-radius: 50%;
   cursor: pointer;
   user-select: none;
+  pointer-events: all;
 
   &::before {
     content: '';
@@ -254,7 +235,7 @@ main {
   margin: 0 var(--padding);
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.3);
-  color: var(--theme-color);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,13 +296,10 @@ main {
 
 :global(.slide) h2,
 :global(.log) {
-  color: white;
   flex: 1;
   padding: var(--padding);
   margin: var(--padding) var(--nav-size);
   width: calc(100% - var(--nav-size) * 2);
-}
-
-:global(.log) {
   background: var(--log-color);
+  color: #000;
 }

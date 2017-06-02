@@ -1,0 +1,29 @@
+mixin arrow(dir)
+  if dir == 'next'
+    svg(style="width:1em;height:1em" viewBox="0 0 24 24")
+      path(fill="currentcolor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z")
+  else if dir == 'prev'
+    svg(style="width:1em;height:1em" viewBox="0 0 24 24")
+       path(fill="currentcolor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z")
+
+mixin pagers()
+  nav.pagers
+    a.prev.jsPrev(href='#')
+      +arrow('prev')
+    a.next.jsNext(href='#')
+      +arrow('next')
+
+mixin dots(n)
+  nav.dots
+    - counter = 0
+    while ++counter <= n
+      a.dot.jsDot(href='#')
+
+mixin slides(n, log)
+  section.slides.jsWrapper
+    - let counter = 0
+    while ++counter <= n
+      article.slide.jsHook(style={'background-image': `url("assets/${(counter % 5) + 1}.jpg")`})
+        h2 Slide #{counter}
+        if log
+          p.log This element has a parallax effect

@@ -129,7 +129,10 @@ coverCustom(ex3, {
   spring: 300,
   onSlide({left, right}, next, prev, current) {
     if (next) {
-      next.style.backgroundPosition = `${easeOutBack(right) * 100}% 50%`
+      next.style.backgroundPosition = `${easeOutBack(right) * -100}px 50%`
+    }
+    if (prev) {
+      current.style.backgroundPosition = `${-100 + (easeOutBack(left) * 100)}px 50%`
     }
     ex3Logs.forEach(log => {
       if (log.parentNode === next) {
