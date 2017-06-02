@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/pixelass/paraglider/compare/v1.0.0...v1.1.0) (2017-06-02)
+
+
+### Bug Fixes
+
+* **events:** prevent default events ([814eeca](https://github.com/pixelass/paraglider/commit/814eeca))
+
+
+### Features
+
+* **dist:** label dist as a feature ([5e5522a](https://github.com/pixelass/paraglider/commit/5e5522a))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2017-06-02)
 
