@@ -1,7 +1,7 @@
 # paraglider
 
 A Slider with parallax API.  
-This slider does not do anything except for adding classNames to the current, previous and next slide.  
+This slider does not do anything except for adding class names to the current, previous and next slide.  
 With the help of callbacks however, you can implement any imaginable effect.
 
 [![npm](https://img.shields.io/npm/v/paraglider.svg?style=flat-square)](https://www.npmjs.com/package/paraglider)
@@ -29,18 +29,75 @@ With the help of callbacks however, you can implement any imaginable effect.
 <!-- toc -->
 
 - [Links](#links)
+- [Usage](#usage)
+  * [Presets](#presets)
+    + [Belt](#belt)
+    + [Cover](#cover)
 - [Developing](#developing)
 
 <!-- tocstop -->
 
 ## Links
 * [Demo](https://pixelass.github.io/paraglider/)
-* [Documentation](https://pixelass/.github.io/paraglider/api/)
+* [Code examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js)
+* [Documentation](https://pixelass.github.io/paraglider/api/)
 
+## Usage
+
+```
+yarn add paraglider
+```
+
+Take a look at the [examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js)
+
+
+```js
+import Glider from 'paraglider'
+
+// A simple belt slider
+const glider = new Glider({
+  onSlide({left, right}, next, prev, current) {
+    if (prev) {
+      prev.style.transform = `translate3d(${-100 + (left * 100)}%,0,0)`
+    } else if (next) {
+      next.style.transform = `translate3d(${100 - (right * 100)}%,0,0)`
+    }
+    current.style.transform = `translate3d(${(right * -100)}%,0,0)`
+    if (typeof opts.onSlide === 'function') {
+      opts.onSlide({left, right}, next, prev, current)
+    }
+  }
+})
+glider.init(document.querySelector('.glide-me'))
+```
+
+### Presets
+
+#### Belt
+
+A simple belt slider
+
+```js
+import {belt} from 'paraglider'
+
+belt(document.querySelector('.glide-me'))
+```
+
+#### Cover
+
+Covers the current slide.
+
+```js
+import {coverRight, coverLeft, coverLeftRight} from 'paraglider'
+
+coverLeft(document.querySelector('.cover.left'))
+coverRight(document.querySelector('.cover.right'))
+coverLeftRight(document.querySelector('.cover.left-right'))
+```
 
 ## Developing
 
-To start a dev server and start developing try the following commands
+`yarn <command>`
 
 * \`start\`: starts the dev server and builds the required files
 * \`test\`: runs test and lints files
