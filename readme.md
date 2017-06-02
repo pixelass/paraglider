@@ -100,12 +100,12 @@ coverLeftRight(document.querySelector('.cover.left-right'))
 
 You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/paraglider/dist.html))
 
-`<script src="https://cdn.rawgit.com/pixelass/paraglider/tree/<VERSION>/dist/paragliner.js"></script>`
+`<script src="https://cdn.rawgit.com/pixelass/paraglider/<VERSION>/dist/paragliner.js"></script>`
 
 Example:
 
-* https://cdn.rawgit.com/pixelass/paraglider/tree/v1.1.0/dist/paragliner.js
-* https://cdn.rawgit.com/pixelass/paraglider/tree/v1.1.0/dist/paragliner.min.js
+* https://cdn.rawgit.com/pixelass/paraglider/v1.1.0/dist/paraglider.js
+* https://cdn.rawgit.com/pixelass/paraglider/v1.1.0/dist/paraglider.min.js
 
 ## Developing
 
