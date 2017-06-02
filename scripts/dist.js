@@ -1,4 +1,4 @@
-import {dist} from './run-build'
+import dist from './run-dist'
 
 dist(true)
 dist()

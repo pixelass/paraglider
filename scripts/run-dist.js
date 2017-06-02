@@ -38,3 +38,5 @@ const dist = (minify) => {
     })
   })
 }
+
+export default dist
