@@ -29,7 +29,10 @@ const wrapper = (glider, opts) => {
   const instance = new Glider(options)
   instance.init(glider)
   pagers.forEach((pager, i) => {
-    const goto = () => instance.goTo(i)
+    const goto = e => {
+      e.preventDefault()
+      return instance.goTo(i)
+    }
     pager.addEventListener('click', goto)
     pager.classList.toggle(options.classNames.active, i === (opts.initialSlide || 0))
   })

@@ -251,7 +251,10 @@ class Glider {
   /**
    * Moves to the next slide via trigger.
    */
-  nextSlide() {
+  nextSlide(e) {
+    if (e && 'preventDefault' in e) {
+      e.preventDefault()
+    }
     this.addSides()
     this.addClassNames()
     this.spring(0, 1, this.options.speed)
@@ -260,7 +263,10 @@ class Glider {
   /**
    * Moves to the previous slide via trigger.
    */
-  prevSlide() {
+  prevSlide(e) {
+    if (e && 'preventDefault' in e) {
+      e.preventDefault()
+    }
     this.addSides()
     this.addClassNames()
     this.spring(0, -1, this.options.speed)
