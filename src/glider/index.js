@@ -1,3 +1,8 @@
+/**
+ * @file src/index.js
+ * @author Gregor Adams <greg@pixelass.com>
+ */
+
 import {PLUGIN_DEFAULTS} from '../config'
 import {
   animate,
@@ -23,6 +28,7 @@ class Glider {
     }
     /**
      * State store for interaction flags
+     * @private
      * @type {object}
      */
     this._state = {
@@ -40,6 +46,7 @@ class Glider {
 
   /**
    * Handles internal storage
+   * @private
    * @param {object} newState The new state porperties to merge into the old state
    */
   setState(newState) {
@@ -49,10 +56,20 @@ class Glider {
     }
   }
 
+  /**
+   * Getter for the state
+   * @private
+   * @returns {object}
+   */
   get state() {
     return this._state
   }
 
+  /**
+   * The state setter is disabled. Use `this.setState` instead
+   * @private
+   * @param {*} x
+   */
   set state(x) {
     throw new Error('Attempted to set state via a setter. Please use the setState method instead.')
   }
@@ -79,7 +96,8 @@ class Glider {
   /**
    * Adds eventlisteners needed for this plugin to work.
    * Movement and release should be tracked on window or document.
-   */
+   * @private
+  */
   addListeners() {
     global.addEventListener('mousemove', this.handleMove)
     global.addEventListener('mouseup', this.handleUp)
@@ -91,6 +109,7 @@ class Glider {
 
   /**
    * Removes all eventlisteners. (Helpful when destroying the plugin instance)
+   * @private
    */
   removeListeners() {
     global.removeEventListener('mousemove', this.handleMove)
@@ -103,6 +122,7 @@ class Glider {
 
   /**
    * Adds class names to slides
+   * @private
    */
   addClassNames() {
     const {currentSlide, previousSlide, nextSlide} = this.state
@@ -119,6 +139,7 @@ class Glider {
    *
    * `init` will be removed after the first interaction. It allows a 'silent' start
    * when working with CSS animations or transitions.
+   * @private
    */
   addInitClassNames() {
     const {classNames} = this.options
@@ -132,6 +153,7 @@ class Glider {
   /**
    * Batch removal of class names.
    * This is dirty but simply removes anything the plugin could have set.
+   * @private
    */
   removeClassNames() {
     const {classNames} = this.options
@@ -154,6 +176,7 @@ class Glider {
   /**
    * Find clientX from the event.
    * This helper will return the correct value for touch or mouse.
+   * @private
    * @param {event} e Mouse or touch event
    * @returns {number} THe clientX of the event
    */
@@ -166,6 +189,7 @@ class Glider {
   /**
    * Add `previous` and `next` classes around the `current` slide.
    * This function respects pager clicks, which modify the next or previous element.
+   * @private
    */
   addSides() {
     const {currentSlide, requestedNext, requestedPrevious} = this.state
@@ -181,6 +205,7 @@ class Glider {
   /**
    * First interaction with the mouse or per touch will be used to set flags and
    * define initial values.
+   * @private
    * @param {event} e Mouse or touch event
    */
   handleDown(e) {
@@ -204,6 +229,7 @@ class Glider {
    * and define initial values.
    * Only fires if down is active. Prevents unintended behaviour when the first
    * touch or mousedown was outside the element.
+   * @private
    */
   handleUp() {
     // Only proceed if the plugin signals a previous down event.
@@ -256,6 +282,7 @@ class Glider {
   /**
    * Handle the end of the slide animation.
    * If there is a callback called `onEnd` call it.
+   * @private
    * @param {number} end Final value
    */
   handleEnd(end) {
@@ -278,12 +305,18 @@ class Glider {
 
     if (typeof onEnd === 'function') {
       const {currentSlide, previousSlide, nextSlide} = this.state
+      /**
+       * Callback for the end
+       * @public
+       * @type {onEnd}
+       */
       onEnd(this.slides[nextSlide], this.slides[previousSlide], this.slides[currentSlide])
     }
   }
 
   /**
    * Handles the snap animation
+   * @private
    * @param {number} progress Current value
    * @param {number} end Final value
    * @param {number} duration Time to pass the until animation is done.
@@ -306,6 +339,7 @@ class Glider {
   /**
    * Handler vor mouse or touch movement.
    * Waits for a threshold and then records the movement on the `x` axis
+   * @private
    * @param {event} e Mouse or touch move event
    */
   handleMove(e) {
@@ -326,6 +360,7 @@ class Glider {
    * Handles the progress. Calculates the progress from the
    * internal state and element dimension.
    * A callback is fired if set
+   * @private
    */
   handleProgress() {
     const {onSlide} = this.options
@@ -343,6 +378,10 @@ class Glider {
 
       // Values were inverted to determine the winner.
       // Invert values back when firing the callback.
+      /**
+       * Callback for progression
+       * @type {onSlide}
+       */
       onSlide({right: right * -1, left: left * -1}, next, prev, current)
     }
   }
@@ -350,6 +389,7 @@ class Glider {
 
 /**
  * @typedef onSlide
+ * @type {function}
  * @param {object} offset Offset of the element to either side.
  * @param {number} offset.left A value between [0, 1]
  * @param {number} offset.right A value between [0, 1]
@@ -360,6 +400,7 @@ class Glider {
 
 /**
  * @typedef onEnd
+ * @type {function}
  * @param {HTMLElement} next The next slide element
  * @param {HTMLElement} previous The previous slide element
  * @param {HTMLElement} current The current slide element

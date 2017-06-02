@@ -1,8 +1,13 @@
 /* global document */
+/**
+ * @file src/helpers.js
+ * @author Gregor Adams <greg@pixelass.com>
+ */
 
 /**
  * Animates from one value to the other over a given time.
  * This function uses requestAnimationFrame and Date to return a reliable result.
+ * @private
  * @param {integer} speed Duration of animation
  * @param {number} from Starting point
  * @param {number} to End point
@@ -35,6 +40,7 @@ const animate = (speed, from, to, callback) => {
 
 /**
  * Helper to get elements. Similar to jQuery's `$(selector, context)`
+ * @private
  * @param {string} selector selector to find
  * @param {HTMLElement} [context=document] Context to search in
  * @returns {array} A list of matching elements
@@ -44,6 +50,7 @@ const findAll = (selector, context = document) =>
 
 /**
  * Helper to get elements. Similar to jQuery's `$(selector, context)[0]`
+ * @private
  * @param {string} selector selector to find
  * @param {HTMLElement} [context=document] Context to search in
  * @returns {HTMLElement} The first matching element
@@ -53,7 +60,8 @@ const findFirst = (selector, context = document) =>
 
 /**
  * Returns either the first or second value depending on truthness.
- * Any number is coidered true
+ * Any number is considered true.
+ * @private
  * @param {*} either
  * @param {*} or
  * @returns {*} One of the two input values
@@ -63,6 +71,7 @@ const eitherOr = (either, or) =>
 
 /**
  * A loop using modulo
+ * @private
  * @param {number} current Current value
  * @param {number} addition Addition to the current value
  * @param {number} length Maximum value.

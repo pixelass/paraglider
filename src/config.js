@@ -1,3 +1,7 @@
+/**
+ * @file src/config.js
+ * @author Gregor Adams <greg@pixelass.com>
+ */
 
 /**
  * Default classList for the plugin.
