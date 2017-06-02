@@ -9,7 +9,6 @@ const {
   coverRight
 } = global.Paraglider
 
-
 const classNames = {
   pluginLoaded: styles.pluginLoaded,
   current: styles.current,
