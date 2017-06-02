@@ -33,12 +33,14 @@ With the help of callbacks however, you can implement any imaginable effect.
   * [Presets](#presets)
     + [Belt](#belt)
     + [Cover](#cover)
+  * [Dist / CDN](#dist--cdn)
 - [Developing](#developing)
 
 <!-- tocstop -->
 
 ## Links
 * [Demo](https://pixelass.github.io/paraglider/)
+* [Dist Demo](https://pixelass.github.io/paraglider/dist.html)
 * [Code examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js)
 * [Documentation](https://pixelass.github.io/paraglider/api/)
 
@@ -48,8 +50,7 @@ With the help of callbacks however, you can implement any imaginable effect.
 yarn add paraglider
 ```
 
-Take a look at the [examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js)
-
+Take a look at the [examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js). ([Demo](https://pixelass.github.io/paraglider/))
 
 ```js
 import Glider from 'paraglider'
@@ -94,6 +95,17 @@ coverLeft(document.querySelector('.cover.left'))
 coverRight(document.querySelector('.cover.right'))
 coverLeftRight(document.querySelector('.cover.left-right'))
 ```
+
+### Dist / CDN
+
+You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/paraglider/dist.html))
+
+`<script src="https://cdn.rawgit.com/pixelass/paraglider/tree/<VERSION>/dist/paragliner.js"></script>`
+
+Example:
+
+* https://cdn.rawgit.com/pixelass/paraglider/tree/v1.1.0/dist/paragliner.js
+* https://cdn.rawgit.com/pixelass/paraglider/tree/v1.1.0/dist/paragliner.min.js
 
 ## Developing
 
