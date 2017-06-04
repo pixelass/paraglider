@@ -1,5 +1,11 @@
 import wrapper from './wrapper'
 
+/**
+ * Cover right animation slider
+ * @param {HTMLElement} glider
+ * @param {object} opts
+ * @returns {function}
+ */
 const coverRight = (glider, opts) => wrapper(glider, {
   ...opts,
   onSlide(progress, {next, previous, current, rest}, slides) {

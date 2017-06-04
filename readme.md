@@ -57,16 +57,22 @@ import Glider from 'paraglider'
 
 // A simple belt slider
 const glider = new Glider({
-  onSlide({left, right}, next, prev, current) {
-    if (prev) {
-      prev.style.transform = `translate3d(${-100 + (left * 100)}%,0,0)`
-    } else if (next) {
-      next.style.transform = `translate3d(${100 - (right * 100)}%,0,0)`
+  onSlide(progress, {next, previous, current, rest}, slides) {
+    if (previous !== null) {
+      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+    } else if (next !== null) {
+      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
     }
-    current.style.transform = `translate3d(${(right * -100)}%,0,0)`
-    if (typeof opts.onSlide === 'function') {
-      opts.onSlide({left, right}, next, prev, current)
-    }
+  },
+  onEnd({next, previous, current, rest}, slides) {
+    rest.forEach(slide => {
+      slides[slide].style.transform = ''
+    })
+    slides[current].style.transform = ''
+    slides[previous].style.transform = 'translate(-100%,0,0)'
+    slides[next].style.transform = 'translate(100%,0,0)'
   }
 })
 glider.init(document.querySelector('.glide-me'))
@@ -81,7 +87,7 @@ A simple belt slider
 ```js
 import {belt} from 'paraglider'
 
-belt(document.querySelector('.glide-me'))
+belt(document.querySelector('.belt'))
 ```
 
 #### Cover
@@ -91,9 +97,9 @@ Covers the current slide.
 ```js
 import {coverRight, coverLeft, coverLeftRight} from 'paraglider'
 
-coverLeft(document.querySelector('.cover.left'))
-coverRight(document.querySelector('.cover.right'))
-coverLeftRight(document.querySelector('.cover.left-right'))
+coverLeft(document.querySelector('.coverLeft'))
+coverRight(document.querySelector('.coverRight'))
+coverLeftRight(document.querySelector('.coverLeftRight'))
 ```
 
 ### Dist / CDN
@@ -111,13 +117,15 @@ Example:
 
 `yarn <command>`
 
-* \`start\`: starts the dev server and builds the required files
-* \`test\`: runs test and lints files
-* \`dev\`: starts the dev server and watches the required files
-* \`babel\`: generates lib from source
-* \`build\`: builds all files from source
-* \`watch\`: builds and watches all files from source
-* \`lint\`: lints JavaScript files
-* \`release\`: release new version using "standard-version"
+* `start`: starts the dev server and builds the required files
+* `test`: runs test and lints files
+* `dev`: starts the dev server and watches the required files
+* `babel`: generates lib from source
+* `build`: builds all files from source
+* `watch`: builds and watches all files from source
+* `lint`: lints JavaScript files
+* `release`: release new version using "standard-version"
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
+
+Images via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)

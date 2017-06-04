@@ -1,7 +1,16 @@
 import Glider from '../glider'
 import {PRESET_DEFAULTS} from '../config'
 
+/**
+ * Simple wrapper including pagers and navigation arrows
+ * @param {HTMLElement} glider
+ * @param {object} opts
+ * @returns {function}
+ */
 const wrapper = (glider, opts) => {
+  if (!glider) {
+    return
+  }
   const pagers = Array.from(glider.querySelectorAll(`.${opts.classNames.dot}`) || [])
   const nextButton = glider.querySelector(`.${opts.classNames.nextButton}`)
   const prevButton = glider.querySelector(`.${opts.classNames.prevButton}`)
