@@ -1,10 +1,10 @@
 const routes = [
   {
-    path: '/',
+    pathName: '/',
     file: 'index'
   },
   {
-    path: '/:page.html',
+    pathName: '/:page.html',
     file: ':page'
   }
 ]

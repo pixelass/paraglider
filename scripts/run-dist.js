@@ -6,6 +6,7 @@ import log from 'winston'
 import browserify from 'browserify'
 import watchify from 'watchify'
 import errorify from 'errorify'
+import collapse from 'bundle-collapser/plugin'
 
 const distFile = path.join(__dirname, '../src/dist.js')
 const distFolder = path.join(__dirname, '../dist')
@@ -13,7 +14,7 @@ const distFolder = path.join(__dirname, '../dist')
 const dist = (minify) => {
   const b = browserify({
     entries: [distFile],
-    plugin: [errorify]
+    plugin: [errorify, collapse]
   })
   const bundle = () => {
     b.bundle().pipe(createWriteStream(path.join(distFolder, `paraglider.${ext}`)))

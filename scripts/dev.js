@@ -1,5 +1,7 @@
+import log from 'winston'
 import serve from './serve'
 import build from './run-build'
 
-serve()
 build(true)
+  .then(serve)
+  .catch(log.error)

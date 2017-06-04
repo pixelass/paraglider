@@ -34,7 +34,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
-    "babel": "cross-env BABEL_ENV=production && babel src --out-dir lib --copy-files",
+    "babel": "cross-env NODE_ENV=production babel src --out-dir lib --copy-files",
     "build": "cross-env NODE_ENV=production babel-node ./scripts/build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "dev": "babel-node ./scripts/dev",
@@ -67,11 +67,13 @@
     "ava": "^0.19.1",
     "babel-cli": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.5.1",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-2": "^6.24.1",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "browserify-hmr": "^0.3.5",
+    "bundle-collapser": "^1.2.1",
     "caniuse-db": "^1.0.30000670",
     "copy": "^0.3.0",
     "coveralls": "^2.11.16",
@@ -106,12 +108,12 @@
     "xo": "^0.18.2"
   },
   "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 ChromeAndroid versions",
-    "last 2 Edge versions",
-    "last 2 iOS versions",
-    "last 2 Safari versions",
-    "last 2 Firefox versions"
+    "last 2 chrome versions",
+    "last 2 safari versions",
+    "last 2 firefox versions",
+    "last 2 edge versions",
+    "last 2 ios versions",
+    "last 2 chromeandroid versions"
   ],
   "browserify": {
     "transform": [
@@ -120,8 +122,8 @@
   },
   "babel": {
     "presets": [
-      "es2015",
-      "stage-2"
+      "stage-2",
+      "env"
     ],
     "plugins": [
       "transform-runtime"
