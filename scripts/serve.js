@@ -24,10 +24,7 @@ const serve = () => {
   routes.forEach(({pathName, file}) => {
     app.get(pathName, ({params}, res) => {
       const param = file.split(':')[1]
-      let fileName = file
-      if (typeof param === 'object') {
-        fileName = params[param]
-      }
+      let fileName = params[param] || file
       const json = readFileSync(path.join(target, `${fileName}.json`)).toString()
       const styles = JSON.parse(json)[`demo/${fileName}.css`]
       options.data.fileName = fileName

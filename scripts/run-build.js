@@ -1,4 +1,4 @@
-import {createWriteStream} from 'fs'
+import {createWriteStream, writeFile} from 'fs'
 import path from 'path'
 import log from 'winston'
 import browserify from 'browserify'
@@ -11,6 +11,7 @@ import collapse from 'bundle-collapser/plugin'
 import rm from 'rimraf'
 import copy from 'copy'
 import globby from 'globby'
+import sharp from 'sharp'
 import {config} from '../package.json' // eslint-disable-line import/extensions
 import shortid from './shortid'
 import longid from './longid'
@@ -44,12 +45,21 @@ const build = (watch = false) => new Promise((resolve, reject) => {
     throw err
   })
   .then(() => {
-    demoFiles.forEach(file =>
-      copy(`${path.join(demoFolder, file)}`, buildFolder, {srcBase: demoFolder}, err => {
+    globby(demoFiles.map(fileName => path.join(demoFolder, fileName))).then(files => files.forEach(file => {
+      const {ext} = path.parse(file)
+      if (ext.match(/.jpg/)) {
+        sharp(file)
+          .rotate()
+          .resize(1500, 1000)
+          .toFile(file.replace(demoFolder, buildFolder))
+        return
+      }
+      copy(file, buildFolder, {srcBase: demoFolder}, err => {
         if (err) {
           throw err
         }
-      }))
+      })
+    }))
 
     globby(fileGlob).then(inputFiles => {
       inputFiles.forEach((filePath, index) => {
@@ -74,10 +84,10 @@ const build = (watch = false) => new Promise((resolve, reject) => {
           b.on('update', bundle)
           b.plugin(watchify)
         } else {
-          //b.transform({
-          //  global: true,
-          //  ignore: ['**/*.css']
-          //}, 'uglifyify')
+          b.transform({
+            global: true,
+            ignore: ['**/*.css']
+          }, 'uglifyify')
         }
 
         b.on('log', message => log.info(message))
