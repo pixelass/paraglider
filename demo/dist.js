@@ -1,12 +1,14 @@
 /* global document */
 import '../src/dist' // eslint-disable-line import/no-unassigned-import
-import styles from './main.css'
+import './main.css' // eslint-disable-line import/no-unassigned-import
+import styles from './dist.css'
 
 // Assign methods from global
 const {
   belt,
   coverLeft,
-  coverRight
+  coverRight,
+  coverLeftRight
 } = global.Paraglider
 
 const classNames = {
@@ -16,13 +18,14 @@ const classNames = {
   next: styles.next,
   init: styles.init,
   active: styles.active,
-  slides: 'jsWrapper',
-  slide: 'jsHook',
-  dot: 'jsDot',
-  prevButton: 'jsPrev',
-  nextButton: 'jsNext'
+  slides: styles.jsWrapper,
+  slide: styles.jsSlide,
+  dot: styles.jsDot,
+  prevButton: styles.jsPrev,
+  nextButton: styles.jsNext
 }
 
-belt(document.querySelector('.belt'), {classNames})
-coverLeft(document.querySelector('.coverLeft'), {classNames})
-coverRight(document.querySelector('.coverRight'), {classNames})
+belt(document.querySelector(`.${styles.belt}`), {classNames})
+coverLeft(document.querySelector(`.${styles.coverLeft}`), {classNames})
+coverRight(document.querySelector(`.${styles.coverRight}`), {classNames})
+coverLeftRight(document.querySelector(`.${styles.coverLeftRight}`), {classNames})

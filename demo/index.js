@@ -1,13 +1,9 @@
 /* global document */
-import {easeOutSine, easeInQuad, easeOutQuad, easeOutBack} from 'easing-utils'
-import {
-  belt,
-  coverLeft,
-  coverRight,
-  coverLeftRight
-} from '../src/presets'
+import {easeOutSine} from 'easing-utils'
 import wrapper from '../src/presets/wrapper'
-import styles from './main.css'
+
+import './main.css' // eslint-disable-line import/no-unassigned-import
+import styles from './index.css'
 
 const classNames = {
   pluginLoaded: styles.pluginLoaded,
@@ -16,144 +12,55 @@ const classNames = {
   next: styles.next,
   init: styles.init,
   active: styles.active,
-  slides: 'jsWrapper',
-  slide: 'jsHook',
-  dot: 'jsDot',
-  prevButton: 'jsPrev',
-  nextButton: 'jsNext'
+  slides: styles.jsWrapper,
+  slide: styles.jsSlide,
+  dot: styles.jsDot,
+  prevButton: styles.jsPrev,
+  nextButton: styles.jsNext
 }
 
-const ex1 = document.querySelector('.ex1')
-const ex1Logs = Array.from(ex1.querySelectorAll('.log') || [])
-belt(ex1, {
-  classNames,
-  initialSlide: 3,
-  onSlide({left, right}, next, prev, current) {
-    ex1Logs.forEach(log => {
-      if (log.parentNode === next) {
-        log.style.transform = `translate3d(${100 - (easeOutSine(right) * 100)}%,0,0)`
-      } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${-100 + (easeOutSine(left) * 100)}%,0,0)`
-      } else if (log.parentNode === current) {
-        log.style.transform = `translate3d(${(easeOutSine(right) * -100)}%,0,0)`
+const parallaxSlider = glider => {
+  const slideSlices = Array.from(document.querySelectorAll(`.${styles.slide}`))
+    .map(slide => Array.from(slide.querySelectorAll(`.${styles.cube}`)))
+
+  return wrapper(glider, {
+    classNames,
+    onSlide(progress, {next, previous, current, rest}, slides) {
+      rest.forEach(slideIndex => {
+        slides[slideIndex].style.transform = ''
+      })
+      if (previous !== null) {
+        slides[previous].style.transform = 'translate3d(0,0,0)'
+        slideSlices[previous].forEach((slice, index) => {
+          const pow = ((slideSlices[previous].length - index - 1) % 6) + 1
+          const value = Math.pow(1 - progress, pow)
+          slice.style.transformOrigin = '0 100%'
+          slice.style.transform = `rotate3d(0,1,0,${-180 * easeOutSine(value)}deg)`
+        })
+      } else if (next !== null) {
+        slides[next].style.transform = 'translate3d(0,0,0)'
+        slideSlices[next].forEach((slice, index) => {
+          const pow = (index % 6) + 1
+          const value = Math.pow(1 - progress, pow)
+          slice.style.transformOrigin = '100% 100%'
+          slice.style.transform = `rotate3d(0,1,0,${-180 * easeOutSine(value)}deg)`
+        })
       }
-    })
-  },
-  onEnd(next, prev, current) {
-    ex1Logs.forEach(log => {
-      if (log.parentNode === current) {
-        log.style.transform = ''
-      }
-    })
-  }
+    },
+    onEnd({current}, slides) {
+      slides.forEach(slide => {
+        slide.style.transform = ''
+      })
+      slideSlices[current].forEach(slice => {
+        slice.style.transform = ''
+      })
+    }
+  })
+}
+
+const sliders = Array.from(document.querySelectorAll(`.${styles.parallax}`))
+
+sliders.forEach(slider => {
+  parallaxSlider(slider)
 })
 
-const coverRightCustom = (glider, opts) => wrapper(glider, {
-  ...opts,
-  onSlide({left, right}, next, prev, current) {
-    if (prev) {
-      prev.style.transform = `translate3d(${100 - (easeOutSine(left) * 100)}%,0,0)`
-    } else if (next) {
-      next.style.transform = `translate3d(${100 - (easeOutSine(right) * 100)}%,0,0)`
-    }
-    if (typeof opts.onSlide === 'function') {
-      opts.onSlide({left, right}, next, prev, current)
-    }
-  },
-  onEnd(next, prev, current) {
-    if (typeof opts.onEnd === 'function') {
-      opts.onEnd(next, prev, current)
-    }
-  }
-})
-
-const ex2 = document.querySelector('.ex2')
-const ex2Logs = Array.from(ex2.querySelectorAll('.log') || [])
-coverRightCustom(ex2, {
-  classNames,
-  initialSlide: 2,
-  speed: 600,
-  spring: 300,
-  onSlide({left, right}, next, prev) {
-    ex2Logs.forEach(log => {
-      if (log.parentNode === next) {
-        log.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
-      } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${100 - (easeOutQuad(left) * 100)}%,0,0)`
-      }
-    })
-  },
-  onEnd(next, prev, current) {
-    ex2Logs.forEach(log => {
-      if (log.parentNode === current) {
-        log.style.transform = ''
-      }
-    })
-  }
-})
-
-const coverCustom = (glider, opts) => wrapper(glider, {
-  ...opts,
-  onSlide({left, right}, next, prev, current) {
-    if (prev) {
-      current.style.transform = `translate3d(${(easeOutSine(right) * -100)}%,0,0)`
-      current.style.zIndex = 2
-      prev.style.transform = `translate3d(0%,0,0)`
-      prev.style.zIndex = 1
-    } else if (next) {
-      current.style.transform = ''
-      current.style.zIndex = 1
-      next.style.zIndex = 2
-      next.style.transform = `translate3d(${100 - (easeOutSine(right) * 100)}%,0,0)`
-    }
-    if (typeof opts.onSlide === 'function') {
-      opts.onSlide({left, right}, next, prev, current)
-    }
-  },
-  onEnd(next, prev, current) {
-    current.style.zIndex = ''
-    next.style.zIndex = ''
-    prev.style.zIndex = ''
-    if (typeof opts.onEnd === 'function') {
-      opts.onEnd(next, prev, current)
-    }
-  }
-})
-
-const ex3 = document.querySelector('.ex3')
-const ex3Logs = Array.from(ex3.querySelectorAll('.log') || [])
-coverCustom(ex3, {
-  classNames,
-  initialSlide: 2,
-  speed: 600,
-  spring: 300,
-  onSlide({left, right}, next, prev, current) {
-    if (next) {
-      next.style.backgroundPosition = `${easeOutBack(right) * -100}px 50%`
-    }
-    if (prev) {
-      current.style.backgroundPosition = `${-100 + (easeOutBack(left) * 100)}px 50%`
-    }
-    ex3Logs.forEach(log => {
-      if (log.parentNode === next) {
-        log.style.transform = `translate3d(${100 - (easeInQuad(right) * 100)}%,0,0)`
-      } else if (log.parentNode === prev) {
-        log.style.transform = `translate3d(${-100 + (easeOutQuad(left) * 100)}%,0,0)`
-      } else if (log.parentNode === current) {
-        log.style.transform = `translate3d(${(easeOutQuad(right) * -100)}%,0,0)`
-      }
-    })
-  },
-  onEnd(next, prev, current) {
-    ex3Logs.forEach(log => {
-      if (log.parentNode === current) {
-        log.style.transform = ''
-      }
-    })
-  }
-})
-
-belt(document.querySelector('.belt'), {classNames})
-coverLeftRight(document.querySelector('.coverLeftRight'), {classNames})
-coverRight(document.querySelector('.coverRight'), {classNames})
-coverLeft(document.querySelector('.coverLeft'), {classNames})

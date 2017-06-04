@@ -3,26 +3,35 @@ extends _layout.pug
 include _mixins.pug
 
 block content
-  h2 Preset: belt
-  .glider.belt
-    +pagers()
-    +dots(2)
-    +slides(2)
-  pre.prettyprint.
-    belt(element)
 
-  h2 Preset: cover-left
-  .glider.coverLeft
-    +pagers()
-    +dots(5)
-    +slides(5)
-  pre.prettyprint.
-    coverLeft(element)
+  article
+    h2 Belt
+    div(class=classNames(styles.glider, styles.belt))
+      +pagers()
+      +dots(5)
+      +slides(5, 'nature_')
 
-  h2 Preset: cover-right
-  .glider.coverRight
-    +pagers()
-    +dots(7)
-    +slides(7)
-  pre.prettyprint.
-    coverRight(element)
+
+  article
+    h2 Cover left
+    div(class=classNames(styles.glider, styles.coverLeft))
+      +pagers()
+      +dots(5)
+      +slides(5, 'city_')
+
+
+  article
+    h2 Cover right
+    div(class=classNames(styles.glider, styles.coverRight))
+      +pagers()
+      +dots(5)
+      +slides(5, 'sea_')
+
+
+  article
+    h2 Cover left-right
+    div(class=classNames(styles.glider, styles.coverLeftRight))
+      +pagers()
+      +dots(5)
+      +slides(5, 'underwater_')
+

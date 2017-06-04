@@ -1,3 +1,5 @@
+
+
 mixin arrow(dir)
   if dir == 'next'
     svg(style="width:1em;height:1em" viewBox="0 0 24 24")
@@ -7,23 +9,22 @@ mixin arrow(dir)
        path(fill="currentcolor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z")
 
 mixin pagers()
-  nav.pagers
-    a.prev.jsPrev(href='#')
+  nav(class=classNames(styles.pagers))
+    a(href='#' class=classNames(styles.prev, styles.jsPrev))
       +arrow('prev')
-    a.next.jsNext(href='#')
+    a(href='#' class=classNames(styles.next, styles.jsNext))
       +arrow('next')
 
 mixin dots(n)
-  nav.dots
+  nav(class=classNames(styles.dots))
     - counter = 0
     while ++counter <= n
-      a.dot.jsDot(href='#')
+      a(href='#' class=classNames(styles.dot, styles.jsDot))
 
-mixin slides(n, log)
-  section.slides.jsWrapper
+mixin slides(n, prefix)
+  section(class=classNames(styles.slides, styles.jsWrapper))
     - let counter = 0
     while ++counter <= n
-      article.slide.jsHook(style={'background-image': `url("assets/${(counter % 5) + 1}.jpg")`})
-        h2 Slide #{counter}
-        if log
-          p.log This element has a parallax effect
+      article(class=classNames(styles.slide, styles.jsSlide) style={'background-image': `url("assets/${prefix}${(counter % 5) + 1}.jpg")`})
+        if block
+          block
