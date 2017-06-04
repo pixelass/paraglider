@@ -2,27 +2,26 @@ import Glider from '../glider'
 import {PRESET_DEFAULTS} from '../config'
 
 const wrapper = (glider, opts) => {
-  const slides = Array.from(glider.querySelectorAll(`.${opts.classNames.slide}`) || [])
   const pagers = Array.from(glider.querySelectorAll(`.${opts.classNames.dot}`) || [])
   const nextButton = glider.querySelector(`.${opts.classNames.nextButton}`)
   const prevButton = glider.querySelector(`.${opts.classNames.prevButton}`)
   const options = {
     ...PRESET_DEFAULTS,
     ...opts,
-    onSlide({left, right}, next, prev, current) {
+    onSlide(progress, {next, previous, current, rest}, slides) {
       if (typeof opts.onSlide === 'function') {
-        opts.onSlide({left, right}, next, prev, current)
+        opts.onSlide(progress, {next, previous, current, rest}, slides)
       }
     },
-    onEnd(next, prev, current) {
+    onEnd({next, previous, current, rest}, slides) {
       pagers.forEach((pager, i) => {
-        pager.classList.toggle(opts.classNames.active, i === slides.indexOf(current))
+        pager.classList.toggle(opts.classNames.active, i === current)
       })
       slides.forEach(slide => {
         slide.style.transform = ''
       })
       if (typeof opts.onEnd === 'function') {
-        opts.onEnd(next, prev, current)
+        opts.onEnd({next, previous, current, rest}, slides)
       }
     }
   }
@@ -36,8 +35,13 @@ const wrapper = (glider, opts) => {
     pager.addEventListener('click', goto)
     pager.classList.toggle(options.classNames.active, i === (opts.initialSlide || 0))
   })
-  nextButton.addEventListener('click', instance.nextSlide)
-  prevButton.addEventListener('click', instance.prevSlide)
+  if (nextButton) {
+    nextButton.addEventListener('click', instance.nextSlide)
+  }
+  if (prevButton) {
+    prevButton.addEventListener('click', instance.prevSlide)
+  }
+  return instance.destroy
 }
 
 export default wrapper

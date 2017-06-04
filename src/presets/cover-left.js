@@ -2,19 +2,25 @@ import wrapper from './wrapper'
 
 const coverLeft = (glider, opts) => wrapper(glider, {
   ...opts,
-  onSlide({left, right}, next, prev, current) {
-    if (prev) {
-      prev.style.transform = `translate3d(${-100 + (left * 100)}%,0,0)`
-    } else if (next) {
-      next.style.transform = `translate3d(${-100 + (right * 100)}%,0,0)`
+  onSlide(progress, {next, previous, current, rest}, slides) {
+    if (previous !== null) {
+      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+    } else if (next !== null) {
+      slides[next].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
     }
     if (typeof opts.onSlide === 'function') {
-      opts.onSlide({left, right}, next, prev, current)
+      opts.onSlide(progress, {next, previous, current, rest}, slides)
     }
   },
-  onEnd(next, prev, current) {
+  onEnd({next, previous, current, rest}, slides) {
+    rest.forEach(slide => {
+      slides[slide].style.transform = ''
+    })
+    slides[current].style.transform = ''
+    slides[previous].style.transform = 'translate(-100%,0,0)'
+    slides[next].style.transform = 'translate(100%,0,0)'
     if (typeof opts.onEnd === 'function') {
-      opts.onEnd(next, prev, current)
+      opts.onEnd({next, previous, current, rest}, slides)
     }
   }
 })

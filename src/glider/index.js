@@ -99,9 +99,9 @@ class Glider {
    * @private
   */
   addListeners() {
-    global.addEventListener('mousemove', this.handleMove)
+    global.addEventListener('mousemove', this.handleMove, {passive: false})
     global.addEventListener('mouseup', this.handleUp)
-    global.addEventListener('touchmove', this.handleMove)
+    global.addEventListener('touchmove', this.handleMove, {passive: false})
     global.addEventListener('touchend', this.handleUp)
     this.slidesWrapper.addEventListener('mousedown', this.handleDown)
     this.slidesWrapper.addEventListener('touchstart', this.handleDown)
@@ -233,19 +233,19 @@ class Glider {
    */
   handleUp() {
     // Only proceed if the plugin signals a previous down event.
-    if (!this.state.down) {
-      return
+    const {down, blocked} = this.state
+    if (down && blocked) {
+      const {snapBackAt} = this.options
+      const progress = this.state.x / this.el.offsetWidth
+      let end = 0
+      if (progress <= (-1 * snapBackAt)) {
+        end = -1
+      } else if (progress >= snapBackAt) {
+        end = 1
+      }
+      this.spring(progress, end, this.options.spring)
     }
-    this.setState({down: false})
-    const {snapBackAt} = this.options
-    const progress = this.state.x / this.el.offsetWidth
-    let end = 0
-    if (progress <= (-1 * snapBackAt)) {
-      end = -1
-    } else if (progress >= snapBackAt) {
-      end = 1
-    }
-    this.spring(progress, end, this.options.spring)
+    this.setState({down: false, blocked: false})
   }
 
   /**
@@ -310,13 +310,18 @@ class Glider {
     this.addClassNames()
 
     if (typeof onEnd === 'function') {
-      const {currentSlide, previousSlide, nextSlide} = this.state
+      const {
+        next,
+        previous,
+        current,
+        rest
+      } = this.getReturnValues(false)
       /**
        * Callback for the end
        * @public
        * @type {onEnd}
        */
-      onEnd(this.slides[nextSlide], this.slides[previousSlide], this.slides[currentSlide])
+      onEnd({next, previous, current, rest}, this.slides)
     }
   }
 
@@ -349,9 +354,11 @@ class Glider {
    * @param {event} e Mouse or touch move event
    */
   handleMove(e) {
-    const {down, xStart} = this.state
+    const {down, xStart, x, blocked} = this.state
+    const {threshold} = this.options
     if (down) {
-      if (Math.abs(this.state.x) > this.options.threshold) {
+      if ((Math.abs(x) > threshold) || blocked) {
+        this.setState({blocked: true})
         e.preventDefault()
         this.handleProgress()
       }
@@ -359,6 +366,28 @@ class Glider {
       this.setState({
         x: xStart - clientX
       })
+    }
+  }
+
+  getReturnValues(direction = true) {
+    const progress = this.state.x / this.el.offsetWidth
+    const {currentSlide, nextSlide, previousSlide} = this.state
+    const right = progress * -1
+    const current = currentSlide
+    // We only need the lower value
+    const next = progress < right && direction ? null : nextSlide
+    const previous = progress > right && direction ? null : previousSlide
+
+    const rest = this.slides.map((el, index) => index)
+      .filter(originalIndex =>
+        [previous, current, next].indexOf(originalIndex) === -1)
+
+    return {
+      next,
+      previous,
+      current,
+      rest,
+      progress: Math.abs(progress)
     }
   }
 
@@ -370,25 +399,24 @@ class Glider {
    */
   handleProgress() {
     const {onSlide} = this.options
-    const {currentSlide, nextSlide, previousSlide, x} = this.state
-    const progress = x / this.el.offsetWidth
 
     if (typeof onSlide === 'function') {
-      const right = progress * -1
-      const left = progress
-      const current = this.slides[currentSlide]
-      // Set left or right to null if we don't need it.
-      // We only need the lower value
-      const next = left < right ? null : this.slides[nextSlide]
-      const prev = left > right ? null : this.slides[previousSlide]
-
-      // Values were inverted to determine the winner.
-      // Invert values back when firing the callback.
+      const {
+        progress,
+        next,
+        previous,
+        current,
+        rest
+      } = this.getReturnValues()
       /**
        * Callback for progression
        * @type {onSlide}
        */
-      onSlide({right: right * -1, left: left * -1}, next, prev, current)
+      onSlide(
+        progress,
+        {next, previous, current, rest},
+        this.slides
+      )
     }
   }
 }
@@ -399,17 +427,23 @@ class Glider {
  * @param {object} offset Offset of the element to either side.
  * @param {number} offset.left A value between [0, 1]
  * @param {number} offset.right A value between [0, 1]
- * @param {HTMLElement} next The next slide element
- * @param {HTMLElement} previous The previous slide element
- * @param {HTMLElement} current The current slide element
+ * @param {object} data Data about the slider activity
+ * @param {number} data.previous Index of previous slide
+ * @param {number} data.current Index of current slide
+ * @param {number} data.next Index of next slide
+ * @param {array.<string>} data.rest Array of all remaining slide indexes
+ * @param {array.<HTMLElement>} slides Array of all slides
  */
 
 /**
  * @typedef onEnd
  * @type {function}
- * @param {HTMLElement} next The next slide element
- * @param {HTMLElement} previous The previous slide element
- * @param {HTMLElement} current The current slide element
+ * @param {object} data Data about the slider activity
+ * @param {number} data.previous Index of previous slide
+ * @param {number} data.current Index of current slide
+ * @param {number} data.next Index of next slide
+ * @param {array.<string>} data.rest Array of all remaining slide indexes
+ * @param {array.<HTMLElement>} slides Array of all slides
  */
 
 export default Glider
