@@ -1,3 +1,13 @@
+/**
+ * Wraps Paraglider to apply pagers and navigation buttons.
+ * This wrapper simplifies the usage of Paraglider by offering some basic
+ * functionality.
+ *
+ * @file presets/wrapper.js
+ * @module  presets
+ * @author Gregor Adams <greg@pixelass.com>
+ */
+
 import Glider from '../glider'
 import {PRESET_DEFAULTS} from '../config'
 
@@ -26,9 +36,6 @@ const wrapper = (glider, opts) => {
       pagers.forEach((pager, i) => {
         pager.classList.toggle(opts.classNames.active, i === current)
       })
-      slides.forEach(slide => {
-        slide.style.transform = ''
-      })
       if (typeof opts.onEnd === 'function') {
         opts.onEnd({next, previous, current, rest}, slides)
       }
@@ -42,7 +49,7 @@ const wrapper = (glider, opts) => {
       return instance.goTo(i)
     }
     pager.addEventListener('click', goto)
-    pager.classList.toggle(options.classNames.active, i === (opts.initialSlide || 0))
+    pager.classList.toggle(options.classNames.active, i === options.initialSlide)
   })
   if (nextButton) {
     nextButton.addEventListener('click', instance.nextSlide)

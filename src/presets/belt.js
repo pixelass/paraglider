@@ -1,3 +1,15 @@
+/**
+ * A simple belt slider as we all know it.
+ * The previous, current and next slide move from left to right
+ * or the other way around at the same time.
+ *
+ * Includes pagers and navigation buttons.
+ *
+ * @file presets/belt.js
+ * @module presets
+ * @author Gregor Adams <greg@pixelass.com>
+ */
+
 import wrapper from './wrapper'
 
 /**

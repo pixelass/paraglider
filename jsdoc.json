@@ -13,7 +13,7 @@
   "source": {
     "include": ["src", "README.md"],
     "includePattern": "\\.js$",
-    "excludePattern": "(node_modules/|docs|coverage|lib)"
+    "excludePattern": "(node_modules/|docs|coverage|lib|spec)"
   },
   "opts": {
     "encoding": "utf8",

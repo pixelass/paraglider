@@ -1,5 +1,8 @@
 /**
- * @file src/config.js
+ * Config data for Paraglider.
+ *
+ * @file config.js
+ * @module config
  * @author Gregor Adams <greg@pixelass.com>
  */
 

@@ -1,12 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = { "default": require(8), __esModule: true };
+},{"8":8}],2:[function(require,module,exports){
 module.exports = { "default": require(9), __esModule: true };
-},{"9":9}],2:[function(require,module,exports){
+},{"9":9}],3:[function(require,module,exports){
 module.exports = { "default": require(10), __esModule: true };
-},{"10":10}],3:[function(require,module,exports){
+},{"10":10}],4:[function(require,module,exports){
 module.exports = { "default": require(11), __esModule: true };
-},{"11":11}],4:[function(require,module,exports){
-module.exports = { "default": require(12), __esModule: true };
-},{"12":12}],5:[function(require,module,exports){
+},{"11":11}],5:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -69,60 +69,38 @@ exports.default = _assign2.default || function (target) {
   return target;
 };
 },{"2":2}],8:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-var _from = require(1);
-
-var _from2 = _interopRequireDefault(_from);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  } else {
-    return (0, _from2.default)(arr);
-  }
-};
-},{"1":1}],9:[function(require,module,exports){
-require(70);
+require(69);
+require(65);
+module.exports = require(17).Array.from;
+},{"17":17,"65":65,"69":69}],9:[function(require,module,exports){
 require(66);
-module.exports = require(18).Array.from;
-},{"18":18,"66":66,"70":70}],10:[function(require,module,exports){
+module.exports = require(17).Object.assign;
+},{"17":17,"66":66}],10:[function(require,module,exports){
 require(67);
-module.exports = require(18).Object.assign;
-},{"18":18,"67":67}],11:[function(require,module,exports){
-require(68);
-var $Object = require(18).Object;
+var $Object = require(17).Object;
 module.exports = function defineProperty(it, key, desc){
   return $Object.defineProperty(it, key, desc);
 };
-},{"18":18,"68":68}],12:[function(require,module,exports){
-require(69);
-module.exports = require(18).Object.keys;
-},{"18":18,"69":69}],13:[function(require,module,exports){
+},{"17":17,"67":67}],11:[function(require,module,exports){
+require(68);
+module.exports = require(17).Object.keys;
+},{"17":17,"68":68}],12:[function(require,module,exports){
 module.exports = function(it){
   if(typeof it != 'function')throw TypeError(it + ' is not a function!');
   return it;
 };
-},{}],14:[function(require,module,exports){
-var isObject = require(34);
+},{}],13:[function(require,module,exports){
+var isObject = require(33);
 module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
-},{"34":34}],15:[function(require,module,exports){
+},{"33":33}],14:[function(require,module,exports){
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = require(59)
-  , toLength  = require(60)
-  , toIndex   = require(57);
+var toIObject = require(58)
+  , toLength  = require(59)
+  , toIndex   = require(56);
 module.exports = function(IS_INCLUDES){
   return function($this, el, fromIndex){
     var O      = toIObject($this)
@@ -139,10 +117,10 @@ module.exports = function(IS_INCLUDES){
     } return !IS_INCLUDES && -1;
   };
 };
-},{"57":57,"59":59,"60":60}],16:[function(require,module,exports){
+},{"56":56,"58":58,"59":59}],15:[function(require,module,exports){
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = require(17)
-  , TAG = require(64)('toStringTag')
+var cof = require(16)
+  , TAG = require(63)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
@@ -163,27 +141,27 @@ module.exports = function(it){
     // ES3 arguments fallback
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
-},{"17":17,"64":64}],17:[function(require,module,exports){
+},{"16":16,"63":63}],16:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = function(it){
   return toString.call(it).slice(8, -1);
 };
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var core = module.exports = {version: '2.4.0'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
-var $defineProperty = require(43)
-  , createDesc      = require(51);
+var $defineProperty = require(42)
+  , createDesc      = require(50);
 
 module.exports = function(object, index, value){
   if(index in object)$defineProperty.f(object, index, createDesc(0, value));
   else object[index] = value;
 };
-},{"43":43,"51":51}],20:[function(require,module,exports){
+},{"42":42,"50":50}],19:[function(require,module,exports){
 // optional / simple context binding
-var aFunction = require(13);
+var aFunction = require(12);
 module.exports = function(fn, that, length){
   aFunction(fn);
   if(that === undefined)return fn;
@@ -202,35 +180,35 @@ module.exports = function(fn, that, length){
     return fn.apply(that, arguments);
   };
 };
-},{"13":13}],21:[function(require,module,exports){
+},{"12":12}],20:[function(require,module,exports){
 // 7.2.1 RequireObjectCoercible(argument)
 module.exports = function(it){
   if(it == undefined)throw TypeError("Can't call method on  " + it);
   return it;
 };
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // Thank's IE8 for his funny defineProperty
-module.exports = !require(26)(function(){
+module.exports = !require(25)(function(){
   return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"26":26}],23:[function(require,module,exports){
-var isObject = require(34)
-  , document = require(27).document
+},{"25":25}],22:[function(require,module,exports){
+var isObject = require(33)
+  , document = require(26).document
   // in old IE typeof document.createElement is 'object'
   , is = isObject(document) && isObject(document.createElement);
 module.exports = function(it){
   return is ? document.createElement(it) : {};
 };
-},{"27":27,"34":34}],24:[function(require,module,exports){
+},{"26":26,"33":33}],23:[function(require,module,exports){
 // IE 8- don't enum bug keys
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
-},{}],25:[function(require,module,exports){
-var global    = require(27)
-  , core      = require(18)
-  , ctx       = require(20)
-  , hide      = require(29)
+},{}],24:[function(require,module,exports){
+var global    = require(26)
+  , core      = require(17)
+  , ctx       = require(19)
+  , hide      = require(28)
   , PROTOTYPE = 'prototype';
 
 var $export = function(type, name, source){
@@ -288,7 +266,7 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library` 
 module.exports = $export;
-},{"18":18,"20":20,"27":27,"29":29}],26:[function(require,module,exports){
+},{"17":17,"19":19,"26":26,"28":28}],25:[function(require,module,exports){
 module.exports = function(exec){
   try {
     return !!exec();
@@ -296,53 +274,53 @@ module.exports = function(exec){
     return true;
   }
 };
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
   ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
 if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function(it, key){
   return hasOwnProperty.call(it, key);
 };
-},{}],29:[function(require,module,exports){
-var dP         = require(43)
-  , createDesc = require(51);
-module.exports = require(22) ? function(object, key, value){
+},{}],28:[function(require,module,exports){
+var dP         = require(42)
+  , createDesc = require(50);
+module.exports = require(21) ? function(object, key, value){
   return dP.f(object, key, createDesc(1, value));
 } : function(object, key, value){
   object[key] = value;
   return object;
 };
-},{"22":22,"43":43,"51":51}],30:[function(require,module,exports){
-module.exports = require(27).document && document.documentElement;
-},{"27":27}],31:[function(require,module,exports){
-module.exports = !require(22) && !require(26)(function(){
-  return Object.defineProperty(require(23)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+},{"21":21,"42":42,"50":50}],29:[function(require,module,exports){
+module.exports = require(26).document && document.documentElement;
+},{"26":26}],30:[function(require,module,exports){
+module.exports = !require(21) && !require(25)(function(){
+  return Object.defineProperty(require(22)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"22":22,"23":23,"26":26}],32:[function(require,module,exports){
+},{"21":21,"22":22,"25":25}],31:[function(require,module,exports){
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = require(17);
+var cof = require(16);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
-},{"17":17}],33:[function(require,module,exports){
+},{"16":16}],32:[function(require,module,exports){
 // check on default Array iterator
-var Iterators  = require(39)
-  , ITERATOR   = require(64)('iterator')
+var Iterators  = require(38)
+  , ITERATOR   = require(63)('iterator')
   , ArrayProto = Array.prototype;
 
 module.exports = function(it){
   return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
 };
-},{"39":39,"64":64}],34:[function(require,module,exports){
+},{"38":38,"63":63}],33:[function(require,module,exports){
 module.exports = function(it){
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
-},{}],35:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 // call something on iterator step with safe closing on error
-var anObject = require(14);
+var anObject = require(13);
 module.exports = function(iterator, fn, value, entries){
   try {
     return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -353,32 +331,32 @@ module.exports = function(iterator, fn, value, entries){
     throw e;
   }
 };
-},{"14":14}],36:[function(require,module,exports){
+},{"13":13}],35:[function(require,module,exports){
 'use strict';
-var create         = require(42)
-  , descriptor     = require(51)
-  , setToStringTag = require(53)
+var create         = require(41)
+  , descriptor     = require(50)
+  , setToStringTag = require(52)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-require(29)(IteratorPrototype, require(64)('iterator'), function(){ return this; });
+require(28)(IteratorPrototype, require(63)('iterator'), function(){ return this; });
 
 module.exports = function(Constructor, NAME, next){
   Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
   setToStringTag(Constructor, NAME + ' Iterator');
 };
-},{"29":29,"42":42,"51":51,"53":53,"64":64}],37:[function(require,module,exports){
+},{"28":28,"41":41,"50":50,"52":52,"63":63}],36:[function(require,module,exports){
 'use strict';
-var LIBRARY        = require(40)
-  , $export        = require(25)
-  , redefine       = require(52)
-  , hide           = require(29)
-  , has            = require(28)
-  , Iterators      = require(39)
-  , $iterCreate    = require(36)
-  , setToStringTag = require(53)
-  , getPrototypeOf = require(46)
-  , ITERATOR       = require(64)('iterator')
+var LIBRARY        = require(39)
+  , $export        = require(24)
+  , redefine       = require(51)
+  , hide           = require(28)
+  , has            = require(27)
+  , Iterators      = require(38)
+  , $iterCreate    = require(35)
+  , setToStringTag = require(52)
+  , getPrototypeOf = require(45)
+  , ITERATOR       = require(63)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
   , FF_ITERATOR    = '@@iterator'
   , KEYS           = 'keys'
@@ -438,8 +416,8 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED
   }
   return methods;
 };
-},{"25":25,"28":28,"29":29,"36":36,"39":39,"40":40,"46":46,"52":52,"53":53,"64":64}],38:[function(require,module,exports){
-var ITERATOR     = require(64)('iterator')
+},{"24":24,"27":27,"28":28,"35":35,"38":38,"39":39,"45":45,"51":51,"52":52,"63":63}],37:[function(require,module,exports){
+var ITERATOR     = require(63)('iterator')
   , SAFE_CLOSING = false;
 
 try {
@@ -460,22 +438,22 @@ module.exports = function(exec, skipClosing){
   } catch(e){ /* empty */ }
   return safe;
 };
-},{"64":64}],39:[function(require,module,exports){
+},{"63":63}],38:[function(require,module,exports){
 module.exports = {};
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 module.exports = true;
-},{}],41:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys  = require(48)
-  , gOPS     = require(45)
-  , pIE      = require(49)
-  , toObject = require(61)
-  , IObject  = require(32)
+var getKeys  = require(47)
+  , gOPS     = require(44)
+  , pIE      = require(48)
+  , toObject = require(60)
+  , IObject  = require(31)
   , $assign  = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || require(26)(function(){
+module.exports = !$assign || require(25)(function(){
   var A = {}
     , B = {}
     , S = Symbol()
@@ -498,25 +476,25 @@ module.exports = !$assign || require(26)(function(){
     while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
   } return T;
 } : $assign;
-},{"26":26,"32":32,"45":45,"48":48,"49":49,"61":61}],42:[function(require,module,exports){
+},{"25":25,"31":31,"44":44,"47":47,"48":48,"60":60}],41:[function(require,module,exports){
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject    = require(14)
-  , dPs         = require(44)
-  , enumBugKeys = require(24)
-  , IE_PROTO    = require(54)('IE_PROTO')
+var anObject    = require(13)
+  , dPs         = require(43)
+  , enumBugKeys = require(23)
+  , IE_PROTO    = require(53)('IE_PROTO')
   , Empty       = function(){ /* empty */ }
   , PROTOTYPE   = 'prototype';
 
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
 var createDict = function(){
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = require(23)('iframe')
+  var iframe = require(22)('iframe')
     , i      = enumBugKeys.length
     , lt     = '<'
     , gt     = '>'
     , iframeDocument;
   iframe.style.display = 'none';
-  require(30).appendChild(iframe);
+  require(29).appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
   // html.removeChild(iframe);
@@ -541,13 +519,13 @@ module.exports = Object.create || function create(O, Properties){
   return Properties === undefined ? result : dPs(result, Properties);
 };
 
-},{"14":14,"23":23,"24":24,"30":30,"44":44,"54":54}],43:[function(require,module,exports){
-var anObject       = require(14)
-  , IE8_DOM_DEFINE = require(31)
-  , toPrimitive    = require(62)
+},{"13":13,"22":22,"23":23,"29":29,"43":43,"53":53}],42:[function(require,module,exports){
+var anObject       = require(13)
+  , IE8_DOM_DEFINE = require(30)
+  , toPrimitive    = require(61)
   , dP             = Object.defineProperty;
 
-exports.f = require(22) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+exports.f = require(21) ? Object.defineProperty : function defineProperty(O, P, Attributes){
   anObject(O);
   P = toPrimitive(P, true);
   anObject(Attributes);
@@ -558,12 +536,12 @@ exports.f = require(22) ? Object.defineProperty : function defineProperty(O, P, 
   if('value' in Attributes)O[P] = Attributes.value;
   return O;
 };
-},{"14":14,"22":22,"31":31,"62":62}],44:[function(require,module,exports){
-var dP       = require(43)
-  , anObject = require(14)
-  , getKeys  = require(48);
+},{"13":13,"21":21,"30":30,"61":61}],43:[function(require,module,exports){
+var dP       = require(42)
+  , anObject = require(13)
+  , getKeys  = require(47);
 
-module.exports = require(22) ? Object.defineProperties : function defineProperties(O, Properties){
+module.exports = require(21) ? Object.defineProperties : function defineProperties(O, Properties){
   anObject(O);
   var keys   = getKeys(Properties)
     , length = keys.length
@@ -572,13 +550,13 @@ module.exports = require(22) ? Object.defineProperties : function defineProperti
   while(length > i)dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
-},{"14":14,"22":22,"43":43,"48":48}],45:[function(require,module,exports){
+},{"13":13,"21":21,"42":42,"47":47}],44:[function(require,module,exports){
 exports.f = Object.getOwnPropertySymbols;
-},{}],46:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has         = require(28)
-  , toObject    = require(61)
-  , IE_PROTO    = require(54)('IE_PROTO')
+var has         = require(27)
+  , toObject    = require(60)
+  , IE_PROTO    = require(53)('IE_PROTO')
   , ObjectProto = Object.prototype;
 
 module.exports = Object.getPrototypeOf || function(O){
@@ -588,11 +566,11 @@ module.exports = Object.getPrototypeOf || function(O){
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
 };
-},{"28":28,"54":54,"61":61}],47:[function(require,module,exports){
-var has          = require(28)
-  , toIObject    = require(59)
-  , arrayIndexOf = require(15)(false)
-  , IE_PROTO     = require(54)('IE_PROTO');
+},{"27":27,"53":53,"60":60}],46:[function(require,module,exports){
+var has          = require(27)
+  , toIObject    = require(58)
+  , arrayIndexOf = require(14)(false)
+  , IE_PROTO     = require(53)('IE_PROTO');
 
 module.exports = function(object, names){
   var O      = toIObject(object)
@@ -606,28 +584,28 @@ module.exports = function(object, names){
   }
   return result;
 };
-},{"15":15,"28":28,"54":54,"59":59}],48:[function(require,module,exports){
+},{"14":14,"27":27,"53":53,"58":58}],47:[function(require,module,exports){
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = require(47)
-  , enumBugKeys = require(24);
+var $keys       = require(46)
+  , enumBugKeys = require(23);
 
 module.exports = Object.keys || function keys(O){
   return $keys(O, enumBugKeys);
 };
-},{"24":24,"47":47}],49:[function(require,module,exports){
+},{"23":23,"46":46}],48:[function(require,module,exports){
 exports.f = {}.propertyIsEnumerable;
-},{}],50:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 // most Object methods by ES6 should accept primitives
-var $export = require(25)
-  , core    = require(18)
-  , fails   = require(26);
+var $export = require(24)
+  , core    = require(17)
+  , fails   = require(25);
 module.exports = function(KEY, exec){
   var fn  = (core.Object || {})[KEY] || Object[KEY]
     , exp = {};
   exp[KEY] = exec(fn);
   $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
 };
-},{"18":18,"25":25,"26":26}],51:[function(require,module,exports){
+},{"17":17,"24":24,"25":25}],50:[function(require,module,exports){
 module.exports = function(bitmap, value){
   return {
     enumerable  : !(bitmap & 1),
@@ -636,32 +614,32 @@ module.exports = function(bitmap, value){
     value       : value
   };
 };
-},{}],52:[function(require,module,exports){
-module.exports = require(29);
-},{"29":29}],53:[function(require,module,exports){
-var def = require(43).f
-  , has = require(28)
-  , TAG = require(64)('toStringTag');
+},{}],51:[function(require,module,exports){
+module.exports = require(28);
+},{"28":28}],52:[function(require,module,exports){
+var def = require(42).f
+  , has = require(27)
+  , TAG = require(63)('toStringTag');
 
 module.exports = function(it, tag, stat){
   if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 };
-},{"28":28,"43":43,"64":64}],54:[function(require,module,exports){
-var shared = require(55)('keys')
-  , uid    = require(63);
+},{"27":27,"42":42,"63":63}],53:[function(require,module,exports){
+var shared = require(54)('keys')
+  , uid    = require(62);
 module.exports = function(key){
   return shared[key] || (shared[key] = uid(key));
 };
-},{"55":55,"63":63}],55:[function(require,module,exports){
-var global = require(27)
+},{"54":54,"62":62}],54:[function(require,module,exports){
+var global = require(26)
   , SHARED = '__core-js_shared__'
   , store  = global[SHARED] || (global[SHARED] = {});
 module.exports = function(key){
   return store[key] || (store[key] = {});
 };
-},{"27":27}],56:[function(require,module,exports){
-var toInteger = require(58)
-  , defined   = require(21);
+},{"26":26}],55:[function(require,module,exports){
+var toInteger = require(57)
+  , defined   = require(20);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function(TO_STRING){
@@ -677,44 +655,44 @@ module.exports = function(TO_STRING){
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
-},{"21":21,"58":58}],57:[function(require,module,exports){
-var toInteger = require(58)
+},{"20":20,"57":57}],56:[function(require,module,exports){
+var toInteger = require(57)
   , max       = Math.max
   , min       = Math.min;
 module.exports = function(index, length){
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
-},{"58":58}],58:[function(require,module,exports){
+},{"57":57}],57:[function(require,module,exports){
 // 7.1.4 ToInteger
 var ceil  = Math.ceil
   , floor = Math.floor;
 module.exports = function(it){
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
-},{}],59:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = require(32)
-  , defined = require(21);
+var IObject = require(31)
+  , defined = require(20);
 module.exports = function(it){
   return IObject(defined(it));
 };
-},{"21":21,"32":32}],60:[function(require,module,exports){
+},{"20":20,"31":31}],59:[function(require,module,exports){
 // 7.1.15 ToLength
-var toInteger = require(58)
+var toInteger = require(57)
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 };
-},{"58":58}],61:[function(require,module,exports){
+},{"57":57}],60:[function(require,module,exports){
 // 7.1.13 ToObject(argument)
-var defined = require(21);
+var defined = require(20);
 module.exports = function(it){
   return Object(defined(it));
 };
-},{"21":21}],62:[function(require,module,exports){
+},{"20":20}],61:[function(require,module,exports){
 // 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = require(34);
+var isObject = require(33);
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 module.exports = function(it, S){
@@ -725,16 +703,16 @@ module.exports = function(it, S){
   if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
   throw TypeError("Can't convert object to primitive value");
 };
-},{"34":34}],63:[function(require,module,exports){
+},{"33":33}],62:[function(require,module,exports){
 var id = 0
   , px = Math.random();
 module.exports = function(key){
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
-},{}],64:[function(require,module,exports){
-var store      = require(55)('wks')
-  , uid        = require(63)
-  , Symbol     = require(27).Symbol
+},{}],63:[function(require,module,exports){
+var store      = require(54)('wks')
+  , uid        = require(62)
+  , Symbol     = require(26).Symbol
   , USE_SYMBOL = typeof Symbol == 'function';
 
 var $exports = module.exports = function(name){
@@ -743,27 +721,27 @@ var $exports = module.exports = function(name){
 };
 
 $exports.store = store;
-},{"27":27,"55":55,"63":63}],65:[function(require,module,exports){
-var classof   = require(16)
-  , ITERATOR  = require(64)('iterator')
-  , Iterators = require(39);
-module.exports = require(18).getIteratorMethod = function(it){
+},{"26":26,"54":54,"62":62}],64:[function(require,module,exports){
+var classof   = require(15)
+  , ITERATOR  = require(63)('iterator')
+  , Iterators = require(38);
+module.exports = require(17).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
 };
-},{"16":16,"18":18,"39":39,"64":64}],66:[function(require,module,exports){
+},{"15":15,"17":17,"38":38,"63":63}],65:[function(require,module,exports){
 'use strict';
-var ctx            = require(20)
-  , $export        = require(25)
-  , toObject       = require(61)
-  , call           = require(35)
-  , isArrayIter    = require(33)
-  , toLength       = require(60)
-  , createProperty = require(19)
-  , getIterFn      = require(65);
+var ctx            = require(19)
+  , $export        = require(24)
+  , toObject       = require(60)
+  , call           = require(34)
+  , isArrayIter    = require(32)
+  , toLength       = require(59)
+  , createProperty = require(18)
+  , getIterFn      = require(64);
 
-$export($export.S + $export.F * !require(38)(function(iter){ Array.from(iter); }), 'Array', {
+$export($export.S + $export.F * !require(37)(function(iter){ Array.from(iter); }), 'Array', {
   // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
   from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
     var O       = toObject(arrayLike)
@@ -791,31 +769,31 @@ $export($export.S + $export.F * !require(38)(function(iter){ Array.from(iter); }
   }
 });
 
-},{"19":19,"20":20,"25":25,"33":33,"35":35,"38":38,"60":60,"61":61,"65":65}],67:[function(require,module,exports){
+},{"18":18,"19":19,"24":24,"32":32,"34":34,"37":37,"59":59,"60":60,"64":64}],66:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
-var $export = require(25);
+var $export = require(24);
 
-$export($export.S + $export.F, 'Object', {assign: require(41)});
-},{"25":25,"41":41}],68:[function(require,module,exports){
-var $export = require(25);
+$export($export.S + $export.F, 'Object', {assign: require(40)});
+},{"24":24,"40":40}],67:[function(require,module,exports){
+var $export = require(24);
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !require(22), 'Object', {defineProperty: require(43).f});
-},{"22":22,"25":25,"43":43}],69:[function(require,module,exports){
+$export($export.S + $export.F * !require(21), 'Object', {defineProperty: require(42).f});
+},{"21":21,"24":24,"42":42}],68:[function(require,module,exports){
 // 19.1.2.14 Object.keys(O)
-var toObject = require(61)
-  , $keys    = require(48);
+var toObject = require(60)
+  , $keys    = require(47);
 
-require(50)('keys', function(){
+require(49)('keys', function(){
   return function keys(it){
     return $keys(toObject(it));
   };
 });
-},{"48":48,"50":50,"61":61}],70:[function(require,module,exports){
+},{"47":47,"49":49,"60":60}],69:[function(require,module,exports){
 'use strict';
-var $at  = require(56)(true);
+var $at  = require(55)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-require(37)(String, 'String', function(iterated){
+require(36)(String, 'String', function(iterated){
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -828,12 +806,10 @@ require(37)(String, 'String', function(iterated){
   this._i += point.length;
   return {value: point, done: false};
 });
-},{"37":37,"56":56}],71:[function(require,module,exports){
+},{"36":36,"55":55}],70:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.PRESET_DEFAULTS = exports.PLUGIN_DEFAULTS = exports.classNames = undefined;
 
 var _extends2 = require(7);
@@ -914,7 +890,7 @@ exports.classNames = classNames;
 exports.PLUGIN_DEFAULTS = PLUGIN_DEFAULTS;
 exports.PRESET_DEFAULTS = PRESET_DEFAULTS;
 
-},{"7":7}],72:[function(require,module,exports){
+},{"7":7}],71:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -922,15 +898,15 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _glider = require(73);
+var _glider = require(72);
 
 var _glider2 = _interopRequireDefault(_glider);
 
-var _presets = require(79);
+var _presets = require(78);
 
 var presets = _interopRequireWildcard(_presets);
 
-var _wrapper = require(80);
+var _wrapper = require(79);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -944,17 +920,11 @@ global.Paraglider = (0, _extends3.default)({
 }, presets);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"7":7,"73":73,"79":79,"80":80}],73:[function(require,module,exports){
+},{"7":7,"72":72,"78":78,"79":79}],72:[function(require,module,exports){
 (function (global){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _toConsumableArray2 = require(8);
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+exports.__esModule = true;
 
 var _keys = require(4);
 
@@ -972,9 +942,9 @@ var _createClass2 = require(6);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _config = require(71);
+var _config = require(70);
 
-var _helpers = require(74);
+var _helpers = require(73);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1022,475 +992,451 @@ var Glider = function () {
    */
 
 
-  (0, _createClass3.default)(Glider, [{
-    key: 'setState',
-    value: function setState(newState) {
-      this._state = (0, _extends3.default)({}, this.state, newState);
+  Glider.prototype.setState = function setState(newState) {
+    this._state = (0, _extends3.default)({}, this.state, newState);
+  };
+
+  /**
+   * Getter for the state
+   * @private
+   * @returns {object}
+   */
+
+
+  /**
+   * Init call for the plugin.
+   *
+   * This method assigns the element to the plugin scope, adds the required
+   * eventListeners and class names.
+   * @param {HTMLElement} el An element containing the required markup with and
+   * selectors
+   */
+  Glider.prototype.init = function init(el) {
+    var classNames = this.options.classNames;
+
+    this.el = el;
+    this.slidesWrapper = (0, _helpers.findFirst)('.' + classNames.slides, el);
+    this.slides = (0, _helpers.findAll)('.' + classNames.slide, this.slidesWrapper);
+
+    this.addListeners();
+    this.addSides();
+    this.addInitClassNames();
+  };
+
+  /**
+   * Adds eventlisteners needed for this plugin to work.
+   * Movement and release should be tracked on window or document.
+   * @private
+  */
+
+
+  Glider.prototype.addListeners = function addListeners() {
+    global.addEventListener('mousemove', this.handleMove, { passive: false });
+    global.addEventListener('mouseup', this.handleUp);
+    global.addEventListener('touchmove', this.handleMove, { passive: false });
+    global.addEventListener('touchend', this.handleUp);
+    this.slidesWrapper.addEventListener('mousedown', this.handleDown);
+    this.slidesWrapper.addEventListener('touchstart', this.handleDown);
+  };
+
+  /**
+   * Removes all eventlisteners. (Helpful when destroying the plugin instance)
+   * @private
+   */
+
+
+  Glider.prototype.removeListeners = function removeListeners() {
+    global.removeEventListener('mousemove', this.handleMove);
+    global.removeEventListener('mouseup', this.handleUp);
+    global.removeEventListener('touchmove', this.handleMove);
+    global.removeEventListener('touchend', this.handleUp);
+    this.slidesWrapper.removeEventListener('mousedown', this.handleDown);
+    this.slidesWrapper.removeEventListener('touchstart', this.handleDown);
+  };
+
+  /**
+   * Adds class names to slides
+   * @private
+   */
+
+
+  Glider.prototype.addClassNames = function addClassNames() {
+    var _state = this.state,
+        currentSlide = _state.currentSlide,
+        previousSlide = _state.previousSlide,
+        nextSlide = _state.nextSlide;
+    var _options$classNames = this.options.classNames,
+        current = _options$classNames.current,
+        next = _options$classNames.next,
+        previous = _options$classNames.previous;
+
+    this.slides.forEach(function (slide, index) {
+      slide.classList.toggle(current, index === currentSlide);
+      slide.classList.toggle(next, index === nextSlide);
+      slide.classList.toggle(previous, index === previousSlide);
+    });
+  };
+
+  /**
+   * Initially set class names
+   *
+   * `init` will be removed after the first interaction. It allows a 'silent' start
+   * when working with CSS animations or transitions.
+   * @private
+   */
+
+
+  Glider.prototype.addInitClassNames = function addInitClassNames() {
+    var classNames = this.options.classNames;
+
+    this.el.classList.add(classNames.pluginLoaded);
+    this.slides.forEach(function (slide) {
+      slide.classList.add(classNames.init);
+    });
+    this.addClassNames();
+  };
+
+  /**
+   * Batch removal of class names.
+   * This is dirty but simply removes anything the plugin could have set.
+   * @private
+   */
+
+
+  Glider.prototype.removeClassNames = function removeClassNames() {
+    var _el$classList;
+
+    var classNames = this.options.classNames;
+
+    var classList = (0, _keys2.default)(classNames).map(function (key) {
+      return classNames[key];
+    });
+
+    (_el$classList = this.el.classList).remove.apply(_el$classList, classList);
+    this.slides.forEach(function (slide) {
+      var _slide$classList;
+
+      (_slide$classList = slide.classList).remove.apply(_slide$classList, classList);
+    });
+  };
+
+  /**
+   * Destroys the plugin by removing eventlisteners and class names
+   */
+
+
+  Glider.prototype.destroy = function destroy() {
+    this.removeListeners();
+    this.removeClassNames();
+    this.el = null;
+    this.slidesWrapper = null;
+    this.slides = null;
+  };
+
+  /* istanbul ignore next */
+  /**
+   * Find clientX from the event.
+   * This helper will return the correct value for touch or mouse.
+   * @private
+   * @param {event} e Mouse or touch event
+   * @returns {number} THe clientX of the event
+   */
+
+
+  Glider.prototype.getClientX = function getClientX(e) {
+    var _e$touches = e.touches,
+        touches = _e$touches === undefined ? [] : _e$touches;
+
+    var _ref = touches[0] || e,
+        clientX = _ref.clientX;
+
+    return clientX;
+  };
+
+  /**
+   * Add `previous` and `next` classes around the `current` slide.
+   * This function respects pager clicks, which modify the next or previous element.
+   * @private
+   */
+
+
+  Glider.prototype.addSides = function addSides() {
+    var _state2 = this.state,
+        currentSlide = _state2.currentSlide,
+        requestedNext = _state2.requestedNext,
+        requestedPrevious = _state2.requestedPrevious;
+    var length = this.slides.length;
+    // Respect requested slides.
+    // {goTo} could set these values.
+
+    var nextSlide = (0, _helpers.eitherOr)(requestedNext, (0, _helpers.modLoop)(currentSlide, 1, length));
+    var previousSlide = (0, _helpers.eitherOr)(requestedPrevious, (0, _helpers.modLoop)(currentSlide, -1, length));
+
+    this.setState({ nextSlide: nextSlide, previousSlide: previousSlide });
+  };
+
+  /* istanbul ignore next */
+  /**
+   * First interaction with the mouse or per touch will be used to set flags and
+   * define initial values.
+   * @private
+   * @param {event} e Mouse or touch event
+   */
+
+
+  Glider.prototype.handleDown = function handleDown(e) {
+    var classNames = this.options.classNames;
+
+    var clientX = this.getClientX(e);
+    this.slides.forEach(function (slide) {
+      slide.classList.remove(classNames.init);
+    });
+    // Flag down
+    // set start coordinate,
+    // set current progress
+    this.setState({
+      down: true,
+      xStart: clientX,
+      x: 0
+    });
+  };
+
+  /* istanbul ignore next */
+  /**
+   * Last interaction with the mouse or per touch will be used to set flags
+   * and define initial values.
+   * Only fires if down is active. Prevents unintended behaviour when the first
+   * touch or mousedown was outside the element.
+   * @private
+   */
+
+
+  Glider.prototype.handleUp = function handleUp() {
+    // Only proceed if the plugin signals a previous down event.
+    var _state3 = this.state,
+        down = _state3.down,
+        blocked = _state3.blocked;
+
+    if (down && blocked) {
+      var snapBackAt = this.options.snapBackAt;
+
+      var progress = this.state.x / this.el.offsetWidth;
+      var end = 0;
+      if (progress <= -1 * snapBackAt) {
+        end = -1;
+      } else if (progress >= snapBackAt) {
+        end = 1;
+      }
+      this.spring(progress, end, this.options.spring);
     }
+    this.setState({ down: false, blocked: false });
+  };
 
-    /**
-     * Getter for the state
-     * @private
-     * @returns {object}
-     */
-
-  }, {
-    key: 'init',
+  /**
+   * Moves to the next slide via trigger.
+   */
 
 
-    /**
-     * Init call for the plugin.
-     *
-     * This method assigns the element to the plugin scope, adds the required
-     * eventListeners and class names.
-     * @param {HTMLElement} el An element containing the required markup with and
-     * selectors
-     */
-    value: function init(el) {
-      var classNames = this.options.classNames;
-
-      this.el = el;
-      this.slidesWrapper = (0, _helpers.findFirst)('.' + classNames.slides, el);
-      this.slides = (0, _helpers.findAll)('.' + classNames.slide, this.slidesWrapper);
-
-      this.addListeners();
-      this.addSides();
-      this.addInitClassNames();
+  Glider.prototype.nextSlide = function nextSlide(e) {
+    /* istanbul ignore if */
+    if (e && 'preventDefault' in e) {
+      e.preventDefault();
     }
+    this.addSides();
+    this.addClassNames();
+    this.spring(0, 1, this.options.speed);
+  };
 
-    /**
-     * Adds eventlisteners needed for this plugin to work.
-     * Movement and release should be tracked on window or document.
-     * @private
-    */
+  /**
+   * Moves to the previous slide via trigger.
+   */
 
-  }, {
-    key: 'addListeners',
-    value: function addListeners() {
-      global.addEventListener('mousemove', this.handleMove, { passive: false });
-      global.addEventListener('mouseup', this.handleUp);
-      global.addEventListener('touchmove', this.handleMove, { passive: false });
-      global.addEventListener('touchend', this.handleUp);
-      this.slidesWrapper.addEventListener('mousedown', this.handleDown);
-      this.slidesWrapper.addEventListener('touchstart', this.handleDown);
+
+  Glider.prototype.prevSlide = function prevSlide(e) {
+    /* istanbul ignore if */
+    if (e && 'preventDefault' in e) {
+      e.preventDefault();
     }
+    this.addSides();
+    this.addClassNames();
+    this.spring(0, -1, this.options.speed);
+  };
 
-    /**
-     * Removes all eventlisteners. (Helpful when destroying the plugin instance)
-     * @private
-     */
+  /**
+   * Moves to the nth slide via trigger. Respects left/right movement
+   */
 
-  }, {
-    key: 'removeListeners',
-    value: function removeListeners() {
-      global.removeEventListener('mousemove', this.handleMove);
-      global.removeEventListener('mouseup', this.handleUp);
-      global.removeEventListener('touchmove', this.handleMove);
-      global.removeEventListener('touchend', this.handleUp);
-      this.slidesWrapper.removeEventListener('mousedown', this.handleDown);
-      this.slidesWrapper.removeEventListener('touchstart', this.handleDown);
+
+  Glider.prototype.goTo = function goTo(n) {
+    if (n > this.state.currentSlide) {
+      this.setState({ requestedNext: n });
+      this.nextSlide();
+    } else if (n < this.state.currentSlide) {
+      this.setState({ requestedPrevious: n });
+      this.prevSlide();
     }
+  };
 
-    /**
-     * Adds class names to slides
-     * @private
-     */
+  /**
+   * Handle the end of the slide animation.
+   * If there is a callback called `onEnd` call it.
+   * @private
+   * @param {number} end Final value
+   */
 
-  }, {
-    key: 'addClassNames',
-    value: function addClassNames() {
-      var _state = this.state,
-          currentSlide = _state.currentSlide,
-          previousSlide = _state.previousSlide,
-          nextSlide = _state.nextSlide;
-      var _options$classNames = this.options.classNames,
-          current = _options$classNames.current,
-          next = _options$classNames.next,
-          previous = _options$classNames.previous;
 
-      this.slides.forEach(function (slide, index) {
-        slide.classList.toggle(current, index === currentSlide);
-        slide.classList.toggle(next, index === nextSlide);
-        slide.classList.toggle(previous, index === previousSlide);
-      });
-    }
+  Glider.prototype.handleEnd = function handleEnd(end) {
+    var onEnd = this.options.onEnd;
 
-    /**
-     * Initially set class names
-     *
-     * `init` will be removed after the first interaction. It allows a 'silent' start
-     * when working with CSS animations or transitions.
-     * @private
-     */
-
-  }, {
-    key: 'addInitClassNames',
-    value: function addInitClassNames() {
-      var classNames = this.options.classNames;
-
-      this.el.classList.add(classNames.pluginLoaded);
-      this.slides.forEach(function (slide) {
-        slide.classList.add(classNames.init);
-      });
-      this.addClassNames();
-    }
-
-    /**
-     * Batch removal of class names.
-     * This is dirty but simply removes anything the plugin could have set.
-     * @private
-     */
-
-  }, {
-    key: 'removeClassNames',
-    value: function removeClassNames() {
-      var _el$classList;
-
-      var classNames = this.options.classNames;
-
-      var classList = (0, _keys2.default)(classNames).map(function (key) {
-        return classNames[key];
-      });
-
-      (_el$classList = this.el.classList).remove.apply(_el$classList, (0, _toConsumableArray3.default)(classList));
-      this.slides.forEach(function (slide) {
-        var _slide$classList;
-
-        (_slide$classList = slide.classList).remove.apply(_slide$classList, (0, _toConsumableArray3.default)(classList));
-      });
-    }
-
-    /**
-     * Destroys the plugin by removing eventlisteners and class names
-     */
-
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      this.removeListeners();
-      this.removeClassNames();
-    }
-
-    /**
-     * Find clientX from the event.
-     * This helper will return the correct value for touch or mouse.
-     * @private
-     * @param {event} e Mouse or touch event
-     * @returns {number} THe clientX of the event
-     */
-
-  }, {
-    key: 'getClientX',
-    value: function getClientX(e) {
-      var _e$touches = e.touches,
-          touches = _e$touches === undefined ? [] : _e$touches;
-
-      var _ref = touches[0] || e,
-          clientX = _ref.clientX;
-
-      return clientX;
-    }
-
-    /**
-     * Add `previous` and `next` classes around the `current` slide.
-     * This function respects pager clicks, which modify the next or previous element.
-     * @private
-     */
-
-  }, {
-    key: 'addSides',
-    value: function addSides() {
-      var _state2 = this.state,
-          currentSlide = _state2.currentSlide,
-          requestedNext = _state2.requestedNext,
-          requestedPrevious = _state2.requestedPrevious;
-      var length = this.slides.length;
-      // Respect requested slides.
-      // {goTo} could set these values.
-
-      var nextSlide = (0, _helpers.eitherOr)(requestedNext, (0, _helpers.modLoop)(currentSlide, 1, length));
-      var previousSlide = (0, _helpers.eitherOr)(requestedPrevious, (0, _helpers.modLoop)(currentSlide, -1, length));
-
-      this.setState({ nextSlide: nextSlide, previousSlide: previousSlide });
-    }
-
-    /**
-     * First interaction with the mouse or per touch will be used to set flags and
-     * define initial values.
-     * @private
-     * @param {event} e Mouse or touch event
-     */
-
-  }, {
-    key: 'handleDown',
-    value: function handleDown(e) {
-      var classNames = this.options.classNames;
-
-      var clientX = this.getClientX(e);
-      this.slides.forEach(function (slide) {
-        slide.classList.remove(classNames.init);
-      });
-      // Flag down
-      // set start coordinate,
-      // set current progress
+    if (end === -1) {
       this.setState({
-        down: true,
-        xStart: clientX,
-        x: 0
+        currentSlide: this.state.previousSlide
       });
-    }
-
-    /**
-     * Last interaction with the mouse or per touch will be used to set flags
-     * and define initial values.
-     * Only fires if down is active. Prevents unintended behaviour when the first
-     * touch or mousedown was outside the element.
-     * @private
-     */
-
-  }, {
-    key: 'handleUp',
-    value: function handleUp() {
-      // Only proceed if the plugin signals a previous down event.
-      var _state3 = this.state,
-          down = _state3.down,
-          blocked = _state3.blocked;
-
-      if (down && blocked) {
-        var snapBackAt = this.options.snapBackAt;
-
-        var progress = this.state.x / this.el.offsetWidth;
-        var end = 0;
-        if (progress <= -1 * snapBackAt) {
-          end = -1;
-        } else if (progress >= snapBackAt) {
-          end = 1;
-        }
-        this.spring(progress, end, this.options.spring);
-      }
-      this.setState({ down: false, blocked: false });
-    }
-
-    /**
-     * Moves to the next slide via trigger.
-     */
-
-  }, {
-    key: 'nextSlide',
-    value: function nextSlide(e) {
-      if (e && 'preventDefault' in e) {
-        e.preventDefault();
-      }
-      this.addSides();
-      this.addClassNames();
-      this.spring(0, 1, this.options.speed);
-    }
-
-    /**
-     * Moves to the previous slide via trigger.
-     */
-
-  }, {
-    key: 'prevSlide',
-    value: function prevSlide(e) {
-      if (e && 'preventDefault' in e) {
-        e.preventDefault();
-      }
-      this.addSides();
-      this.addClassNames();
-      this.spring(0, -1, this.options.speed);
-    }
-
-    /**
-     * Moves to the nth slide via trigger. Respects left/right movement
-     */
-
-  }, {
-    key: 'goTo',
-    value: function goTo(n) {
-      if (n > this.state.currentSlide) {
-        this.setState({ requestedNext: n });
-        this.nextSlide();
-      } else if (n < this.state.currentSlide) {
-        this.setState({ requestedPrevious: n });
-        this.prevSlide();
-      }
-    }
-
-    /**
-     * Handle the end of the slide animation.
-     * If there is a callback called `onEnd` call it.
-     * @private
-     * @param {number} end Final value
-     */
-
-  }, {
-    key: 'handleEnd',
-    value: function handleEnd(end) {
-      var onEnd = this.options.onEnd;
-
-      if (end === -1) {
-        this.setState({
-          currentSlide: this.state.previousSlide
-        });
-      } else if (end === 1) {
-        this.setState({
-          currentSlide: this.state.nextSlide
-        });
-      }
+    } else if (end === 1) {
       this.setState({
-        requestedNext: null,
-        requestedPrevious: null
+        currentSlide: this.state.nextSlide
       });
-      this.addSides();
-      this.addClassNames();
+    }
+    this.setState({
+      requestedNext: null,
+      requestedPrevious: null
+    });
+    this.addSides();
+    this.addClassNames();
 
-      if (typeof onEnd === 'function') {
-        var _getReturnValues = this.getReturnValues(false),
-            next = _getReturnValues.next,
-            previous = _getReturnValues.previous,
-            current = _getReturnValues.current,
-            rest = _getReturnValues.rest;
-        /**
-         * Callback for the end
-         * @public
-         * @type {onEnd}
-         */
+    if (typeof onEnd === 'function') {
+      var _getReturnValues = this.getReturnValues(false),
+          next = _getReturnValues.next,
+          previous = _getReturnValues.previous,
+          current = _getReturnValues.current,
+          rest = _getReturnValues.rest;
+      /**
+       * Callback for the end
+       * @public
+       * @type {onEnd}
+       */
 
 
-        onEnd({ next: next, previous: previous, current: current, rest: rest }, this.slides);
+      onEnd({ next: next, previous: previous, current: current, rest: rest }, this.slides);
+    }
+  };
+
+  /**
+   * Handles the snap animation
+   * @private
+   * @param {number} progress Current value
+   * @param {number} end Final value
+   * @param {number} duration Time to pass the until animation is done.
+   */
+
+
+  Glider.prototype.spring = function spring(progress, end, duration) {
+    var _this = this;
+
+    (0, _helpers.animate)(duration, progress, end, function (p) {
+      _this.setState({
+        x: p * _this.el.offsetWidth
+      });
+      if (p === end) {
+        _this.handleEnd(end);
+      } else {
+        _this.handleProgress();
       }
-    }
+    });
+  };
 
-    /**
-     * Handles the snap animation
-     * @private
-     * @param {number} progress Current value
-     * @param {number} end Final value
-     * @param {number} duration Time to pass the until animation is done.
-     */
+  /* istanbul ignore next */
+  /**
+   * Handler vor mouse or touch movement.
+   * Waits for a threshold and then records the movement on the `x` axis
+   * @private
+   * @param {event} e Mouse or touch move event
+   */
 
-  }, {
-    key: 'spring',
-    value: function spring(progress, end, duration) {
-      var _this = this;
 
-      (0, _helpers.animate)(duration, progress, end, function (p) {
-        _this.setState({
-          x: p * _this.el.offsetWidth
-        });
-        if (p === end) {
-          _this.handleEnd(end);
-        } else {
-          _this.handleProgress();
-        }
-      });
-    }
-
-    /**
-     * Handler vor mouse or touch movement.
-     * Waits for a threshold and then records the movement on the `x` axis
-     * @private
-     * @param {event} e Mouse or touch move event
-     */
-
-  }, {
-    key: 'handleMove',
-    value: function handleMove(e) {
+  Glider.prototype.handleMove = function handleMove(e) {
+    if (this.state.down) {
       var _state4 = this.state,
-          down = _state4.down,
           xStart = _state4.xStart,
           x = _state4.x,
           blocked = _state4.blocked;
       var threshold = this.options.threshold;
 
-      if (down) {
-        if (Math.abs(x) > threshold || blocked) {
-          this.setState({ blocked: true });
-          e.preventDefault();
-          this.handleProgress();
-        }
-        var clientX = this.getClientX(e);
-        this.setState({
-          x: xStart - clientX
-        });
+      if (Math.abs(x) > threshold || blocked) {
+        this.setState({ blocked: true });
+        e.preventDefault();
+        this.handleProgress();
       }
-    }
-  }, {
-    key: 'getReturnValues',
-    value: function getReturnValues() {
-      var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-      var progress = this.state.x / this.el.offsetWidth;
-      var _state5 = this.state,
-          currentSlide = _state5.currentSlide,
-          nextSlide = _state5.nextSlide,
-          previousSlide = _state5.previousSlide;
-
-      var right = progress * -1;
-      var current = currentSlide;
-      // We only need the lower value
-      var next = progress < right && direction ? null : nextSlide;
-      var previous = progress > right && direction ? null : previousSlide;
-
-      var rest = this.slides.map(function (el, index) {
-        return index;
-      }).filter(function (originalIndex) {
-        return [previous, current, next].indexOf(originalIndex) === -1;
+      var clientX = this.getClientX(e);
+      this.setState({
+        x: xStart - clientX
       });
-
-      return {
-        next: next,
-        previous: previous,
-        current: current,
-        rest: rest,
-        progress: Math.abs(progress)
-      };
     }
+  };
 
-    /**
-     * Handles the progress. Calculates the progress from the
-     * internal state and element dimension.
-     * A callback is fired if set
-     * @private
-     */
+  Glider.prototype.getReturnValues = function getReturnValues() {
+    var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
-  }, {
-    key: 'handleProgress',
-    value: function handleProgress() {
-      var onSlide = this.options.onSlide;
+    var progress = this.state.x / this.el.offsetWidth;
+    var _state5 = this.state,
+        currentSlide = _state5.currentSlide,
+        nextSlide = _state5.nextSlide,
+        previousSlide = _state5.previousSlide;
+
+    var right = progress * -1;
+    var current = currentSlide;
+    // We only need the lower value
+    var next = progress < right && direction ? null : nextSlide;
+    var previous = progress > right && direction ? null : previousSlide;
+
+    var rest = this.slides.map(function (el, index) {
+      return index;
+    }).filter(function (originalIndex) {
+      return [previous, current, next].indexOf(originalIndex) === -1;
+    });
+
+    return {
+      next: next,
+      previous: previous,
+      current: current,
+      rest: rest,
+      progress: Math.abs(progress)
+    };
+  };
+
+  /**
+   * Handles the progress. Calculates the progress from the
+   * internal state and element dimension.
+   * A callback is fired if set
+   * @private
+   */
 
 
-      if (typeof onSlide === 'function') {
-        var _getReturnValues2 = this.getReturnValues(),
-            progress = _getReturnValues2.progress,
-            next = _getReturnValues2.next,
-            previous = _getReturnValues2.previous,
-            current = _getReturnValues2.current,
-            rest = _getReturnValues2.rest;
-        /**
-         * Callback for progression
-         * @type {onSlide}
-         */
+  Glider.prototype.handleProgress = function handleProgress() {
+    var onSlide = this.options.onSlide;
 
 
-        onSlide(progress, { next: next, previous: previous, current: current, rest: rest }, this.slides);
-      }
+    if (typeof onSlide === 'function') {
+      var _getReturnValues2 = this.getReturnValues(),
+          progress = _getReturnValues2.progress,
+          next = _getReturnValues2.next,
+          previous = _getReturnValues2.previous,
+          current = _getReturnValues2.current,
+          rest = _getReturnValues2.rest;
+      /**
+       * Callback for progression
+       * @type {onSlide}
+       */
+
+
+      onSlide(progress, { next: next, previous: previous, current: current, rest: rest }, this.slides);
     }
-  }, {
+  };
+
+  (0, _createClass3.default)(Glider, [{
     key: 'state',
     get: function get() {
       return this._state;
-    }
-
-    /**
-     * The state setter is disabled. Use `this.setState` instead
-     * @private
-     * @param {*} x
-     */
-    ,
-    set: function set(x) {
-      throw new Error('Attempted to set state via a setter. Please use the setState method instead.');
     }
   }]);
   return Glider;
@@ -1524,13 +1470,11 @@ var Glider = function () {
 exports.default = Glider;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"4":4,"5":5,"6":6,"7":7,"71":71,"74":74,"8":8}],74:[function(require,module,exports){
+},{"4":4,"5":5,"6":6,"7":7,"70":70,"73":73}],73:[function(require,module,exports){
 (function (global){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.eitherOr = exports.modLoop = exports.animate = exports.findFirst = exports.findAll = undefined;
 
 var _from = require(1);
@@ -1545,6 +1489,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author Gregor Adams <greg@pixelass.com>
  */
 
+/* istanbul ignore next */
 /**
  * Animates from one value to the other over a given time.
  * This function uses requestAnimationFrame and Date to return a reliable result.
@@ -1579,6 +1524,7 @@ var animate = function animate(speed, from, to, callback) {
  * @param {number} progress Current value between `from` and `to`
  */
 
+/* istanbul ignore next */
 /**
  * Helper to get elements. Similar to jQuery's `$(selector, context)`
  * @private
@@ -1591,6 +1537,7 @@ var findAll = function findAll(selector) {
   return (0, _from2.default)(context.querySelectorAll(selector));
 };
 
+/* istanbul ignore next */
 /**
  * Helper to get elements. Similar to jQuery's `$(selector, context)[0]`
  * @private
@@ -1634,18 +1581,16 @@ exports.modLoop = modLoop;
 exports.eitherOr = eitherOr;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"1":1}],75:[function(require,module,exports){
+},{"1":1}],74:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(80);
+var _wrapper = require(79);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -1697,18 +1642,16 @@ var belt = function belt(glider, opts) {
 
 exports.default = belt;
 
-},{"7":7,"80":80}],76:[function(require,module,exports){
+},{"7":7,"79":79}],75:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(80);
+var _wrapper = require(79);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -1758,18 +1701,16 @@ var coverLeftRight = function coverLeftRight(glider, opts) {
 
 exports.default = coverLeftRight;
 
-},{"7":7,"80":80}],77:[function(require,module,exports){
+},{"7":7,"79":79}],76:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(80);
+var _wrapper = require(79);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -1819,18 +1760,16 @@ var coverLeft = function coverLeft(glider, opts) {
 
 exports.default = coverLeft;
 
-},{"7":7,"80":80}],78:[function(require,module,exports){
+},{"7":7,"79":79}],77:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(80);
+var _wrapper = require(79);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -1880,27 +1819,25 @@ var coverRight = function coverRight(glider, opts) {
 
 exports.default = coverRight;
 
-},{"7":7,"80":80}],79:[function(require,module,exports){
+},{"7":7,"79":79}],78:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 exports.coverLeftRight = exports.coverRight = exports.coverLeft = exports.belt = undefined;
 
-var _belt = require(75);
+var _belt = require(74);
 
 var _belt2 = _interopRequireDefault(_belt);
 
-var _coverLeft = require(77);
+var _coverLeft = require(76);
 
 var _coverLeft2 = _interopRequireDefault(_coverLeft);
 
-var _coverRight = require(78);
+var _coverRight = require(77);
 
 var _coverRight2 = _interopRequireDefault(_coverRight);
 
-var _coverLeftRight = require(76);
+var _coverLeftRight = require(75);
 
 var _coverLeftRight2 = _interopRequireDefault(_coverLeftRight);
 
@@ -1911,12 +1848,10 @@ exports.coverLeft = _coverLeft2.default;
 exports.coverRight = _coverRight2.default;
 exports.coverLeftRight = _coverLeftRight2.default;
 
-},{"75":75,"76":76,"77":77,"78":78}],80:[function(require,module,exports){
+},{"74":74,"75":75,"76":76,"77":77}],79:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends2 = require(7);
 
@@ -1926,11 +1861,11 @@ var _from = require(1);
 
 var _from2 = _interopRequireDefault(_from);
 
-var _glider = require(73);
+var _glider = require(72);
 
 var _glider2 = _interopRequireDefault(_glider);
 
-var _config = require(71);
+var _config = require(70);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1996,4 +1931,4 @@ var wrapper = function wrapper(glider, opts) {
 
 exports.default = wrapper;
 
-},{"1":1,"7":7,"71":71,"73":73}]},{},[72]);
+},{"1":1,"7":7,"70":70,"72":72}]},{},[71]);

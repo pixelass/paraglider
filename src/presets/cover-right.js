@@ -1,3 +1,14 @@
+/**
+ * A covering slider.
+ * The previous or next slide cover the current slide from right.
+ *
+ * Includes pagers and navigation buttons.
+ *
+ * @file presets/cover-right.js
+ * @module presets
+ * @author Gregor Adams <greg@pixelass.com>
+ */
+
 import wrapper from './wrapper'
 
 /**

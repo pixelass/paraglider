@@ -1,5 +1,10 @@
 /**
- * @file src/index.js
+ * Paraglider is an API driven slider.
+ *
+ * Per default it simply adds class names to the previous, current and next slide.
+ * With the help of callbacks however, you can add any imaginable behavior
+ *
+ * @file glider/index.js
  * @author Gregor Adams <greg@pixelass.com>
  */
 
@@ -85,10 +90,21 @@ class Glider {
   }
 
   /**
+   * Destroys the plugin by removing eventlisteners and class names
+   */
+  destroy() {
+    this.removeListeners()
+    this.removeClassNames()
+    this.el = null
+    this.slidesWrapper = null
+    this.slides = null
+  }
+
+  /**
    * Adds eventlisteners needed for this plugin to work.
    * Movement and release should be tracked on window or document.
    * @private
-  */
+   */
   addListeners() {
     global.addEventListener('mousemove', this.handleMove, {passive: false})
     global.addEventListener('mouseup', this.handleUp)
@@ -157,14 +173,81 @@ class Glider {
   }
 
   /**
-   * Destroys the plugin by removing eventlisteners and class names
+   * Add `previous` and `next` classes around the `current` slide.
+   * This function respects pager clicks, which modify the next or previous element.
+   * @private
    */
-  destroy() {
-    this.removeListeners()
-    this.removeClassNames()
-    this.el = null
-    this.slidesWrapper = null
-    this.slides = null
+  addSides() {
+    const {currentSlide, requestedNext, requestedPrevious} = this.state
+    const {length} = this.slides
+    // Respect requested slides.
+    // {goTo} could set these values.
+    const nextSlide = eitherOr(requestedNext, modLoop(currentSlide, 1, length))
+    const previousSlide = eitherOr(requestedPrevious, modLoop(currentSlide, -1, length))
+
+    this.setState({nextSlide, previousSlide})
+  }
+
+  /**
+   * Moves to the next slide via trigger.
+   */
+  nextSlide(e) {
+    /* istanbul ignore next */
+    if (e && 'preventDefault' in e) {
+      e.preventDefault()
+    }
+    this.addSides()
+    this.addClassNames()
+    this.spring(0, 1, this.options.speed)
+  }
+
+  /**
+   * Moves to the previous slide via trigger.
+   */
+  prevSlide(e) {
+    /* istanbul ignore next */
+    if (e && 'preventDefault' in e) {
+      e.preventDefault()
+    }
+    this.addSides()
+    this.addClassNames()
+    this.spring(0, -1, this.options.speed)
+  }
+
+  /**
+   * Moves to the nth slide via trigger. Respects left/right movement
+   */
+  goTo(n) {
+    if (n > this.state.currentSlide) {
+      this.setState({requestedNext: n})
+      this.nextSlide()
+    /* istanbul ignore next */
+    } else /* istanbul ignore next */ if (n < this.state.currentSlide) {
+      this.setState({requestedPrevious: n})
+      this.prevSlide()
+    }
+  }
+
+  /**
+   * Handles the snap animation
+   * @private
+   * @param {number} progress Current value
+   * @param {number} end Final value
+   * @param {number} duration Time to pass the until animation is done.
+   */
+  spring(progress, end, duration) {
+    animate(duration, progress, end,
+      p => {
+        this.setState({
+          x: p * this.el.offsetWidth
+        })
+        if (p === end) {
+          this.handleEnd(end)
+        } else {
+          this.handleProgress()
+        }
+      }
+    )
   }
 
   /* istanbul ignore next */
@@ -182,19 +265,33 @@ class Glider {
   }
 
   /**
-   * Add `previous` and `next` classes around the `current` slide.
-   * This function respects pager clicks, which modify the next or previous element.
+   * Prepares return values
    * @private
+   * @param {boolean} direction
+   * @returns {object}
    */
-  addSides() {
-    const {currentSlide, requestedNext, requestedPrevious} = this.state
-    const {length} = this.slides
-    // Respect requested slides.
-    // {goTo} could set these values.
-    const nextSlide = eitherOr(requestedNext, modLoop(currentSlide, 1, length))
-    const previousSlide = eitherOr(requestedPrevious, modLoop(currentSlide, -1, length))
+  getReturnValues(direction = true) {
+    const progress = this.state.x / this.el.offsetWidth
+    const {currentSlide, nextSlide, previousSlide} = this.state
+    const right = progress * -1
+    const current = currentSlide
+    // We only need the lower value
+    /* istanbul ignore next */
+    const next = progress < right && direction ? null : nextSlide
+    /* istanbul ignore next */
+    const previous = progress > right && direction ? null : previousSlide
 
-    this.setState({nextSlide, previousSlide})
+    const rest = this.slides.map((el, index) => index)
+      .filter(originalIndex =>
+        [previous, current, next].indexOf(originalIndex) === -1)
+
+    return {
+      next,
+      previous,
+      current,
+      rest,
+      progress: Math.abs(progress)
+    }
   }
 
   /* istanbul ignore next */
@@ -245,107 +342,6 @@ class Glider {
     this.setState({down: false, blocked: false})
   }
 
-  /**
-   * Moves to the next slide via trigger.
-   */
-  nextSlide(e) {
-    /* istanbul ignore if */
-    if (e && 'preventDefault' in e) {
-      e.preventDefault()
-    }
-    this.addSides()
-    this.addClassNames()
-    this.spring(0, 1, this.options.speed)
-  }
-
-  /**
-   * Moves to the previous slide via trigger.
-   */
-  prevSlide(e) {
-    /* istanbul ignore if */
-    if (e && 'preventDefault' in e) {
-      e.preventDefault()
-    }
-    this.addSides()
-    this.addClassNames()
-    this.spring(0, -1, this.options.speed)
-  }
-
-  /**
-   * Moves to the nth slide via trigger. Respects left/right movement
-   */
-  goTo(n) {
-    if (n > this.state.currentSlide) {
-      this.setState({requestedNext: n})
-      this.nextSlide()
-    } else if (n < this.state.currentSlide) {
-      this.setState({requestedPrevious: n})
-      this.prevSlide()
-    }
-  }
-
-  /**
-   * Handle the end of the slide animation.
-   * If there is a callback called `onEnd` call it.
-   * @private
-   * @param {number} end Final value
-   */
-  handleEnd(end) {
-    const {onEnd} = this.options
-    if (end === -1) {
-      this.setState({
-        currentSlide: this.state.previousSlide
-      })
-    } else if (end === 1) {
-      this.setState({
-        currentSlide: this.state.nextSlide
-      })
-    }
-    this.setState({
-      requestedNext: null,
-      requestedPrevious: null
-    })
-    this.addSides()
-    this.addClassNames()
-
-    if (typeof onEnd === 'function') {
-      const {
-        next,
-        previous,
-        current,
-        rest
-      } = this.getReturnValues(false)
-      /**
-       * Callback for the end
-       * @public
-       * @type {onEnd}
-       */
-      onEnd({next, previous, current, rest}, this.slides)
-    }
-  }
-
-  /**
-   * Handles the snap animation
-   * @private
-   * @param {number} progress Current value
-   * @param {number} end Final value
-   * @param {number} duration Time to pass the until animation is done.
-   */
-  spring(progress, end, duration) {
-    animate(duration, progress, end,
-      p => {
-        this.setState({
-          x: p * this.el.offsetWidth
-        })
-        if (p === end) {
-          this.handleEnd(end)
-        } else {
-          this.handleProgress()
-        }
-      }
-    )
-  }
-
   /* istanbul ignore next */
   /**
    * Handler vor mouse or touch movement.
@@ -366,28 +362,6 @@ class Glider {
       this.setState({
         x: xStart - clientX
       })
-    }
-  }
-
-  getReturnValues(direction = true) {
-    const progress = this.state.x / this.el.offsetWidth
-    const {currentSlide, nextSlide, previousSlide} = this.state
-    const right = progress * -1
-    const current = currentSlide
-    // We only need the lower value
-    const next = progress < right && direction ? null : nextSlide
-    const previous = progress > right && direction ? null : previousSlide
-
-    const rest = this.slides.map((el, index) => index)
-      .filter(originalIndex =>
-        [previous, current, next].indexOf(originalIndex) === -1)
-
-    return {
-      next,
-      previous,
-      current,
-      rest,
-      progress: Math.abs(progress)
     }
   }
 
@@ -419,10 +393,53 @@ class Glider {
       )
     }
   }
+
+  /**
+   * Handle the end of the slide animation.
+   * If there is a callback called `onEnd` call it.
+   * @private
+   * @param {number} end Final value
+   */
+  handleEnd(end) {
+    const {onEnd} = this.options
+    if (end === -1) {
+      this.setState({
+        currentSlide: this.state.previousSlide
+      })
+    /* istanbul ignore next */
+    } else /* istanbul ignore next */ if (end === 1) {
+      this.setState({
+        currentSlide: this.state.nextSlide
+      })
+    }
+    this.setState({
+      requestedNext: null,
+      requestedPrevious: null
+    })
+    this.addSides()
+    this.addClassNames()
+
+    if (typeof onEnd === 'function') {
+      const {
+        next,
+        previous,
+        current,
+        rest
+      } = this.getReturnValues(false)
+      /**
+       * Callback for the end
+       * @public
+       * @type {onEnd}
+       */
+      onEnd({next, previous, current, rest}, this.slides)
+    }
+  }
+
 }
 
 /**
  * @typedef onSlide
+ * @memberof Glider
  * @type {function}
  * @param {object} offset Offset of the element to either side.
  * @param {number} offset.left A value between [0, 1]
@@ -437,6 +454,7 @@ class Glider {
 
 /**
  * @typedef onEnd
+ * @memberof Glider
  * @type {function}
  * @param {object} data Data about the slider activity
  * @param {number} data.previous Index of previous slide

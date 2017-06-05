@@ -21,7 +21,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav class="main-nav">
-    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="Glider.html">Glider</a><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="Glider.html#destroy">destroy</a></li><li data-type='method'><a href="Glider.html#goTo">goTo</a></li><li data-type='method'><a href="Glider.html#init">init</a></li><li data-type='method'><a href="Glider.html#nextSlide">nextSlide</a></li><li data-type='method'><a href="Glider.html#prevSlide">prevSlide</a></li></ul></li></ul><header class="nav-header"><h3>Global</h3></header><ul><li><a href="global.html#belt">belt</a></li><li><a href="global.html#classNames">classNames</a></li><li><a href="global.html#coverLeft">coverLeft</a></li><li><a href="global.html#coverLeftRight">coverLeftRight</a></li><li><a href="global.html#coverRight">coverRight</a></li><li><a href="global.html#PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></li><li><a href="global.html#PRESET_DEFAULTS">PRESET_DEFAULTS</a></li><li><a href="global.html#wrapper">wrapper</a></li></ul>
+    <header class="nav-header"><h2><a href="index.html">Home</a></h2></header><header class="nav-header"><h3><span>Classes</span></h3></header><ul><li><a href="Glider.html">Glider</a><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="Glider.html#destroy">destroy</a></li><li data-type='method'><a href="Glider.html#goTo">goTo</a></li><li data-type='method'><a href="Glider.html#init">init</a></li><li data-type='method'><a href="Glider.html#nextSlide">nextSlide</a></li><li data-type='method'><a href="Glider.html#prevSlide">prevSlide</a></li></ul><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="Glider.html#.onEnd">onEnd</a></li><li data-type='typedef'><a href="Glider.html#.onSlide">onSlide</a></li></ul></li></ul><header class="nav-header"><h3><span>Modules</span></h3></header><ul><li><a href="module-config.html">config</a><ul class='members'><li class='nav-type-header'>Members</li><li data-type='member'><a href="module-config.html#~classNames">classNames</a></li><li data-type='member'><a href="module-config.html#~PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></li><li data-type='member'><a href="module-config.html#~PRESET_DEFAULTS">PRESET_DEFAULTS</a></li></ul></li><li><a href="module-helpers.html">helpers</a><ul class='typedefs'><li class='nav-type-header'>Typedefs</li><li data-type='typedef'><a href="module-helpers.html#~animationCallback">animationCallback</a></li></ul></li><li><a href="module-presets.html">presets</a><ul class='methods'><li class='nav-type-header'>Methods</li><li data-type='method'><a href="module-presets.html#~belt">belt</a></li><li data-type='method'><a href="module-presets.html#~coverLeft">coverLeft</a></li><li data-type='method'><a href="module-presets.html#~coverLeftRight">coverLeftRight</a></li><li data-type='method'><a href="module-presets.html#~coverRight">coverRight</a></li><li data-type='method'><a href="module-presets.html#~wrapper">wrapper</a></li></ul></li></ul>
 </nav>
 
 <main id="main" class="main-content">
@@ -37,7 +37,12 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file src/index.js
+ * Paraglider is an API driven slider.
+ *
+ * Per default it simply adds class names to the previous, current and next slide.
+ * With the help of callbacks however, you can add any imaginable behavior
+ *
+ * @file glider/index.js
  * @author Gregor Adams &lt;greg@pixelass.com>
  */
 
@@ -104,15 +109,6 @@ class Glider {
   }
 
   /**
-   * The state setter is disabled. Use `this.setState` instead
-   * @private
-   * @param {*} x
-   */
-  set state(x) {
-    throw new Error('Attempted to set state via a setter. Please use the setState method instead.')
-  }
-
-  /**
    * Init call for the plugin.
    *
    * This method assigns the element to the plugin scope, adds the required
@@ -132,10 +128,21 @@ class Glider {
   }
 
   /**
+   * Destroys the plugin by removing eventlisteners and class names
+   */
+  destroy() {
+    this.removeListeners()
+    this.removeClassNames()
+    this.el = null
+    this.slidesWrapper = null
+    this.slides = null
+  }
+
+  /**
    * Adds eventlisteners needed for this plugin to work.
    * Movement and release should be tracked on window or document.
    * @private
-  */
+   */
   addListeners() {
     global.addEventListener('mousemove', this.handleMove, {passive: false})
     global.addEventListener('mouseup', this.handleUp)
@@ -204,27 +211,6 @@ class Glider {
   }
 
   /**
-   * Destroys the plugin by removing eventlisteners and class names
-   */
-  destroy() {
-    this.removeListeners()
-    this.removeClassNames()
-  }
-
-  /**
-   * Find clientX from the event.
-   * This helper will return the correct value for touch or mouse.
-   * @private
-   * @param {event} e Mouse or touch event
-   * @returns {number} THe clientX of the event
-   */
-  getClientX(e) {
-    const {touches = []} = e
-    const {clientX} = touches[0] || e
-    return clientX
-  }
-
-  /**
    * Add `previous` and `next` classes around the `current` slide.
    * This function respects pager clicks, which modify the next or previous element.
    * @private
@@ -240,6 +226,110 @@ class Glider {
     this.setState({nextSlide, previousSlide})
   }
 
+  /**
+   * Moves to the next slide via trigger.
+   */
+  nextSlide(e) {
+    /* istanbul ignore if */
+    if (e &amp;&amp; 'preventDefault' in e) {
+      e.preventDefault()
+    }
+    this.addSides()
+    this.addClassNames()
+    this.spring(0, 1, this.options.speed)
+  }
+
+  /**
+   * Moves to the previous slide via trigger.
+   */
+  prevSlide(e) {
+    /* istanbul ignore if */
+    if (e &amp;&amp; 'preventDefault' in e) {
+      e.preventDefault()
+    }
+    this.addSides()
+    this.addClassNames()
+    this.spring(0, -1, this.options.speed)
+  }
+
+  /**
+   * Moves to the nth slide via trigger. Respects left/right movement
+   */
+  goTo(n) {
+    if (n > this.state.currentSlide) {
+      this.setState({requestedNext: n})
+      this.nextSlide()
+    } else if (n &lt; this.state.currentSlide) {
+      this.setState({requestedPrevious: n})
+      this.prevSlide()
+    }
+  }
+
+  /**
+   * Handles the snap animation
+   * @private
+   * @param {number} progress Current value
+   * @param {number} end Final value
+   * @param {number} duration Time to pass the until animation is done.
+   */
+  spring(progress, end, duration) {
+    animate(duration, progress, end,
+      p => {
+        this.setState({
+          x: p * this.el.offsetWidth
+        })
+        if (p === end) {
+          this.handleEnd(end)
+        } else {
+          this.handleProgress()
+        }
+      }
+    )
+  }
+
+  /* istanbul ignore next */
+  /**
+   * Find clientX from the event.
+   * This helper will return the correct value for touch or mouse.
+   * @private
+   * @param {event} e Mouse or touch event
+   * @returns {number} THe clientX of the event
+   */
+  getClientX(e) {
+    const {touches = []} = e
+    const {clientX} = touches[0] || e
+    return clientX
+  }
+
+  /**
+   * Prepares return values
+   * @private
+   * @param {boolean} direction
+   * @returns {object}
+   */
+  getReturnValues(direction = true) {
+    const progress = this.state.x / this.el.offsetWidth
+    const {currentSlide, nextSlide, previousSlide} = this.state
+    const right = progress * -1
+    const current = currentSlide
+    // We only need the lower value
+    const next = progress &lt; right &amp;&amp; direction ? null : nextSlide
+    const previous = progress > right &amp;&amp; direction ? null : previousSlide
+
+    const rest = this.slides.map((el, index) => index)
+      .filter(originalIndex =>
+        [previous, current, next].indexOf(originalIndex) === -1)
+
+    return {
+      next,
+      previous,
+      current,
+      rest,
+      progress: Math.abs(progress)
+    }
+  }
+
+  /* istanbul ignore next */
   /**
    * First interaction with the mouse or per touch will be used to set flags and
    * define initial values.
@@ -262,6 +352,7 @@ class Glider {
     })
   }
 
+  /* istanbul ignore next */
   /**
    * Last interaction with the mouse or per touch will be used to set flags
    * and define initial values.
@@ -286,40 +377,55 @@ class Glider {
     this.setState({down: false, blocked: false})
   }
 
+  /* istanbul ignore next */
   /**
-   * Moves to the next slide via trigger.
+   * Handler vor mouse or touch movement.
+   * Waits for a threshold and then records the movement on the `x` axis
+   * @private
+   * @param {event} e Mouse or touch move event
    */
-  nextSlide(e) {
-    if (e &amp;&amp; 'preventDefault' in e) {
-      e.preventDefault()
+  handleMove(e) {
+    if (this.state.down) {
+      const {xStart, x, blocked} = this.state
+      const {threshold} = this.options
+      if ((Math.abs(x) > threshold) || blocked) {
+        this.setState({blocked: true})
+        e.preventDefault()
+        this.handleProgress()
+      }
+      const clientX = this.getClientX(e)
+      this.setState({
+        x: xStart - clientX
+      })
     }
-    this.addSides()
-    this.addClassNames()
-    this.spring(0, 1, this.options.speed)
   }
 
   /**
-   * Moves to the previous slide via trigger.
+   * Handles the progress. Calculates the progress from the
+   * internal state and element dimension.
+   * A callback is fired if set
+   * @private
    */
-  prevSlide(e) {
-    if (e &amp;&amp; 'preventDefault' in e) {
-      e.preventDefault()
-    }
-    this.addSides()
-    this.addClassNames()
-    this.spring(0, -1, this.options.speed)
-  }
+  handleProgress() {
+    const {onSlide} = this.options
 
-  /**
-   * Moves to the nth slide via trigger. Respects left/right movement
-   */
-  goTo(n) {
-    if (n > this.state.currentSlide) {
-      this.setState({requestedNext: n})
-      this.nextSlide()
-    } else if (n &lt; this.state.currentSlide) {
-      this.setState({requestedPrevious: n})
-      this.prevSlide()
+    if (typeof onSlide === 'function') {
+      const {
+        progress,
+        next,
+        previous,
+        current,
+        rest
+      } = this.getReturnValues()
+      /**
+       * Callback for progression
+       * @type {onSlide}
+       */
+      onSlide(
+        progress,
+        {next, previous, current, rest},
+        this.slides
+      )
     }
   }
 
@@ -363,104 +469,11 @@ class Glider {
     }
   }
 
-  /**
-   * Handles the snap animation
-   * @private
-   * @param {number} progress Current value
-   * @param {number} end Final value
-   * @param {number} duration Time to pass the until animation is done.
-   */
-  spring(progress, end, duration) {
-    animate(duration, progress, end,
-      p => {
-        this.setState({
-          x: p * this.el.offsetWidth
-        })
-        if (p === end) {
-          this.handleEnd(end)
-        } else {
-          this.handleProgress()
-        }
-      }
-    )
-  }
-
-  /**
-   * Handler vor mouse or touch movement.
-   * Waits for a threshold and then records the movement on the `x` axis
-   * @private
-   * @param {event} e Mouse or touch move event
-   */
-  handleMove(e) {
-    const {down, xStart, x, blocked} = this.state
-    const {threshold} = this.options
-    if (down) {
-      if ((Math.abs(x) > threshold) || blocked) {
-        this.setState({blocked: true})
-        e.preventDefault()
-        this.handleProgress()
-      }
-      const clientX = this.getClientX(e)
-      this.setState({
-        x: xStart - clientX
-      })
-    }
-  }
-
-  getReturnValues(direction = true) {
-    const progress = this.state.x / this.el.offsetWidth
-    const {currentSlide, nextSlide, previousSlide} = this.state
-    const right = progress * -1
-    const current = currentSlide
-    // We only need the lower value
-    const next = progress &lt; right &amp;&amp; direction ? null : nextSlide
-    const previous = progress > right &amp;&amp; direction ? null : previousSlide
-
-    const rest = this.slides.map((el, index) => index)
-      .filter(originalIndex =>
-        [previous, current, next].indexOf(originalIndex) === -1)
-
-    return {
-      next,
-      previous,
-      current,
-      rest,
-      progress: Math.abs(progress)
-    }
-  }
-
-  /**
-   * Handles the progress. Calculates the progress from the
-   * internal state and element dimension.
-   * A callback is fired if set
-   * @private
-   */
-  handleProgress() {
-    const {onSlide} = this.options
-
-    if (typeof onSlide === 'function') {
-      const {
-        progress,
-        next,
-        previous,
-        current,
-        rest
-      } = this.getReturnValues()
-      /**
-       * Callback for progression
-       * @type {onSlide}
-       */
-      onSlide(
-        progress,
-        {next, previous, current, rest},
-        this.slides
-      )
-    }
-  }
 }
 
 /**
  * @typedef onSlide
+ * @memberof Glider
  * @type {function}
  * @param {object} offset Offset of the element to either side.
  * @param {number} offset.left A value between [0, 1]
@@ -475,6 +488,7 @@ class Glider {
 
 /**
  * @typedef onEnd
+ * @memberof Glider
  * @type {function}
  * @param {object} data Data about the slider activity
  * @param {number} data.previous Index of previous slide
@@ -499,7 +513,7 @@ export default Glider
 
 
 <footer class="main-footer">
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Jun 05 2017 00:58:23 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Jun 05 2017 10:41:51 GMT+0200 (CEST)
 </footer>
 
 <script>prettyPrint();</script>

@@ -1,6 +1,9 @@
 /* global document */
 /**
- * @file src/helpers.js
+ * A collection of helper functions.
+ *
+ * @file helpers.js
+ * @module helpers
  * @author Gregor Adams <greg@pixelass.com>
  */
 
