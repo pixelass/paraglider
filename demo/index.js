@@ -1,5 +1,5 @@
 /* global document */
-import {easeOutSine} from 'easing-utils'
+import {easeOutSine, linear} from 'easing-utils'
 import wrapper from '../src/presets/wrapper'
 
 import './main.css' // eslint-disable-line import/no-unassigned-import
@@ -19,8 +19,8 @@ const classNames = {
   nextButton: styles.jsNext
 }
 
-const parallaxSlider = glider => {
-  const slideSlices = Array.from(document.querySelectorAll(`.${styles.slide}`))
+const parallaxSlider = (glider, handlePrev, handleNext) => {
+  const slideSlices = Array.from(glider.querySelectorAll(`.${styles.slide}`))
     .map(slide => Array.from(slide.querySelectorAll(`.${styles.cube}`)))
 
   return wrapper(glider, {
@@ -32,18 +32,24 @@ const parallaxSlider = glider => {
       if (previous !== null) {
         slides[previous].style.transform = 'translate3d(0,0,0)'
         slideSlices[previous].forEach((slice, index) => {
-          const pow = ((slideSlices[previous].length - index - 1) % 6) + 1
-          const value = Math.pow(1 - progress, pow)
-          slice.style.transformOrigin = '0 100%'
-          slice.style.transform = `rotate3d(0,1,0,${-180 * easeOutSine(value)}deg)`
+          handlePrev({
+            progress,
+            slice,
+            index,
+            slides: slides[previous],
+            slicesLength: slideSlices[previous].length
+          })
         })
       } else if (next !== null) {
         slides[next].style.transform = 'translate3d(0,0,0)'
         slideSlices[next].forEach((slice, index) => {
-          const pow = (index % 6) + 1
-          const value = Math.pow(1 - progress, pow)
-          slice.style.transformOrigin = '100% 100%'
-          slice.style.transform = `rotate3d(0,1,0,${-180 * easeOutSine(value)}deg)`
+          handleNext({
+            progress,
+            slice,
+            index,
+            slides: slides[previous],
+            slicesLength: slideSlices[previous].length
+          })
         })
       }
     },
@@ -59,8 +65,58 @@ const parallaxSlider = glider => {
 }
 
 const sliders = Array.from(document.querySelectorAll(`.${styles.parallax}`))
+const exampleData = [
+  {
+    x: 0,
+    y: 1,
+    easing: easeOutSine,
+    powPrevious(index, slicesLength) {
+      return ((slicesLength - index - 1) % 6) + 1
+    },
+    powNext(index) {
+      return (index % 6) + 1
+    }
+  },
+  {
+    x: 1,
+    y: 0,
+    easing: linear,
+    powPrevious(index, slicesLength) {
+      return ~~((slicesLength - index - 1) / 6) + 1
+    },
+    powNext(index) {
+      return ~~(index / 6) + 1
+    }
+  },
+  {
+    x: 1,
+    y: 0,
+    easing: linear,
+    powPrevious(index, slicesLength) {
+      return ((slicesLength - index - 1) % 7) + 1
+    },
+    powNext(index) {
+      return (index % 7) + 1
+    }
+  }
+]
 
-sliders.forEach(slider => {
-  parallaxSlider(slider)
+sliders.forEach((slider, sliderIndex) => {
+  parallaxSlider(slider,
+    ({progress, slice, index, slicesLength}) => {
+      const {x, y, powPrevious, easing} = exampleData[sliderIndex]
+      const pow = powPrevious(index, slicesLength)
+      const value = Math.pow(1 - progress, pow)
+      slice.style.transformOrigin = '0 0'
+      slice.style.transform = `rotate3d(${x},${y},0,${-180 * easing(value)}deg)`
+    },
+    ({progress, slice, index, slicesLength}) => {
+      const {x, y, powNext, easing} = exampleData[sliderIndex]
+      const pow = powNext(index, slicesLength)
+      const value = Math.pow(1 - progress, pow)
+      slice.style.transformOrigin = '100% 100%'
+      slice.style.transform = `rotate3d(${x},${y},0,${-180 * easing(value)}deg)`
+    }
+  )
 })
 
