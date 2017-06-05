@@ -66,15 +66,6 @@ class Glider {
   }
 
   /**
-   * The state setter is disabled. Use `this.setState` instead
-   * @private
-   * @param {*} x
-   */
-  set state(x) {
-    throw new Error('Attempted to set state via a setter. Please use the setState method instead.')
-  }
-
-  /**
    * Init call for the plugin.
    *
    * This method assigns the element to the plugin scope, adds the required
@@ -171,8 +162,12 @@ class Glider {
   destroy() {
     this.removeListeners()
     this.removeClassNames()
+    this.el = null
+    this.slidesWrapper = null
+    this.slides = null
   }
 
+  /* istanbul ignore next */
   /**
    * Find clientX from the event.
    * This helper will return the correct value for touch or mouse.
@@ -202,6 +197,7 @@ class Glider {
     this.setState({nextSlide, previousSlide})
   }
 
+  /* istanbul ignore next */
   /**
    * First interaction with the mouse or per touch will be used to set flags and
    * define initial values.
@@ -224,6 +220,7 @@ class Glider {
     })
   }
 
+  /* istanbul ignore next */
   /**
    * Last interaction with the mouse or per touch will be used to set flags
    * and define initial values.
@@ -252,6 +249,7 @@ class Glider {
    * Moves to the next slide via trigger.
    */
   nextSlide(e) {
+    /* istanbul ignore if */
     if (e && 'preventDefault' in e) {
       e.preventDefault()
     }
@@ -264,6 +262,7 @@ class Glider {
    * Moves to the previous slide via trigger.
    */
   prevSlide(e) {
+    /* istanbul ignore if */
     if (e && 'preventDefault' in e) {
       e.preventDefault()
     }
@@ -347,6 +346,7 @@ class Glider {
     )
   }
 
+  /* istanbul ignore next */
   /**
    * Handler vor mouse or touch movement.
    * Waits for a threshold and then records the movement on the `x` axis
@@ -354,9 +354,9 @@ class Glider {
    * @param {event} e Mouse or touch move event
    */
   handleMove(e) {
-    const {down, xStart, x, blocked} = this.state
-    const {threshold} = this.options
-    if (down) {
+    if (this.state.down) {
+      const {xStart, x, blocked} = this.state
+      const {threshold} = this.options
       if ((Math.abs(x) > threshold) || blocked) {
         this.setState({blocked: true})
         e.preventDefault()

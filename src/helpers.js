@@ -4,6 +4,7 @@
  * @author Gregor Adams <greg@pixelass.com>
  */
 
+/* istanbul ignore next */
 /**
  * Animates from one value to the other over a given time.
  * This function uses requestAnimationFrame and Date to return a reliable result.
@@ -38,6 +39,7 @@ const animate = (speed, from, to, callback) => {
  * @param {number} progress Current value between `from` and `to`
  */
 
+/* istanbul ignore next */
 /**
  * Helper to get elements. Similar to jQuery's `$(selector, context)`
  * @private
@@ -48,6 +50,7 @@ const animate = (speed, from, to, callback) => {
 const findAll = (selector, context = document) =>
   Array.from(context.querySelectorAll(selector))
 
+/* istanbul ignore next */
 /**
  * Helper to get elements. Similar to jQuery's `$(selector, context)[0]`
  * @private
