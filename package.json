@@ -50,7 +50,7 @@
     "server": "babel-node ./scripts/server",
     "start": "npm run build && npm run server",
     "stylelint": "stylelint {demo,src}/**/*.{css,less,scss}",
-    "test": "nyc ava --tap | tap-nyan",
+    "test": "nyc ava",
     "watch": "babel-node ./scripts/watch"
   },
   "config": {
@@ -91,6 +91,7 @@
     "husky": "^0.13.2",
     "ignore-styles": "^5.0.1",
     "jsdoc": "^3.4.3",
+    "jsdom": "^11.0.0",
     "mkdirp": "^0.5.1",
     "nyc": "^11.0.1",
     "pify": "^3.0.0",
@@ -124,7 +125,9 @@
   "babel": {
     "presets": [
       "stage-2",
-      "env"
+      ["env", {
+        "loose": true
+      }]
     ],
     "plugins": [
       "transform-runtime"
@@ -173,6 +176,11 @@
       ]
     }
   },
+  "nyc": {
+    "exclude": [
+      "**/spec/*.js"
+    ]
+  },
   "ava": {
     "files": [
       "src/**/spec/*.js"
@@ -185,7 +193,7 @@
       "@ava/transform-test-files"
     ],
     "failFast": true,
-    "tap": true,
+    "tap": false,
     "require": [
       "babel-register",
       "ignore-styles"
