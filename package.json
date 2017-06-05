@@ -1,6 +1,6 @@
 {
   "name": "paraglider",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Slider with parallax API",
   "author": {
     "name": "Gregor Adams",
@@ -125,9 +125,12 @@
   "babel": {
     "presets": [
       "stage-2",
-      ["env", {
-        "loose": true
-      }]
+      [
+        "env",
+        {
+          "loose": true
+        }
+      ]
     ],
     "plugins": [
       "transform-runtime"
