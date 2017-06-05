@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/helpers.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/pixelass/paraglider" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-animationCallback">animationCallback</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">presets</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-belt">belt</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/helpers.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* global document */
+/**
+ * A collection of helper functions.
+ *
+ * @file helpers.js
+ * @module helpers
+ * @author Gregor Adams &lt;greg@pixelass.com&gt;
+ */
+
+/* istanbul ignore next */
+/**
+ * Animates from one value to the other over a given time.
+ * This function uses requestAnimationFrame and Date to return a reliable result.
+ * @private
+ * @param {integer} speed Duration of animation
+ * @param {number} from Starting point
+ * @param {number} to End point
+ * @param {animationCallback} callback Callback to be run on every step.
+ * @returns {function} A looping function.
+ */
+const animate = (speed, from, to, callback) =&gt; {
+  const now = Date.now()
+  const step = (to - from) / speed
+  const loop = () =&gt; {
+    const then = Date.now()
+    const diff = then - now
+    const timeLeft = speed - diff
+
+    if (timeLeft &gt; 0) {
+      global.requestAnimationFrame(loop)
+      callback(from + (step * diff))
+    } else {
+      global.cancelAnimationFrame(loop)
+      callback(to)
+    }
+  }
+  return loop()
+}
+/**
+ * @typedef animationCallback
+ * @type {function}
+ * @param {number} progress Current value between `from` and `to`
+ */
+
+/* istanbul ignore next */
+/**
+ * Helper to get elements. Similar to jQuery&apos;s `$(selector, context)`
+ * @private
+ * @param {string} selector selector to find
+ * @param {HTMLElement} [context=document] Context to search in
+ * @returns {array} A list of matching elements
+ */
+const findAll = (selector, context = document) =&gt;
+  Array.from(context.querySelectorAll(selector))
+
+/* istanbul ignore next */
+/**
+ * Helper to get elements. Similar to jQuery&apos;s `$(selector, context)[0]`
+ * @private
+ * @param {string} selector selector to find
+ * @param {HTMLElement} [context=document] Context to search in
+ * @returns {HTMLElement} The first matching element
+ */
+const findFirst = (selector, context = document) =&gt;
+  context.querySelector(selector)
+
+/**
+ * Returns either the first or second value depending on truthness.
+ * Any number is considered true.
+ * @private
+ * @param {*} either
+ * @param {*} or
+ * @returns {*} One of the two input values
+ */
+const eitherOr = (either, or) =&gt;
+  typeof either === &apos;number&apos; ? either : (either || or)
+
+/**
+ * A loop using modulo
+ * @private
+ * @param {number} current Current value
+ * @param {number} addition Addition to the current value
+ * @param {number} length Maximum value.
+ * @returns {number} Resulting number
+ */
+const modLoop = (current, addition, length) =&gt;
+  (current + addition + length) % length
+
+export {
+  findAll,
+  findFirst,
+  animate,
+  modLoop,
+  eitherOr
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

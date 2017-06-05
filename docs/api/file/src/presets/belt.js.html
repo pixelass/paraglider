@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/presets/belt.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/pixelass/paraglider" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-animationCallback">animationCallback</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">presets</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-belt">belt</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/presets/belt.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * A simple belt slider as we all know it.
+ * The previous, current and next slide move from left to right
+ * or the other way around at the same time.
+ *
+ * Includes pagers and navigation buttons.
+ *
+ * @file presets/belt.js
+ * @module presets
+ * @author Gregor Adams &lt;greg@pixelass.com&gt;
+ */
+
+import wrapper from &apos;./wrapper&apos;
+
+/**
+ * Belt animation slider
+ * @param {HTMLElement} glider
+ * @param {object} opts
+ * @returns {function}
+ */
+const belt = (glider, opts) =&gt; wrapper(glider, {
+  ...opts,
+  onSlide(progress, {next, previous, current, rest}, slides) {
+    if (previous !== null) {
+      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+    } else if (next !== null) {
+      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+    }
+    if (typeof opts.onSlide === &apos;function&apos;) {
+      opts.onSlide(progress, {next, previous, current, rest}, slides)
+    }
+  },
+  onEnd({next, previous, current, rest}, slides) {
+    rest.forEach(slide =&gt; {
+      slides[slide].style.transform = &apos;&apos;
+    })
+    slides[current].style.transform = &apos;&apos;
+    slides[previous].style.transform = &apos;translate(-100%,0,0)&apos;
+    slides[next].style.transform = &apos;translate(100%,0,0)&apos;
+    if (typeof opts.onEnd === &apos;function&apos;) {
+      opts.onEnd({next, previous, current, rest}, slides)
+    }
+  }
+})
+
+export default belt
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

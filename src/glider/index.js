@@ -17,6 +17,10 @@ import {
   findFirst as $$
 } from '../helpers'
 
+/**
+ * Paraglider plugin.
+ * @type {class}
+ */
 class Glider {
   /**
    * A simple slider API. This class simply applies classnames
@@ -27,6 +31,11 @@ class Glider {
    * @returns {this}
    */
   constructor(options = {}) {
+    /**
+     * Plugin options merged from defaults and custom configuration
+     * @private
+     * @type {object}
+     */
     this.options = {
       ...PLUGIN_DEFAULTS,
       ...options
@@ -80,8 +89,23 @@ class Glider {
    */
   init(el) {
     const {classNames} = this.options
+    /**
+     * Outer element
+     * @private
+     * @type {HTMLElement}
+     */
     this.el = el
+    /**
+     * This element is used to track mouse or touch interaction
+     * @private
+     * @type {HTMLElement}
+     */
     this.slidesWrapper = $$(`.${classNames.slides}`, el)
+    /**
+     * A list of all slides.
+     * @private
+     * @type {array.<HTMLElement>}
+     */
     this.slides = $(`.${classNames.slide}`, this.slidesWrapper)
 
     this.addListeners()
@@ -448,7 +472,7 @@ class Glider {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<string>} data.rest Array of all remaining slide indexes
+ * @param {array.<number>} data.rest Array of all remaining slide indexes
  * @param {array.<HTMLElement>} slides Array of all slides
  */
 
@@ -460,7 +484,7 @@ class Glider {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<string>} data.rest Array of all remaining slide indexes
+ * @param {array.<number>} data.rest Array of all remaining slide indexes
  * @param {array.<HTMLElement>} slides Array of all slides
  */
 

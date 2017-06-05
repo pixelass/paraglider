@@ -31,7 +31,7 @@ const classNames = {
 /**
  * Defaults for the main plugin.
  * @type {object}
- * @prop {object} classNames Mapping of class names to be used by the plugin.
+ * @prop {classNames} classNames Mapping of class names to be used by the plugin.
  * @prop {null|onSlide} onSlide Callback while the slider is moving.
  * @prop {null|onEnd} onEnd Callback while the slider stopped moving.
  * @prop {number} speed Animation duration when using paging.
@@ -54,7 +54,7 @@ const PLUGIN_DEFAULTS = {
 /**
  * Defaults for the presets.
  * @type {object}
- * @prop {object} classNames Mapping of class names to be used by the plugin.
+ * @prop {classNames} classNames Mapping of class names to be used by the plugin.
  * @prop {string} classNames.dot Selector for pager dots.
  * @prop {string} classNames.active Active class for pager dots.
  * @prop {string} classNames.nextButton Selector for the navigation to the next slide.

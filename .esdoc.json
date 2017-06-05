@@ -1,0 +1,9 @@
+{
+  "destination": "./docs/api",
+  "experimentalProposal": {
+    "classProperties": true,
+    "objectRestSpread": true
+  },
+  "source": "src",
+  "excludes": ["spec"]
+}

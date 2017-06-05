@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = {"glider":"x","slides":"y","slide":"z","current":"A","previous":"B","next":"C","pagers":"D","prev":"E","dots":"F","dot":"G","active":"H","pluginLoaded":"I","init":"J","jsWrapper":"K","jsSlide":"L","jsDot":"M","jsNext":"N","jsPrev":"O","belt":"P","coverLeft":"Q","coverRight":"R","coverLeftRight":"S"}
+module.exports = {"glider":"a","slides":"b","slide":"c","current":"d","previous":"e","next":"f","pagers":"g","prev":"h","dots":"i","dot":"j","active":"k","pluginLoaded":"l","init":"m","jsWrapper":"n","jsSlide":"o","jsDot":"p","jsNext":"q","jsPrev":"r","belt":"s","coverLeft":"t","coverRight":"u","coverLeftRight":"v"}
 },{}],2:[function(require,module,exports){
 (function (global){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}require(74),require(3);var _dist=require(1),_dist2=_interopRequireDefault(_dist),_global$Paraglider=global.Paraglider,belt=_global$Paraglider.belt,coverLeft=_global$Paraglider.coverLeft,coverRight=_global$Paraglider.coverRight,coverLeftRight=_global$Paraglider.coverLeftRight,classNames={pluginLoaded:_dist2.default.pluginLoaded,current:_dist2.default.current,previous:_dist2.default.previous,next:_dist2.default.next,init:_dist2.default.init,active:_dist2.default.active,slides:_dist2.default.jsWrapper,slide:_dist2.default.jsSlide,dot:_dist2.default.jsDot,prevButton:_dist2.default.jsPrev,nextButton:_dist2.default.jsNext};belt(document.querySelector("."+_dist2.default.belt),{classNames:classNames}),coverLeft(document.querySelector("."+_dist2.default.coverLeft),{classNames:classNames}),coverRight(document.querySelector("."+_dist2.default.coverRight),{classNames:classNames}),coverLeftRight(document.querySelector("."+_dist2.default.coverLeftRight),{classNames:classNames});
@@ -18,9 +18,9 @@ module.exports={default:require(14),__esModule:!0};
 
 },{"14":14}],8:[function(require,module,exports){
 "use strict";exports.__esModule=!0,exports.default=function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")};
-
 },{}],9:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}exports.__esModule=!0;var _defineProperty=require(6),_defineProperty2=_interopRequireDefault(_defineProperty);exports.default=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),(0,_defineProperty2.default)(e,n.key,n)}}return function(r,t,n){return t&&e(r.prototype,t),n&&e(r,n),r}}();
+
 },{"6":6}],10:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}exports.__esModule=!0;var _assign=require(5),_assign2=_interopRequireDefault(_assign);exports.default=_assign2.default||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var s in t)Object.prototype.hasOwnProperty.call(t,s)&&(e[s]=t[s])}return e};
 },{"5":5}],11:[function(require,module,exports){
@@ -36,7 +36,6 @@ require(71),module.exports=require(20).Object.keys;
 module.exports=function(o){if("function"!=typeof o)throw TypeError(o+" is not a function!");return o};
 },{}],16:[function(require,module,exports){
 var isObject=require(36);module.exports=function(e){if(!isObject(e))throw TypeError(e+" is not an object!");return e};
-
 },{"36":36}],17:[function(require,module,exports){
 var toIObject=require(61),toLength=require(62),toIndex=require(59);module.exports=function(e){return function(t,r,n){var o,i=toIObject(t),u=toLength(i.length),f=toIndex(n,u);if(e&&r!=r){for(;u>f;)if((o=i[f++])!=o)return!0}else for(;u>f;f++)if((e||f in i)&&i[f]===r)return e||f||0;return!e&&-1}};
 
@@ -63,6 +62,7 @@ module.exports=!require(28)(function(){return 7!=Object.defineProperty({},"a",{g
 
 },{"28":28}],25:[function(require,module,exports){
 var isObject=require(36),document=require(29).document,is=isObject(document)&&isObject(document.createElement);module.exports=function(e){return is?document.createElement(e):{}};
+
 },{"29":29,"36":36}],26:[function(require,module,exports){
 module.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",");
 
@@ -84,6 +84,7 @@ module.exports=require(29).document&&document.documentElement;
 
 },{"29":29}],33:[function(require,module,exports){
 module.exports=!require(24)&&!require(28)(function(){return 7!=Object.defineProperty(require(25)("div"),"a",{get:function(){return 7}}).a});
+
 },{"24":24,"25":25,"28":28}],34:[function(require,module,exports){
 var cof=require(19);module.exports=Object("z").propertyIsEnumerable(0)?Object:function(e){return"String"==cof(e)?e.split(""):Object(e)};
 
@@ -92,7 +93,6 @@ var Iterators=require(41),ITERATOR=require(66)("iterator"),ArrayProto=Array.prot
 
 },{"41":41,"66":66}],36:[function(require,module,exports){
 module.exports=function(o){return"object"==typeof o?null!==o:"function"==typeof o};
-
 },{}],37:[function(require,module,exports){
 var anObject=require(16);module.exports=function(r,t,e,a){try{return a?t(anObject(e)[0],e[1]):t(e)}catch(t){var c=r.return;throw void 0!==c&&anObject(c.call(r)),t}};
 
@@ -101,6 +101,7 @@ var anObject=require(16);module.exports=function(r,t,e,a){try{return a?t(anObjec
 
 },{"31":31,"44":44,"53":53,"55":55,"66":66}],39:[function(require,module,exports){
 "use strict";var LIBRARY=require(42),$export=require(27),redefine=require(54),hide=require(31),has=require(30),Iterators=require(41),$iterCreate=require(38),setToStringTag=require(55),getPrototypeOf=require(48),ITERATOR=require(66)("iterator"),BUGGY=!([].keys&&"next"in[].keys()),FF_ITERATOR="@@iterator",KEYS="keys",VALUES="values",returnThis=function(){return this};module.exports=function(e,r,t,i,n,o,s){$iterCreate(t,r,i);var u,a,T,R=function(e){if(!BUGGY&&e in f)return f[e];switch(e){case KEYS:case VALUES:return function(){return new t(this,e)}}return function(){return new t(this,e)}},A=r+" Iterator",E=n==VALUES,c=!1,f=e.prototype,h=f[ITERATOR]||f[FF_ITERATOR]||n&&f[n],I=h||R(n),p=n?E?R("entries"):I:void 0,_="Array"==r?f.entries||h:h;if(_&&(T=getPrototypeOf(_.call(new e)))!==Object.prototype&&(setToStringTag(T,A,!0),LIBRARY||has(T,ITERATOR)||hide(T,ITERATOR,returnThis)),E&&h&&h.name!==VALUES&&(c=!0,I=function(){return h.call(this)}),LIBRARY&&!s||!BUGGY&&!c&&f[ITERATOR]||hide(f,ITERATOR,I),Iterators[r]=I,Iterators[A]=returnThis,n)if(u={values:E?I:R(VALUES),keys:o?I:R(KEYS),entries:p},s)for(a in u)a in f||redefine(f,a,u[a]);else $export($export.P+$export.F*(BUGGY||c),r,u);return u};
+
 },{"27":27,"30":30,"31":31,"38":38,"41":41,"42":42,"48":48,"54":54,"55":55,"66":66}],40:[function(require,module,exports){
 var ITERATOR=require(66)("iterator"),SAFE_CLOSING=!1;try{var riter=[7][ITERATOR]();riter.return=function(){SAFE_CLOSING=!0},Array.from(riter,function(){throw 2})}catch(r){}module.exports=function(r,t){if(!t&&!SAFE_CLOSING)return!1;var n=!1;try{var e=[7],u=e[ITERATOR]();u.next=function(){return{done:n=!0}},e[ITERATOR]=function(){return u},r(e)}catch(r){}return n};
 
@@ -156,7 +157,6 @@ var global=require(29),SHARED="__core-js_shared__",store=global[SHARED]||(global
 
 },{"29":29}],58:[function(require,module,exports){
 var toInteger=require(60),defined=require(23);module.exports=function(e){return function(r,t){var n,i,d=String(defined(r)),o=toInteger(t),u=d.length;return o<0||o>=u?e?"":void 0:(n=d.charCodeAt(o),n<55296||n>56319||o+1===u||(i=d.charCodeAt(o+1))<56320||i>57343?e?d.charAt(o):n:e?d.slice(o,o+2):i-56320+(n-55296<<10)+65536)}};
-
 },{"23":23,"60":60}],59:[function(require,module,exports){
 var toInteger=require(60),max=Math.max,min=Math.min;module.exports=function(e,t){return e=toInteger(e),e<0?max(e+t,0):min(e,t)};
 

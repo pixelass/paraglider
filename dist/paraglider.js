@@ -851,7 +851,7 @@ var classNames = {
 /**
  * Defaults for the main plugin.
  * @type {object}
- * @prop {object} classNames Mapping of class names to be used by the plugin.
+ * @prop {classNames} classNames Mapping of class names to be used by the plugin.
  * @prop {null|onSlide} onSlide Callback while the slider is moving.
  * @prop {null|onEnd} onEnd Callback while the slider stopped moving.
  * @prop {number} speed Animation duration when using paging.
@@ -874,7 +874,7 @@ var PLUGIN_DEFAULTS = {
 /**
  * Defaults for the presets.
  * @type {object}
- * @prop {object} classNames Mapping of class names to be used by the plugin.
+ * @prop {classNames} classNames Mapping of class names to be used by the plugin.
  * @prop {string} classNames.dot Selector for pager dots.
  * @prop {string} classNames.active Active class for pager dots.
  * @prop {string} classNames.nextButton Selector for the navigation to the next slide.
@@ -917,10 +917,26 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * Global Paraglider
+ * @type {object}
+ * @prop {function} API
+ * @prop {function} wrapper
+ * @prop {function} belt
+ * @prop {function} coverLeft
+ * @prop {function} coverRight
+ * @prop {function} coverLeftRight
+ */
 global.Paraglider = (0, _extends3.default)({
   API: _glider2.default,
   wrapper: _wrapper2.default
-}, presets);
+}, presets); /**
+              * Globally assigned version of Paraglider.
+              *
+              * @file dist.js
+              * @module dist
+              * @author Gregor Adams <greg@pixelass.com>
+              */
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"7":7,"72":72,"78":78,"79":79}],72:[function(require,module,exports){
@@ -952,6 +968,10 @@ var _helpers = require(73);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
+ * Paraglider plugin.
+ * @type {class}
+ */
+/**
  * Paraglider is an API driven slider.
  *
  * Per default it simply adds class names to the previous, current and next slide.
@@ -974,6 +994,11 @@ var Glider = function () {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     (0, _classCallCheck3.default)(this, Glider);
 
+    /**
+     * Plugin options merged from defaults and custom configuration
+     * @private
+     * @type {object}
+     */
     this.options = (0, _extends3.default)({}, _config.PLUGIN_DEFAULTS, options);
     /**
      * State store for interaction flags
@@ -1021,9 +1046,24 @@ var Glider = function () {
    */
   Glider.prototype.init = function init(el) {
     var classNames = this.options.classNames;
+    /**
+     * Outer element
+     * @private
+     * @type {HTMLElement}
+     */
 
     this.el = el;
+    /**
+     * This element is used to track mouse or touch interaction
+     * @private
+     * @type {HTMLElement}
+     */
     this.slidesWrapper = (0, _helpers.findFirst)('.' + classNames.slides, el);
+    /**
+     * A list of all slides.
+     * @private
+     * @type {array.<HTMLElement>}
+     */
     this.slides = (0, _helpers.findAll)('.' + classNames.slide, this.slidesWrapper);
 
     this.addListeners();
@@ -1473,7 +1513,7 @@ var Glider = function () {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<string>} data.rest Array of all remaining slide indexes
+ * @param {array.<number>} data.rest Array of all remaining slide indexes
  * @param {array.<HTMLElement>} slides Array of all slides
  */
 
@@ -1485,7 +1525,7 @@ var Glider = function () {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<string>} data.rest Array of all remaining slide indexes
+ * @param {array.<number>} data.rest Array of all remaining slide indexes
  * @param {array.<HTMLElement>} slides Array of all slides
  */
 

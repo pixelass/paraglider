@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = {"glider":"a","slides":"b","slide":"c","current":"d","previous":"e","next":"f","pagers":"g","prev":"h","dots":"i","dot":"j","active":"k","slices":"l","slice":"m","cubes":"n l","cube":"o","pluginLoaded":"p","init":"q","jsWrapper":"r","jsSlide":"s","jsDot":"t","jsNext":"u","jsPrev":"v","parallax":"w"}
+module.exports = {"glider":"w","slides":"x","slide":"y","current":"z","previous":"A","next":"B","pagers":"C","prev":"D","dots":"E","dot":"F","active":"G","slices":"H","slice":"I","cubes":"J H","cube":"K","pluginLoaded":"L","init":"M","jsWrapper":"N","jsSlide":"O","jsDot":"P","jsNext":"Q","jsPrev":"R","parallax":"S"}
 },{}],2:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}var _from=require(4),_from2=_interopRequireDefault(_from),_easingUtils=require(73),_wrapper=require(77),_wrapper2=_interopRequireDefault(_wrapper);require(3);var _index=require(1),_index2=_interopRequireDefault(_index),classNames={pluginLoaded:_index2.default.pluginLoaded,current:_index2.default.current,previous:_index2.default.previous,next:_index2.default.next,init:_index2.default.init,active:_index2.default.active,slides:_index2.default.jsWrapper,slide:_index2.default.jsSlide,dot:_index2.default.jsDot,prevButton:_index2.default.jsPrev,nextButton:_index2.default.jsNext},parallaxSlider=function(e,r,t){var n=(0,_from2.default)(e.querySelectorAll("."+_index2.default.slide)).map(function(e){return(0,_from2.default)(e.querySelectorAll("."+_index2.default.cube))});return(0,_wrapper2.default)(e,{classNames:classNames,onSlide:function(e,i,a){var s=i.next,l=i.previous;i.current;i.rest.forEach(function(e){a[e].style.transform=""}),null!==l?(a[l].style.transform="translate3d(0,0,0)",n[l].forEach(function(t,i){r({progress:e,slice:t,index:i,slides:a[l],slicesLength:n[l].length})})):null!==s&&(a[s].style.transform="translate3d(0,0,0)",n[s].forEach(function(r,i){t({progress:e,slice:r,index:i,slides:a[s],slicesLength:n[s].length})}))},onEnd:function(e,r){var t=e.current;r.forEach(function(e){e.style.transform=""}),n[t].forEach(function(e){e.style.transform=""})}})},sliders=(0,_from2.default)(document.querySelectorAll("."+_index2.default.parallax)),exampleData=[{x:0,y:1,easing:_easingUtils.easeOutSine,powPrevious:function(e,r){return(r-e-1)%6+1},powNext:function(e){return e%6+1}},{x:1,y:0,easing:_easingUtils.linear,powPrevious:function(e,r){return 1+~~((r-e-1)/6)},powNext:function(e){return 1+~~(e/6)}},{x:1,y:0,easing:_easingUtils.linear,powPrevious:function(e,r){return(r-e-1)%7+1},powNext:function(e){return e%7+1}}];sliders.forEach(function(e,r){parallaxSlider(e,function(e){var t=e.progress,n=e.slice,i=e.index,a=e.slicesLength,s=exampleData[r],l=s.x,u=s.y,o=s.powPrevious,d=s.easing,f=o(i,a),c=Math.pow(1-t,f);n.style.transformOrigin="0 0",n.style.transform="rotate3d("+l+","+u+",0,"+-180*d(c)+"deg)"},function(e){var t=e.progress,n=e.slice,i=e.index,a=e.slicesLength,s=exampleData[r],l=s.x,u=s.y,o=s.powNext,d=s.easing,f=o(i,a),c=Math.pow(1-t,f);n.style.transformOrigin="100% 100%",n.style.transform="rotate3d("+l+","+u+",0,"+-180*d(c)+"deg)"})});
 
@@ -15,9 +15,9 @@ module.exports={default:require(13),__esModule:!0};
 module.exports={default:require(14),__esModule:!0};
 },{"14":14}],8:[function(require,module,exports){
 "use strict";exports.__esModule=!0,exports.default=function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")};
-
 },{}],9:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}exports.__esModule=!0;var _defineProperty=require(6),_defineProperty2=_interopRequireDefault(_defineProperty);exports.default=function(){function e(e,r){for(var t=0;t<r.length;t++){var n=r[t];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),(0,_defineProperty2.default)(e,n.key,n)}}return function(r,t,n){return t&&e(r.prototype,t),n&&e(r,n),r}}();
+
 },{"6":6}],10:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}exports.__esModule=!0;var _assign=require(5),_assign2=_interopRequireDefault(_assign);exports.default=_assign2.default||function(e){for(var r=1;r<arguments.length;r++){var t=arguments[r];for(var s in t)Object.prototype.hasOwnProperty.call(t,s)&&(e[s]=t[s])}return e};
 },{"5":5}],11:[function(require,module,exports){
@@ -54,6 +54,7 @@ var aFunction=require(15);module.exports=function(n,r,t){if(aFunction(n),void 0=
 
 },{"15":15}],23:[function(require,module,exports){
 module.exports=function(o){if(void 0==o)throw TypeError("Can't call method on  "+o);return o};
+
 },{}],24:[function(require,module,exports){
 module.exports=!require(28)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a});
 },{"28":28}],25:[function(require,module,exports){
@@ -67,6 +68,7 @@ var global=require(29),core=require(20),ctx=require(22),hide=require(31),PROTOTY
 
 },{"20":20,"22":22,"29":29,"31":31}],28:[function(require,module,exports){
 module.exports=function(r){try{return!!r()}catch(r){return!0}};
+
 },{}],29:[function(require,module,exports){
 var global=module.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=global);
 
@@ -158,7 +160,6 @@ var toInteger=require(60),defined=require(23);module.exports=function(e){return 
 var toInteger=require(60),max=Math.max,min=Math.min;module.exports=function(e,t){return e=toInteger(e),e<0?max(e+t,0):min(e,t)};
 },{"60":60}],60:[function(require,module,exports){
 var ceil=Math.ceil,floor=Math.floor;module.exports=function(o){return isNaN(o=+o)?0:(o>0?floor:ceil)(o)};
-
 },{}],61:[function(require,module,exports){
 var IObject=require(34),defined=require(23);module.exports=function(e){return IObject(defined(e))};
 

@@ -13,7 +13,7 @@ With the help of callbacks however, you can implement any imaginable effect.
 [![bitHound](https://img.shields.io/bithound/code/github/pixelass/paraglider.svg?style=flat-square)](https://www.bithound.io/github/pixelass/paraglider)
 [![bitHound](https://img.shields.io/bithound/devDependencies/github/pixelass/paraglider.svg?style=flat-square)](https://www.bithound.io/github/pixelass/paraglider)
 [![Coveralls](https://img.shields.io/coveralls/pixelass/paraglider.svg?style=flat-square)](https://coveralls.io/github/pixelass/paraglider)
-[![Inline docs](http://inch-ci.org/github/pixelass/paraglider.svg?branch=master)](http://inch-ci.org/github/pixelass/paraglider)
+[![Esdoc](https://doc.esdoc.org/github.com/pixelass/paraglider/badge.svg)](https://pixelass.github.io/paraglider/api/)
 
 [![Browserify](https://img.shields.io/badge/build-browserify-3c6991.svg?style=flat-square)](http://browserify.org/)
 [![Babel](https://img.shields.io/badge/babel-stage--2-f5da55.svg?style=flat-square)](http://babeljs.io/docs/plugins/preset-stage-2/)
@@ -23,8 +23,6 @@ With the help of callbacks however, you can implement any imaginable effect.
 
 [![yarn](https://img.shields.io/badge/yarn-friendly-2c8ebb.svg?style=flat-square)](https://yarnpkg.com/)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-44aa44.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
-[![CSS modules](https://img.shields.io/badge/css-modules-44aa44.svg?style=flat-square)](https://github.com/css-modules/css-modulesify)
-[![CSS next](https://img.shields.io/badge/css-next-44aa44.svg?style=flat-square)](http://cssnext.io/)
 
 <!-- toc -->
 

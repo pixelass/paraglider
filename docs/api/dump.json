@@ -1,0 +1,2587 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "name": "src/config.js",
+    "content": "/**\n * Config data for Paraglider.\n *\n * @file config.js\n * @module config\n * @author Gregor Adams <greg@pixelass.com>\n */\n\n/**\n * Default classList for the plugin.\n * This object can be replaced but not merged\n * @type {object}\n * @prop {string} pluginLoaded Applied when the plugin has been loaded\n * @prop {string} init Applied when the pugin has been initialized. Removed on first interaction.\n * @prop {string} slides This element will be used to track touches. This is the wrapper around the slides.\n * @prop {string} slide Selector for each single slide.\n * @prop {string} current Appied to the currently visible slide\n * @prop {string} previous Applied to the previous slide in the queue\n * @prop {string} next Applied to the next slide in the queue\n */\nconst classNames = {\n  pluginLoaded: 'pluginLoaded',\n  slide: 'slide',\n  slides: 'slides',\n  init: 'init',\n  current: 'current',\n  previous: 'previous',\n  next: 'next'\n}\n\n/**\n * Defaults for the main plugin.\n * @type {object}\n * @prop {classNames} classNames Mapping of class names to be used by the plugin.\n * @prop {null|onSlide} onSlide Callback while the slider is moving.\n * @prop {null|onEnd} onEnd Callback while the slider stopped moving.\n * @prop {number} speed Animation duration when using paging.\n * @prop {number} spring Animation duration when snapping.\n * @prop {number} snapBackAt Amount of distance needed to snap. [0, 1]\n * @prop {number} threshold Threshold of pixels until the sliding mechanisms is triggered.\n * @prop {number} initialSlide Initially visible slide\n */\nconst PLUGIN_DEFAULTS = {\n  classNames,\n  onSlide: null,\n  onEnd: null,\n  speed: 250,\n  spring: 100,\n  snapBackAt: 0.25,\n  threshold: 10,\n  initialSlide: 0\n}\n\n/**\n * Defaults for the presets.\n * @type {object}\n * @prop {classNames} classNames Mapping of class names to be used by the plugin.\n * @prop {string} classNames.dot Selector for pager dots.\n * @prop {string} classNames.active Active class for pager dots.\n * @prop {string} classNames.nextButton Selector for the navigation to the next slide.\n * @prop {string} classNames.prevButton Selector for the navigation to the previous slide.\n */\nconst PRESET_DEFAULTS = {\n  classNames: {\n    ...classNames,\n    dot: 'dot',\n    active: 'active',\n    nextButton: 'nextButton',\n    prevButton: 'prevButton'\n  }\n}\n\nexport {\n  classNames,\n  PLUGIN_DEFAULTS,\n  PRESET_DEFAULTS\n}\n",
+    "static": true,
+    "longname": "src/config.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "name": "classNames",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~classNames",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/config.js",
+    "importStyle": "{classNames}",
+    "description": "Default classList for the plugin.\nThis object can be replaced but not merged",
+    "lineNumber": 21,
+    "unknown": [
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} pluginLoaded Applied when the plugin has been loaded"
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} init Applied when the pugin has been initialized. Removed on first interaction."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} slides This element will be used to track touches. This is the wrapper around the slides."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} slide Selector for each single slide."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} current Appied to the currently visible slide"
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} previous Applied to the previous slide in the queue"
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} next Applied to the next slide in the queue"
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "variable",
+    "name": "PLUGIN_DEFAULTS",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~PLUGIN_DEFAULTS",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/config.js",
+    "importStyle": "{PLUGIN_DEFAULTS}",
+    "description": "Defaults for the main plugin.",
+    "lineNumber": 43,
+    "unknown": [
+      {
+        "tagName": "@prop",
+        "tagValue": "{classNames} classNames Mapping of class names to be used by the plugin."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{null|onSlide} onSlide Callback while the slider is moving."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{null|onEnd} onEnd Callback while the slider stopped moving."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{number} speed Animation duration when using paging."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{number} spring Animation duration when snapping."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{number} snapBackAt Amount of distance needed to snap. [0, 1]"
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{number} threshold Threshold of pixels until the sliding mechanisms is triggered."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{number} initialSlide Initially visible slide"
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 3,
+    "kind": "variable",
+    "name": "PRESET_DEFAULTS",
+    "memberof": "src/config.js",
+    "static": true,
+    "longname": "src/config.js~PRESET_DEFAULTS",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/config.js",
+    "importStyle": "{PRESET_DEFAULTS}",
+    "description": "Defaults for the presets.",
+    "lineNumber": 63,
+    "unknown": [
+      {
+        "tagName": "@prop",
+        "tagValue": "{classNames} classNames Mapping of class names to be used by the plugin."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} classNames.dot Selector for pager dots."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} classNames.active Active class for pager dots."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} classNames.nextButton Selector for the navigation to the next slide."
+      },
+      {
+        "tagName": "@prop",
+        "tagValue": "{string} classNames.prevButton Selector for the navigation to the previous slide."
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 4,
+    "kind": "file",
+    "name": "src/dist.js",
+    "content": "/**\n * Globally assigned version of Paraglider.\n *\n * @file dist.js\n * @module dist\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport API from './glider'\nimport * as presets from './presets'\nimport wrapper from './presets/wrapper'\n\n/**\n * Global Paraglider\n * @type {object}\n * @prop {function} API\n * @prop {function} wrapper\n * @prop {function} belt\n * @prop {function} coverLeft\n * @prop {function} coverRight\n * @prop {function} coverLeftRight\n */\nglobal.Paraglider = {\n  API,\n  wrapper,\n  ...presets\n}\n",
+    "static": true,
+    "longname": "src/dist.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 5,
+    "kind": "file",
+    "name": "src/glider/index.js",
+    "content": "/**\n * Paraglider is an API driven slider.\n *\n * Per default it simply adds class names to the previous, current and next slide.\n * With the help of callbacks however, you can add any imaginable behavior\n *\n * @file glider/index.js\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport {PLUGIN_DEFAULTS} from '../config'\nimport {\n  animate,\n  eitherOr,\n  modLoop,\n  findAll as $,\n  findFirst as $$\n} from '../helpers'\n\n/**\n * Paraglider plugin.\n * @type {class}\n */\nclass Glider {\n  /**\n   * A simple slider API. This class simply applies classnames\n   * to the current and surrounding slides.\n   *\n   * It offers an API that allows you to implement any behaviour imaginable. 😂\n   * @param {object} options Custom options for the Plugin call\n   * @returns {this}\n   */\n  constructor(options = {}) {\n    /**\n     * Plugin options merged from defaults and custom configuration\n     * @private\n     * @type {object}\n     */\n    this.options = {\n      ...PLUGIN_DEFAULTS,\n      ...options\n    }\n    /**\n     * State store for interaction flags\n     * @private\n     * @type {object}\n     */\n    this._state = {\n      currentSlide: this.options.initialSlide\n    }\n\n    this.nextSlide = this.nextSlide.bind(this)\n    this.prevSlide = this.prevSlide.bind(this)\n    this.goTo = this.goTo.bind(this)\n    this.handleDown = this.handleDown.bind(this)\n    this.handleMove = this.handleMove.bind(this)\n    this.handleUp = this.handleUp.bind(this)\n    this.getClientX = this.getClientX.bind(this)\n  }\n\n  /**\n   * Handles internal storage\n   * @private\n   * @param {object} newState The new state porperties to merge into the old state\n   */\n  setState(newState) {\n    this._state = {\n      ...this.state,\n      ...newState\n    }\n  }\n\n  /**\n   * Getter for the state\n   * @private\n   * @returns {object}\n   */\n  get state() {\n    return this._state\n  }\n\n  /**\n   * Init call for the plugin.\n   *\n   * This method assigns the element to the plugin scope, adds the required\n   * eventListeners and class names.\n   * @param {HTMLElement} el An element containing the required markup with and\n   * selectors\n   */\n  init(el) {\n    const {classNames} = this.options\n    /**\n     * Outer element\n     * @private\n     * @type {HTMLElement}\n     */\n    this.el = el\n    /**\n     * This element is used to track mouse or touch interaction\n     * @private\n     * @type {HTMLElement}\n     */\n    this.slidesWrapper = $$(`.${classNames.slides}`, el)\n    /**\n     * A list of all slides.\n     * @private\n     * @type {array.<HTMLElement>}\n     */\n    this.slides = $(`.${classNames.slide}`, this.slidesWrapper)\n\n    this.addListeners()\n    this.addSides()\n    this.addInitClassNames()\n  }\n\n  /**\n   * Destroys the plugin by removing eventlisteners and class names\n   */\n  destroy() {\n    this.removeListeners()\n    this.removeClassNames()\n    this.el = null\n    this.slidesWrapper = null\n    this.slides = null\n  }\n\n  /**\n   * Adds eventlisteners needed for this plugin to work.\n   * Movement and release should be tracked on window or document.\n   * @private\n   */\n  addListeners() {\n    global.addEventListener('mousemove', this.handleMove, {passive: false})\n    global.addEventListener('mouseup', this.handleUp)\n    global.addEventListener('touchmove', this.handleMove, {passive: false})\n    global.addEventListener('touchend', this.handleUp)\n    this.slidesWrapper.addEventListener('mousedown', this.handleDown)\n    this.slidesWrapper.addEventListener('touchstart', this.handleDown)\n  }\n\n  /**\n   * Removes all eventlisteners. (Helpful when destroying the plugin instance)\n   * @private\n   */\n  removeListeners() {\n    global.removeEventListener('mousemove', this.handleMove)\n    global.removeEventListener('mouseup', this.handleUp)\n    global.removeEventListener('touchmove', this.handleMove)\n    global.removeEventListener('touchend', this.handleUp)\n    this.slidesWrapper.removeEventListener('mousedown', this.handleDown)\n    this.slidesWrapper.removeEventListener('touchstart', this.handleDown)\n  }\n\n  /**\n   * Adds class names to slides\n   * @private\n   */\n  addClassNames() {\n    const {currentSlide, previousSlide, nextSlide} = this.state\n    const {current, next, previous} = this.options.classNames\n    this.slides.forEach((slide, index) => {\n      slide.classList.toggle(current, index === currentSlide)\n      slide.classList.toggle(next, index === nextSlide)\n      slide.classList.toggle(previous, index === previousSlide)\n    })\n  }\n\n  /**\n   * Initially set class names\n   *\n   * `init` will be removed after the first interaction. It allows a 'silent' start\n   * when working with CSS animations or transitions.\n   * @private\n   */\n  addInitClassNames() {\n    const {classNames} = this.options\n    this.el.classList.add(classNames.pluginLoaded)\n    this.slides.forEach(slide => {\n      slide.classList.add(classNames.init)\n    })\n    this.addClassNames()\n  }\n\n  /**\n   * Batch removal of class names.\n   * This is dirty but simply removes anything the plugin could have set.\n   * @private\n   */\n  removeClassNames() {\n    const {classNames} = this.options\n    const classList = (Object.keys(classNames).map(key => classNames[key]))\n\n    this.el.classList.remove(...classList)\n    this.slides.forEach(slide => {\n      slide.classList.remove(...classList)\n    })\n  }\n\n  /**\n   * Add `previous` and `next` classes around the `current` slide.\n   * This function respects pager clicks, which modify the next or previous element.\n   * @private\n   */\n  addSides() {\n    const {currentSlide, requestedNext, requestedPrevious} = this.state\n    const {length} = this.slides\n    // Respect requested slides.\n    // {goTo} could set these values.\n    const nextSlide = eitherOr(requestedNext, modLoop(currentSlide, 1, length))\n    const previousSlide = eitherOr(requestedPrevious, modLoop(currentSlide, -1, length))\n\n    this.setState({nextSlide, previousSlide})\n  }\n\n  /**\n   * Moves to the next slide via trigger.\n   */\n  nextSlide(e) {\n    /* istanbul ignore next */\n    if (e && 'preventDefault' in e) {\n      e.preventDefault()\n    }\n    this.addSides()\n    this.addClassNames()\n    this.spring(0, 1, this.options.speed)\n  }\n\n  /**\n   * Moves to the previous slide via trigger.\n   */\n  prevSlide(e) {\n    /* istanbul ignore next */\n    if (e && 'preventDefault' in e) {\n      e.preventDefault()\n    }\n    this.addSides()\n    this.addClassNames()\n    this.spring(0, -1, this.options.speed)\n  }\n\n  /**\n   * Moves to the nth slide via trigger. Respects left/right movement\n   */\n  goTo(n) {\n    if (n > this.state.currentSlide) {\n      this.setState({requestedNext: n})\n      this.nextSlide()\n    /* istanbul ignore next */\n    } else /* istanbul ignore next */ if (n < this.state.currentSlide) {\n      this.setState({requestedPrevious: n})\n      this.prevSlide()\n    }\n  }\n\n  /**\n   * Handles the snap animation\n   * @private\n   * @param {number} progress Current value\n   * @param {number} end Final value\n   * @param {number} duration Time to pass the until animation is done.\n   */\n  spring(progress, end, duration) {\n    animate(duration, progress, end,\n      p => {\n        this.setState({\n          x: p * this.el.offsetWidth\n        })\n        if (p === end) {\n          this.handleEnd(end)\n        } else {\n          this.handleProgress()\n        }\n      }\n    )\n  }\n\n  /* istanbul ignore next */\n  /**\n   * Find clientX from the event.\n   * This helper will return the correct value for touch or mouse.\n   * @private\n   * @param {event} e Mouse or touch event\n   * @returns {number} THe clientX of the event\n   */\n  getClientX(e) {\n    const {touches = []} = e\n    const {clientX} = touches[0] || e\n    return clientX\n  }\n\n  /**\n   * Prepares return values\n   * @private\n   * @param {boolean} direction\n   * @returns {object}\n   */\n  getReturnValues(direction = true) {\n    const progress = this.state.x / this.el.offsetWidth\n    const {currentSlide, nextSlide, previousSlide} = this.state\n    const right = progress * -1\n    const current = currentSlide\n    // We only need the lower value\n    /* istanbul ignore next */\n    const next = progress < right && direction ? null : nextSlide\n    /* istanbul ignore next */\n    const previous = progress > right && direction ? null : previousSlide\n\n    const rest = this.slides.map((el, index) => index)\n      .filter(originalIndex =>\n        [previous, current, next].indexOf(originalIndex) === -1)\n\n    return {\n      next,\n      previous,\n      current,\n      rest,\n      progress: Math.abs(progress)\n    }\n  }\n\n  /* istanbul ignore next */\n  /**\n   * First interaction with the mouse or per touch will be used to set flags and\n   * define initial values.\n   * @private\n   * @param {event} e Mouse or touch event\n   */\n  handleDown(e) {\n    const {classNames} = this.options\n    const clientX = this.getClientX(e)\n    this.slides.forEach(slide => {\n      slide.classList.remove(classNames.init)\n    })\n    // Flag down\n    // set start coordinate,\n    // set current progress\n    this.setState({\n      down: true,\n      xStart: clientX,\n      x: 0\n    })\n  }\n\n  /* istanbul ignore next */\n  /**\n   * Last interaction with the mouse or per touch will be used to set flags\n   * and define initial values.\n   * Only fires if down is active. Prevents unintended behaviour when the first\n   * touch or mousedown was outside the element.\n   * @private\n   */\n  handleUp() {\n    // Only proceed if the plugin signals a previous down event.\n    const {down, blocked} = this.state\n    if (down && blocked) {\n      const {snapBackAt} = this.options\n      const progress = this.state.x / this.el.offsetWidth\n      let end = 0\n      if (progress <= (-1 * snapBackAt)) {\n        end = -1\n      } else if (progress >= snapBackAt) {\n        end = 1\n      }\n      this.spring(progress, end, this.options.spring)\n    }\n    this.setState({down: false, blocked: false})\n  }\n\n  /* istanbul ignore next */\n  /**\n   * Handler vor mouse or touch movement.\n   * Waits for a threshold and then records the movement on the `x` axis\n   * @private\n   * @param {event} e Mouse or touch move event\n   */\n  handleMove(e) {\n    if (this.state.down) {\n      const {xStart, x, blocked} = this.state\n      const {threshold} = this.options\n      if ((Math.abs(x) > threshold) || blocked) {\n        this.setState({blocked: true})\n        e.preventDefault()\n        this.handleProgress()\n      }\n      const clientX = this.getClientX(e)\n      this.setState({\n        x: xStart - clientX\n      })\n    }\n  }\n\n  /**\n   * Handles the progress. Calculates the progress from the\n   * internal state and element dimension.\n   * A callback is fired if set\n   * @private\n   */\n  handleProgress() {\n    const {onSlide} = this.options\n\n    if (typeof onSlide === 'function') {\n      const {\n        progress,\n        next,\n        previous,\n        current,\n        rest\n      } = this.getReturnValues()\n      /**\n       * Callback for progression\n       * @type {onSlide}\n       */\n      onSlide(\n        progress,\n        {next, previous, current, rest},\n        this.slides\n      )\n    }\n  }\n\n  /**\n   * Handle the end of the slide animation.\n   * If there is a callback called `onEnd` call it.\n   * @private\n   * @param {number} end Final value\n   */\n  handleEnd(end) {\n    const {onEnd} = this.options\n    if (end === -1) {\n      this.setState({\n        currentSlide: this.state.previousSlide\n      })\n    /* istanbul ignore next */\n    } else /* istanbul ignore next */ if (end === 1) {\n      this.setState({\n        currentSlide: this.state.nextSlide\n      })\n    }\n    this.setState({\n      requestedNext: null,\n      requestedPrevious: null\n    })\n    this.addSides()\n    this.addClassNames()\n\n    if (typeof onEnd === 'function') {\n      const {\n        next,\n        previous,\n        current,\n        rest\n      } = this.getReturnValues(false)\n      /**\n       * Callback for the end\n       * @public\n       * @type {onEnd}\n       */\n      onEnd({next, previous, current, rest}, this.slides)\n    }\n  }\n\n}\n\n/**\n * @typedef onSlide\n * @memberof Glider\n * @type {function}\n * @param {object} offset Offset of the element to either side.\n * @param {number} offset.left A value between [0, 1]\n * @param {number} offset.right A value between [0, 1]\n * @param {object} data Data about the slider activity\n * @param {number} data.previous Index of previous slide\n * @param {number} data.current Index of current slide\n * @param {number} data.next Index of next slide\n * @param {array.<number>} data.rest Array of all remaining slide indexes\n * @param {array.<HTMLElement>} slides Array of all slides\n */\n\n/**\n * @typedef onEnd\n * @memberof Glider\n * @type {function}\n * @param {object} data Data about the slider activity\n * @param {number} data.previous Index of previous slide\n * @param {number} data.current Index of current slide\n * @param {number} data.next Index of next slide\n * @param {array.<number>} data.rest Array of all remaining slide indexes\n * @param {array.<HTMLElement>} slides Array of all slides\n */\n\nexport default Glider\n\n",
+    "static": true,
+    "longname": "src/glider/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 6,
+    "kind": "class",
+    "name": "Glider",
+    "memberof": "src/glider/index.js",
+    "static": true,
+    "longname": "src/glider/index.js~Glider",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/glider/index.js",
+    "importStyle": "Glider",
+    "description": "Paraglider plugin.",
+    "lineNumber": 24,
+    "type": {
+      "nullable": null,
+      "types": [
+        "class"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "interface": false
+  },
+  {
+    "__docId__": 7,
+    "kind": "typedef",
+    "name": "onSlide",
+    "memberof": "src/glider/index.js",
+    "static": true,
+    "longname": "src/glider/index.js~onSlide",
+    "access": null,
+    "description": "",
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "offset",
+        "description": "Offset of the element to either side."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "offset.left",
+        "description": "A value between [0, 1]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "offset.right",
+        "description": "A value between [0, 1]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "Data about the slider activity"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.previous",
+        "description": "Index of previous slide"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.current",
+        "description": "Index of current slide"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.next",
+        "description": "Index of next slide"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "array.<number>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.rest",
+        "description": "Array of all remaining slide indexes"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "array.<HTMLElement>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "slides",
+        "description": "Array of all slides"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ],
+      "optional": false,
+      "name": "onSlide"
+    }
+  },
+  {
+    "__docId__": 8,
+    "kind": "typedef",
+    "name": "onEnd",
+    "memberof": "src/glider/index.js",
+    "static": true,
+    "longname": "src/glider/index.js~onEnd",
+    "access": null,
+    "description": "",
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "Data about the slider activity"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.previous",
+        "description": "Index of previous slide"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.current",
+        "description": "Index of current slide"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.next",
+        "description": "Index of next slide"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "array.<number>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data.rest",
+        "description": "Array of all remaining slide indexes"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "array.<HTMLElement>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "slides",
+        "description": "Array of all slides"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ],
+      "optional": false,
+      "name": "onEnd"
+    }
+  },
+  {
+    "__docId__": 9,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#constructor",
+    "access": null,
+    "description": "A simple slider API. This class simply applies classnames\nto the current and surrounding slides.\n\nIt offers an API that allows you to implement any behaviour imaginable. 😂",
+    "lineNumber": 33,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{this}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "Custom options for the Plugin call"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "this"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 10,
+    "kind": "member",
+    "name": "options",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#options",
+    "access": "private",
+    "description": "Plugin options merged from defaults and custom configuration",
+    "lineNumber": 39,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 11,
+    "kind": "member",
+    "name": "_state",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#_state",
+    "access": "private",
+    "description": "State store for interaction flags",
+    "lineNumber": 48,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 12,
+    "kind": "member",
+    "name": "nextSlide",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#nextSlide",
+    "access": null,
+    "description": null,
+    "lineNumber": 52,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 13,
+    "kind": "member",
+    "name": "prevSlide",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#prevSlide",
+    "access": null,
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 14,
+    "kind": "member",
+    "name": "goTo",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#goTo",
+    "access": null,
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 15,
+    "kind": "member",
+    "name": "handleDown",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleDown",
+    "access": null,
+    "description": null,
+    "lineNumber": 55,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 16,
+    "kind": "member",
+    "name": "handleMove",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleMove",
+    "access": null,
+    "description": null,
+    "lineNumber": 56,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 17,
+    "kind": "member",
+    "name": "handleUp",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleUp",
+    "access": null,
+    "description": null,
+    "lineNumber": 57,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 18,
+    "kind": "member",
+    "name": "getClientX",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#getClientX",
+    "access": null,
+    "description": null,
+    "lineNumber": 58,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 19,
+    "kind": "method",
+    "name": "setState",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#setState",
+    "access": "private",
+    "description": "Handles internal storage",
+    "lineNumber": 66,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "newState",
+        "description": "The new state porperties to merge into the old state"
+      }
+    ]
+  },
+  {
+    "__docId__": 20,
+    "kind": "member",
+    "name": "_state",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#_state",
+    "access": null,
+    "description": null,
+    "lineNumber": 67,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{...undefined: Object, ...newState: Object}"
+      ]
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "get",
+    "name": "state",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#state",
+    "access": "private",
+    "description": "Getter for the state",
+    "lineNumber": 78,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{object}"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "method",
+    "name": "init",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#init",
+    "access": null,
+    "description": "Init call for the plugin.\n\nThis method assigns the element to the plugin scope, adds the required\neventListeners and class names.",
+    "lineNumber": 90,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "el",
+        "description": "An element containing the required markup with and\nselectors"
+      }
+    ]
+  },
+  {
+    "__docId__": 23,
+    "kind": "member",
+    "name": "el",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#el",
+    "access": "private",
+    "description": "Outer element",
+    "lineNumber": 97,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 24,
+    "kind": "member",
+    "name": "slidesWrapper",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#slidesWrapper",
+    "access": "private",
+    "description": "This element is used to track mouse or touch interaction",
+    "lineNumber": 103,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 25,
+    "kind": "member",
+    "name": "slides",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#slides",
+    "access": "private",
+    "description": "A list of all slides.",
+    "lineNumber": 109,
+    "type": {
+      "nullable": null,
+      "types": [
+        "array.<HTMLElement>"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 26,
+    "kind": "method",
+    "name": "destroy",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#destroy",
+    "access": null,
+    "description": "Destroys the plugin by removing eventlisteners and class names",
+    "lineNumber": 119,
+    "params": []
+  },
+  {
+    "__docId__": 27,
+    "kind": "member",
+    "name": "el",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#el",
+    "access": null,
+    "description": null,
+    "lineNumber": 122,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "member",
+    "name": "slidesWrapper",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#slidesWrapper",
+    "access": null,
+    "description": null,
+    "lineNumber": 123,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 29,
+    "kind": "member",
+    "name": "slides",
+    "memberof": "src/glider/index.js~Glider",
+    "static": false,
+    "longname": "src/glider/index.js~Glider#slides",
+    "access": null,
+    "description": null,
+    "lineNumber": 124,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 30,
+    "kind": "method",
+    "name": "addListeners",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#addListeners",
+    "access": "private",
+    "description": "Adds eventlisteners needed for this plugin to work.\nMovement and release should be tracked on window or document.",
+    "lineNumber": 132,
+    "params": []
+  },
+  {
+    "__docId__": 31,
+    "kind": "method",
+    "name": "removeListeners",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#removeListeners",
+    "access": "private",
+    "description": "Removes all eventlisteners. (Helpful when destroying the plugin instance)",
+    "lineNumber": 145,
+    "params": []
+  },
+  {
+    "__docId__": 32,
+    "kind": "method",
+    "name": "addClassNames",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#addClassNames",
+    "access": "private",
+    "description": "Adds class names to slides",
+    "lineNumber": 158,
+    "params": []
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "name": "addInitClassNames",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#addInitClassNames",
+    "access": "private",
+    "description": "Initially set class names\n\n`init` will be removed after the first interaction. It allows a 'silent' start\nwhen working with CSS animations or transitions.",
+    "lineNumber": 175,
+    "params": []
+  },
+  {
+    "__docId__": 34,
+    "kind": "method",
+    "name": "removeClassNames",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#removeClassNames",
+    "access": "private",
+    "description": "Batch removal of class names.\nThis is dirty but simply removes anything the plugin could have set.",
+    "lineNumber": 189,
+    "params": []
+  },
+  {
+    "__docId__": 35,
+    "kind": "method",
+    "name": "addSides",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#addSides",
+    "access": "private",
+    "description": "Add `previous` and `next` classes around the `current` slide.\nThis function respects pager clicks, which modify the next or previous element.",
+    "lineNumber": 204,
+    "params": []
+  },
+  {
+    "__docId__": 36,
+    "kind": "method",
+    "name": "nextSlide",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#nextSlide",
+    "access": null,
+    "description": "Moves to the next slide via trigger.",
+    "lineNumber": 218,
+    "params": [
+      {
+        "name": "e",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 37,
+    "kind": "method",
+    "name": "prevSlide",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#prevSlide",
+    "access": null,
+    "description": "Moves to the previous slide via trigger.",
+    "lineNumber": 231,
+    "params": [
+      {
+        "name": "e",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 38,
+    "kind": "method",
+    "name": "goTo",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#goTo",
+    "access": null,
+    "description": "Moves to the nth slide via trigger. Respects left/right movement",
+    "lineNumber": 244,
+    "params": [
+      {
+        "name": "n",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 39,
+    "kind": "method",
+    "name": "spring",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#spring",
+    "access": "private",
+    "description": "Handles the snap animation",
+    "lineNumber": 262,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "progress",
+        "description": "Current value"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "end",
+        "description": "Final value"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "duration",
+        "description": "Time to pass the until animation is done."
+      }
+    ]
+  },
+  {
+    "__docId__": 40,
+    "kind": "method",
+    "name": "getClientX",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#getClientX",
+    "access": "private",
+    "description": "Find clientX from the event.\nThis helper will return the correct value for touch or mouse.",
+    "lineNumber": 285,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} THe clientX of the event"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "e",
+        "description": "Mouse or touch event"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "THe clientX of the event"
+    }
+  },
+  {
+    "__docId__": 41,
+    "kind": "method",
+    "name": "getReturnValues",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#getReturnValues",
+    "access": "private",
+    "description": "Prepares return values",
+    "lineNumber": 297,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{object}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "direction",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 42,
+    "kind": "method",
+    "name": "handleDown",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleDown",
+    "access": "private",
+    "description": "First interaction with the mouse or per touch will be used to set flags and\ndefine initial values.",
+    "lineNumber": 328,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "e",
+        "description": "Mouse or touch event"
+      }
+    ]
+  },
+  {
+    "__docId__": 43,
+    "kind": "method",
+    "name": "handleUp",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleUp",
+    "access": "private",
+    "description": "Last interaction with the mouse or per touch will be used to set flags\nand define initial values.\nOnly fires if down is active. Prevents unintended behaviour when the first\ntouch or mousedown was outside the element.",
+    "lineNumber": 352,
+    "params": []
+  },
+  {
+    "__docId__": 44,
+    "kind": "method",
+    "name": "handleMove",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleMove",
+    "access": "private",
+    "description": "Handler vor mouse or touch movement.\nWaits for a threshold and then records the movement on the `x` axis",
+    "lineNumber": 376,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "event"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "e",
+        "description": "Mouse or touch move event"
+      }
+    ]
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "name": "handleProgress",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleProgress",
+    "access": "private",
+    "description": "Handles the progress. Calculates the progress from the\ninternal state and element dimension.\nA callback is fired if set",
+    "lineNumber": 398,
+    "params": []
+  },
+  {
+    "__docId__": 46,
+    "kind": "method",
+    "name": "handleEnd",
+    "memberof": "src/glider/index.js~Glider",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/glider/index.js~Glider#handleEnd",
+    "access": "private",
+    "description": "Handle the end of the slide animation.\nIf there is a callback called `onEnd` call it.",
+    "lineNumber": 427,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "end",
+        "description": "Final value"
+      }
+    ]
+  },
+  {
+    "__docId__": 47,
+    "kind": "file",
+    "name": "src/helpers.js",
+    "content": "/* global document */\n/**\n * A collection of helper functions.\n *\n * @file helpers.js\n * @module helpers\n * @author Gregor Adams <greg@pixelass.com>\n */\n\n/* istanbul ignore next */\n/**\n * Animates from one value to the other over a given time.\n * This function uses requestAnimationFrame and Date to return a reliable result.\n * @private\n * @param {integer} speed Duration of animation\n * @param {number} from Starting point\n * @param {number} to End point\n * @param {animationCallback} callback Callback to be run on every step.\n * @returns {function} A looping function.\n */\nconst animate = (speed, from, to, callback) => {\n  const now = Date.now()\n  const step = (to - from) / speed\n  const loop = () => {\n    const then = Date.now()\n    const diff = then - now\n    const timeLeft = speed - diff\n\n    if (timeLeft > 0) {\n      global.requestAnimationFrame(loop)\n      callback(from + (step * diff))\n    } else {\n      global.cancelAnimationFrame(loop)\n      callback(to)\n    }\n  }\n  return loop()\n}\n/**\n * @typedef animationCallback\n * @type {function}\n * @param {number} progress Current value between `from` and `to`\n */\n\n/* istanbul ignore next */\n/**\n * Helper to get elements. Similar to jQuery's `$(selector, context)`\n * @private\n * @param {string} selector selector to find\n * @param {HTMLElement} [context=document] Context to search in\n * @returns {array} A list of matching elements\n */\nconst findAll = (selector, context = document) =>\n  Array.from(context.querySelectorAll(selector))\n\n/* istanbul ignore next */\n/**\n * Helper to get elements. Similar to jQuery's `$(selector, context)[0]`\n * @private\n * @param {string} selector selector to find\n * @param {HTMLElement} [context=document] Context to search in\n * @returns {HTMLElement} The first matching element\n */\nconst findFirst = (selector, context = document) =>\n  context.querySelector(selector)\n\n/**\n * Returns either the first or second value depending on truthness.\n * Any number is considered true.\n * @private\n * @param {*} either\n * @param {*} or\n * @returns {*} One of the two input values\n */\nconst eitherOr = (either, or) =>\n  typeof either === 'number' ? either : (either || or)\n\n/**\n * A loop using modulo\n * @private\n * @param {number} current Current value\n * @param {number} addition Addition to the current value\n * @param {number} length Maximum value.\n * @returns {number} Resulting number\n */\nconst modLoop = (current, addition, length) =>\n  (current + addition + length) % length\n\nexport {\n  findAll,\n  findFirst,\n  animate,\n  modLoop,\n  eitherOr\n}\n",
+    "static": true,
+    "longname": "src/helpers.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 48,
+    "kind": "typedef",
+    "name": "animationCallback",
+    "memberof": "src/helpers.js",
+    "static": true,
+    "longname": "src/helpers.js~animationCallback",
+    "access": null,
+    "description": "",
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "progress",
+        "description": "Current value between `from` and `to`"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ],
+      "optional": false,
+      "name": "animationCallback"
+    }
+  },
+  {
+    "__docId__": 49,
+    "kind": "function",
+    "name": "findAll",
+    "memberof": "src/helpers.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/helpers.js~findAll",
+    "access": "private",
+    "export": true,
+    "importPath": "paraglider/src/helpers.js",
+    "importStyle": "{findAll}",
+    "description": "Helper to get elements. Similar to jQuery's `$(selector, context)`",
+    "lineNumber": 53,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{array} A list of matching elements"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "selector",
+        "description": "selector to find"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "document",
+        "defaultRaw": "document",
+        "name": "context",
+        "description": "Context to search in"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "array"
+      ],
+      "spread": false,
+      "description": "A list of matching elements"
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "function",
+    "name": "findFirst",
+    "memberof": "src/helpers.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/helpers.js~findFirst",
+    "access": "private",
+    "export": true,
+    "importPath": "paraglider/src/helpers.js",
+    "importStyle": "{findFirst}",
+    "description": "Helper to get elements. Similar to jQuery's `$(selector, context)[0]`",
+    "lineNumber": 64,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{HTMLElement} The first matching element"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "selector",
+        "description": "selector to find"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "document",
+        "defaultRaw": "document",
+        "name": "context",
+        "description": "Context to search in"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "HTMLElement"
+      ],
+      "spread": false,
+      "description": "The first matching element"
+    }
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "animate",
+    "memberof": "src/helpers.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/helpers.js~animate",
+    "access": "private",
+    "export": true,
+    "importPath": "paraglider/src/helpers.js",
+    "importStyle": "{animate}",
+    "description": "Animates from one value to the other over a given time.\nThis function uses requestAnimationFrame and Date to return a reliable result.",
+    "lineNumber": 21,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function} A looping function."
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "integer"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "speed",
+        "description": "Duration of animation"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "from",
+        "description": "Starting point"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "to",
+        "description": "End point"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "animationCallback"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": "Callback to be run on every step."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": "A looping function."
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "modLoop",
+    "memberof": "src/helpers.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/helpers.js~modLoop",
+    "access": "private",
+    "export": true,
+    "importPath": "paraglider/src/helpers.js",
+    "importStyle": "{modLoop}",
+    "description": "A loop using modulo",
+    "lineNumber": 86,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{number} Resulting number"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "current",
+        "description": "Current value"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "addition",
+        "description": "Addition to the current value"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "length",
+        "description": "Maximum value."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "Resulting number"
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "function",
+    "name": "eitherOr",
+    "memberof": "src/helpers.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/helpers.js~eitherOr",
+    "access": "private",
+    "export": true,
+    "importPath": "paraglider/src/helpers.js",
+    "importStyle": "{eitherOr}",
+    "description": "Returns either the first or second value depending on truthness.\nAny number is considered true.",
+    "lineNumber": 75,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{*} One of the two input values"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "either",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "or",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "One of the two input values"
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "/**\n * Main export file of Paraglider\n *\n * @file index.js\n * @module Paraglider\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport Glider from './glider'\nimport * as presets from './presets'\n\nexport {presets}\nexport default Glider\n",
+    "static": true,
+    "longname": "src/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 55,
+    "kind": "file",
+    "name": "src/presets/belt.js",
+    "content": "/**\n * A simple belt slider as we all know it.\n * The previous, current and next slide move from left to right\n * or the other way around at the same time.\n *\n * Includes pagers and navigation buttons.\n *\n * @file presets/belt.js\n * @module presets\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport wrapper from './wrapper'\n\n/**\n * Belt animation slider\n * @param {HTMLElement} glider\n * @param {object} opts\n * @returns {function}\n */\nconst belt = (glider, opts) => wrapper(glider, {\n  ...opts,\n  onSlide(progress, {next, previous, current, rest}, slides) {\n    if (previous !== null) {\n      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`\n    } else if (next !== null) {\n      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`\n    }\n    if (typeof opts.onSlide === 'function') {\n      opts.onSlide(progress, {next, previous, current, rest}, slides)\n    }\n  },\n  onEnd({next, previous, current, rest}, slides) {\n    rest.forEach(slide => {\n      slides[slide].style.transform = ''\n    })\n    slides[current].style.transform = ''\n    slides[previous].style.transform = 'translate(-100%,0,0)'\n    slides[next].style.transform = 'translate(100%,0,0)'\n    if (typeof opts.onEnd === 'function') {\n      opts.onEnd({next, previous, current, rest}, slides)\n    }\n  }\n})\n\nexport default belt\n",
+    "static": true,
+    "longname": "src/presets/belt.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 56,
+    "kind": "function",
+    "name": "belt",
+    "memberof": "src/presets/belt.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/presets/belt.js~belt",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/presets/belt.js",
+    "importStyle": "belt",
+    "description": "Belt animation slider",
+    "lineNumber": 21,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "glider",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "file",
+    "name": "src/presets/cover-left-right.js",
+    "content": "/**\n * A covering slider.\n * The previous or next slide cover the current slide from the left or right.\n *\n * Includes pagers and navigation buttons.\n *\n * @file presets/cover-left-right.js\n * @module presets\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport wrapper from './wrapper'\n\n/**\n * Cover left/right animation slider\n * @param {HTMLElement} glider\n * @param {object} opts\n * @returns {function}\n */\nconst coverLeftRight = (glider, opts) => wrapper(glider, {\n  ...opts,\n  onSlide(progress, {next, previous, current, rest}, slides) {\n    if (previous !== null) {\n      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n    } else if (next !== null) {\n      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n    }\n    if (typeof opts.onSlide === 'function') {\n      opts.onSlide(progress, {next, previous, current, rest}, slides)\n    }\n  },\n  onEnd({next, previous, current, rest}, slides) {\n    rest.forEach(slide => {\n      slides[slide].style.transform = ''\n    })\n    slides[current].style.transform = ''\n    slides[previous].style.transform = 'translate(-100%,0,0)'\n    slides[next].style.transform = 'translate(100%,0,0)'\n    if (typeof opts.onEnd === 'function') {\n      opts.onEnd({next, previous, current, rest}, slides)\n    }\n  }\n})\n\nexport default coverLeftRight\n",
+    "static": true,
+    "longname": "src/presets/cover-left-right.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 58,
+    "kind": "function",
+    "name": "coverLeftRight",
+    "memberof": "src/presets/cover-left-right.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/presets/cover-left-right.js~coverLeftRight",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/presets/cover-left-right.js",
+    "importStyle": "coverLeftRight",
+    "description": "Cover left/right animation slider",
+    "lineNumber": 20,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "glider",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "file",
+    "name": "src/presets/cover-left.js",
+    "content": "/**\n * A covering slider.\n * The previous or next slide cover the current slide from the left.\n *\n * Includes pagers and navigation buttons.\n *\n * @file presets/cover-left.js\n * @module presets\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport wrapper from './wrapper'\n\n/**\n * Cover left animation slider\n * @param {HTMLElement} glider\n * @param {object} opts\n * @returns {function}\n */\nconst coverLeft = (glider, opts) => wrapper(glider, {\n  ...opts,\n  onSlide(progress, {next, previous, current, rest}, slides) {\n    if (previous !== null) {\n      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n    } else if (next !== null) {\n      slides[next].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n    }\n    if (typeof opts.onSlide === 'function') {\n      opts.onSlide(progress, {next, previous, current, rest}, slides)\n    }\n  },\n  onEnd({next, previous, current, rest}, slides) {\n    rest.forEach(slide => {\n      slides[slide].style.transform = ''\n    })\n    slides[current].style.transform = ''\n    slides[previous].style.transform = 'translate(-100%,0,0)'\n    slides[next].style.transform = 'translate(100%,0,0)'\n    if (typeof opts.onEnd === 'function') {\n      opts.onEnd({next, previous, current, rest}, slides)\n    }\n  }\n})\n\nexport default coverLeft\n",
+    "static": true,
+    "longname": "src/presets/cover-left.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 60,
+    "kind": "function",
+    "name": "coverLeft",
+    "memberof": "src/presets/cover-left.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/presets/cover-left.js~coverLeft",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/presets/cover-left.js",
+    "importStyle": "coverLeft",
+    "description": "Cover left animation slider",
+    "lineNumber": 20,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "glider",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "file",
+    "name": "src/presets/cover-right.js",
+    "content": "/**\n * A covering slider.\n * The previous or next slide cover the current slide from right.\n *\n * Includes pagers and navigation buttons.\n *\n * @file presets/cover-right.js\n * @module presets\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport wrapper from './wrapper'\n\n/**\n * Cover right animation slider\n * @param {HTMLElement} glider\n * @param {object} opts\n * @returns {function}\n */\nconst coverRight = (glider, opts) => wrapper(glider, {\n  ...opts,\n  onSlide(progress, {next, previous, current, rest}, slides) {\n    if (previous !== null) {\n      slides[previous].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n    } else if (next !== null) {\n      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n    }\n    if (typeof opts.onSlide === 'function') {\n      opts.onSlide(progress, {next, previous, current, rest}, slides)\n    }\n  },\n  onEnd({next, previous, current, rest}, slides) {\n    rest.forEach(slide => {\n      slides[slide].style.transform = ''\n    })\n    slides[current].style.transform = ''\n    slides[previous].style.transform = 'translate(-100%,0,0)'\n    slides[next].style.transform = 'translate(100%,0,0)'\n    if (typeof opts.onEnd === 'function') {\n      opts.onEnd({next, previous, current, rest}, slides)\n    }\n  }\n})\n\nexport default coverRight\n",
+    "static": true,
+    "longname": "src/presets/cover-right.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 62,
+    "kind": "function",
+    "name": "coverRight",
+    "memberof": "src/presets/cover-right.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/presets/cover-right.js~coverRight",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/presets/cover-right.js",
+    "importStyle": "coverRight",
+    "description": "Cover right animation slider",
+    "lineNumber": 20,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "glider",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "file",
+    "name": "src/presets/index.js",
+    "content": "import belt from './belt'\nimport coverLeft from './cover-left'\nimport coverRight from './cover-right'\nimport coverLeftRight from './cover-left-right'\n\nexport {\n  belt,\n  coverLeft,\n  coverRight,\n  coverLeftRight\n}\n",
+    "static": true,
+    "longname": "src/presets/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 64,
+    "kind": "file",
+    "name": "src/presets/wrapper.js",
+    "content": "/**\n * Wraps Paraglider to apply pagers and navigation buttons.\n * This wrapper simplifies the usage of Paraglider by offering some basic\n * functionality.\n *\n * @file presets/wrapper.js\n * @module  presets\n * @author Gregor Adams <greg@pixelass.com>\n */\n\nimport Glider from '../glider'\nimport {PRESET_DEFAULTS} from '../config'\n\n/**\n * Simple wrapper including pagers and navigation arrows\n * @param {HTMLElement} glider\n * @param {object} opts\n * @returns {function}\n */\nconst wrapper = (glider, opts) => {\n  if (!glider) {\n    return\n  }\n  const pagers = Array.from(glider.querySelectorAll(`.${opts.classNames.dot}`) || [])\n  const nextButton = glider.querySelector(`.${opts.classNames.nextButton}`)\n  const prevButton = glider.querySelector(`.${opts.classNames.prevButton}`)\n  const options = {\n    ...PRESET_DEFAULTS,\n    ...opts,\n    onSlide(progress, {next, previous, current, rest}, slides) {\n      if (typeof opts.onSlide === 'function') {\n        opts.onSlide(progress, {next, previous, current, rest}, slides)\n      }\n    },\n    onEnd({next, previous, current, rest}, slides) {\n      pagers.forEach((pager, i) => {\n        pager.classList.toggle(opts.classNames.active, i === current)\n      })\n      if (typeof opts.onEnd === 'function') {\n        opts.onEnd({next, previous, current, rest}, slides)\n      }\n    }\n  }\n  const instance = new Glider(options)\n  instance.init(glider)\n  pagers.forEach((pager, i) => {\n    const goto = e => {\n      e.preventDefault()\n      return instance.goTo(i)\n    }\n    pager.addEventListener('click', goto)\n    pager.classList.toggle(options.classNames.active, i === options.initialSlide)\n  })\n  if (nextButton) {\n    nextButton.addEventListener('click', instance.nextSlide)\n  }\n  if (prevButton) {\n    prevButton.addEventListener('click', instance.prevSlide)\n  }\n  return instance.destroy\n}\n\nexport default wrapper\n",
+    "static": true,
+    "longname": "src/presets/wrapper.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 65,
+    "kind": "function",
+    "name": "wrapper",
+    "memberof": "src/presets/wrapper.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/presets/wrapper.js~wrapper",
+    "access": null,
+    "export": true,
+    "importPath": "paraglider/src/presets/wrapper.js",
+    "importStyle": "wrapper",
+    "description": "Simple wrapper including pagers and navigation arrows",
+    "lineNumber": 20,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{function}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "glider",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opts",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "function"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 96,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 97,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 100,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 101,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 102,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 104,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 110,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 111,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 112,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 113,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "lineNumber": 193,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 115,
+    "kind": "external",
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 116,
+    "kind": "external",
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 117,
+    "kind": "external",
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 118,
+    "kind": "external",
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 119,
+    "kind": "external",
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 120,
+    "kind": "external",
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 121,
+    "kind": "external",
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 122,
+    "kind": "external",
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "static": true,
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "lineNumber": 34,
+    "builtinExternal": true
+  }
+]
