@@ -819,7 +819,10 @@ var _extends3 = _interopRequireDefault(_extends2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * @file src/config.js
+ * Config data for Paraglider.
+ *
+ * @file config.js
+ * @module config
  * @author Gregor Adams <greg@pixelass.com>
  */
 
@@ -949,7 +952,12 @@ var _helpers = require(73);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * @file src/index.js
+ * Paraglider is an API driven slider.
+ *
+ * Per default it simply adds class names to the previous, current and next slide.
+ * With the help of callbacks however, you can add any imaginable behavior
+ *
+ * @file glider/index.js
  * @author Gregor Adams <greg@pixelass.com>
  */
 
@@ -1024,10 +1032,23 @@ var Glider = function () {
   };
 
   /**
+   * Destroys the plugin by removing eventlisteners and class names
+   */
+
+
+  Glider.prototype.destroy = function destroy() {
+    this.removeListeners();
+    this.removeClassNames();
+    this.el = null;
+    this.slidesWrapper = null;
+    this.slides = null;
+  };
+
+  /**
    * Adds eventlisteners needed for this plugin to work.
    * Movement and release should be tracked on window or document.
    * @private
-  */
+   */
 
 
   Glider.prototype.addListeners = function addListeners() {
@@ -1121,16 +1142,95 @@ var Glider = function () {
   };
 
   /**
-   * Destroys the plugin by removing eventlisteners and class names
+   * Add `previous` and `next` classes around the `current` slide.
+   * This function respects pager clicks, which modify the next or previous element.
+   * @private
    */
 
 
-  Glider.prototype.destroy = function destroy() {
-    this.removeListeners();
-    this.removeClassNames();
-    this.el = null;
-    this.slidesWrapper = null;
-    this.slides = null;
+  Glider.prototype.addSides = function addSides() {
+    var _state2 = this.state,
+        currentSlide = _state2.currentSlide,
+        requestedNext = _state2.requestedNext,
+        requestedPrevious = _state2.requestedPrevious;
+    var length = this.slides.length;
+    // Respect requested slides.
+    // {goTo} could set these values.
+
+    var nextSlide = (0, _helpers.eitherOr)(requestedNext, (0, _helpers.modLoop)(currentSlide, 1, length));
+    var previousSlide = (0, _helpers.eitherOr)(requestedPrevious, (0, _helpers.modLoop)(currentSlide, -1, length));
+
+    this.setState({ nextSlide: nextSlide, previousSlide: previousSlide });
+  };
+
+  /**
+   * Moves to the next slide via trigger.
+   */
+
+
+  Glider.prototype.nextSlide = function nextSlide(e) {
+    /* istanbul ignore next */
+    if (e && 'preventDefault' in e) {
+      e.preventDefault();
+    }
+    this.addSides();
+    this.addClassNames();
+    this.spring(0, 1, this.options.speed);
+  };
+
+  /**
+   * Moves to the previous slide via trigger.
+   */
+
+
+  Glider.prototype.prevSlide = function prevSlide(e) {
+    /* istanbul ignore next */
+    if (e && 'preventDefault' in e) {
+      e.preventDefault();
+    }
+    this.addSides();
+    this.addClassNames();
+    this.spring(0, -1, this.options.speed);
+  };
+
+  /**
+   * Moves to the nth slide via trigger. Respects left/right movement
+   */
+
+
+  Glider.prototype.goTo = function goTo(n) {
+    if (n > this.state.currentSlide) {
+      this.setState({ requestedNext: n });
+      this.nextSlide();
+      /* istanbul ignore next */
+    } else /* istanbul ignore next */if (n < this.state.currentSlide) {
+        this.setState({ requestedPrevious: n });
+        this.prevSlide();
+      }
+  };
+
+  /**
+   * Handles the snap animation
+   * @private
+   * @param {number} progress Current value
+   * @param {number} end Final value
+   * @param {number} duration Time to pass the until animation is done.
+   */
+
+
+  Glider.prototype.spring = function spring(progress, end, duration) {
+    var _this = this;
+
+    (0, _helpers.animate)(duration, progress, end, function (p) {
+      _this.setState({
+        x: p * _this.el.offsetWidth
+      });
+      if (p === end) {
+        _this.handleEnd(end);
+      } else {
+        _this.handleProgress();
+      }
+    });
   };
 
   /* istanbul ignore next */
@@ -1154,25 +1254,43 @@ var Glider = function () {
   };
 
   /**
-   * Add `previous` and `next` classes around the `current` slide.
-   * This function respects pager clicks, which modify the next or previous element.
+   * Prepares return values
    * @private
+   * @param {boolean} direction
+   * @returns {object}
    */
 
 
-  Glider.prototype.addSides = function addSides() {
-    var _state2 = this.state,
-        currentSlide = _state2.currentSlide,
-        requestedNext = _state2.requestedNext,
-        requestedPrevious = _state2.requestedPrevious;
-    var length = this.slides.length;
-    // Respect requested slides.
-    // {goTo} could set these values.
+  Glider.prototype.getReturnValues = function getReturnValues() {
+    var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
-    var nextSlide = (0, _helpers.eitherOr)(requestedNext, (0, _helpers.modLoop)(currentSlide, 1, length));
-    var previousSlide = (0, _helpers.eitherOr)(requestedPrevious, (0, _helpers.modLoop)(currentSlide, -1, length));
+    var progress = this.state.x / this.el.offsetWidth;
+    var _state3 = this.state,
+        currentSlide = _state3.currentSlide,
+        nextSlide = _state3.nextSlide,
+        previousSlide = _state3.previousSlide;
 
-    this.setState({ nextSlide: nextSlide, previousSlide: previousSlide });
+    var right = progress * -1;
+    var current = currentSlide;
+    // We only need the lower value
+    /* istanbul ignore next */
+    var next = progress < right && direction ? null : nextSlide;
+    /* istanbul ignore next */
+    var previous = progress > right && direction ? null : previousSlide;
+
+    var rest = this.slides.map(function (el, index) {
+      return index;
+    }).filter(function (originalIndex) {
+      return [previous, current, next].indexOf(originalIndex) === -1;
+    });
+
+    return {
+      next: next,
+      previous: previous,
+      current: current,
+      rest: rest,
+      progress: Math.abs(progress)
+    };
   };
 
   /* istanbul ignore next */
@@ -1213,9 +1331,9 @@ var Glider = function () {
 
   Glider.prototype.handleUp = function handleUp() {
     // Only proceed if the plugin signals a previous down event.
-    var _state3 = this.state,
-        down = _state3.down,
-        blocked = _state3.blocked;
+    var _state4 = this.state,
+        down = _state4.down,
+        blocked = _state4.blocked;
 
     if (down && blocked) {
       var snapBackAt = this.options.snapBackAt;
@@ -1232,48 +1350,61 @@ var Glider = function () {
     this.setState({ down: false, blocked: false });
   };
 
+  /* istanbul ignore next */
   /**
-   * Moves to the next slide via trigger.
+   * Handler vor mouse or touch movement.
+   * Waits for a threshold and then records the movement on the `x` axis
+   * @private
+   * @param {event} e Mouse or touch move event
    */
 
 
-  Glider.prototype.nextSlide = function nextSlide(e) {
-    /* istanbul ignore if */
-    if (e && 'preventDefault' in e) {
-      e.preventDefault();
+  Glider.prototype.handleMove = function handleMove(e) {
+    if (this.state.down) {
+      var _state5 = this.state,
+          xStart = _state5.xStart,
+          x = _state5.x,
+          blocked = _state5.blocked;
+      var threshold = this.options.threshold;
+
+      if (Math.abs(x) > threshold || blocked) {
+        this.setState({ blocked: true });
+        e.preventDefault();
+        this.handleProgress();
+      }
+      var clientX = this.getClientX(e);
+      this.setState({
+        x: xStart - clientX
+      });
     }
-    this.addSides();
-    this.addClassNames();
-    this.spring(0, 1, this.options.speed);
   };
 
   /**
-   * Moves to the previous slide via trigger.
+   * Handles the progress. Calculates the progress from the
+   * internal state and element dimension.
+   * A callback is fired if set
+   * @private
    */
 
 
-  Glider.prototype.prevSlide = function prevSlide(e) {
-    /* istanbul ignore if */
-    if (e && 'preventDefault' in e) {
-      e.preventDefault();
-    }
-    this.addSides();
-    this.addClassNames();
-    this.spring(0, -1, this.options.speed);
-  };
-
-  /**
-   * Moves to the nth slide via trigger. Respects left/right movement
-   */
+  Glider.prototype.handleProgress = function handleProgress() {
+    var onSlide = this.options.onSlide;
 
 
-  Glider.prototype.goTo = function goTo(n) {
-    if (n > this.state.currentSlide) {
-      this.setState({ requestedNext: n });
-      this.nextSlide();
-    } else if (n < this.state.currentSlide) {
-      this.setState({ requestedPrevious: n });
-      this.prevSlide();
+    if (typeof onSlide === 'function') {
+      var _getReturnValues = this.getReturnValues(),
+          progress = _getReturnValues.progress,
+          next = _getReturnValues.next,
+          previous = _getReturnValues.previous,
+          current = _getReturnValues.current,
+          rest = _getReturnValues.rest;
+      /**
+       * Callback for progression
+       * @type {onSlide}
+       */
+
+
+      onSlide(progress, { next: next, previous: previous, current: current, rest: rest }, this.slides);
     }
   };
 
@@ -1292,11 +1423,12 @@ var Glider = function () {
       this.setState({
         currentSlide: this.state.previousSlide
       });
-    } else if (end === 1) {
-      this.setState({
-        currentSlide: this.state.nextSlide
-      });
-    }
+      /* istanbul ignore next */
+    } else /* istanbul ignore next */if (end === 1) {
+        this.setState({
+          currentSlide: this.state.nextSlide
+        });
+      }
     this.setState({
       requestedNext: null,
       requestedPrevious: null
@@ -1305,11 +1437,11 @@ var Glider = function () {
     this.addClassNames();
 
     if (typeof onEnd === 'function') {
-      var _getReturnValues = this.getReturnValues(false),
-          next = _getReturnValues.next,
-          previous = _getReturnValues.previous,
-          current = _getReturnValues.current,
-          rest = _getReturnValues.rest;
+      var _getReturnValues2 = this.getReturnValues(false),
+          next = _getReturnValues2.next,
+          previous = _getReturnValues2.previous,
+          current = _getReturnValues2.current,
+          rest = _getReturnValues2.rest;
       /**
        * Callback for the end
        * @public
@@ -1318,118 +1450,6 @@ var Glider = function () {
 
 
       onEnd({ next: next, previous: previous, current: current, rest: rest }, this.slides);
-    }
-  };
-
-  /**
-   * Handles the snap animation
-   * @private
-   * @param {number} progress Current value
-   * @param {number} end Final value
-   * @param {number} duration Time to pass the until animation is done.
-   */
-
-
-  Glider.prototype.spring = function spring(progress, end, duration) {
-    var _this = this;
-
-    (0, _helpers.animate)(duration, progress, end, function (p) {
-      _this.setState({
-        x: p * _this.el.offsetWidth
-      });
-      if (p === end) {
-        _this.handleEnd(end);
-      } else {
-        _this.handleProgress();
-      }
-    });
-  };
-
-  /* istanbul ignore next */
-  /**
-   * Handler vor mouse or touch movement.
-   * Waits for a threshold and then records the movement on the `x` axis
-   * @private
-   * @param {event} e Mouse or touch move event
-   */
-
-
-  Glider.prototype.handleMove = function handleMove(e) {
-    if (this.state.down) {
-      var _state4 = this.state,
-          xStart = _state4.xStart,
-          x = _state4.x,
-          blocked = _state4.blocked;
-      var threshold = this.options.threshold;
-
-      if (Math.abs(x) > threshold || blocked) {
-        this.setState({ blocked: true });
-        e.preventDefault();
-        this.handleProgress();
-      }
-      var clientX = this.getClientX(e);
-      this.setState({
-        x: xStart - clientX
-      });
-    }
-  };
-
-  Glider.prototype.getReturnValues = function getReturnValues() {
-    var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-    var progress = this.state.x / this.el.offsetWidth;
-    var _state5 = this.state,
-        currentSlide = _state5.currentSlide,
-        nextSlide = _state5.nextSlide,
-        previousSlide = _state5.previousSlide;
-
-    var right = progress * -1;
-    var current = currentSlide;
-    // We only need the lower value
-    var next = progress < right && direction ? null : nextSlide;
-    var previous = progress > right && direction ? null : previousSlide;
-
-    var rest = this.slides.map(function (el, index) {
-      return index;
-    }).filter(function (originalIndex) {
-      return [previous, current, next].indexOf(originalIndex) === -1;
-    });
-
-    return {
-      next: next,
-      previous: previous,
-      current: current,
-      rest: rest,
-      progress: Math.abs(progress)
-    };
-  };
-
-  /**
-   * Handles the progress. Calculates the progress from the
-   * internal state and element dimension.
-   * A callback is fired if set
-   * @private
-   */
-
-
-  Glider.prototype.handleProgress = function handleProgress() {
-    var onSlide = this.options.onSlide;
-
-
-    if (typeof onSlide === 'function') {
-      var _getReturnValues2 = this.getReturnValues(),
-          progress = _getReturnValues2.progress,
-          next = _getReturnValues2.next,
-          previous = _getReturnValues2.previous,
-          current = _getReturnValues2.current,
-          rest = _getReturnValues2.rest;
-      /**
-       * Callback for progression
-       * @type {onSlide}
-       */
-
-
-      onSlide(progress, { next: next, previous: previous, current: current, rest: rest }, this.slides);
     }
   };
 
@@ -1444,6 +1464,7 @@ var Glider = function () {
 
 /**
  * @typedef onSlide
+ * @memberof Glider
  * @type {function}
  * @param {object} offset Offset of the element to either side.
  * @param {number} offset.left A value between [0, 1]
@@ -1458,6 +1479,7 @@ var Glider = function () {
 
 /**
  * @typedef onEnd
+ * @memberof Glider
  * @type {function}
  * @param {object} data Data about the slider activity
  * @param {number} data.previous Index of previous slide
@@ -1485,7 +1507,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* global document */
 /**
- * @file src/helpers.js
+ * A collection of helper functions.
+ *
+ * @file helpers.js
+ * @module helpers
  * @author Gregor Adams <greg@pixelass.com>
  */
 
@@ -1638,7 +1663,17 @@ var belt = function belt(glider, opts) {
       }
     }
   }));
-};
+}; /**
+    * A simple belt slider as we all know it.
+    * The previous, current and next slide move from left to right
+    * or the other way around at the same time.
+    *
+    * Includes pagers and navigation buttons.
+    *
+    * @file presets/belt.js
+    * @module presets
+    * @author Gregor Adams <greg@pixelass.com>
+    */
 
 exports.default = belt;
 
@@ -1697,7 +1732,16 @@ var coverLeftRight = function coverLeftRight(glider, opts) {
       }
     }
   }));
-};
+}; /**
+    * A covering slider.
+    * The previous or next slide cover the current slide from the left or right.
+    *
+    * Includes pagers and navigation buttons.
+    *
+    * @file presets/cover-left-right.js
+    * @module presets
+    * @author Gregor Adams <greg@pixelass.com>
+    */
 
 exports.default = coverLeftRight;
 
@@ -1756,7 +1800,16 @@ var coverLeft = function coverLeft(glider, opts) {
       }
     }
   }));
-};
+}; /**
+    * A covering slider.
+    * The previous or next slide cover the current slide from the left.
+    *
+    * Includes pagers and navigation buttons.
+    *
+    * @file presets/cover-left.js
+    * @module presets
+    * @author Gregor Adams <greg@pixelass.com>
+    */
 
 exports.default = coverLeft;
 
@@ -1815,7 +1868,16 @@ var coverRight = function coverRight(glider, opts) {
       }
     }
   }));
-};
+}; /**
+    * A covering slider.
+    * The previous or next slide cover the current slide from right.
+    *
+    * Includes pagers and navigation buttons.
+    *
+    * @file presets/cover-right.js
+    * @module presets
+    * @author Gregor Adams <greg@pixelass.com>
+    */
 
 exports.default = coverRight;
 
@@ -1875,6 +1937,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param {object} opts
  * @returns {function}
  */
+/**
+ * Wraps Paraglider to apply pagers and navigation buttons.
+ * This wrapper simplifies the usage of Paraglider by offering some basic
+ * functionality.
+ *
+ * @file presets/wrapper.js
+ * @module  presets
+ * @author Gregor Adams <greg@pixelass.com>
+ */
+
 var wrapper = function wrapper(glider, opts) {
   if (!glider) {
     return;
@@ -1902,9 +1974,6 @@ var wrapper = function wrapper(glider, opts) {
       pagers.forEach(function (pager, i) {
         pager.classList.toggle(opts.classNames.active, i === current);
       });
-      slides.forEach(function (slide) {
-        slide.style.transform = '';
-      });
       if (typeof opts.onEnd === 'function') {
         opts.onEnd({ next: next, previous: previous, current: current, rest: rest }, slides);
       }
@@ -1918,7 +1987,7 @@ var wrapper = function wrapper(glider, opts) {
       return instance.goTo(i);
     };
     pager.addEventListener('click', goto);
-    pager.classList.toggle(options.classNames.active, i === (opts.initialSlide || 0));
+    pager.classList.toggle(options.classNames.active, i === options.initialSlide);
   });
   if (nextButton) {
     nextButton.addEventListener('click', instance.nextSlide);
