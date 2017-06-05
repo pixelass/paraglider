@@ -31,6 +31,7 @@ With the help of callbacks however, you can implement any imaginable effect.
 - [Links](#links)
 - [Usage](#usage)
   * [Presets](#presets)
+    + [Wrapper](#wrapper)
     + [Belt](#belt)
     + [Cover](#cover)
   * [Dist / CDN](#dist--cdn)
@@ -80,6 +81,42 @@ glider.init(document.querySelector('.glide-me'))
 
 ### Presets
 
+#### Wrapper
+
+If you want to wrap your slider to use pagers and/or navigation you can use the provided helper.
+The API and configuration remains the same.
+
+```js
+import wrapper from 'paraglider/lib/presets/wrapper'
+
+const belt = (glider, opts) => wrapper(glider, {
+  ...opts,
+  onSlide(progress, {next, previous, current, rest}, slides) {
+    if (previous !== null) {
+      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+    } else if (next !== null) {
+      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+    }
+    if (typeof opts.onSlide === 'function') {
+      opts.onSlide(progress, {next, previous, current, rest}, slides)
+    }
+  },
+  onEnd({next, previous, current, rest}, slides) {
+    rest.forEach(slide => {
+      slides[slide].style.transform = ''
+    })
+    slides[current].style.transform = ''
+    slides[previous].style.transform = 'translate(-100%,0,0)'
+    slides[next].style.transform = 'translate(100%,0,0)'
+    if (typeof opts.onEnd === 'function') {
+      opts.onEnd({next, previous, current, rest}, slides)
+    }
+  }
+})
+```
+
 #### Belt
 
 A simple belt slider
@@ -110,8 +147,8 @@ You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/p
 
 Example:
 
-* https://cdn.rawgit.com/pixelass/paraglider/v1.1.0/dist/paraglider.js
-* https://cdn.rawgit.com/pixelass/paraglider/v1.1.0/dist/paraglider.min.js
+* https://cdn.rawgit.com/pixelass/paraglider/v2.0.1/dist/paraglider.js
+* https://cdn.rawgit.com/pixelass/paraglider/v2.0.1/dist/paraglider.min.js
 
 ## Developing
 
@@ -128,4 +165,4 @@ Example:
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
 
-Images via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)
+Images in Demos via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)
