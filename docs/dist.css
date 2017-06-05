@@ -1,3 +1,22 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  min-width: 320px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+main {
+  margin: auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
 :root { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 }
@@ -217,23 +236,4 @@
 
 .S {
   /* left-right */
-}
-body {
-  margin: 0;
-  font-family: sans-serif;
-  min-width: 320px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-main {
-  margin: auto;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
 }
