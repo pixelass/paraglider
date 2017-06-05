@@ -13,7 +13,7 @@ With the help of callbacks however, you can implement any imaginable effect.
 [![bitHound](https://img.shields.io/bithound/code/github/pixelass/paraglider.svg?style=flat-square)](https://www.bithound.io/github/pixelass/paraglider)
 [![bitHound](https://img.shields.io/bithound/devDependencies/github/pixelass/paraglider.svg?style=flat-square)](https://www.bithound.io/github/pixelass/paraglider)
 [![Coveralls](https://img.shields.io/coveralls/pixelass/paraglider.svg?style=flat-square)](https://coveralls.io/github/pixelass/paraglider)
-[![Esdoc](https://doc.esdoc.org/github.com/pixelass/paraglider/badge.svg)](https://pixelass.github.io/paraglider/api/)
+[![Esdoc](https://pixelass.github.io/paraglider/api/badge.svg)](https://pixelass.github.io/paraglider/api/)
 
 [![Browserify](https://img.shields.io/badge/build-browserify-3c6991.svg?style=flat-square)](http://browserify.org/)
 [![Babel](https://img.shields.io/badge/babel-stage--2-f5da55.svg?style=flat-square)](http://babeljs.io/docs/plugins/preset-stage-2/)
