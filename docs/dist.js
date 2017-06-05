@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = {"glider":"a","slides":"b","slide":"c","current":"d","previous":"e","next":"f","pagers":"g","prev":"h","dots":"i","dot":"j","active":"k","pluginLoaded":"l","init":"m","jsWrapper":"n","jsSlide":"o","jsDot":"p","jsNext":"q","jsPrev":"r","belt":"s","coverLeft":"t","coverRight":"u","coverLeftRight":"v"}
+module.exports = {"glider":"x","slides":"y","slide":"z","current":"A","previous":"B","next":"C","pagers":"D","prev":"E","dots":"F","dot":"G","active":"H","pluginLoaded":"I","init":"J","jsWrapper":"K","jsSlide":"L","jsDot":"M","jsNext":"N","jsPrev":"O","belt":"P","coverLeft":"Q","coverRight":"R","coverLeftRight":"S"}
 },{}],2:[function(require,module,exports){
 (function (global){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}require(74),require(3);var _dist=require(1),_dist2=_interopRequireDefault(_dist),_global$Paraglider=global.Paraglider,belt=_global$Paraglider.belt,coverLeft=_global$Paraglider.coverLeft,coverRight=_global$Paraglider.coverRight,coverLeftRight=_global$Paraglider.coverLeftRight,classNames={pluginLoaded:_dist2.default.pluginLoaded,current:_dist2.default.current,previous:_dist2.default.previous,next:_dist2.default.next,init:_dist2.default.init,active:_dist2.default.active,slides:_dist2.default.jsWrapper,slide:_dist2.default.jsSlide,dot:_dist2.default.jsDot,prevButton:_dist2.default.jsPrev,nextButton:_dist2.default.jsNext};belt(document.querySelector("."+_dist2.default.belt),{classNames:classNames}),coverLeft(document.querySelector("."+_dist2.default.coverLeft),{classNames:classNames}),coverRight(document.querySelector("."+_dist2.default.coverRight),{classNames:classNames}),coverLeftRight(document.querySelector("."+_dist2.default.coverLeftRight),{classNames:classNames});
@@ -64,7 +64,6 @@ module.exports=!require(28)(function(){return 7!=Object.defineProperty({},"a",{g
 
 },{"28":28}],25:[function(require,module,exports){
 var isObject=require(36),document=require(29).document,is=isObject(document)&&isObject(document.createElement);module.exports=function(e){return is?document.createElement(e):{}};
-
 },{"29":29,"36":36}],26:[function(require,module,exports){
 module.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",");
 
@@ -77,6 +76,7 @@ module.exports=function(r){try{return!!r()}catch(r){return!0}};
 var global=module.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=global);
 },{}],30:[function(require,module,exports){
 var hasOwnProperty={}.hasOwnProperty;module.exports=function(r,e){return hasOwnProperty.call(r,e)};
+
 },{}],31:[function(require,module,exports){
 var dP=require(45),createDesc=require(53);module.exports=require(24)?function(e,r,t){return dP.f(e,r,createDesc(1,t))}:function(e,r,t){return e[r]=t,e};
 
@@ -85,7 +85,6 @@ module.exports=require(29).document&&document.documentElement;
 
 },{"29":29}],33:[function(require,module,exports){
 module.exports=!require(24)&&!require(28)(function(){return 7!=Object.defineProperty(require(25)("div"),"a",{get:function(){return 7}}).a});
-
 },{"24":24,"25":25,"28":28}],34:[function(require,module,exports){
 var cof=require(19);module.exports=Object("z").propertyIsEnumerable(0)?Object:function(e){return"String"==cof(e)?e.split(""):Object(e)};
 
@@ -121,7 +120,6 @@ var anObject=require(16),dPs=require(46),enumBugKeys=require(26),IE_PROTO=requir
 
 },{"16":16,"25":25,"26":26,"32":32,"46":46,"56":56}],45:[function(require,module,exports){
 var anObject=require(16),IE8_DOM_DEFINE=require(33),toPrimitive=require(64),dP=Object.defineProperty;exports.f=require(24)?Object.defineProperty:function(e,r,t){if(anObject(e),r=toPrimitive(r,!0),anObject(t),IE8_DOM_DEFINE)try{return dP(e,r,t)}catch(e){}if("get"in t||"set"in t)throw TypeError("Accessors not supported!");return"value"in t&&(e[r]=t.value),e};
-
 },{"16":16,"24":24,"33":33,"64":64}],46:[function(require,module,exports){
 var dP=require(45),anObject=require(16),getKeys=require(50);module.exports=require(24)?Object.defineProperties:function(e,r){anObject(e);for(var t,o=getKeys(r),c=o.length,i=0;c>i;)dP.f(e,t=o[i++],r[t]);return e};
 },{"16":16,"24":24,"45":45,"50":50}],47:[function(require,module,exports){
@@ -132,6 +130,7 @@ var has=require(30),toObject=require(63),IE_PROTO=require(56)("IE_PROTO"),Object
 
 },{"30":30,"56":56,"63":63}],49:[function(require,module,exports){
 var has=require(30),toIObject=require(61),arrayIndexOf=require(17)(!1),IE_PROTO=require(56)("IE_PROTO");module.exports=function(r,e){var a,t=toIObject(r),u=0,O=[];for(a in t)a!=IE_PROTO&&has(t,a)&&O.push(a);for(;e.length>u;)has(t,a=e[u++])&&(~arrayIndexOf(O,a)||O.push(a));return O};
+
 },{"17":17,"30":30,"56":56,"61":61}],50:[function(require,module,exports){
 var $keys=require(49),enumBugKeys=require(26);module.exports=Object.keys||function(e){return $keys(e,enumBugKeys)};
 
@@ -160,6 +159,7 @@ var global=require(29),SHARED="__core-js_shared__",store=global[SHARED]||(global
 var toInteger=require(60),defined=require(23);module.exports=function(e){return function(r,t){var n,i,d=String(defined(r)),o=toInteger(t),u=d.length;return o<0||o>=u?e?"":void 0:(n=d.charCodeAt(o),n<55296||n>56319||o+1===u||(i=d.charCodeAt(o+1))<56320||i>57343?e?d.charAt(o):n:e?d.slice(o,o+2):i-56320+(n-55296<<10)+65536)}};
 },{"23":23,"60":60}],59:[function(require,module,exports){
 var toInteger=require(60),max=Math.max,min=Math.min;module.exports=function(e,t){return e=toInteger(e),e<0?max(e+t,0):min(e,t)};
+
 },{"60":60}],60:[function(require,module,exports){
 var ceil=Math.ceil,floor=Math.floor;module.exports=function(o){return isNaN(o=+o)?0:(o>0?floor:ceil)(o)};
 
