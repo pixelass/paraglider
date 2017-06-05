@@ -47,8 +47,8 @@ const parallaxSlider = (glider, handlePrev, handleNext) => {
             progress,
             slice,
             index,
-            slides: slides[previous],
-            slicesLength: slideSlices[previous].length
+            slides: slides[next],
+            slicesLength: slideSlices[next].length
           })
         })
       }
