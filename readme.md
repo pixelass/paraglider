@@ -145,8 +145,8 @@ You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/p
 
 Example:
 
-* https://cdn.rawgit.com/pixelass/paraglider/v2.0.1/dist/paraglider.js
-* https://cdn.rawgit.com/pixelass/paraglider/v2.0.1/dist/paraglider.min.js
+* https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.js
+* https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.min.js
 
 ## Developing
 

@@ -6,28 +6,10 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "paraglider/src/config.js~plugin_defaults",
-    "variable/index.html#static-variable-PLUGIN_DEFAULTS",
-    "<span>PLUGIN_DEFAULTS</span> <span class=\"search-result-import-path\">paraglider/src/config.js</span>",
-    "variable"
-  ],
-  [
-    "paraglider/src/config.js~preset_defaults",
-    "variable/index.html#static-variable-PRESET_DEFAULTS",
-    "<span>PRESET_DEFAULTS</span> <span class=\"search-result-import-path\">paraglider/src/config.js</span>",
-    "variable"
-  ],
-  [
     "paraglider/src/presets/belt.js~belt",
     "function/index.html#static-function-belt",
     "<span>belt</span> <span class=\"search-result-import-path\">paraglider/src/presets/belt.js</span>",
     "function"
-  ],
-  [
-    "paraglider/src/config.js~classnames",
-    "variable/index.html#static-variable-classNames",
-    "<span>classNames</span> <span class=\"search-result-import-path\">paraglider/src/config.js</span>",
-    "variable"
   ],
   [
     "paraglider/src/presets/cover-left.js~coverleft",
@@ -450,16 +432,16 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "src/glider/index.js~pluginoptions",
+    "typedef/index.html#static-typedef-pluginOptions",
+    "src/glider/index.js~pluginOptions",
+    "typedef"
+  ],
+  [
     "src/helpers.js",
     "file/src/helpers.js.html",
     "src/helpers.js",
     "file"
-  ],
-  [
-    "src/helpers.js~animationcallback",
-    "typedef/index.html#static-typedef-animationCallback",
-    "src/helpers.js~animationCallback",
-    "typedef"
   ],
   [
     "src/index.js",

@@ -32,13 +32,10 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-animationCallback">animationCallback</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-pluginOptions">pluginOptions</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">presets</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-belt">belt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
@@ -72,6 +69,11 @@
 const animate = (speed, from, to, callback) =&gt; {
   const now = Date.now()
   const step = (to - from) / speed
+
+  /**
+   * Loop function
+   * Runs until end is reached
+   */
   const loop = () =&gt; {
     const then = Date.now()
     const diff = then - now
@@ -89,8 +91,15 @@ const animate = (speed, from, to, callback) =&gt; {
 }
 /**
  * @typedef animationCallback
+ * @private
  * @type {function}
  * @param {number} progress Current value between `from` and `to`
+ * @example
+ * animate(1000, 0, 1,
+ *   p =&gt; {
+ *     console.log(p)
+ *   }
+ * )
  */
 
 /* istanbul ignore next */
@@ -98,8 +107,10 @@ const animate = (speed, from, to, callback) =&gt; {
  * Helper to get elements. Similar to jQuery&apos;s `$(selector, context)`
  * @private
  * @param {string} selector selector to find
- * @param {HTMLElement} [context=document] Context to search in
+ * @param {Element} [context=document] Context to search in
  * @returns {array} A list of matching elements
+ * @example
+ * findAll(&apos;.foo&apos;) // =&gt; [...]
  */
 const findAll = (selector, context = document) =&gt;
   Array.from(context.querySelectorAll(selector))
@@ -109,8 +120,10 @@ const findAll = (selector, context = document) =&gt;
  * Helper to get elements. Similar to jQuery&apos;s `$(selector, context)[0]`
  * @private
  * @param {string} selector selector to find
- * @param {HTMLElement} [context=document] Context to search in
- * @returns {HTMLElement} The first matching element
+ * @param {Element} [context=document] Context to search in
+ * @returns {Element} The first matching element
+ * @example
+ * findFirst(&apos;.foo&apos;) // =&gt; &lt;div .../&gt;
  */
 const findFirst = (selector, context = document) =&gt;
   context.querySelector(selector)
@@ -122,6 +135,17 @@ const findFirst = (selector, context = document) =&gt;
  * @param {*} either
  * @param {*} or
  * @returns {*} One of the two input values
+ * @example
+ * eiterOr(0, 4) // =&gt; 0
+ * eiterOr(&apos;0&apos;, 4) // =&gt; &apos;0&apos;
+ * eiterOr(&apos;foo&apos;, 4) // =&gt; &apos;foo&apos;
+ * eiterOr(&apos;&apos;, 4) // =&gt; 4
+ * eiterOr(false, 4) // =&gt; 4
+ * eiterOr(undefined, 4) // =&gt; 4
+ * eiterOr(null, 4) // =&gt; 4
+ * eiterOr({}, 4) // =&gt; {}
+ * eiterOr([], 4) // =&gt; []
+ * eiterOr(() =&gt; {}, 4) // =&gt; () =&gt; {}
  */
 const eitherOr = (either, or) =&gt;
   typeof either === &apos;number&apos; ? either : (either || or)
@@ -133,6 +157,12 @@ const eitherOr = (either, or) =&gt;
  * @param {number} addition Addition to the current value
  * @param {number} length Maximum value.
  * @returns {number} Resulting number
+ * @example
+ * modLoop(1, 2, 3) // ==&gt; 0
+ * modLoop(2, 3, 4) // ==&gt; 1
+ * modLoop(2, -3, 4) // ==&gt; 3
+ * modLoop(20, -3, 20) // ==&gt; 17
+ * modLoop(20, -30, 20) // ==&gt; 10
  */
 const modLoop = (current, addition, length) =&gt;
   (current + addition + length) % length
