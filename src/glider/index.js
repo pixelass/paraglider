@@ -27,7 +27,7 @@ class Glider {
    * to the current and surrounding slides.
    *
    * It offers an API that allows you to implement any behaviour imaginable. 😂
-   * @param {object} options Custom options for the Plugin call
+   * @param {pluginOptions} options Custom options for the Plugin call
    * @returns {this}
    */
   constructor(options = {}) {
@@ -84,7 +84,7 @@ class Glider {
    *
    * This method assigns the element to the plugin scope, adds the required
    * eventListeners and class names.
-   * @param {HTMLElement} el An element containing the required markup with and
+   * @param {Element} el An element containing the required markup with and
    * selectors
    */
   init(el) {
@@ -92,19 +92,19 @@ class Glider {
     /**
      * Outer element
      * @private
-     * @type {HTMLElement}
+     * @type {Element}
      */
     this.el = el
     /**
      * This element is used to track mouse or touch interaction
      * @private
-     * @type {HTMLElement}
+     * @type {Element}
      */
     this.slidesWrapper = $$(`.${classNames.slides}`, el)
     /**
      * A list of all slides.
      * @private
-     * @type {array.<HTMLElement>}
+     * @type {array.<Element>}
      */
     this.slides = $(`.${classNames.slide}`, this.slidesWrapper)
 
@@ -184,6 +184,7 @@ class Glider {
   /**
    * Batch removal of class names.
    * This is dirty but simply removes anything the plugin could have set.
+   * @todo Find a better way to do this.
    * @private
    */
   removeClassNames() {
@@ -214,8 +215,9 @@ class Glider {
 
   /**
    * Moves to the next slide via trigger.
+   * @param {?Event} [e=null] optionally pass the event to prevent it
    */
-  nextSlide(e) {
+  nextSlide(e = null) {
     /* istanbul ignore next */
     if (e && 'preventDefault' in e) {
       e.preventDefault()
@@ -227,8 +229,9 @@ class Glider {
 
   /**
    * Moves to the previous slide via trigger.
+   * @param {?Event} [e=null] optionally pass the event to prevent it
    */
-  prevSlide(e) {
+  prevSlide(e = null) {
     /* istanbul ignore next */
     if (e && 'preventDefault' in e) {
       e.preventDefault()
@@ -240,6 +243,7 @@ class Glider {
 
   /**
    * Moves to the nth slide via trigger. Respects left/right movement
+   * @param {number} n index of requested slide
    */
   goTo(n) {
     if (n > this.state.currentSlide) {
@@ -472,8 +476,20 @@ class Glider {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<number>} data.rest Array of all remaining slide indexes
- * @param {array.<HTMLElement>} slides Array of all slides
+ * @param {Array.<number>} data.rest Array of all remaining slide indexes
+ * @param {Array.<Element>} slides Array of all slides
+ * @example
+ * new Glider({
+ *  onSlide(progress, {next, previous, current, rest}, slides) {
+ *    if (previous !== null) {
+ *      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+ *      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+ *    } else if (next !== null) {
+ *      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+ *      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+ *    }
+ *  }
+ *})
  */
 
 /**
@@ -484,9 +500,43 @@ class Glider {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<number>} data.rest Array of all remaining slide indexes
- * @param {array.<HTMLElement>} slides Array of all slides
+ * @param {Array.<number>} data.rest Array of all remaining slide indexes
+ * @param {Array.<Element>} slides Array of all slides
+ * @example
+ * new Glider({
+ *  onEnd({next, previous, current, rest}, slides) {
+ *    rest.forEach(slide => {
+ *      slides[slide].style.transform = ''
+ *    })
+ *    slides[current].style.transform = ''
+ *    slides[previous].style.transform = 'translate(-100%,0,0)'
+ *    slides[next].style.transform = 'translate(100%,0,0)'
+ *  }
+ *})
+ */
+
+/**
+ * @typedef pluginOptions
+ * @type {object}
+ * @property {object} classNames Mapping of class names to be used by the plugin.
+ * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
+ * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} classNames.slide Selector for each single slide.
+ * @property {string} classNames.current Applied to the currently visible slide
+ * @property {string} classNames.previous Applied to the previous slide in the queue
+ * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {string} classNames.dot Selector for pager dots. (only used in `presets/wrapper`)
+ * @property {string} classNames.active Active class for pager dots. (only used in `presets/wrapper`)
+ * @property {string} classNames.nextButton Selector for the navigation to the next slide. (only used in `presets/wrapper`)
+ * @property {string} classNames.prevButton Selector for the navigation to the previous slide. (only used in `presets/wrapper`)
+ * @property {(null|onSlide)} onSlide Callback while the slider is moving.
+ * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
+ * @property {number} speed Animation duration when using paging.
+ * @property {number} spring Animation duration when snapping.
+ * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]. E.g. `0.3` will snap if 1/3 has been moved
+ * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
+ * @property {number} initialSlide Initially visible slide
  */
 
 export default Glider
-

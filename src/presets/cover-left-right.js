@@ -13,9 +13,14 @@ import wrapper from './wrapper'
 
 /**
  * Cover left/right animation slider
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ *
+ * This is a slider that moves the next or previous over the current slide.
+ * The movement is linear.
+ * Sides cover from left and right
+ *
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 const coverLeftRight = (glider, opts) => wrapper(glider, {
   ...opts,

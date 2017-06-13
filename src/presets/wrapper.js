@@ -9,22 +9,31 @@
  */
 
 import Glider from '../glider'
-import {PRESET_DEFAULTS} from '../config'
+import {PRESET_DEFAULTS, PLUGIN_DEFAULTS} from '../config'
+import {
+  findAll as $,
+  findFirst as $$
+} from '../helpers'
 
 /**
- * Simple wrapper including pagers and navigation arrows
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ * Simple wrapper including pagers and navigation arrows.
+ *
+ * Use this helper to create custom sliders with pager dots and arrows, to
+ * navigate to diferent slides.
+ * The options are extended by additional class names.
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 const wrapper = (glider, opts) => {
   if (!glider) {
     return
   }
-  const pagers = Array.from(glider.querySelectorAll(`.${opts.classNames.dot}`) || [])
-  const nextButton = glider.querySelector(`.${opts.classNames.nextButton}`)
-  const prevButton = glider.querySelector(`.${opts.classNames.prevButton}`)
+  const pagers = $(`.${opts.classNames.dot}`)
+  const nextButton = $$(`.${opts.classNames.nextButton}`, glider)
+  const prevButton = $$(`.${opts.classNames.prevButton}`, glider)
   const options = {
+    ...PLUGIN_DEFAULTS,
     ...PRESET_DEFAULTS,
     ...opts,
     onSlide(progress, {next, previous, current, rest}, slides) {

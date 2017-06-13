@@ -21,6 +21,11 @@
 const animate = (speed, from, to, callback) => {
   const now = Date.now()
   const step = (to - from) / speed
+
+  /**
+   * Loop function
+   * Runs until end is reached
+   */
   const loop = () => {
     const then = Date.now()
     const diff = then - now
@@ -38,8 +43,15 @@ const animate = (speed, from, to, callback) => {
 }
 /**
  * @typedef animationCallback
+ * @private
  * @type {function}
  * @param {number} progress Current value between `from` and `to`
+ * @example
+ * animate(1000, 0, 1,
+ *   p => {
+ *     console.log(p)
+ *   }
+ * )
  */
 
 /* istanbul ignore next */
@@ -47,8 +59,10 @@ const animate = (speed, from, to, callback) => {
  * Helper to get elements. Similar to jQuery's `$(selector, context)`
  * @private
  * @param {string} selector selector to find
- * @param {HTMLElement} [context=document] Context to search in
+ * @param {Element} [context=document] Context to search in
  * @returns {array} A list of matching elements
+ * @example
+ * findAll('.foo') // => [...]
  */
 const findAll = (selector, context = document) =>
   Array.from(context.querySelectorAll(selector))
@@ -58,8 +72,10 @@ const findAll = (selector, context = document) =>
  * Helper to get elements. Similar to jQuery's `$(selector, context)[0]`
  * @private
  * @param {string} selector selector to find
- * @param {HTMLElement} [context=document] Context to search in
- * @returns {HTMLElement} The first matching element
+ * @param {Element} [context=document] Context to search in
+ * @returns {Element} The first matching element
+ * @example
+ * findFirst('.foo') // => <div .../>
  */
 const findFirst = (selector, context = document) =>
   context.querySelector(selector)
@@ -71,6 +87,17 @@ const findFirst = (selector, context = document) =>
  * @param {*} either
  * @param {*} or
  * @returns {*} One of the two input values
+ * @example
+ * eiterOr(0, 4) // => 0
+ * eiterOr('0', 4) // => '0'
+ * eiterOr('foo', 4) // => 'foo'
+ * eiterOr('', 4) // => 4
+ * eiterOr(false, 4) // => 4
+ * eiterOr(undefined, 4) // => 4
+ * eiterOr(null, 4) // => 4
+ * eiterOr({}, 4) // => {}
+ * eiterOr([], 4) // => []
+ * eiterOr(() => {}, 4) // => () => {}
  */
 const eitherOr = (either, or) =>
   typeof either === 'number' ? either : (either || or)
@@ -82,6 +109,12 @@ const eitherOr = (either, or) =>
  * @param {number} addition Addition to the current value
  * @param {number} length Maximum value.
  * @returns {number} Resulting number
+ * @example
+ * modLoop(1, 2, 3) // ==> 0
+ * modLoop(2, 3, 4) // ==> 1
+ * modLoop(2, -3, 4) // ==> 3
+ * modLoop(20, -3, 20) // ==> 17
+ * modLoop(20, -30, 20) // ==> 10
  */
 const modLoop = (current, addition, length) =>
   (current + addition + length) % length

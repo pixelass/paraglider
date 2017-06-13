@@ -13,10 +13,14 @@
 import wrapper from './wrapper'
 
 /**
- * Belt animation slider
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ * Belt animation slider.
+ *
+ * This is a default slider that moves the current and next or previous slide at
+ * the same time. The movement is linear.
+ *
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 const belt = (glider, opts) => wrapper(glider, {
   ...opts,
