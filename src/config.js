@@ -9,14 +9,15 @@
 /**
  * Default classList for the plugin.
  * This object can be replaced but not merged
+ * @private
  * @type {object}
- * @prop {string} pluginLoaded Applied when the plugin has been loaded
- * @prop {string} init Applied when the pugin has been initialized. Removed on first interaction.
- * @prop {string} slides This element will be used to track touches. This is the wrapper around the slides.
- * @prop {string} slide Selector for each single slide.
- * @prop {string} current Appied to the currently visible slide
- * @prop {string} previous Applied to the previous slide in the queue
- * @prop {string} next Applied to the next slide in the queue
+ * @property {string} pluginLoaded Applied when the plugin has been loaded
+ * @property {string} init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} slide Selector for each single slide.
+ * @property {string} current Applied to the currently visible slide
+ * @property {string} previous Applied to the previous slide in the queue
+ * @property {string} next Applied to the next slide in the queue
  */
 const classNames = {
   pluginLoaded: 'pluginLoaded',
@@ -30,15 +31,23 @@ const classNames = {
 
 /**
  * Defaults for the main plugin.
+ * @private
  * @type {object}
- * @prop {classNames} classNames Mapping of class names to be used by the plugin.
- * @prop {null|onSlide} onSlide Callback while the slider is moving.
- * @prop {null|onEnd} onEnd Callback while the slider stopped moving.
- * @prop {number} speed Animation duration when using paging.
- * @prop {number} spring Animation duration when snapping.
- * @prop {number} snapBackAt Amount of distance needed to snap. [0, 1]
- * @prop {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
- * @prop {number} initialSlide Initially visible slide
+ * @property {object} classNames Mapping of class names to be used by the plugin.
+ * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
+ * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} classNames.slide Selector for each single slide.
+ * @property {string} classNames.current Applied to the currently visible slide
+ * @property {string} classNames.previous Applied to the previous slide in the queue
+ * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {(null|onSlide)} onSlide Callback while the slider is moving.
+ * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
+ * @property {number} speed Animation duration when using paging.
+ * @property {number} spring Animation duration when snapping.
+ * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]
+ * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
+ * @property {number} initialSlide Initially visible slide
  */
 const PLUGIN_DEFAULTS = {
   classNames,
@@ -53,14 +62,30 @@ const PLUGIN_DEFAULTS = {
 
 /**
  * Defaults for the presets.
+ * @private
  * @type {object}
- * @prop {classNames} classNames Mapping of class names to be used by the plugin.
- * @prop {string} classNames.dot Selector for pager dots.
- * @prop {string} classNames.active Active class for pager dots.
- * @prop {string} classNames.nextButton Selector for the navigation to the next slide.
- * @prop {string} classNames.prevButton Selector for the navigation to the previous slide.
+ * @property {object} classNames Mapping of class names to be used by the plugin.
+ * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
+ * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} classNames.slide Selector for each single slide.
+ * @property {string} classNames.current Applied to the currently visible slide
+ * @property {string} classNames.previous Applied to the previous slide in the queue
+ * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {string} classNames.dot Selector for pager dots.
+ * @property {string} classNames.active Active class for pager dots.
+ * @property {string} classNames.nextButton Selector for the navigation to the next slide.
+ * @property {string} classNames.prevButton Selector for the navigation to the previous slide.
+ * @property {(null|onSlide)} onSlide Callback while the slider is moving.
+ * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
+ * @property {number} speed Animation duration when using paging.
+ * @property {number} spring Animation duration when snapping.
+ * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]
+ * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
+ * @property {number} initialSlide Initially visible slide
  */
 const PRESET_DEFAULTS = {
+  ...PLUGIN_DEFAULTS,
   classNames: {
     ...classNames,
     dot: 'dot',
