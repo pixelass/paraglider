@@ -95,6 +95,61 @@ test('Glider has a nextSlide method', async t => {
   t.true(await p, true)
 })
 
+test('Glider has a prevSlide method', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = markup
+    const glider = document.querySelector('.glider')
+    const instance = new Glider({
+      speed: SLIDE_TIME,
+      onEnd() {
+        resolve(true)
+      }
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+    instance.prevSlide()
+  })
+  t.true(await p, true)
+})
+
+test('prevSlide can prevent an event', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = markup
+    const glider = document.querySelector('.glider')
+    const instance = new Glider({
+      speed: SLIDE_TIME
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+    instance.prevSlide({preventDefault() {
+      resolve(true)
+    }})
+  })
+  t.true(await p, true)
+})
+
+test('nextSlide can prevent an event', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = markup
+    const glider = document.querySelector('.glider')
+    const instance = new Glider({
+      speed: SLIDE_TIME
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+    instance.nextSlide({preventDefault() {
+      resolve(true)
+    }})
+  })
+  t.true(await p, true)
+})
+
 test('Glider has an onEnd callback', async t => {
   const p = new Promise((resolve, reject) => {
     document.body.innerHTML = markup
