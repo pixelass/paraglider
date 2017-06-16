@@ -829,14 +829,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Default classList for the plugin.
  * This object can be replaced but not merged
+ * @private
  * @type {object}
- * @prop {string} pluginLoaded Applied when the plugin has been loaded
- * @prop {string} init Applied when the pugin has been initialized. Removed on first interaction.
- * @prop {string} slides This element will be used to track touches. This is the wrapper around the slides.
- * @prop {string} slide Selector for each single slide.
- * @prop {string} current Appied to the currently visible slide
- * @prop {string} previous Applied to the previous slide in the queue
- * @prop {string} next Applied to the next slide in the queue
+ * @property {string} pluginLoaded Applied when the plugin has been loaded
+ * @property {string} init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} slide Selector for each single slide.
+ * @property {string} current Applied to the currently visible slide
+ * @property {string} previous Applied to the previous slide in the queue
+ * @property {string} next Applied to the next slide in the queue
  */
 var classNames = {
   pluginLoaded: 'pluginLoaded',
@@ -850,15 +851,23 @@ var classNames = {
 
 /**
  * Defaults for the main plugin.
+ * @private
  * @type {object}
- * @prop {classNames} classNames Mapping of class names to be used by the plugin.
- * @prop {null|onSlide} onSlide Callback while the slider is moving.
- * @prop {null|onEnd} onEnd Callback while the slider stopped moving.
- * @prop {number} speed Animation duration when using paging.
- * @prop {number} spring Animation duration when snapping.
- * @prop {number} snapBackAt Amount of distance needed to snap. [0, 1]
- * @prop {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
- * @prop {number} initialSlide Initially visible slide
+ * @property {object} classNames Mapping of class names to be used by the plugin.
+ * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
+ * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} classNames.slide Selector for each single slide.
+ * @property {string} classNames.current Applied to the currently visible slide
+ * @property {string} classNames.previous Applied to the previous slide in the queue
+ * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {(null|onSlide)} onSlide Callback while the slider is moving.
+ * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
+ * @property {number} speed Animation duration when using paging.
+ * @property {number} spring Animation duration when snapping.
+ * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]
+ * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
+ * @property {number} initialSlide Initially visible slide
  */
 var PLUGIN_DEFAULTS = {
   classNames: classNames,
@@ -873,21 +882,36 @@ var PLUGIN_DEFAULTS = {
 
 /**
  * Defaults for the presets.
+ * @private
  * @type {object}
- * @prop {classNames} classNames Mapping of class names to be used by the plugin.
- * @prop {string} classNames.dot Selector for pager dots.
- * @prop {string} classNames.active Active class for pager dots.
- * @prop {string} classNames.nextButton Selector for the navigation to the next slide.
- * @prop {string} classNames.prevButton Selector for the navigation to the previous slide.
+ * @property {object} classNames Mapping of class names to be used by the plugin.
+ * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
+ * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} classNames.slide Selector for each single slide.
+ * @property {string} classNames.current Applied to the currently visible slide
+ * @property {string} classNames.previous Applied to the previous slide in the queue
+ * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {string} classNames.dot Selector for pager dots.
+ * @property {string} classNames.active Active class for pager dots.
+ * @property {string} classNames.nextButton Selector for the navigation to the next slide.
+ * @property {string} classNames.prevButton Selector for the navigation to the previous slide.
+ * @property {(null|onSlide)} onSlide Callback while the slider is moving.
+ * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
+ * @property {number} speed Animation duration when using paging.
+ * @property {number} spring Animation duration when snapping.
+ * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]
+ * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
+ * @property {number} initialSlide Initially visible slide
  */
-var PRESET_DEFAULTS = {
+var PRESET_DEFAULTS = (0, _extends3.default)({}, PLUGIN_DEFAULTS, {
   classNames: (0, _extends3.default)({}, classNames, {
     dot: 'dot',
     active: 'active',
     nextButton: 'nextButton',
     prevButton: 'prevButton'
   })
-};
+});
 
 exports.classNames = classNames;
 exports.PLUGIN_DEFAULTS = PLUGIN_DEFAULTS;
@@ -987,7 +1011,7 @@ var Glider = function () {
    * to the current and surrounding slides.
    *
    * It offers an API that allows you to implement any behaviour imaginable. 😂
-   * @param {object} options Custom options for the Plugin call
+   * @param {pluginOptions} options Custom options for the Plugin call
    * @returns {this}
    */
   function Glider() {
@@ -1041,7 +1065,7 @@ var Glider = function () {
    *
    * This method assigns the element to the plugin scope, adds the required
    * eventListeners and class names.
-   * @param {HTMLElement} el An element containing the required markup with and
+   * @param {Element} el An element containing the required markup with and
    * selectors
    */
   Glider.prototype.init = function init(el) {
@@ -1049,20 +1073,20 @@ var Glider = function () {
     /**
      * Outer element
      * @private
-     * @type {HTMLElement}
+     * @type {Element}
      */
 
     this.el = el;
     /**
      * This element is used to track mouse or touch interaction
      * @private
-     * @type {HTMLElement}
+     * @type {Element}
      */
     this.slidesWrapper = (0, _helpers.findFirst)('.' + classNames.slides, el);
     /**
      * A list of all slides.
      * @private
-     * @type {array.<HTMLElement>}
+     * @type {array.<Element>}
      */
     this.slides = (0, _helpers.findAll)('.' + classNames.slide, this.slidesWrapper);
 
@@ -1160,6 +1184,7 @@ var Glider = function () {
   /**
    * Batch removal of class names.
    * This is dirty but simply removes anything the plugin could have set.
+   * @todo Find a better way to do this.
    * @private
    */
 
@@ -1205,10 +1230,13 @@ var Glider = function () {
 
   /**
    * Moves to the next slide via trigger.
+   * @param {?Event} [e=null] optionally pass the event to prevent it
    */
 
 
-  Glider.prototype.nextSlide = function nextSlide(e) {
+  Glider.prototype.nextSlide = function nextSlide() {
+    var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     /* istanbul ignore next */
     if (e && 'preventDefault' in e) {
       e.preventDefault();
@@ -1220,10 +1248,13 @@ var Glider = function () {
 
   /**
    * Moves to the previous slide via trigger.
+   * @param {?Event} [e=null] optionally pass the event to prevent it
    */
 
 
-  Glider.prototype.prevSlide = function prevSlide(e) {
+  Glider.prototype.prevSlide = function prevSlide() {
+    var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     /* istanbul ignore next */
     if (e && 'preventDefault' in e) {
       e.preventDefault();
@@ -1235,6 +1266,7 @@ var Glider = function () {
 
   /**
    * Moves to the nth slide via trigger. Respects left/right movement
+   * @param {number} n index of requested slide
    */
 
 
@@ -1513,8 +1545,20 @@ var Glider = function () {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<number>} data.rest Array of all remaining slide indexes
- * @param {array.<HTMLElement>} slides Array of all slides
+ * @param {Array.<number>} data.rest Array of all remaining slide indexes
+ * @param {Array.<Element>} slides Array of all slides
+ * @example
+ * new Glider({
+ *  onSlide(progress, {next, previous, current, rest}, slides) {
+ *    if (previous !== null) {
+ *      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+ *      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+ *    } else if (next !== null) {
+ *      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+ *      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+ *    }
+ *  }
+ *})
  */
 
 /**
@@ -1525,8 +1569,43 @@ var Glider = function () {
  * @param {number} data.previous Index of previous slide
  * @param {number} data.current Index of current slide
  * @param {number} data.next Index of next slide
- * @param {array.<number>} data.rest Array of all remaining slide indexes
- * @param {array.<HTMLElement>} slides Array of all slides
+ * @param {Array.<number>} data.rest Array of all remaining slide indexes
+ * @param {Array.<Element>} slides Array of all slides
+ * @example
+ * new Glider({
+ *  onEnd({next, previous, current, rest}, slides) {
+ *    rest.forEach(slide => {
+ *      slides[slide].style.transform = ''
+ *    })
+ *    slides[current].style.transform = ''
+ *    slides[previous].style.transform = 'translate(-100%,0,0)'
+ *    slides[next].style.transform = 'translate(100%,0,0)'
+ *  }
+ *})
+ */
+
+/**
+ * @typedef pluginOptions
+ * @type {object}
+ * @property {object} classNames Mapping of class names to be used by the plugin.
+ * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
+ * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
+ * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
+ * @property {string} classNames.slide Selector for each single slide.
+ * @property {string} classNames.current Applied to the currently visible slide
+ * @property {string} classNames.previous Applied to the previous slide in the queue
+ * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {string} classNames.dot Selector for pager dots. (only used in `presets/wrapper`)
+ * @property {string} classNames.active Active class for pager dots. (only used in `presets/wrapper`)
+ * @property {string} classNames.nextButton Selector for the navigation to the next slide. (only used in `presets/wrapper`)
+ * @property {string} classNames.prevButton Selector for the navigation to the previous slide. (only used in `presets/wrapper`)
+ * @property {(null|onSlide)} onSlide Callback while the slider is moving.
+ * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
+ * @property {number} speed Animation duration when using paging.
+ * @property {number} spring Animation duration when snapping.
+ * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]. E.g. `0.3` will snap if 1/3 has been moved
+ * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
+ * @property {number} initialSlide Initially visible slide
  */
 
 exports.default = Glider;
@@ -1568,6 +1647,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var animate = function animate(speed, from, to, callback) {
   var now = Date.now();
   var step = (to - from) / speed;
+
+  /**
+   * Loop function
+   * Runs until end is reached
+   */
   var loop = function loop() {
     var then = Date.now();
     var diff = then - now;
@@ -1585,8 +1669,15 @@ var animate = function animate(speed, from, to, callback) {
 };
 /**
  * @typedef animationCallback
+ * @private
  * @type {function}
  * @param {number} progress Current value between `from` and `to`
+ * @example
+ * animate(1000, 0, 1,
+ *   p => {
+ *     console.log(p)
+ *   }
+ * )
  */
 
 /* istanbul ignore next */
@@ -1594,8 +1685,10 @@ var animate = function animate(speed, from, to, callback) {
  * Helper to get elements. Similar to jQuery's `$(selector, context)`
  * @private
  * @param {string} selector selector to find
- * @param {HTMLElement} [context=document] Context to search in
+ * @param {Element} [context=document] Context to search in
  * @returns {array} A list of matching elements
+ * @example
+ * findAll('.foo') // => [...]
  */
 var findAll = function findAll(selector) {
   var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
@@ -1607,8 +1700,10 @@ var findAll = function findAll(selector) {
  * Helper to get elements. Similar to jQuery's `$(selector, context)[0]`
  * @private
  * @param {string} selector selector to find
- * @param {HTMLElement} [context=document] Context to search in
- * @returns {HTMLElement} The first matching element
+ * @param {Element} [context=document] Context to search in
+ * @returns {Element} The first matching element
+ * @example
+ * findFirst('.foo') // => <div .../>
  */
 var findFirst = function findFirst(selector) {
   var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
@@ -1622,6 +1717,17 @@ var findFirst = function findFirst(selector) {
  * @param {*} either
  * @param {*} or
  * @returns {*} One of the two input values
+ * @example
+ * eiterOr(0, 4) // => 0
+ * eiterOr('0', 4) // => '0'
+ * eiterOr('foo', 4) // => 'foo'
+ * eiterOr('', 4) // => 4
+ * eiterOr(false, 4) // => 4
+ * eiterOr(undefined, 4) // => 4
+ * eiterOr(null, 4) // => 4
+ * eiterOr({}, 4) // => {}
+ * eiterOr([], 4) // => []
+ * eiterOr(() => {}, 4) // => () => {}
  */
 var eitherOr = function eitherOr(either, or) {
   return typeof either === 'number' ? either : either || or;
@@ -1634,6 +1740,12 @@ var eitherOr = function eitherOr(either, or) {
  * @param {number} addition Addition to the current value
  * @param {number} length Maximum value.
  * @returns {number} Resulting number
+ * @example
+ * modLoop(1, 2, 3) // ==> 0
+ * modLoop(2, 3, 4) // ==> 1
+ * modLoop(2, -3, 4) // ==> 3
+ * modLoop(20, -3, 20) // ==> 17
+ * modLoop(20, -30, 20) // ==> 10
  */
 var modLoop = function modLoop(current, addition, length) {
   return (current + addition + length) % length;
@@ -1662,10 +1774,14 @@ var _wrapper2 = _interopRequireDefault(_wrapper);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Belt animation slider
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ * Belt animation slider.
+ *
+ * This is a default slider that moves the current and next or previous slide at
+ * the same time. The movement is linear.
+ *
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 var belt = function belt(glider, opts) {
   return (0, _wrapper2.default)(glider, (0, _extends3.default)({}, opts, {
@@ -1734,9 +1850,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Cover left/right animation slider
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ *
+ * This is a slider that moves the next or previous over the current slide.
+ * The movement is linear.
+ * Sides cover from left and right
+ *
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 var coverLeftRight = function coverLeftRight(glider, opts) {
   return (0, _wrapper2.default)(glider, (0, _extends3.default)({}, opts, {
@@ -1802,9 +1923,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Cover left animation slider
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ *
+ * This is a slider that moves the next or previous over the current slide.
+ * The movement is linear.
+ * Sides always cover from left.
+ *
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 var coverLeft = function coverLeft(glider, opts) {
   return (0, _wrapper2.default)(glider, (0, _extends3.default)({}, opts, {
@@ -1870,9 +1996,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Cover right animation slider
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
+ *
+ * This is a slider that moves the next or previous over the current slide.
+ * The movement is linear.
+ * Sides always cover from right.
+ *
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
 var coverRight = function coverRight(glider, opts) {
   return (0, _wrapper2.default)(glider, (0, _extends3.default)({}, opts, {
@@ -1959,42 +2090,34 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _from = require(1);
-
-var _from2 = _interopRequireDefault(_from);
-
 var _glider = require(72);
 
 var _glider2 = _interopRequireDefault(_glider);
 
 var _config = require(70);
 
+var _helpers = require(73);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Simple wrapper including pagers and navigation arrows
- * @param {HTMLElement} glider
- * @param {object} opts
- * @returns {function}
- */
-/**
- * Wraps Paraglider to apply pagers and navigation buttons.
- * This wrapper simplifies the usage of Paraglider by offering some basic
- * functionality.
+ * Simple wrapper including pagers and navigation arrows.
  *
- * @file presets/wrapper.js
- * @module  presets
- * @author Gregor Adams <greg@pixelass.com>
+ * Use this helper to create custom sliders with pager dots and arrows, to
+ * navigate to diferent slides.
+ * The options are extended by additional class names.
+ * @param {Element} glider
+ * @param {pluginOptions} opts
+ * @returns {function} returns the destroy method
  */
-
 var wrapper = function wrapper(glider, opts) {
   if (!glider) {
     return;
   }
-  var pagers = (0, _from2.default)(glider.querySelectorAll('.' + opts.classNames.dot) || []);
-  var nextButton = glider.querySelector('.' + opts.classNames.nextButton);
-  var prevButton = glider.querySelector('.' + opts.classNames.prevButton);
-  var options = (0, _extends3.default)({}, _config.PRESET_DEFAULTS, opts, {
+  var pagers = (0, _helpers.findAll)('.' + opts.classNames.dot, glider);
+  var nextButton = (0, _helpers.findFirst)('.' + opts.classNames.nextButton, glider);
+  var prevButton = (0, _helpers.findFirst)('.' + opts.classNames.prevButton, glider);
+  var options = (0, _extends3.default)({}, _config.PLUGIN_DEFAULTS, _config.PRESET_DEFAULTS, opts, {
     onSlide: function onSlide(progress, _ref, slides) {
       var next = _ref.next,
           previous = _ref.previous,
@@ -2036,8 +2159,16 @@ var wrapper = function wrapper(glider, opts) {
     prevButton.addEventListener('click', instance.prevSlide);
   }
   return instance.destroy;
-};
+}; /**
+    * Wraps Paraglider to apply pagers and navigation buttons.
+    * This wrapper simplifies the usage of Paraglider by offering some basic
+    * functionality.
+    *
+    * @file presets/wrapper.js
+    * @module  presets
+    * @author Gregor Adams <greg@pixelass.com>
+    */
 
 exports.default = wrapper;
 
-},{"1":1,"7":7,"70":70,"72":72}]},{},[71]);
+},{"7":7,"70":70,"72":72,"73":73}]},{},[71]);
