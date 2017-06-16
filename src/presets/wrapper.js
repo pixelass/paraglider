@@ -29,7 +29,7 @@ const wrapper = (glider, opts) => {
   if (!glider) {
     return
   }
-  const pagers = $(`.${opts.classNames.dot}`)
+  const pagers = $(`.${opts.classNames.dot}`, glider)
   const nextButton = $$(`.${opts.classNames.nextButton}`, glider)
   const prevButton = $$(`.${opts.classNames.prevButton}`, glider)
   const options = {
