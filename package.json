@@ -1,6 +1,6 @@
 {
   "name": "paraglider",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A Slider with parallax API",
   "author": {
     "name": "Gregor Adams",
@@ -164,9 +164,15 @@
           ]
         }
       ],
-      "plugin/no-unsupported-browser-features": [true, {
-        "ignore": ["flexbox", "transforms3d"]
-      }],
+      "plugin/no-unsupported-browser-features": [
+        true,
+        {
+          "ignore": [
+            "flexbox",
+            "transforms3d"
+          ]
+        }
+      ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
