@@ -384,6 +384,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/glider/index.js~glider#animation",
+    "class/src/glider/index.js~Glider.html#instance-member-animation",
+    "src/glider/index.js~Glider#animation",
+    "member"
+  ],
+  [
     "src/glider/index.js~glider#constructor",
     "class/src/glider/index.js~Glider.html#instance-constructor-constructor",
     "src/glider/index.js~Glider#constructor",
