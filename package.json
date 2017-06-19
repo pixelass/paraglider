@@ -107,6 +107,7 @@
     "xo": "^0.18.2"
   },
   "browserslist": [
+    "ie 11",
     "last 2 chrome versions",
     "last 2 safari versions",
     "last 2 firefox versions",
@@ -163,9 +164,9 @@
           ]
         }
       ],
-      "plugin/no-unsupported-browser-features": [
-        true
-      ],
+      "plugin/no-unsupported-browser-features": [true, {
+        "ignore": ["flexbox", "transforms3d"]
+      }],
       "selector-pseudo-class-no-unknown": [
         true,
         {
