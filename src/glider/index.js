@@ -159,9 +159,23 @@ class Glider {
     const {currentSlide, previousSlide, nextSlide} = this.state
     const {current, next, previous} = this.options.classNames
     this.slides.forEach((slide, index) => {
-      slide.classList.toggle(current, index === currentSlide)
-      slide.classList.toggle(next, index === nextSlide)
-      slide.classList.toggle(previous, index === previousSlide)
+      // IE11 can't use a second argument in element.classList.toggle
+      // @see https://connect.microsoft.com/IE/Feedback/details/878564/
+      if (index === currentSlide) {
+        slide.classList.add(current)
+      } else {
+        slide.classList.remove(current)
+      }
+      if (index === nextSlide) {
+        slide.classList.add(next)
+      } else {
+        slide.classList.remove(next)
+      }
+      if (index === previousSlide) {
+        slide.classList.add(previous)
+      } else {
+        slide.classList.remove(previous)
+      }
     })
   }
 
@@ -264,7 +278,8 @@ class Glider {
    * @param {number} duration Time to pass the until animation is done.
    */
   spring(progress, end, duration) {
-    animate(duration, progress, end,
+    global.cancelAnimationFrame(this.animation)
+    this.animation = animate(duration, progress, end,
       p => {
         this.setState({
           x: p * this.el.offsetWidth
@@ -446,6 +461,7 @@ class Glider {
     })
     this.addSides()
     this.addClassNames()
+    global.cancelAnimationFrame(this.animation)
 
     if (typeof onEnd === 'function') {
       const {

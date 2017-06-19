@@ -43,7 +43,11 @@ const wrapper = (glider, opts) => {
     },
     onEnd({next, previous, current, rest}, slides) {
       pagers.forEach((pager, i) => {
-        pager.classList.toggle(opts.classNames.active, i === current)
+        if (i === current) {
+          pager.classList.add(opts.classNames.active)
+        } else {
+          pager.classList.remove(opts.classNames.active)
+        }
       })
       if (typeof opts.onEnd === 'function') {
         opts.onEnd({next, previous, current, rest}, slides)
@@ -58,7 +62,11 @@ const wrapper = (glider, opts) => {
       return instance.goTo(i)
     }
     pager.addEventListener('click', goto)
-    pager.classList.toggle(options.classNames.active, i === options.initialSlide)
+    if (i === options.initialSlide) {
+      pager.classList.add(opts.classNames.active)
+    } else {
+      pager.classList.remove(opts.classNames.active)
+    }
   })
   if (nextButton) {
     nextButton.addEventListener('click', instance.nextSlide)

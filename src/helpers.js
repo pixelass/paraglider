@@ -39,7 +39,8 @@ const animate = (speed, from, to, callback) => {
       callback(to)
     }
   }
-  return loop()
+  loop()
+  return loop
 }
 /**
  * @typedef animationCallback

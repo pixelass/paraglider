@@ -41,8 +41,8 @@ const belt = (glider, opts) => wrapper(glider, {
       slides[slide].style.transform = ''
     })
     slides[current].style.transform = ''
-    slides[previous].style.transform = 'translate(-100%,0,0)'
-    slides[next].style.transform = 'translate(100%,0,0)'
+    slides[previous].style.transform = 'translate3d(-100%,0,0)'
+    slides[next].style.transform = 'translate3d(100%,0,0)'
     if (typeof opts.onEnd === 'function') {
       opts.onEnd({next, previous, current, rest}, slides)
     }
