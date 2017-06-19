@@ -1,0 +1,37 @@
+extends _layout.pug
+
+include _mixins.pug
+
+block content
+
+  article
+    h2 Belt
+    div(class=classNames(styles.glider, styles.belt))
+      +pagers()
+      +dots(5)
+      +slides(5, 'nature_')
+
+
+  article
+    h2 Cover left
+    div(class=classNames(styles.glider, styles.coverLeft))
+      +pagers()
+      +dots(5)
+      +slides(5, 'city_')
+
+
+  article
+    h2 Cover right
+    div(class=classNames(styles.glider, styles.coverRight))
+      +pagers()
+      +dots(5)
+      +slides(5, 'sea_')
+
+
+  article
+    h2 Cover left-right
+    div(class=classNames(styles.glider, styles.coverLeftRight))
+      +pagers()
+      +dots(5)
+      +slides(5, 'underwater_')
+
