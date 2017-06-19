@@ -1156,9 +1156,23 @@ var Glider = function () {
         previous = _options$classNames.previous;
 
     this.slides.forEach(function (slide, index) {
-      slide.classList.toggle(current, index === currentSlide);
-      slide.classList.toggle(next, index === nextSlide);
-      slide.classList.toggle(previous, index === previousSlide);
+      // IE11 can't use a second argument in element.classList.toggle
+      // @see https://connect.microsoft.com/IE/Feedback/details/878564/
+      if (index === currentSlide) {
+        slide.classList.add(current);
+      } else {
+        slide.classList.remove(current);
+      }
+      if (index === nextSlide) {
+        slide.classList.add(next);
+      } else {
+        slide.classList.remove(next);
+      }
+      if (index === previousSlide) {
+        slide.classList.add(previous);
+      } else {
+        slide.classList.remove(previous);
+      }
     });
   };
 
@@ -1293,7 +1307,8 @@ var Glider = function () {
   Glider.prototype.spring = function spring(progress, end, duration) {
     var _this = this;
 
-    (0, _helpers.animate)(duration, progress, end, function (p) {
+    global.cancelAnimationFrame(this.animation);
+    this.animation = (0, _helpers.animate)(duration, progress, end, function (p) {
       _this.setState({
         x: p * _this.el.offsetWidth
       });
@@ -1507,6 +1522,7 @@ var Glider = function () {
     });
     this.addSides();
     this.addClassNames();
+    global.cancelAnimationFrame(this.animation);
 
     if (typeof onEnd === 'function') {
       var _getReturnValues2 = this.getReturnValues(false),
@@ -1665,7 +1681,8 @@ var animate = function animate(speed, from, to, callback) {
       callback(to);
     }
   };
-  return loop();
+  loop();
+  return loop;
 };
 /**
  * @typedef animationCallback
@@ -1812,8 +1829,8 @@ var belt = function belt(glider, opts) {
         slides[slide].style.transform = '';
       });
       slides[current].style.transform = '';
-      slides[previous].style.transform = 'translate(-100%,0,0)';
-      slides[next].style.transform = 'translate(100%,0,0)';
+      slides[previous].style.transform = 'translate3d(-100%,0,0)';
+      slides[next].style.transform = 'translate3d(100%,0,0)';
       if (typeof opts.onEnd === 'function') {
         opts.onEnd({ next: next, previous: previous, current: current, rest: rest }, slides);
       }
@@ -2135,7 +2152,11 @@ var wrapper = function wrapper(glider, opts) {
           rest = _ref2.rest;
 
       pagers.forEach(function (pager, i) {
-        pager.classList.toggle(opts.classNames.active, i === current);
+        if (i === current) {
+          pager.classList.add(opts.classNames.active);
+        } else {
+          pager.classList.remove(opts.classNames.active);
+        }
       });
       if (typeof opts.onEnd === 'function') {
         opts.onEnd({ next: next, previous: previous, current: current, rest: rest }, slides);
@@ -2150,7 +2171,11 @@ var wrapper = function wrapper(glider, opts) {
       return instance.goTo(i);
     };
     pager.addEventListener('click', goto);
-    pager.classList.toggle(options.classNames.active, i === options.initialSlide);
+    if (i === options.initialSlide) {
+      pager.classList.add(opts.classNames.active);
+    } else {
+      pager.classList.remove(opts.classNames.active);
+    }
   });
   if (nextButton) {
     nextButton.addEventListener('click', instance.nextSlide);
