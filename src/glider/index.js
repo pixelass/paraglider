@@ -278,7 +278,11 @@ class Glider {
    * @param {number} duration Time to pass the until animation is done.
    */
   spring(progress, end, duration) {
+    // Cancel previous animations
     global.cancelAnimationFrame(this.animation)
+    /**
+     * Animation cache to allow canceling
+     */
     this.animation = animate(duration, progress, end,
       p => {
         this.setState({
