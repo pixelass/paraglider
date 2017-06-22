@@ -489,14 +489,8 @@ class Glider {
  * @typedef onSlide
  * @memberof Glider
  * @type {function}
- * @param {object} offset Offset of the element to either side.
- * @param {number} offset.left A value between [0, 1]
- * @param {number} offset.right A value between [0, 1]
- * @param {object} data Data about the slider activity
- * @param {number} data.previous Index of previous slide
- * @param {number} data.current Index of current slide
- * @param {number} data.next Index of next slide
- * @param {Array.<number>} data.rest Array of all remaining slide indexes
+ * @param {callbackProgress} progress Offset of the element to either side.
+ * @param {callbackData} data Data about the slider activity
  * @param {Array.<Element>} slides Array of all slides
  * @example
  * new Glider({
@@ -516,11 +510,7 @@ class Glider {
  * @typedef onEnd
  * @memberof Glider
  * @type {function}
- * @param {object} data Data about the slider activity
- * @param {number} data.previous Index of previous slide
- * @param {number} data.current Index of current slide
- * @param {number} data.next Index of next slide
- * @param {Array.<number>} data.rest Array of all remaining slide indexes
+ * @param {callbackData} data Data about the slider activity
  * @param {Array.<Element>} slides Array of all slides
  * @example
  * new Glider({
@@ -533,6 +523,20 @@ class Glider {
  *    slides[next].style.transform = 'translate(100%,0,0)'
  *  }
  *})
+ */
+
+/**
+ * @typedef callbackProgress
+ * @property {number} left A value between [0, 1]
+ * @property {number} right A value between [0, 1]
+ */
+
+/**
+ * @typedef callbackData
+ * @property {number} data.previous Index of previous slide
+ * @property {number} data.current Index of current slide
+ * @property {number} data.next Index of next slide
+ * @property {Array.<number>} data.rest Array of all remaining slide indexes
  */
 
 /**
