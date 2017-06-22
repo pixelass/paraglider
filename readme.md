@@ -150,19 +150,6 @@ Example:
 * https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.js
 * https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.min.js
 
-## Developing
-
-`yarn <command>`
-
-* `start`: starts the dev server and builds the required files
-* `test`: runs test and lints files
-* `dev`: starts the dev server and watches the required files
-* `babel`: generates lib from source
-* `build`: builds all files from source
-* `watch`: builds and watches all files from source
-* `lint`: lints JavaScript files
-* `release`: release new version using "standard-version"
-
 © 2017 by [Gregor Adams](greg@pixelass.com)
 
 Images in Demos via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)  
