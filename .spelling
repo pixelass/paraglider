@@ -16,9 +16,13 @@ dist
 cdn
 plugin
 chrisaitken
+flickr
+onlinewebfonts
+commitizen
+changelog
+repo
  - readme.md
 init
-2
 es2015
 JS
 xo
@@ -26,7 +30,6 @@ Ava
 tap-nyan
 hopsdoc
 css-modulesify
-2017
 Gregor
 readme.md
 package.json
