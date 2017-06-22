@@ -33,6 +33,8 @@
   <ul>
     
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackProgress">callbackProgress</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-pluginOptions">pluginOptions</a></span></span></li>
@@ -326,7 +328,11 @@ class Glider {
    * @param {number} duration Time to pass the until animation is done.
    */
   spring(progress, end, duration) {
+    // Cancel previous animations
     global.cancelAnimationFrame(this.animation)
+    /**
+     * Animation cache to allow canceling
+     */
     this.animation = animate(duration, progress, end,
       p =&gt; {
         this.setState({
@@ -533,14 +539,8 @@ class Glider {
  * @typedef onSlide
  * @memberof Glider
  * @type {function}
- * @param {object} offset Offset of the element to either side.
- * @param {number} offset.left A value between [0, 1]
- * @param {number} offset.right A value between [0, 1]
- * @param {object} data Data about the slider activity
- * @param {number} data.previous Index of previous slide
- * @param {number} data.current Index of current slide
- * @param {number} data.next Index of next slide
- * @param {Array.&lt;number&gt;} data.rest Array of all remaining slide indexes
+ * @param {callbackProgress} progress Offset of the element to either side.
+ * @param {callbackData} data Data about the slider activity
  * @param {Array.&lt;Element&gt;} slides Array of all slides
  * @example
  * new Glider({
@@ -560,11 +560,7 @@ class Glider {
  * @typedef onEnd
  * @memberof Glider
  * @type {function}
- * @param {object} data Data about the slider activity
- * @param {number} data.previous Index of previous slide
- * @param {number} data.current Index of current slide
- * @param {number} data.next Index of next slide
- * @param {Array.&lt;number&gt;} data.rest Array of all remaining slide indexes
+ * @param {callbackData} data Data about the slider activity
  * @param {Array.&lt;Element&gt;} slides Array of all slides
  * @example
  * new Glider({
@@ -577,6 +573,20 @@ class Glider {
  *    slides[next].style.transform = &apos;translate(100%,0,0)&apos;
  *  }
  *})
+ */
+
+/**
+ * @typedef callbackProgress
+ * @property {number} left A value between [0, 1]
+ * @property {number} right A value between [0, 1]
+ */
+
+/**
+ * @typedef callbackData
+ * @property {number} data.previous Index of previous slide
+ * @property {number} data.current Index of current slide
+ * @property {number} data.next Index of next slide
+ * @property {Array.&lt;number&gt;} data.rest Array of all remaining slide indexes
  */
 
 /**

@@ -426,6 +426,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/glider/index.js~callbackdata",
+    "typedef/index.html#static-typedef-callbackData",
+    "src/glider/index.js~callbackData",
+    "typedef"
+  ],
+  [
+    "src/glider/index.js~callbackprogress",
+    "typedef/index.html#static-typedef-callbackProgress",
+    "src/glider/index.js~callbackProgress",
+    "typedef"
+  ],
+  [
     "src/glider/index.js~onend",
     "typedef/index.html#static-typedef-onEnd",
     "src/glider/index.js~onEnd",
