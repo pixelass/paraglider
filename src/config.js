@@ -41,8 +41,8 @@ const classNames = {
  * @property {string} classNames.current Applied to the currently visible slide
  * @property {string} classNames.previous Applied to the previous slide in the queue
  * @property {string} classNames.next Applied to the next slide in the queue
- * @property {(null|onInit)} onSlide Callback when the slider has been created.
- * @property {(null|onDestroy)} onSlide Callback when the slider has been destroyed.
+ * @property {(null|onInit)} onInit Callback when the slider has been created.
+ * @property {(null|onDestroy)} onDestroy Callback when the slider has been destroyed.
  * @property {(null|onSlide)} onSlide Callback while the slider is moving.
  * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
  * @property {number} speed Animation duration when using paging.
@@ -84,8 +84,8 @@ const PLUGIN_DEFAULTS = {
  * @property {string} classNames.active Active class for pager dots.
  * @property {string} classNames.nextButton Selector for the navigation to the next slide.
  * @property {string} classNames.prevButton Selector for the navigation to the previous slide.
- * @property {(null|onInit)} onSlide Callback when the slider has been created.
- * @property {(null|onDestroy)} onSlide Callback when the slider has been destroyed.
+ * @property {(null|onInit)} onInit Callback when the slider has been created.
+ * @property {(null|onDestroy)} onDestroy Callback when the slider has been destroyed.
  * @property {(null|onSlide)} onSlide Callback while the slider is moving.
  * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
  * @property {number} speed Animation duration when using paging.

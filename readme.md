@@ -34,8 +34,8 @@ With the help of callbacks however, you can implement any imaginable effect.
     + [Wrapper](#wrapper)
     + [Belt](#belt)
     + [Cover](#cover)
+  * [Options](#options)
   * [Dist / CDN](#dist--cdn)
-- [Developing](#developing)
 
 <!-- tocstop -->
 
@@ -139,6 +139,30 @@ coverRight(document.querySelector('.coverRight'))
 coverLeftRight(document.querySelector('.coverLeftRight'))
 ```
 
+### Options
+
+Defaults for the main plugin.
+
+* `classNames` `{object}`: Mapping of class names to be used by the plugin.
+* `classNames.pluginLoaded` `{string}`: Applied when the plugin has been loaded
+* `classNames.init` `{string}`: Applied when the plugin has been initialized. Removed on first interaction.
+* `classNames.slides` `{string}`: This element will be used to track touches. This is the wrapper around the slides.
+* `classNames.slide` `{string}`: Selector for each single slide.
+* `classNames.current` `{string}`: Applied to the currently visible slide
+* `classNames.previous` `{string}`: Applied to the previous slide in the queue
+* `classNames.next` `{string}`: Applied to the next slide in the queue
+* `onInit` `{(null|onInit)}`: Callback when the slider has been created.
+* `onDestroy` `{(null|onDestroy)}`: Callback when the slider has been destroyed.
+* `onSlide` `{(null|onSlide)}`: Callback while the slider is moving.
+* `onEnd` `{(null|onEnd)}`: Callback while the slider stopped moving.
+* `speed` `{number}`: Animation duration when using paging.
+* `spring` `{number}`: Animation duration when snapping.
+* `snapBackAt` `{number}`: Amount of distance needed to snap. [0, 1]
+* `threshold` `{number}`: Threshold of pixels until the sliding mechanisms is triggered.
+* `initialSlide` `{number}`: Initially visible slide
+* `visibleSlides` `{number}`: Amount of visible slides
+* `slideBy` `{number}`: Amount of slides to slide on interaction
+
 ### Dist / CDN
 
 You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/paraglider/dist.html))
@@ -147,8 +171,8 @@ You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/p
 
 Example:
 
-* https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.js
-* https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.min.js
+* https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.js
+* https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.min.js
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
 
