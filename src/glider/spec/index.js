@@ -9,11 +9,12 @@ initDom()
 const SLIDE_TIME = 64
 const TIMEOUT = SLIDE_TIME * 4
 const {classNames} = PLUGIN_DEFAULTS
-const markup = `<div class="glider"><div class="${classNames.slides}">${
-  Array.from(Array(3)).map(() =>
+const createMarkup = n => `<div class="glider"><div class="${classNames.slides}">${
+  Array.from(Array(n)).map(() =>
     `<div class="${classNames.slide}"></div>`
   ).join('')
 }</div></div>`
+const markup = createMarkup(3)
 
 test('Glider returns an init method', t => {
   const instance = new Glider()
@@ -188,8 +189,93 @@ test('Glider has an onSlide callback', async t => {
   t.true(await p, true)
 })
 
+test('Glider has an onInit callback', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = markup
+    const glider = document.querySelector('.glider')
+    const instance = new Glider({
+      speed: SLIDE_TIME,
+      onInit() {
+        resolve(true)
+      }
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+  })
+  t.true(await p, true)
+})
+
+test('Glider has an onDestroy callback', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = markup
+    const glider = document.querySelector('.glider')
+    const instance = new Glider({
+      speed: SLIDE_TIME,
+      onDestroy() {
+        resolve(true)
+      }
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+    instance.destroy()
+  })
+  t.true(await p, true)
+})
+
+test('Glider can have multiple visible slides', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = markup
+    const glider = document.querySelector('.glider')
+    const instance = new Glider({
+      speed: SLIDE_TIME,
+      visibleSlides: 2,
+      onSlide(progress, {current}) {
+        if (current.length === 2) {
+          resolve(true)
+        } else {
+          reject(new Error())
+        }
+      }
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+    instance.nextSlide()
+  })
+  t.true(await p, true)
+})
+
+test('Glider can slide by less than the amount of visible slides', async t => {
+  const p = new Promise((resolve, reject) => {
+    document.body.innerHTML = createMarkup(6)
+    const glider = document.querySelector('.glider')
+    const slides = glider.querySelectorAll(`.${classNames.slide}`)
+    const a = slides[0]
+    const b = slides[2]
+    const instance = new Glider({
+      speed: SLIDE_TIME,
+      visibleSlides: 4,
+      slideBy: 2,
+      onEnd() {
+        resolve(b.classList.contains(classNames.current))
+      }
+    })
+    setTimeout(() => {
+      reject(new Error())
+    }, TIMEOUT)
+    instance.init(glider)
+    t.true(a.classList.contains(classNames.current))
+    instance.nextSlide()
+  })
+  t.true(await p, true)
+})
+
 test('Glider has an working nextSlide callback', async t => {
-  let b
   const p = new Promise((resolve, reject) => {
     document.body.innerHTML = markup
     const glider = document.querySelector('.glider')
@@ -197,8 +283,7 @@ test('Glider has an working nextSlide callback', async t => {
     const instance = new Glider({
       speed: SLIDE_TIME,
       onEnd() {
-        b = glider.querySelector(`.${classNames.slide}`)
-        resolve(b.classList.contains(classNames.previous))
+        resolve(a.classList.contains(classNames.previous))
       }
     })
     setTimeout(() => {
@@ -212,7 +297,6 @@ test('Glider has an working nextSlide callback', async t => {
 })
 
 test('Glider has an working prevSlide callback', async t => {
-  let b
   const p = new Promise((resolve, reject) => {
     document.body.innerHTML = markup
     const glider = document.querySelector('.glider')
@@ -220,8 +304,7 @@ test('Glider has an working prevSlide callback', async t => {
     const instance = new Glider({
       speed: SLIDE_TIME,
       onEnd() {
-        b = glider.querySelector(`.${classNames.slide}`)
-        resolve(b.classList.contains(classNames.next))
+        resolve(a.classList.contains(classNames.next))
       }
     })
     setTimeout(() => {

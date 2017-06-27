@@ -41,6 +41,8 @@ const classNames = {
  * @property {string} classNames.current Applied to the currently visible slide
  * @property {string} classNames.previous Applied to the previous slide in the queue
  * @property {string} classNames.next Applied to the next slide in the queue
+ * @property {(null|onInit)} onSlide Callback when the slider has been created.
+ * @property {(null|onDestroy)} onSlide Callback when the slider has been destroyed.
  * @property {(null|onSlide)} onSlide Callback while the slider is moving.
  * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
  * @property {number} speed Animation duration when using paging.
@@ -48,16 +50,22 @@ const classNames = {
  * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]
  * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
  * @property {number} initialSlide Initially visible slide
+ * @property {number} visibleSlides Amount of visible slides
+ * @property {number} slideBy Amount of slides to slide on interaction
  */
 const PLUGIN_DEFAULTS = {
   classNames,
+  onInit: null,
+  onDestroy: null,
   onSlide: null,
   onEnd: null,
   speed: 250,
   spring: 100,
   snapBackAt: 0.25,
   threshold: 10,
-  initialSlide: 0
+  initialSlide: 0,
+  visibleSlides: 1,
+  slideBy: 1
 }
 
 /**
@@ -76,6 +84,8 @@ const PLUGIN_DEFAULTS = {
  * @property {string} classNames.active Active class for pager dots.
  * @property {string} classNames.nextButton Selector for the navigation to the next slide.
  * @property {string} classNames.prevButton Selector for the navigation to the previous slide.
+ * @property {(null|onInit)} onSlide Callback when the slider has been created.
+ * @property {(null|onDestroy)} onSlide Callback when the slider has been destroyed.
  * @property {(null|onSlide)} onSlide Callback while the slider is moving.
  * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
  * @property {number} speed Animation duration when using paging.
@@ -83,6 +93,8 @@ const PLUGIN_DEFAULTS = {
  * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]
  * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
  * @property {number} initialSlide Initially visible slide
+ * @property {number} visibleSlides Amount of visible slides
+ * @property {number} slideBy Amount of slides to slide on interaction
  */
 const PRESET_DEFAULTS = {
   ...PLUGIN_DEFAULTS,

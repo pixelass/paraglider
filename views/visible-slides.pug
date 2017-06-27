@@ -1,0 +1,23 @@
+extends _layout.pug
+
+include _mixins.pug
+
+block content
+
+  article
+    h2 2 Visible slides (slideBy 1)
+    div(class=classNames(styles.glider, styles.multi1))
+      +pagers()
+      +slides(5, 'nature_')
+
+  article
+    h2 4 Visible slides (slideBy 4)
+    div(class=classNames(styles.glider, styles.multi2))
+      +pagers()
+      +slides(10, 'city_')
+
+  article
+    h2 3 Visible slides (slideBy 2)
+    div(class=classNames(styles.glider, styles.multi3))
+      +pagers()
+      +slides(7, 'sea_')

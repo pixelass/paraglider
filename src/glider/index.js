@@ -88,7 +88,7 @@ class Glider {
    * selectors
    */
   init(el) {
-    const {classNames} = this.options
+    const {classNames, onInit} = this.options
     /**
      * Outer element
      * @private
@@ -111,17 +111,40 @@ class Glider {
     this.addListeners()
     this.addSides()
     this.addInitClassNames()
+    if (typeof onInit === 'function') {
+      const {
+        next,
+        previous,
+        current,
+        rest
+      } = this.getReturnValues(false)
+      /**
+       * Callback for the end
+       * @public
+       * @type {onInit}
+       */
+      onInit({next, previous, current, rest}, this.slides)
+    }
   }
 
   /**
    * Destroys the plugin by removing eventlisteners and class names
    */
   destroy() {
+    const {onDestroy} = this.options
     this.removeListeners()
     this.removeClassNames()
     this.el = null
     this.slidesWrapper = null
     this.slides = null
+    if (typeof onDestroy === 'function') {
+      /**
+       * Callback for the end
+       * @public
+       * @type {onDestroy}
+       */
+      onDestroy()
+    }
   }
 
   /**
@@ -157,24 +180,26 @@ class Glider {
    */
   addClassNames() {
     const {currentSlide, previousSlide, nextSlide} = this.state
-    const {current, next, previous} = this.options.classNames
+    const {visibleSlides, classNames} = this.options
+    const {current, next, previous} = classNames
+    const {length} = this.slides
     this.slides.forEach((slide, index) => {
       // IE11 can't use a second argument in element.classList.toggle
       // @see https://connect.microsoft.com/IE/Feedback/details/878564/
+      slide.classList.remove(current, next, previous)
       if (index === currentSlide) {
         slide.classList.add(current)
-      } else {
-        slide.classList.remove(current)
-      }
-      if (index === nextSlide) {
-        slide.classList.add(next)
-      } else {
-        slide.classList.remove(next)
-      }
-      if (index === previousSlide) {
+      } else if (index === previousSlide) {
         slide.classList.add(previous)
-      } else {
-        slide.classList.remove(previous)
+      } else if (index === nextSlide) {
+        slide.classList.add(next)
+      }
+      for (let i = 1; i < visibleSlides; i++) {
+        if (index === modLoop(currentSlide, i, length)) {
+          slide.classList.add(`${current}__${i}`)
+        } else {
+          slide.classList.remove(`${current}__${i}`)
+        }
       }
     })
   }
@@ -217,12 +242,13 @@ class Glider {
    * @private
    */
   addSides() {
+    const {slideBy} = this.options
     const {currentSlide, requestedNext, requestedPrevious} = this.state
     const {length} = this.slides
     // Respect requested slides.
     // {goTo} could set these values.
-    const nextSlide = eitherOr(requestedNext, modLoop(currentSlide, 1, length))
-    const previousSlide = eitherOr(requestedPrevious, modLoop(currentSlide, -1, length))
+    const nextSlide = eitherOr(requestedNext, modLoop(currentSlide, (slideBy), length))
+    const previousSlide = eitherOr(requestedPrevious, modLoop(currentSlide, (-1 * (slideBy)), length))
 
     this.setState({nextSlide, previousSlide})
   }
@@ -318,25 +344,45 @@ class Glider {
    * @returns {object}
    */
   getReturnValues(direction = true) {
-    const progress = this.state.x / this.el.offsetWidth
+    const {length} = this.slides
+    const {visibleSlides, slideBy} = this.options
     const {currentSlide, nextSlide, previousSlide} = this.state
+    const progress = this.state.x / this.el.offsetWidth
     const right = progress * -1
-    const current = currentSlide
+    const current = []
+    for (let i = 0; i < visibleSlides; i++) {
+      current.push(modLoop(currentSlide, i, length))
+    }
     // We only need the lower value
+    const next = []
     /* istanbul ignore next */
-    const next = progress < right && direction ? null : nextSlide
+    if (progress > right && direction) {
+      for (let i = 0; i < visibleSlides; i++) {
+        next.push(modLoop(nextSlide, i, length))
+      }
+    } else {
+      next.push(null)
+    }
+    const previous = []
     /* istanbul ignore next */
-    const previous = progress > right && direction ? null : previousSlide
+    if (progress < right && direction) {
+      for (let i = 0; i < slideBy; i++) {
+        previous.push(modLoop(previousSlide, i, length))
+      }
+    } else {
+      previous.push(null)
+    }
 
     const rest = this.slides.map((el, index) => index)
       .filter(originalIndex =>
-        [previous, current, next].indexOf(originalIndex) === -1)
+        [...previous, ...current, ...next].filter(x => x !== 0).indexOf(originalIndex) === -1)
 
+    /* istanbul ignore next */
     return {
-      next,
-      previous,
-      current,
       rest,
+      previous: previous.length > 1 ? previous : previous[0],
+      next: next.length > 1 ? next : next[0],
+      current: current.length > 1 ? current : current[0],
       progress: Math.abs(progress)
     }
   }
@@ -419,7 +465,7 @@ class Glider {
    * @private
    */
   handleProgress() {
-    const {onSlide} = this.options
+    const {onSlide, slideBy} = this.options
 
     if (typeof onSlide === 'function') {
       const {
@@ -434,7 +480,7 @@ class Glider {
        * @type {onSlide}
        */
       onSlide(
-        progress,
+        progress * slideBy,
         {next, previous, current, rest},
         this.slides
       )
@@ -482,10 +528,10 @@ class Glider {
       onEnd({next, previous, current, rest}, this.slides)
     }
   }
-
 }
 
 /**
+ * Callback while the Glider is moving
  * @typedef onSlide
  * @memberof Glider
  * @type {function}
@@ -507,6 +553,7 @@ class Glider {
  */
 
 /**
+ * Callback when the Glider stopped moving
  * @typedef onEnd
  * @memberof Glider
  * @type {function}
@@ -521,6 +568,36 @@ class Glider {
  *    slides[current].style.transform = ''
  *    slides[previous].style.transform = 'translate(-100%,0,0)'
  *    slides[next].style.transform = 'translate(100%,0,0)'
+ *  }
+ *})
+ */
+
+/**
+ * Callback when the Glider has been created
+ * @typedef onInit
+ * @memberof Glider
+ * @type {function}
+ * @param {callbackData} data Data about the slider activity
+ * @param {Array.<Element>} slides Array of all slides
+ * @example
+ * new Glider({
+ *  onInit({next, previous, current, rest}, slides) {
+ *    slides[current].style.background = 'red'
+ *  }
+ *})
+ */
+
+/**
+ * Callback when the Glider has been destoyed
+ * @typedef onDestroy
+ * @memberof Glider
+ * @type {function}
+ * @param {callbackData} data Data about the slider activity
+ * @param {Array.<Element>} slides Array of all slides
+ * @example
+ * new Glider({
+ *  onDestroy() {
+ *    // Slider has been destroyed
  *  }
  *})
  */
