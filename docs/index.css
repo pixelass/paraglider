@@ -21,7 +21,7 @@ main {
 :root { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 }
 
-.w {
+.R {
   position: relative;
   width: 100%;
   max-width: 100vw;
@@ -31,7 +31,7 @@ main {
   color: var(--theme-color);
 }
 
-.x {
+.S {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -41,7 +41,7 @@ main {
   z-index: 0;
 }
 
-.y {
+.T {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -66,25 +66,25 @@ main {
   visibility: hidden
 }
 
-.y.z {
+.T.U {
  -webkit-transform: translate3d(0%, 0, 0);
          transform: translate3d(0%, 0, 0);
  z-index: 1;
 }
 
-.y.A {
+.T.V {
  z-index: 2;
  -webkit-transform: translate3d(-100%, 0, 0);
          transform: translate3d(-100%, 0, 0);
 }
 
-.y.B {
+.T.W {
  z-index: 3;
  -webkit-transform: translate3d(100%, 0, 0);
          transform: translate3d(100%, 0, 0);
 }
 
-.C {
+.X {
   position: absolute;
   top: 0;
   left: 0;
@@ -94,8 +94,8 @@ main {
   z-index: 2
 }
 
-.C .D,
-  .C .B {
+.X .Y,
+  .X .W {
  position: absolute;
  top: 50%;
  width: 1em;
@@ -123,19 +123,19 @@ main {
          user-select: none;
 }
 
-.C .D:hover, .C .B:hover {
+.X .Y:hover, .X .W:hover {
  background: rgba(255, 255, 255, .9);
 }
 
-.C .D {
+.X .Y {
  left: 0;
 }
 
-.C .B {
+.X .W {
  right: 0;
 }
 
-.E {
+.Z {
   position: absolute;
   left: 0;
   right: 0;
@@ -150,7 +150,7 @@ main {
   visibility: hidden;
 }
 
-.F {
+.aa {
   position: relative;
   height: 3rem;
   width: 3rem;
@@ -175,7 +175,7 @@ main {
           justify-content: center
 }
 
-.F::before {
+.aa::before {
  content: '';
  display: block;
  height: 1em;
@@ -184,16 +184,16 @@ main {
  background: rgba(255, 255, 255, .5);
 }
 
-.F:hover {
+.aa:hover {
  background: rgba(0, 0, 0, .3);
 }
 
-.F.G::before {
+.aa.ab::before {
  content: '';
  background: rgba(255, 255, 255, .9);
 }
 
-.H {
+.ac {
   position: absolute;
   top: 0;
   right: 0;
@@ -206,7 +206,7 @@ main {
   visibility: hidden;
 }
 
-.I {
+.ad {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -218,48 +218,48 @@ main {
           backface-visibility: hidden
 }
 
-.I:nth-child(2) {
+.ad:nth-child(2) {
  background-position: -10vw var(--position-y);
 }
 
-.I:nth-child(3) {
+.ad:nth-child(3) {
  background-position: -20vw var(--position-y);
 }
 
-.I:nth-child(4) {
+.ad:nth-child(4) {
  background-position: -30vw var(--position-y);
 }
 
-.I:nth-child(5) {
+.ad:nth-child(5) {
  background-position: -40vw var(--position-y);
 }
 
-.I:nth-child(6) {
+.ad:nth-child(6) {
  background-position: -50vw var(--position-y);
 }
 
-.I:nth-child(7) {
+.ad:nth-child(7) {
  background-position: -60vw var(--position-y);
 }
 
-.I:nth-child(8) {
+.ad:nth-child(8) {
  background-position: -70vw var(--position-y);
 }
 
-.I:nth-child(9) {
+.ad:nth-child(9) {
  background-position: -80vw var(--position-y);
 }
 
-.I:nth-child(10) {
+.ad:nth-child(10) {
  background-position: -90vw var(--position-y);
 }
 
-.J {
+.ae {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
-.K {
+.af {
   --position-x: 0;
   --position-y: 0;
   --factor: 6;
@@ -278,112 +278,112 @@ main {
           backface-visibility: hidden
 }
 
-.K:nth-child(2) {
+.af:nth-child(2) {
  --position-x: calc(var(--step) * 1);
 }
 
-.K:nth-child(3) {
+.af:nth-child(3) {
  --position-x: calc(var(--step) * 2);
 }
 
-.K:nth-child(4) {
+.af:nth-child(4) {
  --position-x: calc(var(--step) * 3);
 }
 
-.K:nth-child(5) {
+.af:nth-child(5) {
  --position-x: calc(var(--step) * 4);
 }
 
-.K:nth-child(6) {
+.af:nth-child(6) {
  --position-x: calc(var(--step) * 5);
 }
 
-.K:nth-child(7) {
+.af:nth-child(7) {
  --position-y: calc(var(--step) * 1);
 }
 
-.K:nth-child(8) {
+.af:nth-child(8) {
  --position-x: calc(var(--step) * 1);
  --position-y: calc(var(--step) * 1);
 }
 
-.K:nth-child(9) {
+.af:nth-child(9) {
  --position-x: calc(var(--step) * 2);
  --position-y: calc(var(--step) * 1);
 }
 
-.K:nth-child(10) {
+.af:nth-child(10) {
  --position-x: calc(var(--step) * 3);
  --position-y: calc(var(--step) * 1);
 }
 
-.K:nth-child(11) {
+.af:nth-child(11) {
  --position-x: calc(var(--step) * 4);
  --position-y: calc(var(--step) * 1);
 }
 
-.K:nth-child(12) {
+.af:nth-child(12) {
  --position-x: calc(var(--step) * 5);
  --position-y: calc(var(--step) * 1);
 }
 
-.K:nth-child(13) {
+.af:nth-child(13) {
  --position-y: calc(var(--step) * 2);
 }
 
-.K:nth-child(14) {
+.af:nth-child(14) {
  --position-x: calc(var(--step) * 1);
  --position-y: calc(var(--step) * 2);
 }
 
-.K:nth-child(15) {
+.af:nth-child(15) {
  --position-x: calc(var(--step) * 2);
  --position-y: calc(var(--step) * 2);
 }
 
-.K:nth-child(16) {
+.af:nth-child(16) {
  --position-x: calc(var(--step) * 3);
  --position-y: calc(var(--step) * 2);
 }
 
-.K:nth-child(17) {
+.af:nth-child(17) {
  --position-x: calc(var(--step) * 4);
  --position-y: calc(var(--step) * 2);
 }
 
-.K:nth-child(18) {
+.af:nth-child(18) {
  --position-x: calc(var(--step) * 5);
  --position-y: calc(var(--step) * 2);
 }
 
-.L {
+.ag {
   /* plugin loaded */
 }
 
-.M {
+.ah {
   /* plugin initialized */
 }
 
-.N {
+.ai {
   /* slides */
 }
 
-.O {
+.aj {
   /* slide */
 }
 
-.P {
+.ak {
   /* dot */
 }
 
-.Q {
+.al {
   /* next */
 }
 
-.R {
+.am {
   /* prev */
 }
 
-.S {
+.an {
   /* parallax */
 }

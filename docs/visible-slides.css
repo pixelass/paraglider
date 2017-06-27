@@ -21,7 +21,7 @@ main {
 :root { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 }
 
-.ao {
+.w {
   position: relative;
   width: 100%;
   max-width: 100vw;
@@ -31,7 +31,7 @@ main {
   color: var(--theme-color);
 }
 
-.ap {
+.x {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -41,13 +41,13 @@ main {
   z-index: 0;
 }
 
-.aq {
+.y {
   overflow: hidden;
   position: absolute;
   top: 0;
-  right: 0;
   bottom: 0;
   left: 0;
+  width: 33.33333%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -56,8 +56,8 @@ main {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 1rem 2rem 2rem;
-  -webkit-transform: translate3d(100%, 0, 0);
-          transform: translate3d(100%, 0, 0);
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
   background-size: cover;
   background-position: 50% 50%;
   z-index: 0;
@@ -67,25 +67,19 @@ main {
           user-select: none
 }
 
-.aq.ar {
- -webkit-transform: translate3d(0%, 0, 0);
-         transform: translate3d(0%, 0, 0);
+.y.z {
  z-index: 1;
 }
 
-.aq.as {
+.y.A {
  z-index: 2;
- -webkit-transform: translate3d(-100%, 0, 0);
-         transform: translate3d(-100%, 0, 0);
 }
 
-.aq.at {
+.y.B {
  z-index: 3;
- -webkit-transform: translate3d(100%, 0, 0);
-         transform: translate3d(100%, 0, 0);
 }
 
-.au {
+.C {
   position: absolute;
   top: 0;
   left: 0;
@@ -95,8 +89,8 @@ main {
   z-index: 2
 }
 
-.au .av,
-  .au .at {
+.C .D,
+  .C .B {
  position: absolute;
  top: 50%;
  width: 1em;
@@ -124,19 +118,19 @@ main {
          user-select: none;
 }
 
-.au .av:hover, .au .at:hover {
+.C .D:hover, .C .B:hover {
  background: rgba(255, 255, 255, .9);
 }
 
-.au .av {
+.C .D {
  left: 0;
 }
 
-.au .at {
+.C .B {
  right: 0;
 }
 
-.aw {
+.E {
   position: absolute;
   left: 0;
   right: 0;
@@ -151,7 +145,7 @@ main {
   visibility: hidden;
 }
 
-.ax {
+.F {
   position: relative;
   height: 3rem;
   width: 3rem;
@@ -176,7 +170,7 @@ main {
           justify-content: center
 }
 
-.ax::before {
+.F::before {
  content: '';
  display: block;
  height: 1em;
@@ -185,55 +179,51 @@ main {
  background: rgba(255, 255, 255, .5);
 }
 
-.ax:hover {
+.F:hover {
  background: rgba(0, 0, 0, .3);
 }
 
-.ax.ay::before {
+.F.G::before {
  content: '';
  background: rgba(255, 255, 255, .9);
 }
 
-.az {
+.H {
   /* plugin loaded */
 }
 
-.aA {
+.I {
   /* plugin initialized */
 }
 
-.aB {
+.J {
   /* slides */
 }
 
-.aC {
+.K {
   /* slide */
 }
 
-.aD {
+.L {
   /* dot */
 }
 
-.aE {
+.M {
   /* next */
 }
 
-.aF {
+.N {
   /* prev */
 }
 
-.aG {
-  /* belt */
+.O {
+  /* multi */
 }
 
-.aH {
-  /* left */
+.P {
+  /* multi */
 }
 
-.aI {
-  /* right */
-}
-
-.aJ {
-  /* left-right */
+.Q {
+  /* multi */
 }
