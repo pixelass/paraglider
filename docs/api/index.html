@@ -35,7 +35,9 @@
   <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackProgress">callbackProgress</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onDestroy">onDestroy</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onInit">onInit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-pluginOptions">pluginOptions</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">presets</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-belt">belt</a></span></span></li>
@@ -79,10 +81,10 @@
 <li><a href="#cover">Cover</a></li>
 </ul>
 </li>
+<li><a href="#options">Options</a></li>
 <li><a href="#dist--cdn">Dist / CDN</a></li>
 </ul>
 </li>
-<li><a href="#developing">Developing</a></li>
 </ul>
 <p><!-- tocstop -->
 </p>
@@ -167,13 +169,36 @@ coverLeft(document.querySelector(&apos;.coverLeft&apos;))
 coverRight(document.querySelector(&apos;.coverRight&apos;))
 coverLeftRight(document.querySelector(&apos;.coverLeftRight&apos;))</code>
 </code></pre>
+<h3 id="options">Options</h3>
+<p>Defaults for the main plugin.</p>
+<ul>
+<li><code>classNames</code> <code>{object}</code>: Mapping of class names to be used by the plugin.</li>
+<li><code>classNames.pluginLoaded</code> <code>{string}</code>: Applied when the plugin has been loaded</li>
+<li><code>classNames.init</code> <code>{string}</code>: Applied when the plugin has been initialized. Removed on first interaction.</li>
+<li><code>classNames.slides</code> <code>{string}</code>: This element will be used to track touches. This is the wrapper around the slides.</li>
+<li><code>classNames.slide</code> <code>{string}</code>: Selector for each single slide.</li>
+<li><code>classNames.current</code> <code>{string}</code>: Applied to the currently visible slide</li>
+<li><code>classNames.previous</code> <code>{string}</code>: Applied to the previous slide in the queue</li>
+<li><code>classNames.next</code> <code>{string}</code>: Applied to the next slide in the queue</li>
+<li><code>onInit</code> <code>{(null|onInit)}</code>: Callback when the slider has been created.</li>
+<li><code>onDestroy</code> <code>{(null|onDestroy)}</code>: Callback when the slider has been destroyed.</li>
+<li><code>onSlide</code> <code>{(null|onSlide)}</code>: Callback while the slider is moving.</li>
+<li><code>onEnd</code> <code>{(null|onEnd)}</code>: Callback while the slider stopped moving.</li>
+<li><code>speed</code> <code>{number}</code>: Animation duration when using paging.</li>
+<li><code>spring</code> <code>{number}</code>: Animation duration when snapping.</li>
+<li><code>snapBackAt</code> <code>{number}</code>: Amount of distance needed to snap. [0, 1]</li>
+<li><code>threshold</code> <code>{number}</code>: Threshold of pixels until the sliding mechanisms is triggered.</li>
+<li><code>initialSlide</code> <code>{number}</code>: Initially visible slide</li>
+<li><code>visibleSlides</code> <code>{number}</code>: Amount of visible slides</li>
+<li><code>slideBy</code> <code>{number}</code>: Amount of slides to slide on interaction</li>
+</ul>
 <h3 id="dist-cdn">Dist / CDN</h3>
 <p>You can use this plugin as a global plugin. (<a href="https://pixelass.github.io/paraglider/dist.html">Demo</a>)</p>
 <p><code>&lt;script src=&quot;https://cdn.rawgit.com/pixelass/paraglider/&lt;VERSION&gt;/dist/paragliner.js&quot;&gt;&lt;/script&gt;</code></p>
 <p>Example:</p>
 <ul>
-<li><a href="https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.js">https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.js</a></li>
-<li><a href="https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.min.js">https://cdn.rawgit.com/pixelass/paraglider/v2.0.2/dist/paraglider.min.js</a></li>
+<li><a href="https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.js">https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.js</a></li>
+<li><a href="https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.min.js">https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.min.js</a></li>
 </ul>
 <p>&#xA9; 2017 by <a href="greg@pixelass.com">Gregor Adams</a></p>
 <p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p>

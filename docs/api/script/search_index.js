@@ -438,9 +438,21 @@ window.esdocSearchIndex = [
     "typedef"
   ],
   [
+    "src/glider/index.js~ondestroy",
+    "typedef/index.html#static-typedef-onDestroy",
+    "src/glider/index.js~onDestroy",
+    "typedef"
+  ],
+  [
     "src/glider/index.js~onend",
     "typedef/index.html#static-typedef-onEnd",
     "src/glider/index.js~onEnd",
+    "typedef"
+  ],
+  [
+    "src/glider/index.js~oninit",
+    "typedef/index.html#static-typedef-onInit",
+    "src/glider/index.js~onInit",
     "typedef"
   ],
   [
