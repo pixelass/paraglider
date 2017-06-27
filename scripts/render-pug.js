@@ -7,7 +7,6 @@ import {name, description} from '../package.json' // eslint-disable-line import/
 const src = path.join(__dirname, '../views')
 const target = path.join(__dirname, '../docs')
 
-
 const renderPug = () => {
   // Render all views
   globby([path.join(src, '*.pug'), `!${path.join(src, '_*.pug')}`]).then(files => {

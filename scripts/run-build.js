@@ -1,4 +1,4 @@
-import {createWriteStream, writeFile} from 'fs'
+import {createWriteStream} from 'fs'
 import path from 'path'
 import log from 'winston'
 import browserify from 'browserify'
@@ -6,13 +6,11 @@ import watchify from 'watchify'
 import errorify from 'errorify'
 import cssModulesify from 'css-modulesify'
 import cssNext from 'postcss-cssnext'
-import hmr from 'browserify-hmr'
 import collapse from 'bundle-collapser/plugin'
 import rm from 'rimraf'
 import copy from 'copy'
 import globby from 'globby'
 import sharp from 'sharp'
-import {config} from '../package.json' // eslint-disable-line import/extensions
 import shortid from './shortid'
 import longid from './longid'
 
@@ -61,8 +59,8 @@ const build = (watch = false) => new Promise((resolve, reject) => {
       })
     }))
 
-    globby(fileGlob).then(inputFiles => {
-      inputFiles.forEach((filePath, index) => {
+    globby(fileGlob).then(inputFiles =>
+      Promise.all(inputFiles.map(filePath => new Promise((resolve, reject) => {
         const file = path.parse(filePath).name
         const inFile = path.join(demoFolder, `${file}.js`)
         const outFile = path.join(buildFolder, file)
@@ -93,16 +91,14 @@ const build = (watch = false) => new Promise((resolve, reject) => {
         b.on('log', message => log.info(message))
         b.on('error', message => {
           log.error(message)
-          return reject()
+          reject(new Error())
         })
         b.on('css stream', readable => {
           if (watch) {
             resolve()
           } else {
-            readable.on('data', chunk => {
-              if (index === (inputFiles.length - 1)) {
-                setTimeout(resolve, 100)
-              }
+            readable.on('data', () => {
+              resolve()
             })
           }
         })
@@ -115,8 +111,10 @@ const build = (watch = false) => new Promise((resolve, reject) => {
           cache: {}
         })
         bundle()
-      })
-    })
+      })))
+      .then(resolve)
+      .catch(reject)
+    )
   })
 })
 
