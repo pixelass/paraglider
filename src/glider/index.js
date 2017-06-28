@@ -123,7 +123,7 @@ class Glider {
        * @public
        * @type {onInit}
        */
-      onInit({next, previous, current, rest}, this.slides)
+      onInit({next, previous, current, rest}, this.slides, this.options)
     }
   }
 
@@ -482,7 +482,8 @@ class Glider {
       onSlide(
         progress * slideBy,
         {next, previous, current, rest},
-        this.slides
+        this.slides,
+        this.options
       )
     }
   }
@@ -525,7 +526,7 @@ class Glider {
        * @public
        * @type {onEnd}
        */
-      onEnd({next, previous, current, rest}, this.slides)
+      onEnd({next, previous, current, rest}, this.slides, this.options)
     }
   }
 }
