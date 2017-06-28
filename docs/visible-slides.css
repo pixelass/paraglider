@@ -21,7 +21,7 @@ main {
 :root { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 }
 
-.w {
+.ap {
   position: relative;
   width: 100%;
   max-width: 100vw;
@@ -31,7 +31,7 @@ main {
   color: var(--theme-color);
 }
 
-.x {
+.aq {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -41,7 +41,7 @@ main {
   z-index: 0;
 }
 
-.y {
+.ar {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -67,19 +67,19 @@ main {
           user-select: none
 }
 
-.y.z {
+.ar.as {
  z-index: 1;
 }
 
-.y.A {
+.ar.at {
  z-index: 2;
 }
 
-.y.B {
+.ar.au {
  z-index: 3;
 }
 
-.C {
+.av {
   position: absolute;
   top: 0;
   left: 0;
@@ -89,8 +89,8 @@ main {
   z-index: 2
 }
 
-.C .D,
-  .C .B {
+.av .aw,
+  .av .au {
  position: absolute;
  top: 50%;
  width: 1em;
@@ -118,19 +118,19 @@ main {
          user-select: none;
 }
 
-.C .D:hover, .C .B:hover {
+.av .aw:hover, .av .au:hover {
  background: rgba(255, 255, 255, .9);
 }
 
-.C .D {
+.av .aw {
  left: 0;
 }
 
-.C .B {
+.av .au {
  right: 0;
 }
 
-.E {
+.ax {
   position: absolute;
   left: 0;
   right: 0;
@@ -145,7 +145,7 @@ main {
   visibility: hidden;
 }
 
-.F {
+.ay {
   position: relative;
   height: 3rem;
   width: 3rem;
@@ -170,7 +170,7 @@ main {
           justify-content: center
 }
 
-.F::before {
+.ay::before {
  content: '';
  display: block;
  height: 1em;
@@ -179,51 +179,55 @@ main {
  background: rgba(255, 255, 255, .5);
 }
 
-.F:hover {
+.ay:hover {
  background: rgba(0, 0, 0, .3);
 }
 
-.F.G::before {
+.ay.az::before {
  content: '';
  background: rgba(255, 255, 255, .9);
 }
 
-.H {
+.aA {
   /* plugin loaded */
 }
 
-.I {
+.aB {
   /* plugin initialized */
 }
 
-.J {
+.aC {
   /* slides */
 }
 
-.K {
+.aD {
   /* slide */
 }
 
-.L {
+.aE {
   /* dot */
 }
 
-.M {
+.aF {
   /* next */
 }
 
-.N {
+.aG {
   /* prev */
 }
 
-.O {
+.aH {
   /* multi */
 }
 
-.P {
+.aI {
   /* multi */
 }
 
-.Q {
+.aJ {
+  /* multi */
+}
+
+.aK {
   /* multi */
 }

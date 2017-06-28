@@ -21,7 +21,7 @@ main {
 :root { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 }
 
-.ao {
+.T {
   position: relative;
   width: 100%;
   max-width: 100vw;
@@ -31,7 +31,7 @@ main {
   color: var(--theme-color);
 }
 
-.ap {
+.U {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -41,7 +41,7 @@ main {
   z-index: 0;
 }
 
-.aq {
+.V {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -67,25 +67,25 @@ main {
           user-select: none
 }
 
-.aq.ar {
+.V.W {
  -webkit-transform: translate3d(0%, 0, 0);
          transform: translate3d(0%, 0, 0);
  z-index: 1;
 }
 
-.aq.as {
+.V.X {
  z-index: 2;
  -webkit-transform: translate3d(-100%, 0, 0);
          transform: translate3d(-100%, 0, 0);
 }
 
-.aq.at {
+.V.Y {
  z-index: 3;
  -webkit-transform: translate3d(100%, 0, 0);
          transform: translate3d(100%, 0, 0);
 }
 
-.au {
+.Z {
   position: absolute;
   top: 0;
   left: 0;
@@ -95,8 +95,8 @@ main {
   z-index: 2
 }
 
-.au .av,
-  .au .at {
+.Z .aa,
+  .Z .Y {
  position: absolute;
  top: 50%;
  width: 1em;
@@ -124,19 +124,19 @@ main {
          user-select: none;
 }
 
-.au .av:hover, .au .at:hover {
+.Z .aa:hover, .Z .Y:hover {
  background: rgba(255, 255, 255, .9);
 }
 
-.au .av {
+.Z .aa {
  left: 0;
 }
 
-.au .at {
+.Z .Y {
  right: 0;
 }
 
-.aw {
+.ab {
   position: absolute;
   left: 0;
   right: 0;
@@ -151,7 +151,7 @@ main {
   visibility: hidden;
 }
 
-.ax {
+.ac {
   position: relative;
   height: 3rem;
   width: 3rem;
@@ -176,7 +176,7 @@ main {
           justify-content: center
 }
 
-.ax::before {
+.ac::before {
  content: '';
  display: block;
  height: 1em;
@@ -185,55 +185,55 @@ main {
  background: rgba(255, 255, 255, .5);
 }
 
-.ax:hover {
+.ac:hover {
  background: rgba(0, 0, 0, .3);
 }
 
-.ax.ay::before {
+.ac.ad::before {
  content: '';
  background: rgba(255, 255, 255, .9);
 }
 
-.az {
+.ae {
   /* plugin loaded */
 }
 
-.aA {
+.af {
   /* plugin initialized */
 }
 
-.aB {
+.ag {
   /* slides */
 }
 
-.aC {
+.ah {
   /* slide */
 }
 
-.aD {
+.ai {
   /* dot */
 }
 
-.aE {
+.aj {
   /* next */
 }
 
-.aF {
+.ak {
   /* prev */
 }
 
-.aG {
+.al {
   /* belt */
 }
 
-.aH {
+.am {
   /* left */
 }
 
-.aI {
+.an {
   /* right */
 }
 
-.aJ {
+.ao {
   /* left-right */
 }
