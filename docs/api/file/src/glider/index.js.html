@@ -44,6 +44,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
 </ul>
 </div>
@@ -175,7 +177,7 @@ class Glider {
        * @public
        * @type {onInit}
        */
-      onInit({next, previous, current, rest}, this.slides)
+      onInit({next, previous, current, rest}, this.slides, this.options)
     }
   }
 
@@ -534,7 +536,8 @@ class Glider {
       onSlide(
         progress * slideBy,
         {next, previous, current, rest},
-        this.slides
+        this.slides,
+        this.options
       )
     }
   }
@@ -577,7 +580,7 @@ class Glider {
        * @public
        * @type {onEnd}
        */
-      onEnd({next, previous, current, rest}, this.slides)
+      onEnd({next, previous, current, rest}, this.slides, this.options)
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 13,
-  "actualCount": 13,
+  "expectCount": 15,
+  "actualCount": 15,
   "files": {
     "src/glider/index.js": {
       "expectCount": 8,
@@ -24,6 +24,16 @@
       "undocumentLines": []
     },
     "src/presets/cover-right.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/presets/multi-belt.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/presets/multi-wrapper.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []

@@ -30,6 +30,18 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "paraglider/src/presets/multi-belt.js~multibelt",
+    "function/index.html#static-function-multiBelt",
+    "<span>multiBelt</span> <span class=\"search-result-import-path\">paraglider/src/presets/multi-belt.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/presets/multi-wrapper.js~multiwrapper",
+    "function/index.html#static-function-multiWrapper",
+    "<span>multiWrapper</span> <span class=\"search-result-import-path\">paraglider/src/presets/multi-wrapper.js</span>",
+    "function"
+  ],
+  [
     "paraglider/src/presets/wrapper.js~wrapper",
     "function/index.html#static-function-wrapper",
     "<span>wrapper</span> <span class=\"search-result-import-path\">paraglider/src/presets/wrapper.js</span>",
@@ -507,6 +519,18 @@ window.esdocSearchIndex = [
     "src/presets/index.js",
     "file/src/presets/index.js.html",
     "src/presets/index.js",
+    "file"
+  ],
+  [
+    "src/presets/multi-belt.js",
+    "file/src/presets/multi-belt.js.html",
+    "src/presets/multi-belt.js",
+    "file"
+  ],
+  [
+    "src/presets/multi-wrapper.js",
+    "file/src/presets/multi-wrapper.js.html",
+    "src/presets/multi-wrapper.js",
     "file"
   ],
   [
