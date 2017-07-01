@@ -62,46 +62,47 @@
   "dependencies": {},
   "devDependencies": {
     "abcq": "^0.2.2",
-    "ava": "^0.19.1",
+    "ava": "^0.20.0",
     "babel-cli": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.5.1",
+    "babel-preset-env": "^1.5.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-2": "^6.24.1",
     "babelify": "^7.3.0",
-    "browserify": "^14.1.0",
+    "browserify": "^14.4.0",
     "browserify-hmr": "^0.3.5",
     "bundle-collapser": "^1.2.1",
-    "caniuse-db": "^1.0.30000670",
+    "caniuse-db": "^1.0.30000696",
     "copy": "^0.3.0",
     "coveralls": "^2.11.16",
-    "cross-env": "^5.0.0",
+    "cross-env": "^5.0.1",
     "css-modulesify": "^0.28.0",
     "cz-conventional-changelog": "^2.0.0",
     "easing-utils": "^0.0.7",
     "errorify": "^0.3.1",
     "esdoc": "^0.5.2",
+    "eslint-plugin-spellcheck": "^0.0.8",
     "express": "^4.15.3",
     "git-repo-name": "^0.6.0",
     "git-user-email": "^0.2.2",
     "git-username": "^0.5.0",
     "globby": "^6.1.0",
     "hopsdoc": "^0.1.7",
-    "husky": "^0.13.2",
+    "husky": "^0.14.1",
     "ignore-styles": "^5.0.1",
     "jsdom": "^11.0.0",
     "mkdirp": "^0.5.1",
-    "nyc": "^11.0.1",
+    "nyc": "^11.0.3",
     "pify": "^3.0.0",
     "postcss-cssnext": "^2.11.0",
-    "pug": "^2.0.0-rc.1",
+    "pug": "^2.0.0-rc.2",
     "rimraf": "^2.6.1",
     "sharp": "^0.18.1",
-    "standard-version": "^4.0.0",
-    "stylelint": "^7.9.0",
+    "standard-version": "^4.2.0",
+    "stylelint": "^7.12.0",
     "stylelint-config-standard": "^16.0.0",
     "stylelint-no-unsupported-browser-features": "^1.0.0",
-    "uglifyify": "^3.0.4",
+    "uglifyify": "3",
     "watchify": "^3.9.0",
     "winston": "^2.3.1",
     "xo": "^0.18.2"
@@ -142,8 +143,40 @@
   "xo": {
     "space": true,
     "semicolon": false,
+    "plugins": [
+      "spellcheck"
+    ],
     "rules": {
-      "no-console": "error"
+      "no-console": "error",
+      "spellcheck/spell-checker": [
+        1,
+        {
+          "comments": true,
+          "strings": false,
+          "identifiers": false,
+          "lang": "en_US",
+          "skipWords": [
+            "Paraglider",
+            "istanbul",
+            "Timeline",
+            "Init",
+            "prev",
+            "Gregor",
+            "Adams",
+            "greg",
+            "pixelass",
+            "mousedown",
+            "el",
+            "js",
+            "eslint"
+          ],
+          "skipIfMatch": [
+            "@[a-zA-z]+",
+            "http://[^s]*",
+            "^[-\\w]+/[-\\w\\.]+$"
+          ]
+        }
+      ]
     }
   },
   "stylelint": {
@@ -185,12 +218,12 @@
   },
   "nyc": {
     "exclude": [
-      "**/spec/*.js"
+      "**/__tests__/*.js"
     ]
   },
   "ava": {
     "files": [
-      "src/**/spec/*.js"
+      "src/**/__tests__/*.js"
     ],
     "source": [
       "src/**/*.js"
