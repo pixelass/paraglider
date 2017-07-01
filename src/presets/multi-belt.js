@@ -20,7 +20,7 @@ import multiWrapper from './multi-wrapper'
  * the same time. The movement is linear.
  *
  * @param {Element} glider
- * @param {pluginOptions} opts
+ * @param {PRESET_DEFAULTS} opts
  * @returns {function} returns the destroy method
  */
 const multiBelt = (glider, opts) => multiWrapper(glider, {
@@ -61,12 +61,19 @@ const multiBelt = (glider, opts) => multiWrapper(glider, {
       } else {
         slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
       }
+    } else if (current.length > 0) {
+      const percent = current[0] === 0 ? -100 : 100
+      current.forEach((id, index) => {
+        slides[id].style.transform = `translate3d(${(index * 100) - (progress * percent)}%,0,0)`
+      })
+    } else {
+      const percent = current === 0 ? -100 : 100
+      slides[current].style.transform = `translate3d(${(progress * percent)}%,0,0)`
     }
   },
   onEnd({next, previous, current, rest}, slides) {
     slides.forEach(slide => {
       slide.style.transform = ''
-      slide.style.zIndex = ''
     })
     current.forEach((id, index) => {
       slides[id].style.transform = `translate3d(${index * 100}%,0,0)`

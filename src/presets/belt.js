@@ -19,13 +19,16 @@ import wrapper from './wrapper'
  * the same time. The movement is linear.
  *
  * @param {Element} glider
- * @param {pluginOptions} opts
+ * @param {PRESET_DEFAULTS} opts
  * @returns {function} returns the destroy method
  */
 const belt = (glider, opts) => wrapper(glider, {
   ...opts,
   onSlide(progress, {next, previous, current, rest}, slides) {
-    if (previous !== null) {
+    if (previous === null && next === null) {
+      const percent = current > 0 ? -100 : 100
+      slides[current].style.transform = `translate3d(${(progress * percent)}%,0,0)`
+    } else if (previous !== null) {
       slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
       slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
     } else if (next !== null) {
@@ -37,12 +40,10 @@ const belt = (glider, opts) => wrapper(glider, {
     }
   },
   onEnd({next, previous, current, rest}, slides) {
-    rest.forEach(slide => {
-      slides[slide].style.transform = ''
+    [next, previous, ...rest].forEach(id => {
+      slides[id].style.transform = ''
     })
     slides[current].style.transform = ''
-    slides[previous].style.transform = 'translate3d(-100%,0,0)'
-    slides[next].style.transform = 'translate3d(100%,0,0)'
     if (typeof opts.onEnd === 'function') {
       opts.onEnd({next, previous, current, rest}, slides)
     }

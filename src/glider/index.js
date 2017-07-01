@@ -1,9 +1,4 @@
 /**
- * Paraglider is an API driven slider.
- *
- * Per default it simply adds class names to the previous, current and next slide.
- * With the help of callbacks however, you can add any imaginable behavior
- *
  * @file glider/index.js
  * @author Gregor Adams <greg@pixelass.com>
  */
@@ -12,7 +7,9 @@ import {PLUGIN_DEFAULTS} from '../config'
 import {
   animate,
   eitherOr,
+  arrayOrValue,
   modLoop,
+  toggleClass,
   findAll as $,
   findFirst as $$
 } from '../helpers'
@@ -23,11 +20,15 @@ import {
  */
 class Glider {
   /**
-   * A simple slider API. This class simply applies classnames
-   * to the current and surrounding slides.
+   * Paraglider is an API driven slider.
+   * It exposes a timeline and offers some options.
    *
-   * It offers an API that allows you to implement any behaviour imaginable. 😂
-   * @param {pluginOptions} options Custom options for the Plugin call
+   * This gives developers a lot of freedom when implementing a slider.
+   * The main purpose for this plugin is to create slideshows with a parallax effect.
+   * Due to the simplicity you can feed the timeline to other plugins and create amazing
+   * effects like animating SVGs or drawing on a canvas.
+   *
+   * @param {PLUGIN_DEFAULTS} options Custom options for the Plugin call
    * @returns {this}
    */
   constructor(options = {}) {
@@ -46,7 +47,8 @@ class Glider {
      * @type {object}
      */
     this._state = {
-      currentSlide: this.options.initialSlide
+      currentSlide: this.options.initialSlide,
+      init: true
     }
 
     this.nextSlide = this.nextSlide.bind(this)
@@ -61,7 +63,7 @@ class Glider {
   /**
    * Handles internal storage
    * @private
-   * @param {object} newState The new state porperties to merge into the old state
+   * @param {object} newState The new state properties to merge into the old state
    */
   setState(newState) {
     this._state = {
@@ -83,7 +85,7 @@ class Glider {
    * Init call for the plugin.
    *
    * This method assigns the element to the plugin scope, adds the required
-   * eventListeners and class names.
+   * event listeners and class names.
    * @param {Element} el An element containing the required markup with and
    * selectors
    */
@@ -128,7 +130,7 @@ class Glider {
   }
 
   /**
-   * Destroys the plugin by removing eventlisteners and class names
+   * Destroys the plugin by removing event listeners and class names
    */
   destroy() {
     const {onDestroy} = this.options
@@ -148,30 +150,60 @@ class Glider {
   }
 
   /**
-   * Adds eventlisteners needed for this plugin to work.
+   * Adds event listeners needed for this plugin to work.
    * Movement and release should be tracked on window or document.
    * @private
+   * @listens {touchmove}
+   *   Listens to touchmove if `enableTouch === true`
+   *   global listener to allow out of bounds movement.
+   * @listens {touchend}
+   *   Listens to touchend if `enableTouch === true`
+   *   global listener to allow out of bounds movement.
+   * @listens {touchstart}
+   *   Listens to touchstart if `enableTouch === true`
+   *   scoped listener to determine activity
+   * @listens {mousemove}
+   *   Listens to mousemove if `enableTouch === true`
+   *   global listener to allow out of bounds movement.
+   * @listens {mouseup}
+   *   Listens to mouseup if `enableTouch === true`
+   *   global listener to allow out of bounds movement.
+   * @listens {mousedown}
+   *   Listens to mousedown if `enableTouch === true`
+   *   scoped listener to determine activity
    */
   addListeners() {
-    global.addEventListener('mousemove', this.handleMove, {passive: false})
-    global.addEventListener('mouseup', this.handleUp)
-    global.addEventListener('touchmove', this.handleMove, {passive: false})
-    global.addEventListener('touchend', this.handleUp)
-    this.slidesWrapper.addEventListener('mousedown', this.handleDown)
-    this.slidesWrapper.addEventListener('touchstart', this.handleDown)
+    /* istanbul ignore next */
+    if (this.options.enableTouch) {
+      global.addEventListener('touchmove', this.handleMove, {passive: false})
+      global.addEventListener('touchend', this.handleUp)
+      this.slidesWrapper.addEventListener('touchstart', this.handleDown)
+    }
+    /* istanbul ignore next */
+    if (this.options.enableSwipe) {
+      global.addEventListener('mousemove', this.handleMove, {passive: false})
+      global.addEventListener('mouseup', this.handleUp)
+      this.slidesWrapper.addEventListener('mousedown', this.handleDown)
+    }
   }
 
   /**
-   * Removes all eventlisteners. (Helpful when destroying the plugin instance)
+   * Removes all event listeners. (Helpful when destroying the plugin instance)
    * @private
    */
   removeListeners() {
-    global.removeEventListener('mousemove', this.handleMove)
-    global.removeEventListener('mouseup', this.handleUp)
-    global.removeEventListener('touchmove', this.handleMove)
-    global.removeEventListener('touchend', this.handleUp)
-    this.slidesWrapper.removeEventListener('mousedown', this.handleDown)
-    this.slidesWrapper.removeEventListener('touchstart', this.handleDown)
+    /* istanbul ignore next */
+    if (this.options.enableTouch) {
+      global.removeEventListener('touchmove', this.handleMove)
+      global.removeEventListener('touchend', this.handleUp)
+      this.slidesWrapper.removeEventListener('touchstart', this.handleDown)
+    }
+    /* istanbul ignore next */
+    if (this.options.enableSwipe) {
+      global.removeEventListener('mousemove', this.handleMove)
+      global.removeEventListener('mouseup', this.handleUp)
+      this.slidesWrapper.removeEventListener('mousedown', this.handleDown)
+    }
   }
 
   /**
@@ -179,29 +211,37 @@ class Glider {
    * @private
    */
   addClassNames() {
-    const {currentSlide, previousSlide, nextSlide} = this.state
-    const {visibleSlides, classNames} = this.options
-    const {current, next, previous} = classNames
-    const {length} = this.slides
-    this.slides.forEach((slide, index) => {
-      // IE11 can't use a second argument in element.classList.toggle
-      // @see https://connect.microsoft.com/IE/Feedback/details/878564/
-      slide.classList.remove(current, next, previous)
-      if (index === currentSlide) {
-        slide.classList.add(current)
-      } else if (index === previousSlide) {
-        slide.classList.add(previous)
-      } else if (index === nextSlide) {
-        slide.classList.add(next)
-      }
-      for (let i = 1; i < visibleSlides; i++) {
-        if (index === modLoop(currentSlide, i, length)) {
-          slide.classList.add(`${current}__${i}`)
-        } else {
-          slide.classList.remove(`${current}__${i}`)
+    const {addClasses, addMultiClasses} = this.options
+    const keys = Object.keys(addClasses)
+    if (keys.length > 0) {
+      const {currentSlide, previousSlide, nextSlide} = this.state
+      const {visibleSlides, slideBy, classNames} = this.options
+      const {current, next, previous} = classNames
+      const {length} = this.slides
+      const diff = visibleSlides - slideBy
+      this.slides.forEach((slide, index) => {
+        const isCurrent = (index === currentSlide) && (addClasses.current === true)
+        const isNext = (index === modLoop(nextSlide, diff, length)) && (addClasses.next === true)
+        const isPrevious = (index === previousSlide) && (addClasses.previous === true)
+        toggleClass(slide, current, isCurrent)
+        toggleClass(slide, next, isNext)
+        toggleClass(slide, previous, isPrevious)
+        if (addMultiClasses.current === true) {
+          for (let i = 0; i < visibleSlides; i++) {
+            const isCurrent = (index === modLoop(currentSlide, i, length))
+            toggleClass(slide, `${current}__${i}`, isCurrent)
+          }
         }
-      }
-    })
+        if ((addMultiClasses.previous === true) || (addMultiClasses.next === true)) {
+          for (let i = 0; i < slideBy; i++) {
+            const isNext = (index === modLoop(nextSlide, (i + diff), length)) && (addMultiClasses.next === true)
+            const isPrevious = (index === modLoop(previousSlide, i, length)) && (addMultiClasses.previous === true)
+            toggleClass(slide, `${next}__${i}`, isNext)
+            toggleClass(slide, `${previous}__${i}`, isPrevious)
+          }
+        }
+      })
+    }
   }
 
   /**
@@ -214,9 +254,11 @@ class Glider {
   addInitClassNames() {
     const {classNames} = this.options
     this.el.classList.add(classNames.pluginLoaded)
-    this.slides.forEach(slide => {
-      slide.classList.add(classNames.init)
-    })
+    if (this.state.init) {
+      this.slides.forEach(slide => {
+        slide.classList.add(classNames.init)
+      })
+    }
     this.addClassNames()
   }
 
@@ -247,9 +289,10 @@ class Glider {
     const {length} = this.slides
     // Respect requested slides.
     // {goTo} could set these values.
-    const nextSlide = eitherOr(requestedNext, modLoop(currentSlide, (slideBy), length))
-    const previousSlide = eitherOr(requestedPrevious, modLoop(currentSlide, (-1 * (slideBy)), length))
-
+    const originalNext = modLoop(currentSlide, slideBy, length)
+    const originalPrevious = modLoop(currentSlide, (-1 * (slideBy)), length)
+    const nextSlide = eitherOr(requestedNext, originalNext)
+    const previousSlide = eitherOr(requestedPrevious, originalPrevious)
     this.setState({nextSlide, previousSlide})
   }
 
@@ -261,6 +304,12 @@ class Glider {
     /* istanbul ignore next */
     if (e && 'preventDefault' in e) {
       e.preventDefault()
+    }
+    if (this.state.init) {
+      this.setState({init: false})
+      this.slides.forEach(slide => {
+        slide.classList.remove(this.options.classNames.init)
+      })
     }
     this.addSides()
     this.addClassNames()
@@ -275,6 +324,12 @@ class Glider {
     /* istanbul ignore next */
     if (e && 'preventDefault' in e) {
       e.preventDefault()
+    }
+    if (this.state.init) {
+      this.setState({init: false})
+      this.slides.forEach(slide => {
+        slide.classList.remove(this.options.classNames.init)
+      })
     }
     this.addSides()
     this.addClassNames()
@@ -309,13 +364,25 @@ class Glider {
     /**
      * Animation cache to allow canceling
      */
-    this.animation = animate(duration, progress, end,
+    const {currentSlide, nextSlide, previousSlide} = this.state
+    const {loop, visibleSlides, slideBy} = this.options
+    const {length} = this.slides
+    let theEnd = end
+    if (!loop) {
+      theEnd = end < 0 && previousSlide > currentSlide ? 0 : theEnd
+      theEnd = end > 0 && modLoop(nextSlide, visibleSlides - slideBy, length) < currentSlide ? 0 : theEnd
+    }
+    /**
+     * Animation flag. Calls the animation and stores the function to allow `cancelAnimationFrame`
+     * @type {loop}
+     */
+    this.animation = animate(duration, progress, theEnd,
       p => {
         this.setState({
           x: p * this.el.offsetWidth
         })
-        if (p === end) {
-          this.handleEnd(end)
+        if (p === theEnd) {
+          this.handleEnd(theEnd)
         } else {
           this.handleProgress()
         }
@@ -345,44 +412,47 @@ class Glider {
    */
   getReturnValues(direction = true) {
     const {length} = this.slides
-    const {visibleSlides, slideBy} = this.options
+    const {visibleSlides, slideBy, loop} = this.options
     const {currentSlide, nextSlide, previousSlide} = this.state
     const progress = this.state.x / this.el.offsetWidth
     const right = progress * -1
-    const current = []
+    const currentItems = []
     for (let i = 0; i < visibleSlides; i++) {
-      current.push(modLoop(currentSlide, i, length))
+      currentItems.push(modLoop(currentSlide, i, length))
     }
     // We only need the lower value
-    const next = []
+    const nextItems = [null]
+    const useNext = (currentSlide < modLoop(nextSlide, (visibleSlides - slideBy), length)) || loop
     /* istanbul ignore next */
-    if (progress > right && direction) {
+    const returnNext = (progress > right && direction)
+    /* istanbul ignore next */
+    if ((useNext && returnNext) || !direction) {
+      nextItems.pop()
       for (let i = 0; i < visibleSlides; i++) {
-        next.push(modLoop(nextSlide, i, length))
+        nextItems.push(modLoop(nextSlide, i, length))
       }
-    } else {
-      next.push(null)
     }
-    const previous = []
+    const previousItems = [null]
+    const usePrevious = (currentSlide > previousSlide) || loop
     /* istanbul ignore next */
-    if (progress < right && direction) {
+    const returnPrevious = (progress < right && direction)
+    /* istanbul ignore next */
+    if ((usePrevious && returnPrevious) || !direction) {
+      previousItems.pop()
       for (let i = 0; i < slideBy; i++) {
-        previous.push(modLoop(previousSlide, i, length))
+        previousItems.push(modLoop(previousSlide, i, length))
       }
-    } else {
-      previous.push(null)
     }
 
     const rest = this.slides.map((el, index) => index)
       .filter(originalIndex =>
-        [...previous, ...current, ...next].filter(x => x !== 0).indexOf(originalIndex) === -1)
+        [...previousItems, ...currentItems, ...nextItems].filter(x => x !== 0).indexOf(originalIndex) === -1)
 
-    /* istanbul ignore next */
     return {
       rest,
-      previous: previous.length > 1 ? previous : previous[0],
-      next: next.length > 1 ? next : next[0],
-      current: current.length > 1 ? current : current[0],
+      previous: arrayOrValue(previousItems),
+      next: arrayOrValue(nextItems),
+      current: arrayOrValue(currentItems),
       progress: Math.abs(progress)
     }
   }
@@ -395,18 +465,20 @@ class Glider {
    * @param {event} e Mouse or touch event
    */
   handleDown(e) {
-    const {classNames} = this.options
     const clientX = this.getClientX(e)
-    this.slides.forEach(slide => {
-      slide.classList.remove(classNames.init)
-    })
+    if (this.state.init) {
+      this.slides.forEach(slide => {
+        slide.classList.remove(this.options.classNames.init)
+      })
+    }
     // Flag down
     // set start coordinate,
     // set current progress
     this.setState({
       down: true,
       xStart: clientX,
-      x: 0
+      x: 0,
+      init: false
     })
   }
 
@@ -414,7 +486,7 @@ class Glider {
   /**
    * Last interaction with the mouse or per touch will be used to set flags
    * and define initial values.
-   * Only fires if down is active. Prevents unintended behaviour when the first
+   * Only fires if down is active. Prevents unintended behavior when the first
    * touch or mousedown was outside the element.
    * @private
    */
@@ -437,7 +509,7 @@ class Glider {
 
   /* istanbul ignore next */
   /**
-   * Handler vor mouse or touch movement.
+   * Handler for mouse or touch movement.
    * Waits for a threshold and then records the movement on the `x` axis
    * @private
    * @param {event} e Mouse or touch move event
@@ -530,115 +602,5 @@ class Glider {
     }
   }
 }
-
-/**
- * Callback while the Glider is moving
- * @typedef onSlide
- * @memberof Glider
- * @type {function}
- * @param {callbackProgress} progress Offset of the element to either side.
- * @param {callbackData} data Data about the slider activity
- * @param {Array.<Element>} slides Array of all slides
- * @example
- * new Glider({
- *  onSlide(progress, {next, previous, current, rest}, slides) {
- *    if (previous !== null) {
- *      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
- *      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
- *    } else if (next !== null) {
- *      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
- *      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
- *    }
- *  }
- *})
- */
-
-/**
- * Callback when the Glider stopped moving
- * @typedef onEnd
- * @memberof Glider
- * @type {function}
- * @param {callbackData} data Data about the slider activity
- * @param {Array.<Element>} slides Array of all slides
- * @example
- * new Glider({
- *  onEnd({next, previous, current, rest}, slides) {
- *    rest.forEach(slide => {
- *      slides[slide].style.transform = ''
- *    })
- *    slides[current].style.transform = ''
- *    slides[previous].style.transform = 'translate(-100%,0,0)'
- *    slides[next].style.transform = 'translate(100%,0,0)'
- *  }
- *})
- */
-
-/**
- * Callback when the Glider has been created
- * @typedef onInit
- * @memberof Glider
- * @type {function}
- * @param {callbackData} data Data about the slider activity
- * @param {Array.<Element>} slides Array of all slides
- * @example
- * new Glider({
- *  onInit({next, previous, current, rest}, slides) {
- *    slides[current].style.background = 'red'
- *  }
- *})
- */
-
-/**
- * Callback when the Glider has been destoyed
- * @typedef onDestroy
- * @memberof Glider
- * @type {function}
- * @param {callbackData} data Data about the slider activity
- * @param {Array.<Element>} slides Array of all slides
- * @example
- * new Glider({
- *  onDestroy() {
- *    // Slider has been destroyed
- *  }
- *})
- */
-
-/**
- * @typedef callbackProgress
- * @property {number} left A value between [0, 1]
- * @property {number} right A value between [0, 1]
- */
-
-/**
- * @typedef callbackData
- * @property {number} data.previous Index of previous slide
- * @property {number} data.current Index of current slide
- * @property {number} data.next Index of next slide
- * @property {Array.<number>} data.rest Array of all remaining slide indexes
- */
-
-/**
- * @typedef pluginOptions
- * @type {object}
- * @property {object} classNames Mapping of class names to be used by the plugin.
- * @property {string} classNames.pluginLoaded Applied when the plugin has been loaded
- * @property {string} classNames.init Applied when the pugin has been initialized. Removed on first interaction.
- * @property {string} classNames.slides This element will be used to track touches. This is the wrapper around the slides.
- * @property {string} classNames.slide Selector for each single slide.
- * @property {string} classNames.current Applied to the currently visible slide
- * @property {string} classNames.previous Applied to the previous slide in the queue
- * @property {string} classNames.next Applied to the next slide in the queue
- * @property {string} classNames.dot Selector for pager dots. (only used in `presets/wrapper`)
- * @property {string} classNames.active Active class for pager dots. (only used in `presets/wrapper`)
- * @property {string} classNames.nextButton Selector for the navigation to the next slide. (only used in `presets/wrapper`)
- * @property {string} classNames.prevButton Selector for the navigation to the previous slide. (only used in `presets/wrapper`)
- * @property {(null|onSlide)} onSlide Callback while the slider is moving.
- * @property {(null|onEnd)} onEnd Callback while the slider stopped moving.
- * @property {number} speed Animation duration when using paging.
- * @property {number} spring Animation duration when snapping.
- * @property {number} snapBackAt Amount of distance needed to snap. [0, 1]. E.g. `0.3` will snap if 1/3 has been moved
- * @property {number} threshold Threshold of pixels until the sliding mechanisms is triggered.
- * @property {number} initialSlide Initially visible slide
- */
 
 export default Glider

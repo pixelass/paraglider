@@ -22,7 +22,7 @@ import {
  * navigate to diferent slides.
  * The options are extended by additional class names.
  * @param {Element} glider
- * @param {pluginOptions} opts
+ * @param {PRESET_DEFAULTS} opts
  * @returns {function} returns the destroy method
  */
 const wrapper = (glider, opts) => {

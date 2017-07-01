@@ -9,6 +9,7 @@
 import API from './glider'
 import * as presets from './presets'
 import wrapper from './presets/wrapper'
+import multiWrapper from './presets/multi-wrapper'
 
 /**
  * Global Paraglider
@@ -23,5 +24,6 @@ import wrapper from './presets/wrapper'
 global.Paraglider = {
   API,
   wrapper,
+  multiWrapper,
   ...presets
 }

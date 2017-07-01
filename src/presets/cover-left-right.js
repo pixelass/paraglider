@@ -19,7 +19,7 @@ import wrapper from './wrapper'
  * Sides cover from left and right
  *
  * @param {Element} glider
- * @param {pluginOptions} opts
+ * @param {PRESET_DEFAULTS} opts
  * @returns {function} returns the destroy method
  */
 const coverLeftRight = (glider, opts) => wrapper(glider, {
@@ -35,12 +35,10 @@ const coverLeftRight = (glider, opts) => wrapper(glider, {
     }
   },
   onEnd({next, previous, current, rest}, slides) {
-    rest.forEach(slide => {
-      slides[slide].style.transform = ''
+    [next, previous, ...rest].forEach(id => {
+      slides[id].style.transform = ''
     })
     slides[current].style.transform = ''
-    slides[previous].style.transform = 'translate(-100%,0,0)'
-    slides[next].style.transform = 'translate(100%,0,0)'
     if (typeof opts.onEnd === 'function') {
       opts.onEnd({next, previous, current, rest}, slides)
     }

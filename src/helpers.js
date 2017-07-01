@@ -81,6 +81,44 @@ const findAll = (selector, context = document) =>
 const findFirst = (selector, context = document) =>
   context.querySelector(selector)
 
+/* istanbul ignore next */
+
+/**
+ * Toggle class ponyFill to support IE11 and other awkward browsers.
+ * IE11 can't use a second argument in `element.classList.toggle`
+ * @see https://connect.microsoft.com/IE/Feedback/details/878564/
+ * @private
+ * @param {Element} el
+ * @param {string} className
+ * @param {boolean} bool
+ * @author Gregor Adams <greg@pixelass.com>
+ * @version [version]
+ * @example
+ * const element = document.querySelector('a')
+ * const isActive = true
+ * toggle(element, active, isActive) // add active
+ * toggle(element, active, 1) // add active
+ * toggle(element, active, !0) // add active
+ * toggle(element, active, !!1) // add active
+ * toggle(element, active, 'yes') // add active
+ * toggle(element, active, 'no') // add active
+ * toggle(element, active, null) // toggle active
+ * toggle(element, active) // toggle active
+ * toggle(element, active, false) // remove active
+ * toggle(element, active, 0) // remove active
+ * toggle(element, active, !!0) // remove active
+ * toggle(element, active, '') // remove active
+ */
+const toggleClass = (el, className, bool = null) => {
+  if (bool === null) {
+    el.classList.toggle(className)
+  } else if (bool) {
+    el.classList.add(className)
+  } else {
+    el.classList.remove(className)
+  }
+}
+
 /**
  * Returns either the first or second value depending on truthness.
  * Any number is considered true.
@@ -111,19 +149,37 @@ const eitherOr = (either, or) =>
  * @param {number} length Maximum value.
  * @returns {number} Resulting number
  * @example
- * modLoop(1, 2, 3) // ==> 0
- * modLoop(2, 3, 4) // ==> 1
- * modLoop(2, -3, 4) // ==> 3
- * modLoop(20, -3, 20) // ==> 17
- * modLoop(20, -30, 20) // ==> 10
+ * modLoop(1, 2, 3) // => 0
+ * modLoop(2, 3, 4) // => 1
+ * modLoop(2, -3, 4) // => 3
+ * modLoop(20, -3, 20) // => 17
+ * modLoop(20, -30, 20) // => 10
  */
 const modLoop = (current, addition, length) =>
   (current + addition + length) % length
 
+/**
+ * Takes an array and returns a single value if it is the only item.
+ * Otherwise it returns the original array.
+ * @private
+ * @param {array} current Current value
+ * @param {number} addition Addition to the current value
+ * @param {number} length Maximum value.
+ * @returns {number} Resulting number
+ * @example
+ * arrayOrValue([null, 1, 2]) // => [null, 1, 2]
+ * arrayOrValue([1]) // => 1
+ * arrayOrValue([1,'1']) // => [1,'1']
+ * arrayOrValue([null]) // => null
+ */
+const arrayOrValue = arr => arr.length > 1 ? arr : arr[0]
+
 export {
   findAll,
   findFirst,
+  toggleClass,
   animate,
   modLoop,
-  eitherOr
+  eitherOr,
+  arrayOrValue
 }

@@ -22,7 +22,7 @@ import {
  * navigate to different slides.
  * The options are extended by additional class names.
  * @param {Element} glider
- * @param {pluginOptions} opts
+ * @param {PRESET_DEFAULTS} opts
  * @returns {function} returns the destroy method
  */
 const multiWrapper = (glider, opts) => {
@@ -32,7 +32,7 @@ const multiWrapper = (glider, opts) => {
   const nextButton = $$(`.${opts.classNames.nextButton}`, glider)
   const prevButton = $$(`.${opts.classNames.prevButton}`, glider)
   // Prepare the options to ensure correct behavior
-  // `slideBy` must be smaller or equal to `visibleSlides` and greator or equal to `1`
+  // `slideBy` must be smaller or equal to `visibleSlides` and greater or equal to `1`
   const preparedOptions = {
     ...PLUGIN_DEFAULTS,
     ...PRESET_DEFAULTS,
