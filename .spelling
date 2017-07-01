@@ -21,7 +21,10 @@ onlinewebfonts
 commitizen
 changelog
 repo
- - readme.md
+iOS
+ChromeAndroid
+touchend
+mouseup
 init
 es2015
 JS
@@ -36,3 +39,4 @@ package.json
 Github
 _mixins.pug
 cssnext
+10px

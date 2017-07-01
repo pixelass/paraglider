@@ -4,6 +4,21 @@
     "classProperties": true,
     "objectRestSpread": true
   },
+  "title": "Paraglider",
+  "access": ["public", "protected"],
+  "manual": {
+    "asset": "./manual/assets",
+    "changelog": ["./CHANGELOG.md"],
+    "overview": ["./manual/OVERVIEW.md"],
+    "design": ["./manual/DESIGN.md"],
+    "installation": ["./manual/INSTALLATION.md"],
+    "usage": ["./manual/USAGE.md"],
+    "tutorial": ["./manual/TUTORIAL.md"],
+    "configuration": ["./manual/CONFIGURATION.md"],
+    "example": ["./manual/EXAMPLE.md"],
+    "advanced": ["./manual/ADVANCED.md"],
+    "faq": ["./manual/FAQ.md"]
+  },
   "source": "src",
-  "excludes": ["spec"]
+  "excludes": ["__tests__"]
 }
