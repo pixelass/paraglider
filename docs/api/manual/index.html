@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container manual-root manual-index" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/pixelass/paraglider" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div class="manual-toc-root">
+  
+<div data-ice="manual" data-toc-name="overview">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-overview" data-section-count="&#x25A0;" data-link="manual/overview/OVERVIEW.html"><a href="manual/overview/OVERVIEW.html" data-ice="link">Overview</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="design">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-design" data-section-count="&#x25A0;" data-link="manual/design/DESIGN.html"><a href="manual/design/DESIGN.html" data-ice="link">Design</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="installation">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-installation" data-section-count="&#x25A0;" data-link="manual/installation/INSTALLATION.html"><a href="manual/installation/INSTALLATION.html" data-ice="link">Installation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation/INSTALLATION.html"><a href="manual/installation/INSTALLATION.html#yarn" data-ice="link">yarn</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/installation/INSTALLATION.html"><a href="manual/installation/INSTALLATION.html#npm" data-ice="link">npm</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="tutorial">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-tutorial" data-section-count="&#x25A0;" data-link="manual/tutorial/TUTORIAL.html"><a href="manual/tutorial/TUTORIAL.html" data-ice="link">Tutorial</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="usage">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-usage" data-section-count="&#x25A0;&#x25A0;" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html" data-ice="link">Usage</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#wrappers" data-ice="link">Wrappers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#wrapper" data-ice="link">Wrapper</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#multi-wrapper" data-ice="link">Multi wrapper</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#presets" data-ice="link">Presets</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#belt" data-ice="link">Belt</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#multi-belt" data-ice="link">Multi belt</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/usage/USAGE.html"><a href="manual/usage/USAGE.html#cover" data-ice="link">Cover</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="configuration">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-configuration" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html" data-ice="link">Configuration</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#class-names" data-ice="link">Class names</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#options" data-ice="link">Options</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#loop" data-ice="link">Loop</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#visible-slides" data-ice="link">Visible slides</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#amount-of-next-slides" data-ice="link">Amount of next slides</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#enable-touch" data-ice="link">Enable Touch</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#enable-swipe" data-ice="link">Enable Swipe</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#initial-slide" data-ice="link">Initial slide</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#threshold" data-ice="link">Threshold</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#snap-back" data-ice="link">Snap back</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#speed-and-duration" data-ice="link">Speed and duration</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#add-classes" data-ice="link">Add classes</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#callbacks" data-ice="link">Callbacks</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#initialized" data-ice="link">Initialized</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#destroyed" data-ice="link">Destroyed</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#sliding" data-ice="link">Sliding</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/configuration/CONFIGURATION.html"><a href="manual/configuration/CONFIGURATION.html#finished" data-ice="link">Finished</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="advanced">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-advanced" data-section-count="&#x25A0;" data-link="manual/advanced/ADVANCED.html"><a href="manual/advanced/ADVANCED.html" data-ice="link">Advanced</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="example">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-example" data-section-count="&#x25A0;" data-link="manual/example/EXAMPLE.html"><a href="manual/example/EXAMPLE.html" data-ice="link">Example</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/example/EXAMPLE.html"><a href="manual/example/EXAMPLE.html#demos" data-ice="link">Demos</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/example/EXAMPLE.html"><a href="manual/example/EXAMPLE.html#codepen" data-ice="link">Codepen</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="reference">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-reference" data-section-count="&#x25A0;&#x25A0;&#x25A0;" data-link="identifiers.html"><a href="identifiers.html" data-ice="link">Reference</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="identifiers.html"><a href="identifiers.html#class" data-ice="link">Class</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="identifiers.html"><a href="identifiers.html#function" data-ice="link">Function</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="identifiers.html"><a href="identifiers.html#variable" data-ice="link">Variable</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="identifiers.html"><a href="identifiers.html#typedef" data-ice="link">Typedef</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="faq">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-faq" data-section-count="&#x25A0;" data-link="manual/faq/FAQ.html"><a href="manual/faq/FAQ.html" data-ice="link">FAQ</a></li>
+</ul>
+  </div>
+<div data-ice="manual" data-toc-name="changelog">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1 manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#change-log" data-ice="link">Change Log</a></li>
+<li data-ice="manualNav" class="indent-h1 manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-2-0-https-github-com-pixelass-paraglider-compare-v2-1-0-v2-2-0-2017-06-28-" data-ice="link">2.2.0 (2017-06-28)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#features" data-ice="link">Features</a></li>
+<li data-ice="manualNav" class="indent-h1 manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-1-0-https-github-com-pixelass-paraglider-compare-v2-0-4-v2-1-0-2017-06-27-" data-ice="link">2.1.0 (2017-06-27)</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-0-4-https-github-com-pixelass-paraglider-compare-v2-0-3-v2-0-4-2017-06-19-" data-ice="link">2.0.4 (2017-06-19)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#bug-fixes" data-ice="link">Bug Fixes</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-0-3-https-github-com-pixelass-paraglider-compare-v2-0-2-v2-0-3-2017-06-16-" data-ice="link">2.0.3 (2017-06-16)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#bug-fixes" data-ice="link">Bug Fixes</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-0-2-https-github-com-pixelass-paraglider-compare-v2-0-1-v2-0-2-2017-06-13-" data-ice="link">2.0.2 (2017-06-13)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#bug-fixes" data-ice="link">Bug Fixes</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-0-1-https-github-com-pixelass-paraglider-compare-v2-0-0-v2-0-1-2017-06-05-" data-ice="link">2.0.1 (2017-06-05)</a></li>
+<li data-ice="manualNav" class="indent-h1 manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-2-0-0-https-github-com-pixelass-paraglider-compare-v1-1-0-v2-0-0-2017-06-04-" data-ice="link">2.0.0 (2017-06-04)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#code-refactoring" data-ice="link">Code Refactoring</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#breaking-changes" data-ice="link">BREAKING CHANGES</a></li>
+<li data-ice="manualNav" class="indent-h1 manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#-1-1-0-https-github-com-pixelass-paraglider-compare-v1-0-0-v1-1-0-2017-06-02-" data-ice="link">1.1.0 (2017-06-02)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#bug-fixes" data-ice="link">Bug Fixes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#features" data-ice="link">Features</a></li>
+<li data-ice="manualNav" class="indent-h1 manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#1-0-0-2017-06-02-" data-ice="link">1.0.0 (2017-06-02)</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#bug-fixes" data-ice="link">Bug Fixes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/changelog/CHANGELOG.html"><a href="manual/changelog/CHANGELOG.html#features" data-ice="link">Features</a></li>
+</ul>
+  </div>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="github-markdown">
+  
+
+  <p class="manual-badge" data-ice="manualBadge"><img src="./manual-badge.svg"></p>
+
+  <div class="manual-cards">
+    
+  <div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-overview" data-section-count="&#x25A0;"><span data-ice="label-inner">Overview</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Overview</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><p><!-- tocstop -->
+</p><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/overview/OVERVIEW.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-design" data-section-count="&#x25A0;"><span data-ice="label-inner">Design</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Design</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><p><!-- tocstop -->
+</p><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/design/DESIGN.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-installation" data-section-count="&#x25A0;"><span data-ice="label-inner">Installation</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Installation</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><ul>
+<li><a href="#yarn">yarn</a></li>
+<li><a href="#npm">npm</a></li>
+</ul><p><!-- tocstop -->
+</p><h2>yarn</h2><pre><code><code class="source-code prettyprint">yarn add paraglider</code>
+</code></pre><h2>npm</h2><pre><code><code class="source-code prettyprint">npm install paraglider --save</code>
+</code></pre><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/installation/INSTALLATION.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-tutorial" data-section-count="&#x25A0;"><span data-ice="label-inner">Tutorial</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Tutorial</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><p><!-- tocstop -->
+</p><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/tutorial/TUTORIAL.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-usage" data-section-count="&#x25A0;&#x25A0;"><span data-ice="label-inner">Usage</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Usage</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><ul>
+<li><a href="#wrappers">Wrappers</a><ul>
+<li><a href="#wrapper">Wrapper</a></li>
+<li><a href="#multi-wrapper">Multi wrapper</a></li>
+</ul>
+</li>
+<li><a href="#presets">Presets</a><ul>
+<li><a href="#belt">Belt</a></li>
+<li><a href="#multi-belt">Multi belt</a></li>
+<li><a href="#cover">Cover</a></li>
+</ul>
+</li>
+</ul><p><!-- tocstop -->
+</p><pre><code class="lang-js"><code class="source-code prettyprint">import Glider from &apos;paraglider&apos;
+
+// A simple belt slider
+const glider = new Glider({
+  onSlide(progress, {next, previous, current, rest}, slides) {
+    if (previous !== null) {
+      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+    } else if (next !== null) {
+      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+    }
+  },
+  onEnd({next, previous, current, rest}, slides) {
+    rest.forEach(slide =&gt; {
+      slides[slide].style.transform = &apos;&apos;
+    })
+    slides[current].style.transform = &apos;&apos;
+    slides[previous].style.transform = &apos;translate3d(-100%,0,0)&apos;
+    slides[next].style.transform = &apos;translate3d(100%,0,0)&apos;
+  }
+})
+glider.init(document.querySelector(&apos;.glide-me&apos;))</code>
+</code></pre><h2>Wrappers</h2><h3>Wrapper</h3><p>If you want to wrap your slider to use pagers and/or navigation you can use the provided helper.
+The API and configuration remains the same.</p><pre><code class="lang-js"><code class="source-code prettyprint">import wrapper from &apos;paraglider/lib/presets/wrapper&apos;
+
+const belt = (glider, opts) =&gt; wrapper(glider, {
+  ...opts,
+  onSlide(progress, {next, previous, current, rest}, slides) {
+    if (previous !== null) {
+      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
+    } else if (next !== null) {
+      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+    }
+    if (typeof opts.onSlide === &apos;function&apos;) {
+      opts.onSlide(progress, {next, previous, current, rest}, slides)
+    }
+  },
+  onEnd({next, previous, current, rest}, slides) {
+    [next, previous, ...rest].forEach(slide =&gt; {
+      slides[slide].style.transform = &apos;translate3d(-100%,0,0)&apos;
+    })
+    slides[current].style.transform = &apos;&apos;
+    if (typeof opts.onEnd === &apos;function&apos;) {
+      opts.onEnd({next, previous, current, rest}, slides)
+    }
+  }
+})</code>
+</code></pre><h3>Multi wrapper</h3><p>Allows using <code>slideBy</code> and <code>visibleSlides</code> in a wrapper. (No pager dots)</p><pre><code class="lang-js"><code class="source-code prettyprint">import multiWrapper from &apos;paraglider/lib/presets/multi-wrapper&apos;
+
+const multiBelt = (glider, opts) =&gt; multiWrapper(glider, {
+  ...opts,
+  onInit({next, previous, current, rest}, slides) {
+    current.forEach((id, index) =&gt; {
+      slides[id].style.transform = `translate3d(${index * 100}%,0,0)`
+    })
+  },
+  onSlide(progress, {next, previous, current, rest}, slides, {slideBy}) {
+    if (previous !== null) {
+      if (current.length &gt; 0) {
+        current.forEach((id, index) =&gt; {
+          slides[id].style.transform = `translate3d(${(index * 100) + (progress * 100)}%,0,0)`
+        })
+      } else {
+        slides[current].style.transform = `translate3d(${progress * 100}%,0,0)`
+      }
+      if (previous.length &gt; 0) {
+        previous.forEach((id, index) =&gt; {
+          slides[id].style.transform = `translate3d(${((slideBy - 1) * -100) + (index * 100) + (progress * 100) - 100}%,0,0)`
+        })
+      } else {
+        slides[previous].style.transform = `translate3d(${(progress * 100) - 100}%,0,0)`
+      }
+    } else if (next !== null) {
+      if (current.length &gt; 0) {
+        current.forEach((id, index) =&gt; {
+          slides[id].style.transform = `translate3d(${(index * 100) - (progress * 100)}%,0,0)`
+        })
+      } else {
+        slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
+      }
+      if (next.length &gt; 0) {
+        next.forEach((id, index) =&gt; {
+          slides[id].style.transform = `translate3d(${(slideBy * 100) + (index * 100) - (progress * 100)}%,0,0)`
+        })
+      } else {
+        slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
+      }
+    }
+  },
+  onEnd({next, previous, current, rest}, slides) {
+    const currentIndexes = current.length &gt; 0 ? current : current ? current : []
+    slides.filter((id, i) =&gt; currentIndexes.indexOf(i) &gt; -1).forEach(slide =&gt; {
+      slide.style.transform = &apos;translate3d-1%,0,0)&apos;
+    })
+    current.forEach((id, index) =&gt; {
+      slides[id].style.transform = `translate3d(${index * 100}%,0,0)`
+    })
+  }
+})</code>
+</code></pre><h2>Presets</h2><h3>Belt</h3><p>A simple belt slider</p><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;))</code>
+</code></pre><h3>Multi belt</h3><p>A belt slider that allows having multiple visible slides.</p><pre><code class="lang-js"><code class="source-code prettyprint">import {multiBelt} from &apos;paraglider/presets&apos;
+
+multiBelt(document.querySelector(&apos;.belt&apos;, {visibleItems: 2}))</code>
+</code></pre><h3>Cover</h3><p>Covers the current slide.</p><pre><code class="lang-js"><code class="source-code prettyprint">import {coverRight, coverLeft, coverLeftRight} from &apos;paraglider/presets&apos;
+
+coverLeft(document.querySelector(&apos;.coverLeft&apos;))
+coverRight(document.querySelector(&apos;.coverRight&apos;))
+coverLeftRight(document.querySelector(&apos;.coverLeftRight&apos;))</code>
+</code></pre><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/usage/USAGE.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-configuration" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;"><span data-ice="label-inner">Configuration</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Configuration</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><ul>
+<li><a href="#class-names">Class names</a></li>
+<li><a href="#options">Options</a><ul>
+<li><a href="#loop">Loop</a></li>
+<li><a href="#visible-slides">Visible slides</a></li>
+<li><a href="#amount-of-next-slides">Amount of next slides</a></li>
+<li><a href="#enable-touch">Enable Touch</a></li>
+<li><a href="#enable-swipe">Enable Swipe</a></li>
+<li><a href="#initial-slide">Initial slide</a></li>
+<li><a href="#threshold">Threshold</a></li>
+<li><a href="#snap-back">Snap back</a><ul>
+<li><a href="#speed-and-duration">Speed and duration</a></li>
+</ul>
+</li>
+<li><a href="#add-classes">Add classes</a></li>
+</ul>
+</li>
+<li><a href="#callbacks">Callbacks</a><ul>
+<li><a href="#initialized">Initialized</a></li>
+<li><a href="#destroyed">Destroyed</a></li>
+<li><a href="#sliding">Sliding</a></li>
+<li><a href="#finished">Finished</a></li>
+</ul>
+</li>
+</ul><p><!-- tocstop -->
+</p><h2>Class names</h2><ul>
+<li><code>{object} classNames</code><ul>
+<li>Mapping of class names to be used by the plugin.</li>
+</ul>
+</li>
+<li><code>{string} [classNames.pluginLoaded=&apos;pluginLoaded&apos;]</code><ul>
+<li>Applied when the plugin has been loaded</li>
+</ul>
+</li>
+<li><code>{string} [classNames.init=&apos;init&apos;]</code><ul>
+<li>Applied when the plugin has been initialized. Removed on first interaction.</li>
+</ul>
+</li>
+<li><code>{string} [classNames.slides=&apos;slides&apos;]</code><ul>
+<li>This element will be used to track touches. This is the wrapper around the slides.</li>
+</ul>
+</li>
+<li><code>{string} [classNames.slide=&apos;slide&apos;]</code><ul>
+<li>Selector for each single slide.</li>
+</ul>
+</li>
+<li><code>{string} [classNames.current=&apos;current&apos;]</code><ul>
+<li>Applied to the currently visible slide</li>
+</ul>
+</li>
+<li><code>{string} [classNames.previous=&apos;previous&apos;]</code><ul>
+<li>Applied to the previous slide in the queue</li>
+</ul>
+</li>
+<li><code>{string} [classNames.next=&apos;next&apos;]</code><ul>
+<li>Applied to the next slide in the queue</li>
+</ul>
+</li>
+<li><code>{object} addClasses</code><ul>
+<li>Map of class names to be added to slides.</li>
+</ul>
+</li>
+<li><code>{object} [addClasses.previous=true]</code><ul>
+<li>Sets previous class name to slides.</li>
+</ul>
+</li>
+<li><code>{object} [addClasses.current=true]</code><ul>
+<li>Sets current class name to slides.</li>
+</ul>
+</li>
+<li><code>{object} [addClasses.next=true]</code><ul>
+<li>Sets next class name to slides.</li>
+</ul>
+</li>
+<li><code>{object} addMultiClasses</code><ul>
+<li>Map of class names to be added to slides using a counter.</li>
+</ul>
+</li>
+<li><code>{object} [addMultiClasses.previous=undefined]</code><ul>
+<li>Sets previous class name to slides using a counter.</li>
+</ul>
+</li>
+<li><code>{object} [addMultiClasses.current]</code><ul>
+<li>Sets current class name to slides using a counter.</li>
+</ul>
+</li>
+<li><code>{object} [addMultiClasses.next=undefined]</code><ul>
+<li>Sets next class name to slides using a counter.</li>
+</ul>
+</li>
+</ul><h2>Options</h2><ul>
+<li><code>{boolean} [enableTouch=true]</code><ul>
+<li>Enable touch interaction.</li>
+</ul>
+</li>
+<li><code>{boolean} [enableSwipe=true]</code><ul>
+<li>Enable mouse/drag/swipe interaction.</li>
+</ul>
+</li>
+<li><code>{boolean} [loop=false]</code><ul>
+<li>Enable looping slides.</li>
+</ul>
+</li>
+<li><code>{number} [speed=250]</code><ul>
+<li>Animation duration when using paging.</li>
+</ul>
+</li>
+<li><code>{number} [spring=100]</code><ul>
+<li>Animation duration when snapping.</li>
+</ul>
+</li>
+<li><code>{number} [snapBackAt=0.25]</code><ul>
+<li>Amount of distance needed to snap. [0, 1]</li>
+</ul>
+</li>
+<li><code>{number} [threshold=10]</code><ul>
+<li>Threshold of pixels until the sliding mechanisms is triggered.</li>
+</ul>
+</li>
+<li><code>{number} [initialSlide=0]</code><ul>
+<li>Initially visible slide</li>
+</ul>
+</li>
+<li><code>{number} [visibleSlides=1]</code><ul>
+<li>Amount of visible slides</li>
+</ul>
+</li>
+<li><code>{number} [slideBy=1]</code><ul>
+<li>Amount of slides to slide on interaction</li>
+</ul>
+</li>
+</ul><h3>Loop</h3><p><code>[loop=true] {boolean}</code></p><p>Looping can be disabled with this flag.</p><blockquote>
+<p>Warning! This does not work well when <code>visibleSlides &gt; 1</code>.<br>Issue reports welcome<br>Contributions welcome  </p>
+</blockquote><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;), {loop: false})</code>
+</code></pre><h3>Visible slides</h3><p><code>[visibleSLides=1] {number}</code></p><p>Show more than one slide. </p><blockquote>
+<p>Warning! This does not work well when <code>loop === false</code>.<br>Issue reports welcome<br>Contributions welcome  </p>
+</blockquote><pre><code class="lang-js"><code class="source-code prettyprint">import {multiBelt} from &apos;paraglider/presets&apos;
+
+multiBelt(document.querySelector(&apos;.belt&apos;), {visibleSlides: 3})</code>
+</code></pre><h3>Amount of next slides</h3><p><code>[slideBy=1] {number}</code></p><p>Allows sliding by more than one item.</p><blockquote>
+<p>Warning! Requires <code>visibleSlides &gt;= slideBy</code>.  </p>
+</blockquote><pre><code class="lang-js"><code class="source-code prettyprint">import {multiBelt} from &apos;paraglider/presets&apos;
+
+multiBelt(document.querySelector(&apos;.belt&apos;), {visibleSlides: 3})</code>
+</code></pre><h3>Enable Touch</h3><p><code>[enableSwipe=true] {boolean}</code></p><p>Disable or enable swiping with touch.</p><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;), {enableTouch: false})</code>
+</code></pre><h3>Enable Swipe</h3><p><code>[enableSwipe=true] {boolean}</code></p><p>Disable or enable swiping with the mouse.</p><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;), {enableSwipe: false})</code>
+</code></pre><h3>Initial slide</h3><p><code>[initialSlide=0] {boolean}</code></p><p>Set the initially active slide</p><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;), {initialSlide: 1})</code>
+</code></pre><h3>Threshold</h3><p><code>[threshold=10] {number}</code></p><p>Pixel value before swiping will activate (helps on iOS to optimize scrolling).</p><blockquote>
+<p>Warning! Creates a minor jump depending on the value.<br>10px seems to be default for most developers and similar plugins.  </p>
+</blockquote><pre><code class="lang-js"><code class="source-code prettyprint">import {multiBelt} from &apos;paraglider/presets&apos;
+
+multiBelt(document.querySelector(&apos;.belt&apos;), {threshold: 5})</code>
+</code></pre><h3>Snap back</h3><p><code>[snapBackAt=0.25] {number}</code></p><p>Progress needed to snap to the next slide. [0, 1]</p><pre><code class="lang-js"><code class="source-code prettyprint">import {multiBelt} from &apos;paraglider/presets&apos;
+
+multiBelt(document.querySelector(&apos;.belt&apos;), {snapBackAt: 0.5})</code>
+</code></pre><h4>Speed and duration</h4><p><code>[speed=250] {number}</code>  </p><p>Speed defines the time the animation takes when <code>nextSlide</code> or <code>prevSlide</code> are called.  </p><p><code>[spring=100] {number}</code></p><p>Spring defines the time the animation takes when touch or mouse interaction is stopped (touchend, mouseup)</p><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;), {speed: 1000, spring: 300})</code>
+</code></pre><h3>Add classes</h3><p><code>addClasses {object}</code>  </p><ul>
+<li><code>previous {boolean}</code></li>
+<li><code>current {boolean}</code></li>
+<li><code>next {boolean}</code></li>
+</ul><p>Allows defining if class names should be added to the slides.</p><p><code>addMultiClasses {object}</code>  </p><ul>
+<li><code>previous {boolean}</code></li>
+<li><code>current {boolean}</code></li>
+<li><code>next {boolean}</code></li>
+</ul><p>Allows defining if class names should be added to the slides if multiple are visible.</p><p><code>current__0, current__1, ...</code></p><pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider/presets&apos;
+
+belt(document.querySelector(&apos;.belt&apos;), {addClasses: {current: true}})</code>
+</code></pre><h2>Callbacks</h2><ul>
+<li><code>{(null|onInit)} [onInit=null]</code><ul>
+<li>Callback when the slider has been created.</li>
+</ul>
+</li>
+<li><code>{(null|onDestroy)} [onDestroy=null]</code><ul>
+<li>Callback when the slider has been destroyed.</li>
+</ul>
+</li>
+<li><code>{(null|onSlide)} [onSlide=null]</code><ul>
+<li>Callback while the slider is moving.</li>
+</ul>
+</li>
+<li><code>{(null|onEnd)} [onEnd=null]</code><ul>
+<li>Callback while the slider stopped moving.</li>
+</ul>
+</li>
+</ul><h3>Initialized</h3><p><code>[onInit=null] {null|function}</code>  </p><p>Defaults to null and does nothing. Can be a function with parameters</p><pre><code class="lang-js"><code class="source-code prettyprint">import Glider from &apos;paraglider&apos;
+
+const glider = new Glider({
+  onInit({previous, current, next, rest}, slides, options) {
+    slides[current].style.transform = &apos;translate3d(0,0,0)&apos;
+  }
+})</code>
+</code></pre><h3>Destroyed</h3><p><code>[onDestroy=null] {null|function}</code>  </p><p>Defaults to null and does nothing. Can be a function</p><pre><code class="lang-js"><code class="source-code prettyprint">import Glider from &apos;paraglider&apos;
+
+const glider = new Glider({
+  onDestroy() {
+    // ...
+  }
+})</code>
+</code></pre><h3>Sliding</h3><p><code>[onSlide=null] {null|function}</code>  </p><p>Defaults to null and does nothing. Can be a function with parameters</p><pre><code class="lang-js"><code class="source-code prettyprint">import Glider from &apos;paraglider&apos;
+
+const glider = new Glider({
+  onSlide(progress, {previous, current, next, rest}, slides, options) {
+    slides[current].style.transform = &apos;translate3d(${100 * progress}%,0,0)&apos;
+    // ...
+  }
+})</code>
+</code></pre><h3>Finished</h3><p><code>[onEnd=null] {null|function}</code>  </p><p>Defaults to null and does nothing. Can be a function with parameters</p><pre><code class="lang-js"><code class="source-code prettyprint">import Glider from &apos;paraglider&apos;
+
+const glider = new Glider({
+  onEnd({previous, current, next, rest}, slides, options) {
+    slides[current].style.transform = &apos;translate3d(0,0,0)&apos;
+  }
+})</code>
+</code></pre><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/configuration/CONFIGURATION.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-advanced" data-section-count="&#x25A0;"><span data-ice="label-inner">Advanced</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Advanced</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><p><!-- tocstop -->
+</p><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/advanced/ADVANCED.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-example" data-section-count="&#x25A0;"><span data-ice="label-inner">Example</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>Example</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><ul>
+<li><a href="#demos">Demos</a></li>
+<li><a href="#codepen">Codepen</a></li>
+</ul><p><!-- tocstop -->
+</p><p>Take a look at the <a href="https://github.com/pixelass/paraglider/blob/master/demo/index.js">examples</a>. (<a href="https://pixelass.github.io/paraglider/">Demo</a>)</p><h2>Demos</h2><ul>
+<li><a href="https://github.com/pixelass/paraglider/blob/master/demo/index.js">Main Examples</a></li>
+<li><a href="https://pixelass.github.io/paraglider/">Main Demo</a></li>
+<li><a href="https://github.com/pixelass/paraglider/blob/master/demo/dist.js">Dist Examples</a></li>
+<li><a href="https://pixelass.github.io/paraglider/dist.html">Dist Demo</a></li>
+<li><a href="https://github.com/pixelass/paraglider/blob/master/demo/presets.js">Presets Examples</a></li>
+<li><a href="https://pixelass.github.io/paraglider/presets.html">Presets Demo</a></li>
+<li><a href="https://github.com/pixelass/paraglider/blob/master/demo/visible-slides.js">Visible Slides Examples</a></li>
+<li>[Visible Slides Demo](<a href="https://pixelass.github.io/paraglider/visible-slides.html">https://pixelass.github.io/paraglider/visible-slides.html</a></li>
+</ul><h2>Codepen</h2><ul>
+<li><a href="https://greensock.com/timelinemax">timelineMax</a>: <a href="https://codepen.io/pixelass/pen/PjJXEQ">example</a> on CodePen.</li>
+<li><a href="https://github.com/bodymovin/bodymovin">Bodymovin</a>: <a href="https://codepen.io/pixelass/pen/OgOLaK">example</a> on CodePen.</li>
+<li><a href="https://github.com/veltman/flubber/">Flubber</a>: <a href="https://codepen.io/pixelass/pen/GEMvaG">example</a> on CodePen.</li>
+</ul><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/example/EXAMPLE.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-reference" data-section-count="&#x25A0;&#x25A0;&#x25A0;"><span data-ice="label-inner">References</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>References</h1>
+<div data-ice="classSummary"><h2 id="class">Class Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Static Public Class Summary</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span><span data-ice="signature">: <span>class</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Paraglider plugin.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+<div data-ice="functionSummary"><h2 id="function">Function Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Static Public Function Summary</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-belt">belt</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Belt animation slider.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Cover left animation slider</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Cover left/right animation slider</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Cover right animation slider</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Belt animation slider.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Wrapper including navigation arrows.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Simple wrapper including pagers and navigation arrows.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<div data-ice="variableSummary"><h2 id="variable">Variable Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Static Public Variable Summary</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Defaults for the presets.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span><span data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Defaults for the presets.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<div data-ice="typedefSummary"><h2 id="typedef">Typedef Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Static Public Typedef Summary</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span><span data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="typedef/index.html#static-typedef-onDestroy">onDestroy</a></span></span><span data-ice="signature">(data: <span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span>, slides: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>&gt;): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Callback when the Glider has been destroyed</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span><span data-ice="signature">(data: <span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span>, slides: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>&gt;, options: <span>callbackOptions</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Callback when the Glider stopped moving</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="typedef/index.html#static-typedef-onInit">onInit</a></span></span><span data-ice="signature">(data: <span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span>, slides: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>&gt;, options: <span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span> | <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Callback when the Glider has been created</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span><span data-ice="signature">(progress: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, data: <span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span>, slides: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>&gt;, options: <span>callbackOptions</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Callback while the Glider is moving</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+</div>
+        <a data-ice="link" href="identifiers.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-faq" data-section-count="&#x25A0;"><span data-ice="label-inner">FAQ</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>FAQ</h1><p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p><p></p><p><!-- toc -->
+</p><p><!-- tocstop -->
+</p><ol>
+<li>Does this work in internet Explorer 9?<ul>
+<li>Maybe, I haven&apos;t tested it.</li>
+</ul>
+</li>
+<li>Does this work with other Plugins?<ul>
+<li>Yes, especially if they are timeline based.</li>
+<li><a href="https://greensock.com/timelinemax">timelineMax</a>: <a href="https://codepen.io/pixelass/pen/PjJXEQ">example</a> on CodePen.</li>
+<li><a href="https://github.com/bodymovin/bodymovin">Bodymovin</a>: <a href="https://codepen.io/pixelass/pen/OgOLaK">example</a> on CodePen.</li>
+<li><a href="https://github.com/veltman/flubber/">Flubber</a>: <a href="https://codepen.io/pixelass/pen/GEMvaG">example</a> on CodePen.</li>
+</ul>
+</li>
+<li>If I create examples will you list them here?<ul>
+<li>Yes definitely, simply create a pull request and add it to the <code>manual/EXAMPLE.md</code> file</li>
+</ul>
+</li>
+</ol><p>&#xA9; 2017 by <a href="./manual/greg@pixelass.com">Gregor Adams</a></p><p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p></div>
+        <a data-ice="link" href="manual/faq/FAQ.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <h1 data-ice="label" class="manual-color manual-color-changelog" data-section-count="&#x25A0;&#x25A0;&#x25A0;&#x25A0;&#x25A0;"><span data-ice="label-inner">1.0.0 (2017-06-02)</span></h1>
+      <div class="manual-card">
+        <div data-ice="card"><h1>1.0.0 (2017-06-02)</h1><h3>Bug Fixes</h3><ul>
+<li><strong>presets:</strong> direction on belt (<a href="https://github.com/pixelass/paraglider/commit/8aaecb5">8aaecb5</a>)</li>
+</ul><h3>Features</h3><ul>
+<li><strong>alpha:</strong> alpha version of plugin (<a href="https://github.com/pixelass/paraglider/commit/00606be">00606be</a>)</li>
+<li><strong>presets:</strong> added slider presets (<a href="https://github.com/pixelass/paraglider/commit/38461b1">38461b1</a>)</li>
+</ul></div>
+        <a data-ice="link" href="manual/changelog/CHANGELOG.html#1-0-0-2017-06-02-"></a>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

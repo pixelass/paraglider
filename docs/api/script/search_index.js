@@ -6,6 +6,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "paraglider/src/config.js~plugin_defaults",
+    "variable/index.html#static-variable-PLUGIN_DEFAULTS",
+    "<span>PLUGIN_DEFAULTS</span> <span class=\"search-result-import-path\">paraglider/src/config.js</span>",
+    "variable"
+  ],
+  [
+    "paraglider/src/config.js~preset_defaults",
+    "variable/index.html#static-variable-PRESET_DEFAULTS",
+    "<span>PRESET_DEFAULTS</span> <span class=\"search-result-import-path\">paraglider/src/config.js</span>",
+    "variable"
+  ],
+  [
     "paraglider/src/presets/belt.js~belt",
     "function/index.html#static-function-belt",
     "<span>belt</span> <span class=\"search-result-import-path\">paraglider/src/presets/belt.js</span>",
@@ -438,45 +450,39 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/glider/index.js~callbackdata",
+    "src/glider/types.js",
+    "file/src/glider/types.js.html",
+    "src/glider/types.js",
+    "file"
+  ],
+  [
+    "src/glider/types.js~callbackdata",
     "typedef/index.html#static-typedef-callbackData",
-    "src/glider/index.js~callbackData",
+    "src/glider/types.js~callbackData",
     "typedef"
   ],
   [
-    "src/glider/index.js~callbackprogress",
-    "typedef/index.html#static-typedef-callbackProgress",
-    "src/glider/index.js~callbackProgress",
-    "typedef"
-  ],
-  [
-    "src/glider/index.js~ondestroy",
+    "src/glider/types.js~ondestroy",
     "typedef/index.html#static-typedef-onDestroy",
-    "src/glider/index.js~onDestroy",
+    "src/glider/types.js~onDestroy",
     "typedef"
   ],
   [
-    "src/glider/index.js~onend",
+    "src/glider/types.js~onend",
     "typedef/index.html#static-typedef-onEnd",
-    "src/glider/index.js~onEnd",
+    "src/glider/types.js~onEnd",
     "typedef"
   ],
   [
-    "src/glider/index.js~oninit",
+    "src/glider/types.js~oninit",
     "typedef/index.html#static-typedef-onInit",
-    "src/glider/index.js~onInit",
+    "src/glider/types.js~onInit",
     "typedef"
   ],
   [
-    "src/glider/index.js~onslide",
+    "src/glider/types.js~onslide",
     "typedef/index.html#static-typedef-onSlide",
-    "src/glider/index.js~onSlide",
-    "typedef"
-  ],
-  [
-    "src/glider/index.js~pluginoptions",
-    "typedef/index.html#static-typedef-pluginOptions",
-    "src/glider/index.js~pluginOptions",
+    "src/glider/types.js~onSlide",
     "typedef"
   ],
   [

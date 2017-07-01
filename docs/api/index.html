@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl">
-  <title data-ice="title">API Document</title>
+  <title data-ice="title">Paraglider API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -15,7 +15,7 @@
 
 <header>
   <a href="./">Home</a>
-  
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
   <a href="identifiers.html">Reference</a>
   <a href="source.html">Source</a>
   
@@ -32,14 +32,14 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackProgress">callbackProgress</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onDestroy">onDestroy</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onEnd">onEnd</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onInit">onInit</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-onSlide">onSlide</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-pluginOptions">pluginOptions</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">presets</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-belt">belt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
@@ -55,7 +55,12 @@
 <p></p><p><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg"></p>
 
 <p></p>
-<p>A Slider with parallax API.<br>This slider does not do anything except for adding class names to the current, previous and next slide.<br>With the help of callbacks however, you can implement any imaginable effect.</p>
+<p>Paraglider is an API driven slider.
+It exposes a timeline and offers some options.</p>
+<p>This gives developers a lot of freedom when implementing a slider.
+The main purpose for this plugin is to create slideshows with a parallax effect.</p>
+<p>Due to the simplicity you can feed the timeline to other plugins and create amazing
+effects like animating SVGs or drawing on a canvas.</p>
 <p><a href="https://www.npmjs.com/package/paraglider"><img src="https://img.shields.io/npm/v/paraglider.svg?style=flat-square" alt="npm"></a>
 <a href="https://github.com/conventional-changelog/standard-version"><img src="https://img.shields.io/badge/release-standard%20version-44aa44.svg?style=flat-square" alt="Standard Version"></a>
 <a href="https://raw.githubusercontent.com/pixelass/paraglider/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="GitHub license"></a>
@@ -64,7 +69,8 @@
 <a href="https://www.bithound.io/github/pixelass/paraglider"><img src="https://img.shields.io/bithound/code/github/pixelass/paraglider.svg?style=flat-square" alt="bitHound"></a>
 <a href="https://www.bithound.io/github/pixelass/paraglider"><img src="https://img.shields.io/bithound/devDependencies/github/pixelass/paraglider.svg?style=flat-square" alt="bitHound"></a>
 <a href="https://coveralls.io/github/pixelass/paraglider"><img src="https://img.shields.io/coveralls/pixelass/paraglider.svg?style=flat-square" alt="Coveralls"></a>
-<a href="https://pixelass.github.io/paraglider/api/"><img src="https://pixelass.github.io/paraglider/api/badge.svg" alt="Esdoc"></a></p>
+<a href="https://pixelass.github.io/paraglider/api"><img src="https://pixelass.github.io/paraglider/api/badge.svg" alt="Esdoc"></a>
+<a href="https://pixelass.github.io/paraglider/api/manual"><img src="https://pixelass.github.io/paraglider/api/manual-badge.svg" alt="Manual"></a></p>
 <p><a href="http://browserify.org/"><img src="https://img.shields.io/badge/build-browserify-3c6991.svg?style=flat-square" alt="Browserify"></a>
 <a href="http://babeljs.io/docs/plugins/preset-stage-2/"><img src="https://img.shields.io/badge/babel-stage--2-f5da55.svg?style=flat-square" alt="Babel"></a>
 <a href="http://babeljs.io/docs/plugins/transform-runtime/"><img src="https://img.shields.io/badge/babel-transform--runtime-f5da55.svg?style=flat-square" alt="Babel"></a>
@@ -75,196 +81,29 @@
 <p><!-- toc -->
 </p>
 <ul>
-<li><a href="#links">Links</a></li>
-<li><a href="#usage">Usage</a><ul>
-<li><a href="#presets">Presets</a><ul>
-<li><a href="#wrapper">Wrapper</a></li>
-<li><a href="#multi-wrapper">Multi wrapper</a></li>
-<li><a href="#belt">Belt</a></li>
-<li><a href="#multi-belt">Multi belt</a></li>
-<li><a href="#cover">Cover</a></li>
-</ul>
-</li>
-<li><a href="#options">Options</a></li>
-<li><a href="#dist--cdn">Dist / CDN</a></li>
-</ul>
-</li>
+<li><a href="#docs">Docs</a></li>
+<li><a href="#browser-matrix">Browser Matrix</a></li>
 </ul>
 <p><!-- tocstop -->
 </p>
-<h2 id="links">Links</h2>
+<h2 id="docs">Docs</h2>
 <ul>
-<li><a href="https://pixelass.github.io/paraglider/">Demo</a></li>
-<li><a href="https://pixelass.github.io/paraglider/dist.html">Dist Demo</a></li>
-<li><a href="https://github.com/pixelass/paraglider/blob/master/demo/index.js">Code examples</a></li>
 <li><a href="https://pixelass.github.io/paraglider/api/">Documentation</a></li>
+<li><a href="https://pixelass.github.io/paraglider/api/manual">Manual</a></li>
 </ul>
-<h2 id="usage">Usage</h2>
+<h2 id="browser-matrix">Browser Matrix</h2>
+<p><img src="https://img.shields.io/badge/IE-11-44aa44.svg?style=flat-square" alt="IE 11">
+<img src="https://img.shields.io/badge/Edge-last_2-44aa44.svg?style=flat-square" alt="Edge">
+<img src="https://img.shields.io/badge/Chrome-last_2-44aa44.svg?style=flat-square" alt="Chrome">
+<img src="https://img.shields.io/badge/Firefox-last_2-44aa44.svg?style=flat-square" alt="Firefox">
+<img src="https://img.shields.io/badge/Safari-last_2-44aa44.svg?style=flat-square" alt="Safari">
+<img src="https://img.shields.io/badge/iOS-last_2-44aa44.svg?style=flat-square" alt="iOS">
+<img src="https://img.shields.io/badge/ChromeAndroid-last-44aa44.svg?style=flat-square" alt="ChromeAndroid"></p>
 <pre><code><code class="source-code prettyprint">yarn add paraglider</code>
-</code></pre><p>Take a look at the <a href="https://github.com/pixelass/paraglider/blob/master/demo/index.js">examples</a>. (<a href="https://pixelass.github.io/paraglider/">Demo</a>)</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import Glider from &apos;paraglider&apos;
-
-// A simple belt slider
-const glider = new Glider({
-  onSlide(progress, {next, previous, current, rest}, slides) {
-    if (previous !== null) {
-      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
-    } else if (next !== null) {
-      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
-    }
-  },
-  onEnd({next, previous, current, rest}, slides) {
-    rest.forEach(slide =&gt; {
-      slides[slide].style.transform = &apos;&apos;
-    })
-    slides[current].style.transform = &apos;&apos;
-    slides[previous].style.transform = &apos;translate(-100%,0,0)&apos;
-    slides[next].style.transform = &apos;translate(100%,0,0)&apos;
-  }
-})
-glider.init(document.querySelector(&apos;.glide-me&apos;))</code>
+</code></pre><p>You can use this plugin as a global plugin.</p>
+<pre><code class="lang-html"><code class="source-code prettyprint">&lt;script src=&quot;https://cdn.rawgit.com/pixelass/paraglider/v2.3.0/dist/paraglider.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.rawgit.com/pixelass/paraglider/v2.3.0/dist/paraglider.min.js&quot;&gt;&lt;/script&gt;</code>
 </code></pre>
-<h3 id="presets">Presets</h3>
-<h4 id="wrapper">Wrapper</h4>
-<p>If you want to wrap your slider to use pagers and/or navigation you can use the provided helper.
-The API and configuration remains the same.</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import wrapper from &apos;paraglider/lib/presets/wrapper&apos;
-
-const belt = (glider, opts) =&gt; wrapper(glider, {
-  ...opts,
-  onSlide(progress, {next, previous, current, rest}, slides) {
-    if (previous !== null) {
-      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
-    } else if (next !== null) {
-      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
-    }
-    if (typeof opts.onSlide === &apos;function&apos;) {
-      opts.onSlide(progress, {next, previous, current, rest}, slides)
-    }
-  },
-  onEnd({next, previous, current, rest}, slides) {
-    rest.forEach(slide =&gt; {
-      slides[slide].style.transform = &apos;&apos;
-    })
-    slides[current].style.transform = &apos;&apos;
-    slides[previous].style.transform = &apos;translate(-100%,0,0)&apos;
-    slides[next].style.transform = &apos;translate(100%,0,0)&apos;
-    if (typeof opts.onEnd === &apos;function&apos;) {
-      opts.onEnd({next, previous, current, rest}, slides)
-    }
-  }
-})</code>
-</code></pre>
-<h4 id="multi-wrapper">Multi wrapper</h4>
-<p>Allows using <code>slideBy</code> and <code>visibleSlides</code> in a wrapper. (No pager dots)</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import multiWrapper from &apos;paraglider/lib/presets/multi-wrapper&apos;
-
-const multiBelt = (glider, opts) =&gt; multiWrapper(glider, {
-  ...opts,
-  onInit({next, previous, current, rest}, slides) {
-    current.forEach((id, index) =&gt; {
-      slides[id].style.transform = `translate3d(${index * 100}%,0,0)`
-    })
-  },
-  onSlide(progress, {next, previous, current, rest}, slides, {slideBy}) {
-    if (previous !== null) {
-      if (current.length &gt; 0) {
-        current.forEach((id, index) =&gt; {
-          slides[id].style.transform = `translate3d(${(index * 100) + (progress * 100)}%,0,0)`
-        })
-      } else {
-        slides[current].style.transform = `translate3d(${progress * 100}%,0,0)`
-      }
-      if (previous.length &gt; 0) {
-        previous.forEach((id, index) =&gt; {
-          slides[id].style.transform = `translate3d(${((slideBy - 1) * -100) + (index * 100) + (progress * 100) - 100}%,0,0)`
-        })
-      } else {
-        slides[previous].style.transform = `translate3d(${(progress * 100) - 100}%,0,0)`
-      }
-    } else if (next !== null) {
-      if (current.length &gt; 0) {
-        current.forEach((id, index) =&gt; {
-          slides[id].style.transform = `translate3d(${(index * 100) - (progress * 100)}%,0,0)`
-        })
-      } else {
-        slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
-      }
-      if (next.length &gt; 0) {
-        next.forEach((id, index) =&gt; {
-          slides[id].style.transform = `translate3d(${(slideBy * 100) + (index * 100) - (progress * 100)}%,0,0)`
-        })
-      } else {
-        slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
-      }
-    }
-  },
-  onEnd({next, previous, current, rest}, slides) {
-    slides.forEach(slide =&gt; {
-      slide.style.transform = &apos;&apos;
-      slide.style.zIndex = &apos;&apos;
-    })
-    current.forEach((id, index) =&gt; {
-      slides[id].style.transform = `translate3d(${index * 100}%,0,0)`
-    })
-  }
-})</code>
-</code></pre>
-<h4 id="belt">Belt</h4>
-<p>A simple belt slider</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import {belt} from &apos;paraglider&apos;
-
-belt(document.querySelector(&apos;.belt&apos;))</code>
-</code></pre>
-<h4 id="multi-belt">Multi belt</h4>
-<p>A belt slider that allows having multiple visible slides.</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import {multiBelt} from &apos;paraglider&apos;
-
-multiBelt(document.querySelector(&apos;.belt&apos;))</code>
-</code></pre>
-<h4 id="cover">Cover</h4>
-<p>Covers the current slide.</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">import {coverRight, coverLeft, coverLeftRight} from &apos;paraglider&apos;
-
-coverLeft(document.querySelector(&apos;.coverLeft&apos;))
-coverRight(document.querySelector(&apos;.coverRight&apos;))
-coverLeftRight(document.querySelector(&apos;.coverLeftRight&apos;))</code>
-</code></pre>
-<h3 id="options">Options</h3>
-<p>Defaults for the main plugin.</p>
-<ul>
-<li><code>classNames</code> <code>{object}</code>: Mapping of class names to be used by the plugin.</li>
-<li><code>classNames.pluginLoaded</code> <code>{string}</code>: Applied when the plugin has been loaded</li>
-<li><code>classNames.init</code> <code>{string}</code>: Applied when the plugin has been initialized. Removed on first interaction.</li>
-<li><code>classNames.slides</code> <code>{string}</code>: This element will be used to track touches. This is the wrapper around the slides.</li>
-<li><code>classNames.slide</code> <code>{string}</code>: Selector for each single slide.</li>
-<li><code>classNames.current</code> <code>{string}</code>: Applied to the currently visible slide</li>
-<li><code>classNames.previous</code> <code>{string}</code>: Applied to the previous slide in the queue</li>
-<li><code>classNames.next</code> <code>{string}</code>: Applied to the next slide in the queue</li>
-<li><code>onInit</code> <code>{(null|onInit)}</code>: Callback when the slider has been created.</li>
-<li><code>onDestroy</code> <code>{(null|onDestroy)}</code>: Callback when the slider has been destroyed.</li>
-<li><code>onSlide</code> <code>{(null|onSlide)}</code>: Callback while the slider is moving.</li>
-<li><code>onEnd</code> <code>{(null|onEnd)}</code>: Callback while the slider stopped moving.</li>
-<li><code>speed</code> <code>{number}</code>: Animation duration when using paging.</li>
-<li><code>spring</code> <code>{number}</code>: Animation duration when snapping.</li>
-<li><code>snapBackAt</code> <code>{number}</code>: Amount of distance needed to snap. [0, 1]</li>
-<li><code>threshold</code> <code>{number}</code>: Threshold of pixels until the sliding mechanisms is triggered.</li>
-<li><code>initialSlide</code> <code>{number}</code>: Initially visible slide</li>
-<li><code>visibleSlides</code> <code>{number}</code>: Amount of visible slides</li>
-<li><code>slideBy</code> <code>{number}</code>: Amount of slides to slide on interaction</li>
-</ul>
-<h3 id="dist-cdn">Dist / CDN</h3>
-<p>You can use this plugin as a global plugin. (<a href="https://pixelass.github.io/paraglider/dist.html">Demo</a>)</p>
-<p><code>&lt;script src=&quot;https://cdn.rawgit.com/pixelass/paraglider/&lt;VERSION&gt;/dist/paragliner.js&quot;&gt;&lt;/script&gt;</code></p>
-<p>Example:</p>
-<ul>
-<li><a href="https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.js">https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.js</a></li>
-<li><a href="https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.min.js">https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.min.js</a></li>
-</ul>
 <p>&#xA9; 2017 by <a href="greg@pixelass.com">Gregor Adams</a></p>
 <p>Images in Demos via <a href="https://www.flickr.com/photos/chrisaitken/">chrisaitken</a> on <a href="https://www.flickr.com">Flickr</a><br>Logo via <a href="http://www.onlinewebfonts.com">onlinewebfonts</a></p>
 </div>

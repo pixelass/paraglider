@@ -1,0 +1,354 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 3141,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 105,
+      "column": 0
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 3141,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 105,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [],
+    "directives": [],
+    "leadingComments": null,
+    "innerComments": [
+      {
+        "type": "CommentBlock",
+        "value": "*\n * Type definitions for Paraglider callbacks.\n *\n * @file types.js\n * @module types\n * @author Gregor Adams <greg@pixelass.com>\n ",
+        "start": 0,
+        "end": 135,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentBlock",
+        "value": "*\n * Callback while the Glider is moving\n * @typedef onSlide\n * @memberof Glider\n * @type {function}\n * @param {number} progress Timeline of scroll progress `[0, 1]`\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {callbackOptions} options Subset of options\n * @example\n * new Glider({\n *  onSlide(progress, {next, previous, current, rest}, slides, options) {\n *    if (previous !== null) {\n *      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n *      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`\n *    } else if (next !== null) {\n *      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n *      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`\n *    }\n *  }\n *})\n ",
+        "start": 137,
+        "end": 1004,
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 0
+          },
+          "end": {
+            "line": 30,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentBlock",
+        "value": "*\n * Callback when the Glider stopped moving\n * @typedef onEnd\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {callbackOptions} options Subset of options\n * @example\n * new Glider({\n *  onEnd({next, previous, current, rest}, slides, options) {\n *    rest.forEach(slide => {\n *      slides[slide].style.transform = ''\n *    })\n *    slides[current].style.transform = ''\n *    slides[previous].style.transform = 'translate3d(-100%,0,0)'\n *    slides[next].style.transform = 'translate3d(100%,0,0)'\n *  }\n *})\n ",
+        "start": 1006,
+        "end": 1637,
+        "loc": {
+          "start": {
+            "line": 32,
+            "column": 0
+          },
+          "end": {
+            "line": 51,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentBlock",
+        "value": "*\n * Callback when the Glider has been created\n * @typedef onInit\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options\n * @example\n * new Glider({\n *  onInit({next, previous, current, rest}, slides, options) {\n *    slides[current].style.background = 'red'\n *  }\n *})\n ",
+        "start": 1639,
+        "end": 2067,
+        "loc": {
+          "start": {
+            "line": 53,
+            "column": 0
+          },
+          "end": {
+            "line": 67,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentBlock",
+        "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @example\n * new Glider({\n *  onDestroy() {\n *    // Slider has been destroyed\n *  }\n *})\n ",
+        "start": 2069,
+        "end": 2393,
+        "loc": {
+          "start": {
+            "line": 69,
+            "column": 0
+          },
+          "end": {
+            "line": 82,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentBlock",
+        "value": "*\n * @typedef callbackData\n * @property {?(number|Array.<number>)} previous\n *   Could be an Array, a number or null.\n *   * `null`: no items available\n *   * `number`: one item available\n *   * `array`: multiple items available\n * @property {?(number|Array.<number>)} current\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {?(number|Array.<number>)} next\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {Array.<number>} rest\n *   Array of all remaining slide indexes.\n *   If none are left the array is just empty\n ",
+        "start": 2395,
+        "end": 3140,
+        "loc": {
+          "start": {
+            "line": 84,
+            "column": 0
+          },
+          "end": {
+            "line": 104,
+            "column": 3
+          }
+        }
+      }
+    ]
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Type definitions for Paraglider callbacks.\n *\n * @file types.js\n * @module types\n * @author Gregor Adams <greg@pixelass.com>\n ",
+      "start": 0,
+      "end": 135,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback while the Glider is moving\n * @typedef onSlide\n * @memberof Glider\n * @type {function}\n * @param {number} progress Timeline of scroll progress `[0, 1]`\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {callbackOptions} options Subset of options\n * @example\n * new Glider({\n *  onSlide(progress, {next, previous, current, rest}, slides, options) {\n *    if (previous !== null) {\n *      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n *      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`\n *    } else if (next !== null) {\n *      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n *      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`\n *    }\n *  }\n *})\n ",
+      "start": 137,
+      "end": 1004,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback when the Glider stopped moving\n * @typedef onEnd\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {callbackOptions} options Subset of options\n * @example\n * new Glider({\n *  onEnd({next, previous, current, rest}, slides, options) {\n *    rest.forEach(slide => {\n *      slides[slide].style.transform = ''\n *    })\n *    slides[current].style.transform = ''\n *    slides[previous].style.transform = 'translate3d(-100%,0,0)'\n *    slides[next].style.transform = 'translate3d(100%,0,0)'\n *  }\n *})\n ",
+      "start": 1006,
+      "end": 1637,
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback when the Glider has been created\n * @typedef onInit\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options\n * @example\n * new Glider({\n *  onInit({next, previous, current, rest}, slides, options) {\n *    slides[current].style.background = 'red'\n *  }\n *})\n ",
+      "start": 1639,
+      "end": 2067,
+      "loc": {
+        "start": {
+          "line": 53,
+          "column": 0
+        },
+        "end": {
+          "line": 67,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @example\n * new Glider({\n *  onDestroy() {\n *    // Slider has been destroyed\n *  }\n *})\n ",
+      "start": 2069,
+      "end": 2393,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 0
+        },
+        "end": {
+          "line": 82,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * @typedef callbackData\n * @property {?(number|Array.<number>)} previous\n *   Could be an Array, a number or null.\n *   * `null`: no items available\n *   * `number`: one item available\n *   * `array`: multiple items available\n * @property {?(number|Array.<number>)} current\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {?(number|Array.<number>)} next\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {Array.<number>} rest\n *   Array of all remaining slide indexes.\n *   If none are left the array is just empty\n ",
+      "start": 2395,
+      "end": 3140,
+      "loc": {
+        "start": {
+          "line": 84,
+          "column": 0
+        },
+        "end": {
+          "line": 104,
+          "column": 3
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Type definitions for Paraglider callbacks.\n *\n * @file types.js\n * @module types\n * @author Gregor Adams <greg@pixelass.com>\n ",
+      "start": 0,
+      "end": 135,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback while the Glider is moving\n * @typedef onSlide\n * @memberof Glider\n * @type {function}\n * @param {number} progress Timeline of scroll progress `[0, 1]`\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {callbackOptions} options Subset of options\n * @example\n * new Glider({\n *  onSlide(progress, {next, previous, current, rest}, slides, options) {\n *    if (previous !== null) {\n *      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`\n *      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`\n *    } else if (next !== null) {\n *      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`\n *      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`\n *    }\n *  }\n *})\n ",
+      "start": 137,
+      "end": 1004,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback when the Glider stopped moving\n * @typedef onEnd\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {callbackOptions} options Subset of options\n * @example\n * new Glider({\n *  onEnd({next, previous, current, rest}, slides, options) {\n *    rest.forEach(slide => {\n *      slides[slide].style.transform = ''\n *    })\n *    slides[current].style.transform = ''\n *    slides[previous].style.transform = 'translate3d(-100%,0,0)'\n *    slides[next].style.transform = 'translate3d(100%,0,0)'\n *  }\n *})\n ",
+      "start": 1006,
+      "end": 1637,
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback when the Glider has been created\n * @typedef onInit\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options\n * @example\n * new Glider({\n *  onInit({next, previous, current, rest}, slides, options) {\n *    slides[current].style.background = 'red'\n *  }\n *})\n ",
+      "start": 1639,
+      "end": 2067,
+      "loc": {
+        "start": {
+          "line": 53,
+          "column": 0
+        },
+        "end": {
+          "line": 67,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @example\n * new Glider({\n *  onDestroy() {\n *    // Slider has been destroyed\n *  }\n *})\n ",
+      "start": 2069,
+      "end": 2393,
+      "loc": {
+        "start": {
+          "line": 69,
+          "column": 0
+        },
+        "end": {
+          "line": 82,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n * @typedef callbackData\n * @property {?(number|Array.<number>)} previous\n *   Could be an Array, a number or null.\n *   * `null`: no items available\n *   * `number`: one item available\n *   * `array`: multiple items available\n * @property {?(number|Array.<number>)} current\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {?(number|Array.<number>)} next\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {Array.<number>} rest\n *   Array of all remaining slide indexes.\n *   If none are left the array is just empty\n ",
+      "start": 2395,
+      "end": 3140,
+      "loc": {
+        "start": {
+          "line": 84,
+          "column": 0
+        },
+        "end": {
+          "line": 104,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 3141,
+      "end": 3141,
+      "loc": {
+        "start": {
+          "line": 105,
+          "column": 0
+        },
+        "end": {
+          "line": 105,
+          "column": 0
+        }
+      }
+    }
+  ]
+}
