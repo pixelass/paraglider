@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/pixelass/paraglider/compare/v2.2.0...v2.3.0) (2017-07-01)
+
+
+### Features
+
+* **options:** Added various options ([c56173d](https://github.com/pixelass/paraglider/commit/c56173d))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/pixelass/paraglider/compare/v2.1.0...v2.2.0) (2017-06-28)
 
