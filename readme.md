@@ -2,9 +2,15 @@
 
 <p align="center"><img width="300" src="https://cdn.rawgit.com/pixelass/paraglider/master/paraglider.svg" alt="logo"/></p>
 
-A Slider with parallax API.  
-This slider does not do anything except for adding class names to the current, previous and next slide.  
-With the help of callbacks however, you can implement any imaginable effect.
+Paraglider is an API driven slider.
+It exposes a timeline and offers some options.
+
+This gives developers a lot of freedom when implementing a slider.
+The main purpose for this plugin is to create slideshows with a parallax effect.
+
+Due to the simplicity you can feed the timeline to other plugins and create amazing
+effects like animating SVGs or drawing on a canvas.
+
 
 [![npm](https://img.shields.io/npm/v/paraglider.svg?style=flat-square)](https://www.npmjs.com/package/paraglider)
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-44aa44.svg?style=flat-square)](https://github.com/conventional-changelog/standard-version)
@@ -15,7 +21,8 @@ With the help of callbacks however, you can implement any imaginable effect.
 [![bitHound](https://img.shields.io/bithound/code/github/pixelass/paraglider.svg?style=flat-square)](https://www.bithound.io/github/pixelass/paraglider)
 [![bitHound](https://img.shields.io/bithound/devDependencies/github/pixelass/paraglider.svg?style=flat-square)](https://www.bithound.io/github/pixelass/paraglider)
 [![Coveralls](https://img.shields.io/coveralls/pixelass/paraglider.svg?style=flat-square)](https://coveralls.io/github/pixelass/paraglider)
-[![Esdoc](https://pixelass.github.io/paraglider/api/badge.svg)](https://pixelass.github.io/paraglider/api/)
+[![Esdoc](https://pixelass.github.io/paraglider/api/badge.svg)](https://pixelass.github.io/paraglider/api)
+[![Manual](https://pixelass.github.io/paraglider/api/manual-badge.svg)](https://pixelass.github.io/paraglider/api/manual)
 
 [![Browserify](https://img.shields.io/badge/build-browserify-3c6991.svg?style=flat-square)](http://browserify.org/)
 [![Babel](https://img.shields.io/badge/babel-stage--2-f5da55.svg?style=flat-square)](http://babeljs.io/docs/plugins/preset-stage-2/)
@@ -28,222 +35,37 @@ With the help of callbacks however, you can implement any imaginable effect.
 
 <!-- toc -->
 
-- [Links](#links)
-- [Usage](#usage)
-  * [Presets](#presets)
-    + [Wrapper](#wrapper)
-    + [Multi wrapper](#multi-wrapper)
-    + [Belt](#belt)
-    + [Multi belt](#multi-belt)
-    + [Cover](#cover)
-  * [Options](#options)
-  * [Dist / CDN](#dist--cdn)
+- [Docs](#docs)
+- [Browser Matrix](#browser-matrix)
 
 <!-- tocstop -->
 
-## Links
-* [Demo](https://pixelass.github.io/paraglider/)
-* [Dist Demo](https://pixelass.github.io/paraglider/dist.html)
-* [Code examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js)
-* [Documentation](https://pixelass.github.io/paraglider/api/)
+## Docs
 
-## Usage
+* [Documentation](https://pixelass.github.io/paraglider/api/)
+* [Manual](https://pixelass.github.io/paraglider/api/manual)
+
+## Browser Matrix
+
+![IE 11](https://img.shields.io/badge/IE-11-44aa44.svg?style=flat-square)
+![Edge](https://img.shields.io/badge/Edge-last_2-44aa44.svg?style=flat-square)
+![Chrome](https://img.shields.io/badge/Chrome-last_2-44aa44.svg?style=flat-square)
+![Firefox](https://img.shields.io/badge/Firefox-last_2-44aa44.svg?style=flat-square)
+![Safari](https://img.shields.io/badge/Safari-last_2-44aa44.svg?style=flat-square)
+![iOS](https://img.shields.io/badge/iOS-last_2-44aa44.svg?style=flat-square)
+![ChromeAndroid](https://img.shields.io/badge/ChromeAndroid-last-44aa44.svg?style=flat-square)
 
 ```
 yarn add paraglider
 ```
 
-Take a look at the [examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js). ([Demo](https://pixelass.github.io/paraglider/))
+You can use this plugin as a global plugin.
 
-```js
-import Glider from 'paraglider'
-
-// A simple belt slider
-const glider = new Glider({
-  onSlide(progress, {next, previous, current, rest}, slides) {
-    if (previous !== null) {
-      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
-    } else if (next !== null) {
-      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
-    }
-  },
-  onEnd({next, previous, current, rest}, slides) {
-    rest.forEach(slide => {
-      slides[slide].style.transform = ''
-    })
-    slides[current].style.transform = ''
-    slides[previous].style.transform = 'translate(-100%,0,0)'
-    slides[next].style.transform = 'translate(100%,0,0)'
-  }
-})
-glider.init(document.querySelector('.glide-me'))
+```html
+<script src="https://cdn.rawgit.com/pixelass/paraglider/v2.3.0/dist/paraglider.js"></script>
+<script src="https://cdn.rawgit.com/pixelass/paraglider/v2.3.0/dist/paraglider.min.js"></script>
 ```
 
-### Presets
-
-#### Wrapper
-
-If you want to wrap your slider to use pagers and/or navigation you can use the provided helper.
-The API and configuration remains the same.
-
-```js
-import wrapper from 'paraglider/lib/presets/wrapper'
-
-const belt = (glider, opts) => wrapper(glider, {
-  ...opts,
-  onSlide(progress, {next, previous, current, rest}, slides) {
-    if (previous !== null) {
-      slides[previous].style.transform = `translate3d(${-100 + (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * 100)}%,0,0)`
-    } else if (next !== null) {
-      slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
-      slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
-    }
-    if (typeof opts.onSlide === 'function') {
-      opts.onSlide(progress, {next, previous, current, rest}, slides)
-    }
-  },
-  onEnd({next, previous, current, rest}, slides) {
-    rest.forEach(slide => {
-      slides[slide].style.transform = ''
-    })
-    slides[current].style.transform = ''
-    slides[previous].style.transform = 'translate(-100%,0,0)'
-    slides[next].style.transform = 'translate(100%,0,0)'
-    if (typeof opts.onEnd === 'function') {
-      opts.onEnd({next, previous, current, rest}, slides)
-    }
-  }
-})
-```
-
-#### Multi wrapper
-
-Allows using `slideBy` and `visibleSlides` in a wrapper. (No pager dots)
-
-```js
-import multiWrapper from 'paraglider/lib/presets/multi-wrapper'
-
-const multiBelt = (glider, opts) => multiWrapper(glider, {
-  ...opts,
-  onInit({next, previous, current, rest}, slides) {
-    current.forEach((id, index) => {
-      slides[id].style.transform = `translate3d(${index * 100}%,0,0)`
-    })
-  },
-  onSlide(progress, {next, previous, current, rest}, slides, {slideBy}) {
-    if (previous !== null) {
-      if (current.length > 0) {
-        current.forEach((id, index) => {
-          slides[id].style.transform = `translate3d(${(index * 100) + (progress * 100)}%,0,0)`
-        })
-      } else {
-        slides[current].style.transform = `translate3d(${progress * 100}%,0,0)`
-      }
-      if (previous.length > 0) {
-        previous.forEach((id, index) => {
-          slides[id].style.transform = `translate3d(${((slideBy - 1) * -100) + (index * 100) + (progress * 100) - 100}%,0,0)`
-        })
-      } else {
-        slides[previous].style.transform = `translate3d(${(progress * 100) - 100}%,0,0)`
-      }
-    } else if (next !== null) {
-      if (current.length > 0) {
-        current.forEach((id, index) => {
-          slides[id].style.transform = `translate3d(${(index * 100) - (progress * 100)}%,0,0)`
-        })
-      } else {
-        slides[current].style.transform = `translate3d(${(progress * -100)}%,0,0)`
-      }
-      if (next.length > 0) {
-        next.forEach((id, index) => {
-          slides[id].style.transform = `translate3d(${(slideBy * 100) + (index * 100) - (progress * 100)}%,0,0)`
-        })
-      } else {
-        slides[next].style.transform = `translate3d(${100 - (progress * 100)}%,0,0)`
-      }
-    }
-  },
-  onEnd({next, previous, current, rest}, slides) {
-    slides.forEach(slide => {
-      slide.style.transform = ''
-      slide.style.zIndex = ''
-    })
-    current.forEach((id, index) => {
-      slides[id].style.transform = `translate3d(${index * 100}%,0,0)`
-    })
-  }
-})
-```
-
-#### Belt
-
-A simple belt slider
-
-```js
-import {belt} from 'paraglider'
-
-belt(document.querySelector('.belt'))
-```
-
-#### Multi belt
-
-A belt slider that allows having multiple visible slides.
-
-```js
-import {multiBelt} from 'paraglider'
-
-multiBelt(document.querySelector('.belt'))
-```
-
-#### Cover
-
-Covers the current slide.
-
-```js
-import {coverRight, coverLeft, coverLeftRight} from 'paraglider'
-
-coverLeft(document.querySelector('.coverLeft'))
-coverRight(document.querySelector('.coverRight'))
-coverLeftRight(document.querySelector('.coverLeftRight'))
-```
-
-### Options
-
-Defaults for the main plugin.
-
-* `classNames` `{object}`: Mapping of class names to be used by the plugin.
-* `classNames.pluginLoaded` `{string}`: Applied when the plugin has been loaded
-* `classNames.init` `{string}`: Applied when the plugin has been initialized. Removed on first interaction.
-* `classNames.slides` `{string}`: This element will be used to track touches. This is the wrapper around the slides.
-* `classNames.slide` `{string}`: Selector for each single slide.
-* `classNames.current` `{string}`: Applied to the currently visible slide
-* `classNames.previous` `{string}`: Applied to the previous slide in the queue
-* `classNames.next` `{string}`: Applied to the next slide in the queue
-* `onInit` `{(null|onInit)}`: Callback when the slider has been created.
-* `onDestroy` `{(null|onDestroy)}`: Callback when the slider has been destroyed.
-* `onSlide` `{(null|onSlide)}`: Callback while the slider is moving.
-* `onEnd` `{(null|onEnd)}`: Callback while the slider stopped moving.
-* `speed` `{number}`: Animation duration when using paging.
-* `spring` `{number}`: Animation duration when snapping.
-* `snapBackAt` `{number}`: Amount of distance needed to snap. [0, 1]
-* `threshold` `{number}`: Threshold of pixels until the sliding mechanisms is triggered.
-* `initialSlide` `{number}`: Initially visible slide
-* `visibleSlides` `{number}`: Amount of visible slides
-* `slideBy` `{number}`: Amount of slides to slide on interaction
-
-### Dist / CDN
-
-You can use this plugin as a global plugin. ([Demo](https://pixelass.github.io/paraglider/dist.html))
-
-`<script src="https://cdn.rawgit.com/pixelass/paraglider/<VERSION>/dist/paragliner.js"></script>`
-
-Example:
-
-* https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.js
-* https://cdn.rawgit.com/pixelass/paraglider/v2.1.0/dist/paraglider.min.js
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
 
