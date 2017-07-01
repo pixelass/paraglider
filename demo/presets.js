@@ -22,7 +22,7 @@ const classNames = {
   nextButton: styles.jsNext
 }
 
-belt(document.querySelector(`.${styles.belt}`), {classNames})
+belt(document.querySelector(`.${styles.belt}`), {classNames, loop: false})
 coverLeft(document.querySelector(`.${styles.coverLeft}`), {classNames})
 coverRight(document.querySelector(`.${styles.coverRight}`), {classNames})
 coverLeftRight(document.querySelector(`.${styles.coverLeftRight}`), {classNames})

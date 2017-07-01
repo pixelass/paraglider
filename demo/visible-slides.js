@@ -16,7 +16,18 @@ const multiCover = (glider, opts) => multiWrapper(glider, {
     })
   },
   onSlide(progress, {next, previous, current, rest}, slides, {slideBy}) {
-    if (previous !== null) {
+    if (next === null && previous === null) {
+      const percent = current[0] === 0 ? 100 : -100
+      let add = 0
+      if (percent < 0) {
+        current = current.filter((x, i) => i > 1)
+        add = 200
+      }
+      current.forEach((id, index) => {
+        slides[id].style.transform = `translate3d(${(index * 100) + add + (progress * percent)}%,0,0)`
+        slides[id].style.zIndex = 2
+      })
+    } else if (previous !== null) {
       current.forEach((id, index) => {
         slides[id].style.transform = `translate3d(${(index * 100) + (progress * 100)}%,0,0)`
         slides[id].style.zIndex = 2
@@ -69,7 +80,36 @@ const classNames = {
   nextButton: styles.jsNext
 }
 
-multiBelt($$(`.${styles.multi1}`), {classNames, visibleSlides: 2, slideBy: 1})
-multiBelt($$(`.${styles.multi2}`), {classNames, visibleSlides: 4, slideBy: 4})
-multiCover($$(`.${styles.multi3}`), {classNames, visibleSlides: 5, slideBy: 2})
-multiCover($$(`.${styles.multi4}`), {classNames, visibleSlides: 3, slideBy: 3})
+multiBelt($$(`.${styles.multi1}`), {
+  classNames,
+  visibleSlides: 2,
+  slideBy: 1,
+  loop: false,
+  addMultiClasses: {
+    previous: true,
+    current: true,
+    next: true
+  }
+})
+multiBelt($$(`.${styles.multi2}`), {
+  classNames,
+  visibleSlides: 4,
+  slideBy: 4,
+  loop: false,
+  addMultiClasses: {
+    previous: true,
+    current: true,
+    next: true
+  }
+})
+multiCover($$(`.${styles.multi3}`), {
+  classNames,
+  visibleSlides: 5,
+  slideBy: 2,
+  loop: false
+})
+multiCover($$(`.${styles.multi4}`), {
+  classNames,
+  visibleSlides: 3,
+  slideBy: 3
+})

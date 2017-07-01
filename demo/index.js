@@ -119,4 +119,3 @@ sliders.forEach((slider, sliderIndex) => {
     }
   )
 })
-
