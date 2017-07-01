@@ -254,11 +254,9 @@ class Glider {
   addInitClassNames() {
     const {classNames} = this.options
     this.el.classList.add(classNames.pluginLoaded)
-    if (this.state.init) {
-      this.slides.forEach(slide => {
-        slide.classList.add(classNames.init)
-      })
-    }
+    this.slides.forEach(slide => {
+      slide.classList.add(classNames.init)
+    })
     this.addClassNames()
   }
 
@@ -305,6 +303,7 @@ class Glider {
     if (e && 'preventDefault' in e) {
       e.preventDefault()
     }
+    /* istanbul ignore next */
     if (this.state.init) {
       this.setState({init: false})
       this.slides.forEach(slide => {
@@ -325,6 +324,7 @@ class Glider {
     if (e && 'preventDefault' in e) {
       e.preventDefault()
     }
+    /* istanbul ignore next */
     if (this.state.init) {
       this.setState({init: false})
       this.slides.forEach(slide => {
@@ -466,6 +466,7 @@ class Glider {
    */
   handleDown(e) {
     const clientX = this.getClientX(e)
+    /* istanbul ignore next */
     if (this.state.init) {
       this.slides.forEach(slide => {
         slide.classList.remove(this.options.classNames.init)
