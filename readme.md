@@ -62,8 +62,8 @@ yarn add paraglider
 You can use this plugin as a global plugin.
 
 ```html
-<script src="https://cdn.rawgit.com/pixelass/paraglider/v2.4.1/dist/paraglider.js"></script>
-<script src="https://cdn.rawgit.com/pixelass/paraglider/v2.4.1/dist/paraglider.min.js"></script>
+<script src="https://cdn.rawgit.com/pixelass/paraglider/v3.0.0/dist/paraglider.js"></script>
+<script src="https://cdn.rawgit.com/pixelass/paraglider/v3.0.0/dist/paraglider.min.js"></script>
 ```
 
 
