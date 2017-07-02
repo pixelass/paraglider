@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/pixelass/paraglider/compare/v2.3.0...v2.4.0) (2017-07-02)
+
+
+### Features
+
+* **dist:** Added data-wrapper ([467f987](https://github.com/pixelass/paraglider/commit/467f987))
+* **helpers:** preventdefault and parseObject ([44e4bd4](https://github.com/pixelass/paraglider/commit/44e4bd4))
+* **methods:** onDestory exposes options ([cef0995](https://github.com/pixelass/paraglider/commit/cef0995))
+* **methods:** return values on methods ([eb343e9](https://github.com/pixelass/paraglider/commit/eb343e9))
+* **presets:** Added new wrapper ([06a0600](https://github.com/pixelass/paraglider/commit/06a0600))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/pixelass/paraglider/compare/v2.2.0...v2.3.0) (2017-07-01)
 
