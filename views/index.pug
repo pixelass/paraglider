@@ -1,36 +1,162 @@
 extends _layout.pug
 include _mixins.pug
 
-block content
-  article
-    h2 Vertical blinds
-    div(class=classNames(styles.glider, styles.parallax))
-      +pagers()
-      +dots(5)
-      +slides(5, 'nature_')
-        div(class=classNames(styles.cubes))
-          - let slices = 18
-          while slices--
-            div(class=classNames(styles.cube))
+block main
 
-  article
-    h2 Horizontal blinds
-    div(class=classNames(styles.glider, styles.parallax))
-      +pagers()
-      +dots(5)
-      +slides(5, 'city_')
-        div(class=classNames(styles.cubes))
-          - let slices = 18
-          while slices--
-            div(class=classNames(styles.cube))
+  -
+    const imageData = [{
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Nighttime at Pyramid Lake',
+      description: 'I just got a Sony A7S and a Rokinon 14mm f2.8 lens, so I can go all out on my Nighttime in Nevada project, and this is from my first attempt at testing it out. It’s easily the most sophisticated camera that I’ve ever used, and I’m going to need to experiment with it for a while before I feel comfortable with getting the most out of its capabilities.',
+      link: 'https://flic.kr/p/qeMf2F',
+      image: 'panorama_1.jpg',
+      thumbnail: 'panorama_1_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Far Out at Mobias Arch',
+      description: 'I went out to the Alabama Hills of California’s Eastern Sierra to play around with some nighttime photography, and I used my new flashlight for some light painting.',
+      link: 'https://flic.kr/p/pfXbbx',
+      image: 'panorama_2.jpg',
+      thumbnail: 'panorama_2_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Nighttime at Pfeiffer Beach',
+      description: 'The mist, clouds, & humidity make it rough to do oceanside astrophotography, but here’s my attempt at it from Big Sur’s Pfeiffer Beach.',
+      link: 'https://flic.kr/p/qqEnNm',
+      image: 'panorama_3.jpg',
+      thumbnail: 'panorama_3_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Star Lake, California',
+      description: 'In the middle of July, I attempted a thru-hike on the Tahoe Rim Trail, and everything was going great until I slipped on a rock and severly dislocated my left index finger while trying to get up a side-trail to Mt. Tallac before sunset. It was a great week out in the backcountry, and even though I’m typing this one-hanfed I am glad I lugged around the heavy camera equipment for a week. Next year, I’ll try to finish it. Anyway, here’s one from the second night on the trail when I camped at Star Lake.',
+      link: 'https://flic.kr/p/wrkpBC',
+      image: 'panorama_4.jpg',
+      thumbnail: 'panorama_4_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Milky Way over Barn in Modoc County, California',
+      description: 'My supermoon photos were kind of meh, but at least I found this old barn to photograph during my long drive home.',
+      link: 'https://flic.kr/p/yU4xgc',
+      image: 'panorama_5.jpg',
+      thumbnail: 'panorama_5_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Tahoe City Nighttime Panorama',
+      description: 'I love photographing the Milky Way during spring because it will make a natural arch across the sky.',
+      link: 'https://flic.kr/p/F8LggJ',
+      image: 'panorama_6.jpg',
+      thumbnail: 'panorama_6_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Lake Tahoe’s Bonsai Rock & Milky Way',
+      description: 'My favorite female vocalist, Janis Joplin, used to sing, "Honey, get it while you can," so I thought about that when I noticed that the Milky Way would be above the horizon line for about an hour before moonrise would wash it out. I set my alarm for midnight and drove over to lovely Lake Tahoe, and thankfully nobody else was down at Bonsai Rock, and everything worked out.',
+      link: 'https://flic.kr/p/GE4fdh',
+      image: 'panorama_7.jpg',
+      thumbnail: 'panorama_7_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Starry Night at Utah’s Bryce Canyon National Park',
+      description: 'Utah’s Bryce Canyon National Park is at a high altitude that really allows the amazing Milky Way Galaxy to be seen during a clear night.',
+      link: 'https://flic.kr/p/HV59br',
+      image: 'panorama_8.jpg',
+      thumbnail: 'panorama_8_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Milky Way Panorama over Lake Tahoe’s Emerald Bay',
+      description: 'It’s been on my list for a while, so it was great to finally head over to Lake Tahoe’s Emerald Bay State Park for some Milky Way photography.',
+      link: 'https://flic.kr/p/TggHMR',
+      image: 'panorama_9.jpg',
+      thumbnail: 'panorama_9_thumbnail.jpg'
+    },
+    {
+      artist: 'Beau Rogers',
+      artistLink: 'https://www.flickr.com/photos/beaurogers/',
+      name: 'Milky Way over Nevada’s Wee Thump Joshua Tree Wilderness',
+      description: 'I went to Nevada’s Wee Thump Joshua Tree Wilderness a couple years ago during spring break, but I was too much of a noob to know that the Milky Way would be out at around 3AM. Thankfully, this time I knew better and didn’t arrive until about 2:30ish. I shot some timelapse footage and even flew my drone for a bit after sunrise, and I’ll have something about it on YouTube in a week or so...',
+      link: 'https://flic.kr/p/SLRBVq',
+      image: 'panorama_10.jpg',
+      thumbnail: 'panorama_10_thumbnail.jpg'
+    }]
+  article(class=layout.article)
+    +slideshow(imageData.length, {
+      speed: 600,
+      spring: 300,
+      addClasses: {current: true},
+      addMultiClasses: {},
+      easing: 'easeInOutSine',
+      imageData: imageData,
+      loop: 0,
+      thumbnails: true,
+      pagers: true,
+      nav: true
+    })
 
-  article
-    h2 Squares
-    div(class=classNames(styles.glider, styles.parallax))
-      +pagers()
-      +dots(5)
-      +slides(5, 'sea_')
-        div(class=classNames(styles.cubes))
-          - let slices = 18
-          while slices--
-            div(class=classNames(styles.cube))
+  article(class=layout.article)
+    +slideshow(~~(imageData.length / 2), {
+      speed: 600,
+      spring: 300,
+      addClasses: {current: true},
+      addMultiClasses: {},
+      imageData: imageData,
+      pagers: true,
+      thumbnails: true
+    })
+
+  article(class=layout.article)
+    +slideshow(~~(imageData.length / 3), {
+      speed: 600,
+      spring: 300,
+      addClasses: {current: true},
+      addMultiClasses: {},
+      imageData: imageData,
+      nav: true,
+      pagers: true
+    })
+
+  article(class=layout.article)
+    +slideshow(~~(imageData.length / 1.5), {
+      speed: 600,
+      spring: 300,
+      addClasses: {current: true},
+      addMultiClasses: {},
+      imageData: imageData,
+      pagers: true
+    })
+
+  article(class=layout.article)
+    +slideshow(~~(imageData.length / 1.2), {
+      speed: 600,
+      spring: 300,
+      addClasses: {current: true},
+      addMultiClasses: {},
+      imageData: imageData,
+      nav: true
+    })
+
+
+  article(class=layout.article)
+    +slideshow(~~(imageData.length / 1.2), {
+      speed: 600,
+      spring: 300,
+      addClasses: {current: true},
+      addMultiClasses: {},
+      imageData: imageData
+    })
+

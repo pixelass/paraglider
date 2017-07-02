@@ -1,0 +1,309 @@
+/***********
+ * Composers *
+ ***********/
+.wrapper {
+  position: relative;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.fit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.fill {
+  flex: 1;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.centerX {
+  justify-content: center;
+}
+
+.centerY {
+  align-items: center;
+  align-content: center;
+}
+
+.centerCenter {
+  composes: centerX centerY;
+}
+
+.betweenX {
+  justify-content: space-between;
+}
+
+.endY {
+  align-items: flex-end;
+  align-content: flex-end;
+}
+
+.endX {
+  justify-content: flex-end;
+}
+
+/*************
+ * Slideshow *
+ *************/
+
+:root {
+  --pager-size: 1rem;
+  --thumb-size: 5rem;
+  --nav-size: 3rem;
+  --width: 100vw;
+  --max-width: 960;
+  --min-width: 320;
+  --theme-color-default: hsl(0, 0%, 50%);
+  --theme-color-lightest: color(var(--theme-color-default) l(90%));
+  --theme-color-lighter: color(var(--theme-color-default) l(70%));
+  --theme-color-darker: color(var(--theme-color-default) l(30%));
+  --theme-color-darkest: color(var(--theme-color-default) l(10%));
+  --min-font-size: 16;
+  --max-font-size: 24;
+}
+
+.slideshow {
+  composes: jsSlideshow from './hooks.css';
+  composes: flex vertical wrapper;
+  width: var(--width);
+  max-width: calc(var(--max-width) * 1px);
+  min-width: calc(var(--min-width) * 1px);
+  margin: auto;
+
+  & img {
+    max-width: 100%;
+  }
+
+  & a {
+    text-decoration: none;
+  }
+
+  /* Slideshow States */
+
+  &.isLoaded {
+    /* plugin loaded */
+  }
+
+  &.isInit {
+    /* initialized
+     * removed after first interaction
+     */
+  }
+}
+
+/* Slides */
+
+.slides {
+  composes: jsSlides from './hooks.css';
+  composes: fill flex wrapper;
+  z-index: 1;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Dragging State */
+
+.isDraggable {
+  cursor: grab;
+}
+
+.isDragging {
+  cursor: grabbing;
+
+  & * {
+    cursor: grabbing;
+  }
+}
+
+.slide {
+  composes: jsSlide from './hooks.css';
+  composes: fit;
+  display: block;
+  margin: 0;
+  padding: 0;
+  will-change: transform;
+
+  /* Slide States */
+
+  &.isCurrent {
+    /* current slide */
+    position: relative;
+  }
+
+  &.isPrevious {
+    /* previous slide */
+  }
+
+  &.isNext {
+    /* next slide */
+  }
+}
+
+.image,
+.imageWrapper {
+  display: block;
+}
+
+/* Pagers */
+
+.pagers {
+  composes: flex wrap centerX;
+  background: var(--theme-color-lightest);
+}
+
+.pager {
+  composes: jsPager from './hooks.css';
+  composes: flex centerCenter;
+  margin: 0.25em 0.125em;
+  color: var(--theme-color-darker);
+
+  &:hover {
+    color: var(--theme-color-darkest);
+  }
+
+  /* Pager states */
+
+  &.isActive {
+    /* active pager */
+  }
+}
+
+.dot {
+  composes: jsDot from './hooks.css';
+  display: block;
+  font-size: var(--pager-size);
+  height: 1em;
+  width: 1em;
+  margin: 0.5em;
+  border-radius: 50%;
+  background: currentcolor;
+  will-change: transform, opacity;
+}
+
+.thumb {
+  composes: jsDot from './hooks.css';
+  display: block;
+  font-size: var(--thumb-size);
+  width: 1em;
+  will-change: transform, opacity;
+}
+
+/* Navigation */
+
+.nav {
+  composes: fit flex hidden betweenX centerY;
+  z-index: 10;
+  mix-blend-mode: screen;
+
+  @media (max-width: 30em) {
+    display: none;
+  }
+}
+
+.button {
+  composes: flex centerCenter visible;
+  height: 100%;
+  font-size: var(--nav-size);
+  color: rgba(255, 255, 255, 0.75);
+
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  /* Button states */
+
+  &.isDisabled {
+    /* disabled button */
+    cursor: default;
+    opacity: 0.25;
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+.previousButton {
+  composes: jsPrev from './hooks.css';
+  composes: button;
+}
+
+.nextButton {
+  composes: jsNext from './hooks.css';
+  composes: button;
+}
+
+.caption {
+  composes: fit flex vertical endX hidden;
+  font-size: 0.7rem;
+
+  @media screen and (min-width: 20rem) {
+    font-size: calc(0.7rem + 0.7 * ((100vw - 20rem) / 30));
+  }
+
+  @media screen and (min-width: 50rem) {
+    font-size: 1.4rem;
+  }
+}
+
+.captionBackground {
+  composes: jsCaption from './hooks.css';
+  composes: visible;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  color: #fff;
+  padding: 1em calc(var(--nav-size) + 1em);
+  overflow: hidden;
+  will-change: transform;
+
+  @media (max-width: 30em) {
+    padding: 1em;
+  }
+}
+
+.headline {
+  composes: jsHeadline from './hooks.css';
+  font-weight: lighter;
+  font-size: 1.5em;
+  margin: 0 0 1rem;
+  will-change: opacity;
+}
+
+.subline {
+  composes: jsSubline from './hooks.css';
+  font-weight: lighter;
+  font-size: 1.2em;
+  margin: 0 0 1rem;
+  will-change: opacity;
+}
+
+.description {
+  composes: jsDescription from './hooks.css';
+  font-size: 0.7em;
+  will-change: transform;
+
+  @media (max-width: 30em) {
+    display: none;
+  }
+}
+
+.artist {
+  font-weight: bolder;
+}

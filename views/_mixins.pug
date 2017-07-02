@@ -1,30 +1,64 @@
 
 
-mixin arrow(dir)
-  if dir == 'next'
-    svg(style="width:1em;height:1em" viewBox="0 0 24 24")
+mixin arrow(dirOrPath)
+  svg(style="width:1em;height:1em" viewBox="0 0 24 24")
+    if dirOrPath == 'right'
       path(fill="currentcolor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z")
-  else if dir == 'prev'
-    svg(style="width:1em;height:1em" viewBox="0 0 24 24")
+    else if dirOrPath == 'left'
        path(fill="currentcolor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z")
+    else
+       path(fill="currentcolor" d=dirOrPath)
 
-mixin pagers()
-  nav(class=classNames(styles.pagers))
-    a(href='#' class=classNames(styles.prev, styles.jsPrev))
-      +arrow('prev')
-    a(href='#' class=classNames(styles.next, styles.jsNext))
-      +arrow('next')
+mixin nav()
+  nav(class=slideshow.nav)
+    a(href='#' class=slideshow.previousButton)
+      +arrow('left')
+    a(href='#' class=slideshow.nextButton)
+      +arrow('right')
 
-mixin dots(n)
-  nav(class=classNames(styles.dots))
-    - counter = 0
-    while ++counter <= n
-      a(href='#' class=classNames(styles.dot, styles.jsDot))
+mixin pagers(n, imageData)
+  nav(class=slideshow.pagers)
+    - let counter = -1
+    while ++counter < n
+      a(href='#' class=slideshow.pager)
+        if imageData
+          - const item = imageData[counter]
+          img(class=slideshow.thumb src=`assets/${item.image}`)
+        else
+          span(class=slideshow.dot)
 
-mixin slides(n, prefix)
-  section(class=classNames(styles.slides, styles.jsWrapper))
-    - let counter = 0
-    while ++counter <= n
-      article(class=classNames(styles.slide, styles.jsSlide) style={'background-image': `url("assets/${prefix}${(counter % 5) + 1}.jpg")`})
-        if block
-          block
+mixin slides(n, imageData, nav)
+  section(class=slideshow.slides)
+    - let counter = -1
+    while ++counter < n
+      figure(class=slideshow.slide)
+        if imageData
+          - const item = imageData[counter]
+            a(class=slideshow.imageWrapper href=item.link)
+              img(class=slideshow.image src=`assets/${item.image}`)
+          figcaption(class=slideshow.caption)
+            div(class=slideshow.captionBackground)
+              h1(class=slideshow.headline)= item.name
+              h3(class=slideshow.subline) by&nbsp;
+                a(class=slideshow.artist href=item.artistLink)= item.artist
+              p(class=slideshow.description)=item.description
+
+    if nav
+      +nav
+
+mixin slideshow(items, options)
+  div(class=slideshow.slideshow
+      data-speed=options.speed
+      data-spring=options.spring
+      data-autoplay=options.autoplay
+      data-loop=options.loop
+      data-easing=options.easing
+      data-enable-touch=options.enableTouch
+      data-enable-swipe=options.enableSwipe
+      data-add-classes=options.addClasses
+      data-add-multi-classes=options.addMultiClasses)
+    +slides(items, options.imageData, options.nav)
+      if block
+        block
+    if options.pagers
+      +pagers(items, options.thumbnails ? options.imageData : false)

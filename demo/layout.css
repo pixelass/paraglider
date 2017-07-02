@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  min-width: 320px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: currentcolor;
+}
+
+:root {
+  --theme-color-default: hsl(220, 20%, 50%);
+  --theme-color-lightest: color(var(--theme-color-default) l(90%));
+  --theme-color-lighter: color(var(--theme-color-default) l(70%));
+  --theme-color-darker: color(var(--theme-color-default) l(30%));
+  --theme-color-darkest: color(var(--theme-color-default) l(10%));
+}
+
+.header {
+  background: var(--theme-color-darker);
+  color: var(--theme-color-lightest);
+
+  & h1 {
+    font-weight: lighter;
+  }
+
+  & a {
+    text-decoration: none;
+  }
+}
+
+.main {
+  flex: 1;
+  background: var(--theme-color-lighter);
+  color: var(--theme-color-darkest);
+}
+
+.footer {
+  background: var(--theme-color-default);
+  color: var(--theme-color-lightest);
+}
+
+.nav {
+  display: flex;
+}
+
+.navLink {
+  border: 1px solid;
+  margin: 0.35em;
+  flex: 1;
+  text-align: center;
+  color: currentcolor;
+  text-decoration: none;
+}
+
+.article {
+  margin: 1em auto;
+}

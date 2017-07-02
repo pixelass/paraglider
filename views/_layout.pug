@@ -1,8 +1,9 @@
 -
-  const classNames = (...names) => names.join(' ')
-  const {styles} = data
   const timestamp = Date.now()
   const currentYear = (new Date()).getFullYear()
+  const layout = data.styles['demo/layout.css']
+  const slideshow = data.styles['demo/slideshow.css']
+  const local = data.styles[`demo/${data.file}.css`]
 doctype
 html
   head
@@ -12,11 +13,24 @@ html
     title= `${data.fileName} | ${data.name} | ${data.description}`
     link(rel="icon"  type="image/png"  href="favico.png")
     link(rel="stylesheet" href=`${data.fileName}.css?${timestamp}`)
+    block head
   body
-    //- header
-      h1= data.name
-    main
-      block content
-    //- footer
+    header(class=layout.header)
+      h1
+        a(href="index.html")= data.name
+      nav(class=layout.nav)
+        -
+          const files = data.files.filter(x => x !== 'index')
+                                  .sort((a, b) => b[0] - a[0])
+        each file in files
+          -
+            const name = file.split('')
+                             .map((x, i) => i === 0 ? x.toUpperCase() : x)
+                             .join('')
+          a(href=`${file}.html` class=layout.link)= name
+    main(class=layout.main)
+      block main
+    footer(class=layout.footer)
       p= `Copyright © ${currentYear} by Gregor Adams`
+    block scripts
     script(src=`${data.fileName}.js?${timestamp}`)
