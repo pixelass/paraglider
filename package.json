@@ -59,7 +59,9 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "easing-utils": "^0.0.7"
+  },
   "devDependencies": {
     "abcq": "^0.2.2",
     "ava": "^0.20.0",
@@ -78,7 +80,6 @@
     "cross-env": "^5.0.1",
     "css-modulesify": "^0.28.0",
     "cz-conventional-changelog": "^2.0.0",
-    "easing-utils": "^0.0.7",
     "errorify": "^0.3.1",
     "esdoc": "^0.5.2",
     "eslint-plugin-spellcheck": "^0.0.8",
@@ -127,7 +128,18 @@
       [
         "env",
         {
-          "loose": true
+          "loose": true,
+          "targets": {
+            "browsers": [
+              "ie 11",
+              "last 2 chrome versions",
+              "last 2 safari versions",
+              "last 2 firefox versions",
+              "last 2 edge versions",
+              "last 2 ios versions",
+              "last 2 chromeandroid versions"
+            ]
+          }
         }
       ]
     ],
@@ -161,6 +173,9 @@
             "Timeline",
             "Init",
             "prev",
+            "dragstart",
+            "draggable",
+            "mouseup",
             "Gregor",
             "Adams",
             "greg",
@@ -200,9 +215,16 @@
       "plugin/no-unsupported-browser-features": [
         true,
         {
-          "ignore": [
-            "flexbox",
-            "transforms3d"
+          "severity": "warning",
+          "ignore": [],
+          "browsers": [
+            "ie 11",
+            "last 2 chrome versions",
+            "last 2 chromeandroid versions",
+            "last 2 edge versions",
+            "last 2 ios versions",
+            "last 2 safari versions",
+            "last 2 firefox versions"
           ]
         }
       ],
