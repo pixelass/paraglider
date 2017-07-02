@@ -176,7 +176,7 @@ const arrayOrValue = arr => arr.length > 1 ? arr : arr[0]
 /* istanbul ignore next */
 /**
  * Parse dataset with nested object strings to a true object
- * @param {dataset} obj
+ * @param {dataset} dataset
  * @returns {object} valid JSON
  * @example
  * const data = parseObject(document.querySelector('.foo').dataset)
