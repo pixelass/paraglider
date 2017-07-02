@@ -1,4 +1,6 @@
-body {
+.l a {
+    text-decoration: none;
+}body {
   margin: 0;
   font-family: sans-serif;
   min-width: 320px;
@@ -32,11 +34,7 @@ a {
 }
 
 .l h1 {
-  font-weight: lighter;
-}
-
-.l a {
-  text-decoration: none;
+    font-weight: lighter;
 }
 
 .m {
@@ -114,6 +112,32 @@ a {
 
 .k {
   /* description */
+}
+.X.Y {
+    /* disabled button */
+    cursor: default;
+    opacity: 0.25;
+    color: rgba(255, 255, 255, 1);
+}
+.S.T {
+    /* active pager */
+}
+.L.O {
+    /* next slide */
+}
+.L.N {
+    /* previous slide */
+}
+.F.H {
+    /* initialized
+     * removed after first interaction
+     */
+}
+.F.G {
+    /* plugin loaded */
+}
+.F a {
+    text-decoration: none;
 }
 /***********
  * Composers *
@@ -213,23 +237,7 @@ a {
 }
 
 .F img {
-  max-width: 100%;
-}
-
-.F a {
-  text-decoration: none;
-}
-
-.F.G {
-
-  /* plugin loaded */
-}
-
-.F.H {
-
-  /* initialized
-     * removed after first interaction
-     */
+    max-width: 100%;
 }
 
 /* Slides */
@@ -256,8 +264,8 @@ a {
 }
 
 .K * {
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
 }
 
 .L {
@@ -270,19 +278,8 @@ a {
 }
 
 .L.M {
-
-  /* current slide */
-  position: relative;
-}
-
-.L.N {
-
-  /* previous slide */
-}
-
-.L.O {
-
-  /* next slide */
+    /* current slide */
+    position: relative;
 }
 
 .P,
@@ -304,12 +301,7 @@ a {
 }
 
 .S:hover {
-  color: rgb(26, 26, 26);
-}
-
-.S.T {
-
-  /* active pager */
+    color: rgb(26, 26, 26);
 }
 
 .U {
@@ -338,9 +330,9 @@ a {
 }
 
 @media (max-width: 30em) {
-  .W {
+    .W {
     display: none;
-  }
+    }
   }
 
 .X {
@@ -352,15 +344,7 @@ a {
 }
 
 .X:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.X.Y {
-
-  /* disabled button */
-  cursor: default;
-  opacity: 0.25;
-  color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .Z {
@@ -374,15 +358,15 @@ a {
 }
 
 @media screen and (min-width: 20rem) {
-  .ab {
+    .ab {
     font-size: calc(0.7rem + 0.7 * ((100vw - 20rem) / 30));
-  }
+    }
   }
 
 @media screen and (min-width: 50rem) {
-  .ab {
+    .ab {
     font-size: 1.4rem;
-  }
+    }
   }
 
 .ac {
@@ -394,9 +378,9 @@ a {
 }
 
 @media (max-width: 30em) {
-  .ac {
+    .ac {
     padding: 1em;
-  }
+    }
   }
 
 .ad {
@@ -419,9 +403,9 @@ a {
 }
 
 @media (max-width: 30em) {
-  .af {
+    .af {
     display: none;
-  }
+    }
   }
 
 .ag {
