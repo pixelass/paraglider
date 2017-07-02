@@ -124,11 +124,14 @@
   },
   "babel": {
     "presets": [
+      "es2015",
       "stage-2",
       [
         "env",
         {
           "loose": true,
+          "debug": true,
+          "useBuiltIns": true,
           "targets": {
             "browsers": [
               "ie 11",
@@ -142,9 +145,6 @@
           }
         }
       ]
-    ],
-    "plugins": [
-      "transform-runtime"
     ],
     "env": {
       "development": {
