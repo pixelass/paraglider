@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/pixelass/paraglider/compare/v2.4.0...v3.0.0) (2017-07-02)
+
+
+### build
+
+* **polyfills:** don't polyfill ([7358836](https://github.com/pixelass/paraglider/commit/7358836))
+
+
+### Code Refactoring
+
+* **dist:** dist is generated from main ([e831461](https://github.com/pixelass/paraglider/commit/e831461))
+* **exports:** plugin only exports API ([48a0cef](https://github.com/pixelass/paraglider/commit/48a0cef))
+
+
+### BREAKING CHANGES
+
+* **dist:** Dist only exposes API. No presets or wrappers
+* **exports:** No access to presets in main
+* **polyfills:** no polyfills in dist versions
+
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/pixelass/paraglider/compare/v2.3.0...v2.4.0) (2017-07-02)
 
