@@ -5,7 +5,7 @@
     "objectRestSpread": true
   },
   "title": "Paraglider",
-  "access": ["public", "protected"],
+  "access": ["public", "private"],
   "manual": {
     "asset": "./manual/assets",
     "changelog": ["./CHANGELOG.md"],
