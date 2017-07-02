@@ -1,15 +1,11 @@
 /**
- * Wraps Paraglider to apply pagers and navigation buttons.
- * This wrapper simplifies the usage of Paraglider by offering some basic
- * functionality.
- *
- * @file presets/wrapper.js
+ * @file presets/multi-wrapper.js
  * @module  presets
  * @author Gregor Adams <greg@pixelass.com>
  */
 
 import Glider from '../glider'
-import {PRESET_DEFAULTS, PLUGIN_DEFAULTS} from '../config'
+import {PRESET_DEFAULTS} from '../config'
 import {
   findFirst as $$
 } from '../helpers'
@@ -34,7 +30,6 @@ const multiWrapper = (glider, opts) => {
   // Prepare the options to ensure correct behavior
   // `slideBy` must be smaller or equal to `visibleSlides` and greater or equal to `1`
   const preparedOptions = {
-    ...PLUGIN_DEFAULTS,
     ...PRESET_DEFAULTS,
     ...opts
   }

@@ -1,15 +1,11 @@
 /**
- * Wraps Paraglider to apply pagers and navigation buttons.
- * This wrapper simplifies the usage of Paraglider by offering some basic
- * functionality.
- *
  * @file presets/wrapper.js
  * @module  presets
  * @author Gregor Adams <greg@pixelass.com>
  */
 
 import Glider from '../glider'
-import {PRESET_DEFAULTS, PLUGIN_DEFAULTS} from '../config'
+import {PRESET_DEFAULTS} from '../config'
 import {
   findAll as $,
   findFirst as $$
@@ -19,7 +15,7 @@ import {
  * Simple wrapper including pagers and navigation arrows.
  *
  * Use this helper to create custom sliders with pager dots and arrows, to
- * navigate to diferent slides.
+ * navigate to different slides.
  * The options are extended by additional class names.
  * @param {Element} glider
  * @param {PRESET_DEFAULTS} opts
@@ -33,7 +29,6 @@ const wrapper = (glider, opts) => {
   const nextButton = $$(`.${opts.classNames.nextButton}`, glider)
   const prevButton = $$(`.${opts.classNames.prevButton}`, glider)
   const options = {
-    ...PLUGIN_DEFAULTS,
     ...PRESET_DEFAULTS,
     ...opts,
     onSlide(progress, {next, previous, current, rest}, slides) {
