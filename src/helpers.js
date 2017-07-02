@@ -173,6 +173,41 @@ const modLoop = (current, addition, length) =>
  */
 const arrayOrValue = arr => arr.length > 1 ? arr : arr[0]
 
+/* istanbul ignore next */
+/**
+ * Parse dataset with nested object strings to a true object
+ * @param {dataset} obj
+ * @returns {object} valid JSON
+ * @example
+ * const data = parseObject(document.querySelector('.foo').dataset)
+ */
+const parseObject = dataset => {
+  const obj = {}
+  Object.keys(dataset).forEach(key => {
+    let value = dataset[key]
+    try {
+      value = isNaN(value) ? JSON.parse(value) : Number(value)
+    } catch (err) {
+      // Ignore error
+    }
+    obj[key] = value
+  })
+  return obj
+}
+
+/* istanbul ignore next */
+/**
+ * Prevents default event
+ * @param {event} e
+ * @example
+ * el.addEventListener('mousemove', preventDefault)
+ * el.addEventListener('dragstart', e => {
+ *   preventDefault(e)
+ *   // ...
+ * })
+ */
+const preventDefault = e => e.preventDefault()
+
 export {
   findAll,
   findFirst,
@@ -180,5 +215,7 @@ export {
   animate,
   modLoop,
   eitherOr,
-  arrayOrValue
+  arrayOrValue,
+  parseObject,
+  preventDefault
 }
