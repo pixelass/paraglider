@@ -32,7 +32,9 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseObject">parseObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-preventDefault">preventDefault</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
@@ -44,6 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dataWrapper">dataWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
@@ -128,41 +131,7 @@
 </tbody>
 </table>
 </div>
-<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-member-animation">animation</a></span></span><span data-ice="signature">: <span>loop</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Animation flag.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
+
 <div data-ice="methodSummary"><h2>Method Summary</h2><table class="summary" data-ice="summary">
   <thead><tr><td data-ice="title" colspan="3">Public Methods</td></tr></thead>
   <tbody>
@@ -208,7 +177,7 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-goTo">goTo</a></span></span><span data-ice="signature">(n: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-goTo">goTo</a></span></span><span data-ice="signature">(n: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -264,7 +233,7 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-nextSlide">nextSlide</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-nextSlide">nextSlide</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -292,7 +261,7 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-prevSlide">prevSlide</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-prevSlide">prevSlide</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -396,53 +365,7 @@ effects like animating SVGs or drawing on a canvas.</p>
   
 </div>
 </div>
-<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-animation">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span data-ice="name">animation</span><span data-ice="signature">: <span>loop</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/glider/index.js.html#lineNumber379">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Animation flag. Calls the animation and stores the function to allow <code>cancelAnimationFrame</code></p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
@@ -497,11 +420,11 @@ effects like animating SVGs or drawing on a canvas.</p>
     
     
     
-    <span data-ice="name">goTo</span><span data-ice="signature">(n: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>)</span>
+    <span data-ice="name">goTo</span><span data-ice="signature">(n: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/glider/index.js.html#lineNumber343">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/glider/index.js.html#lineNumber345">source</a></span></span>
     </span>
   </h3>
 
@@ -533,7 +456,19 @@ effects like animating SVGs or drawing on a canvas.</p>
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -622,11 +557,11 @@ selectors</p>
     
     
     
-    <span data-ice="name">nextSlide</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
+    <span data-ice="name">nextSlide</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/glider/index.js.html#lineNumber303">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/glider/index.js.html#lineNumber301">source</a></span></span>
     </span>
   </h3>
 
@@ -660,7 +595,19 @@ selectors</p>
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -685,7 +632,7 @@ selectors</p>
     
     
     
-    <span data-ice="name">prevSlide</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
+    <span data-ice="name">prevSlide</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -723,7 +670,19 @@ selectors</p>
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 

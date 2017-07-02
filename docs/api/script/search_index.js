@@ -42,6 +42,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "paraglider/src/presets/data-wrapper.js~datawrapper",
+    "function/index.html#static-function-dataWrapper",
+    "<span>dataWrapper</span> <span class=\"search-result-import-path\">paraglider/src/presets/data-wrapper.js</span>",
+    "function"
+  ],
+  [
     "paraglider/src/presets/multi-belt.js~multibelt",
     "function/index.html#static-function-multiBelt",
     "<span>multiBelt</span> <span class=\"search-result-import-path\">paraglider/src/presets/multi-belt.js</span>",
@@ -51,6 +57,18 @@ window.esdocSearchIndex = [
     "paraglider/src/presets/multi-wrapper.js~multiwrapper",
     "function/index.html#static-function-multiWrapper",
     "<span>multiWrapper</span> <span class=\"search-result-import-path\">paraglider/src/presets/multi-wrapper.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~parseobject",
+    "function/index.html#static-function-parseObject",
+    "<span>parseObject</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~preventdefault",
+    "function/index.html#static-function-preventDefault",
+    "<span>preventDefault</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
     "function"
   ],
   [
@@ -408,12 +426,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/glider/index.js~glider#animation",
-    "class/src/glider/index.js~Glider.html#instance-member-animation",
-    "src/glider/index.js~Glider#animation",
-    "member"
-  ],
-  [
     "src/glider/index.js~glider#constructor",
     "class/src/glider/index.js~Glider.html#instance-constructor-constructor",
     "src/glider/index.js~Glider#constructor",
@@ -519,6 +531,12 @@ window.esdocSearchIndex = [
     "src/presets/cover-right.js",
     "file/src/presets/cover-right.js.html",
     "src/presets/cover-right.js",
+    "file"
+  ],
+  [
+    "src/presets/data-wrapper.js",
+    "file/src/presets/data-wrapper.js.html",
+    "src/presets/data-wrapper.js",
     "file"
   ],
   [

@@ -1,11 +1,11 @@
 {
   "coverage": "100%",
-  "expectCount": 17,
-  "actualCount": 17,
+  "expectCount": 19,
+  "actualCount": 19,
   "files": {
     "src/glider/index.js": {
-      "expectCount": 8,
-      "actualCount": 8,
+      "expectCount": 7,
+      "actualCount": 7,
       "undocumentLines": []
     },
     "src/config.js": {
@@ -33,6 +33,11 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "src/presets/data-wrapper.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "src/presets/multi-belt.js": {
       "expectCount": 1,
       "actualCount": 1,
@@ -41,6 +46,11 @@
     "src/presets/multi-wrapper.js": {
       "expectCount": 1,
       "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/helpers.js": {
+      "expectCount": 2,
+      "actualCount": 2,
       "undocumentLines": []
     },
     "src/presets/wrapper.js": {

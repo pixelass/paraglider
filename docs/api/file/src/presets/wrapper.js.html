@@ -32,7 +32,9 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseObject">parseObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-preventDefault">preventDefault</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
@@ -44,6 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dataWrapper">dataWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
@@ -53,17 +56,13 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/presets/wrapper.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * Wraps Paraglider to apply pagers and navigation buttons.
- * This wrapper simplifies the usage of Paraglider by offering some basic
- * functionality.
- *
  * @file presets/wrapper.js
  * @module  presets
  * @author Gregor Adams &lt;greg@pixelass.com&gt;
  */
 
 import Glider from &apos;../glider&apos;
-import {PRESET_DEFAULTS, PLUGIN_DEFAULTS} from &apos;../config&apos;
+import {PRESET_DEFAULTS} from &apos;../config&apos;
 import {
   findAll as $,
   findFirst as $$
@@ -73,7 +72,7 @@ import {
  * Simple wrapper including pagers and navigation arrows.
  *
  * Use this helper to create custom sliders with pager dots and arrows, to
- * navigate to diferent slides.
+ * navigate to different slides.
  * The options are extended by additional class names.
  * @param {Element} glider
  * @param {PRESET_DEFAULTS} opts
@@ -87,7 +86,6 @@ const wrapper = (glider, opts) =&gt; {
   const nextButton = $$(`.${opts.classNames.nextButton}`, glider)
   const prevButton = $$(`.${opts.classNames.prevButton}`, glider)
   const options = {
-    ...PLUGIN_DEFAULTS,
     ...PRESET_DEFAULTS,
     ...opts,
     onSlide(progress, {next, previous, current, rest}, slides) {

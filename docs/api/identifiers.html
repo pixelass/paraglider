@@ -32,7 +32,9 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseObject">parseObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-preventDefault">preventDefault</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
@@ -44,6 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dataWrapper">dataWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
@@ -217,6 +220,34 @@
         <p>
           
           
+          <span data-ice="name"><span><a href="function/index.html#static-function-dataWrapper">dataWrapper</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span>DATA_DEFAULTS</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Wraps Paraglider to apply pagers and navigation buttons and autoplay.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
           <span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span><span data-ice="signature">(glider: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span>, opts: <span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></span>
         </p>
       </div>
@@ -252,6 +283,62 @@
         
         
         <div data-ice="description"><p>Wrapper including navigation arrows.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-parseObject">parseObject</a></span></span><span data-ice="signature">(dataset: <span>dataset</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Parse dataset with nested object strings to a true object</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="function/index.html#static-function-preventDefault">preventDefault</a></span></span><span data-ice="signature">(e: <span>event</span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Prevents default event</p>
 </div>
       </div>
     </td>

@@ -32,7 +32,9 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseObject">parseObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-preventDefault">preventDefault</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
@@ -44,6 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dataWrapper">dataWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
@@ -177,9 +180,9 @@ const toggleClass = (el, className, bool = null) =&gt; {
  * Returns either the first or second value depending on truthness.
  * Any number is considered true.
  * @private
- * @param {*} either
- * @param {*} or
- * @returns {*} One of the two input values
+ * @param {any} either
+ * @param {any} or
+ * @returns {any} One of the two input values
  * @example
  * eiterOr(0, 4) // =&gt; 0
  * eiterOr(&apos;0&apos;, 4) // =&gt; &apos;0&apos;
@@ -216,17 +219,51 @@ const modLoop = (current, addition, length) =&gt;
  * Takes an array and returns a single value if it is the only item.
  * Otherwise it returns the original array.
  * @private
- * @param {array} current Current value
- * @param {number} addition Addition to the current value
- * @param {number} length Maximum value.
- * @returns {number} Resulting number
+ * @param {array} arr Array to check
+ * @returns {?any}
  * @example
  * arrayOrValue([null, 1, 2]) // =&gt; [null, 1, 2]
  * arrayOrValue([1]) // =&gt; 1
+ * arrayOrValue([&apos;a&apos;]) // =&gt; &apos;a&apos;
  * arrayOrValue([1,&apos;1&apos;]) // =&gt; [1,&apos;1&apos;]
  * arrayOrValue([null]) // =&gt; null
  */
 const arrayOrValue = arr =&gt; arr.length &gt; 1 ? arr : arr[0]
+
+/* istanbul ignore next */
+/**
+ * Parse dataset with nested object strings to a true object
+ * @param {dataset} dataset
+ * @returns {object} valid JSON
+ * @example
+ * const data = parseObject(document.querySelector(&apos;.foo&apos;).dataset)
+ */
+const parseObject = dataset =&gt; {
+  const obj = {}
+  Object.keys(dataset).forEach(key =&gt; {
+    let value = dataset[key]
+    try {
+      value = isNaN(value) ? JSON.parse(value) : Number(value)
+    } catch (err) {
+      // Ignore error
+    }
+    obj[key] = value
+  })
+  return obj
+}
+
+/* istanbul ignore next */
+/**
+ * Prevents default event
+ * @param {event} e
+ * @example
+ * el.addEventListener(&apos;mousemove&apos;, preventDefault)
+ * el.addEventListener(&apos;dragstart&apos;, e =&gt; {
+ *   preventDefault(e)
+ *   // ...
+ * })
+ */
+const preventDefault = e =&gt; e.preventDefault()
 
 export {
   findAll,
@@ -235,7 +272,9 @@ export {
   animate,
   modLoop,
   eitherOr,
-  arrayOrValue
+  arrayOrValue,
+  parseObject,
+  preventDefault
 }
 </code></pre>
 

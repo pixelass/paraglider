@@ -32,7 +32,9 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseObject">parseObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-preventDefault">preventDefault</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PLUGIN_DEFAULTS">PLUGIN_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PRESET_DEFAULTS">PRESET_DEFAULTS</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">glider</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html">Glider</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-callbackData">callbackData</a></span></span></li>
@@ -44,6 +46,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeftRight">coverLeftRight</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverLeft">coverLeft</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coverRight">coverRight</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-dataWrapper">dataWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiBelt">multiBelt</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-multiWrapper">multiWrapper</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-wrapper">wrapper</a></span></span></li>
@@ -199,7 +202,7 @@ class Glider {
        * @public
        * @type {onDestroy}
        */
-      onDestroy()
+      onDestroy(this.options)
     }
   }
 
@@ -308,11 +311,9 @@ class Glider {
   addInitClassNames() {
     const {classNames} = this.options
     this.el.classList.add(classNames.pluginLoaded)
-    if (this.state.init) {
-      this.slides.forEach(slide =&gt; {
-        slide.classList.add(classNames.init)
-      })
-    }
+    this.slides.forEach(slide =&gt; {
+      slide.classList.add(classNames.init)
+    })
     this.addClassNames()
   }
 
@@ -359,6 +360,7 @@ class Glider {
     if (e &amp;&amp; &apos;preventDefault&apos; in e) {
       e.preventDefault()
     }
+    /* istanbul ignore next */
     if (this.state.init) {
       this.setState({init: false})
       this.slides.forEach(slide =&gt; {
@@ -368,6 +370,7 @@ class Glider {
     this.addSides()
     this.addClassNames()
     this.spring(0, 1, this.options.speed)
+    return this.state.nextSlide
   }
 
   /**
@@ -379,6 +382,7 @@ class Glider {
     if (e &amp;&amp; &apos;preventDefault&apos; in e) {
       e.preventDefault()
     }
+    /* istanbul ignore next */
     if (this.state.init) {
       this.setState({init: false})
       this.slides.forEach(slide =&gt; {
@@ -388,6 +392,7 @@ class Glider {
     this.addSides()
     this.addClassNames()
     this.spring(0, -1, this.options.speed)
+    return this.state.previousSlide
   }
 
   /**
@@ -397,11 +402,11 @@ class Glider {
   goTo(n) {
     if (n &gt; this.state.currentSlide) {
       this.setState({requestedNext: n})
-      this.nextSlide()
+      return this.nextSlide()
     /* istanbul ignore next */
     } else /* istanbul ignore next */ if (n &lt; this.state.currentSlide) {
       this.setState({requestedPrevious: n})
-      this.prevSlide()
+      return this.prevSlide()
     }
   }
 
@@ -428,6 +433,7 @@ class Glider {
     }
     /**
      * Animation flag. Calls the animation and stores the function to allow `cancelAnimationFrame`
+     * @private
      * @type {loop}
      */
     this.animation = animate(duration, progress, theEnd,
@@ -520,6 +526,7 @@ class Glider {
    */
   handleDown(e) {
     const clientX = this.getClientX(e)
+    /* istanbul ignore next */
     if (this.state.init) {
       this.slides.forEach(slide =&gt; {
         slide.classList.remove(this.options.classNames.init)
