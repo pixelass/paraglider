@@ -1030,17 +1030,21 @@ var _glider = require(72);
 
 var _glider2 = _interopRequireDefault(_glider);
 
-var _presets = require(78);
+var _presets = require(79);
 
 var presets = _interopRequireWildcard(_presets);
 
-var _wrapper = require(81);
+var _wrapper = require(82);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
-var _multiWrapper = require(80);
+var _multiWrapper = require(81);
 
 var _multiWrapper2 = _interopRequireDefault(_multiWrapper);
+
+var _dataWrapper = require(78);
+
+var _dataWrapper2 = _interopRequireDefault(_dataWrapper);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1056,22 +1060,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @prop {function} coverRight
  * @prop {function} coverLeftRight
  */
-/**
- * Globally assigned version of Paraglider.
- *
- * @file dist.js
- * @module dist
- * @author Gregor Adams <greg@pixelass.com>
- */
-
 global.Paraglider = (0, _extends3.default)({
   API: _glider2.default,
   wrapper: _wrapper2.default,
-  multiWrapper: _multiWrapper2.default
-}, presets);
+  multiWrapper: _multiWrapper2.default,
+  dataWrapper: _dataWrapper2.default
+}, presets); /**
+              * Globally assigned version of Paraglider.
+              *
+              * @file dist.js
+              * @module dist
+              * @author Gregor Adams <greg@pixelass.com>
+              */
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"7":7,"72":72,"78":78,"80":80,"81":81}],72:[function(require,module,exports){
+},{"7":7,"72":72,"78":78,"79":79,"81":81,"82":82}],72:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1239,7 +1242,7 @@ var Glider = function () {
        * @public
        * @type {onDestroy}
        */
-      onDestroy();
+      onDestroy(this.options);
     }
   };
 
@@ -1449,6 +1452,7 @@ var Glider = function () {
     this.addSides();
     this.addClassNames();
     this.spring(0, 1, this.options.speed);
+    return this.state.nextSlide;
   };
 
   /**
@@ -1476,6 +1480,7 @@ var Glider = function () {
     this.addSides();
     this.addClassNames();
     this.spring(0, -1, this.options.speed);
+    return this.state.previousSlide;
   };
 
   /**
@@ -1487,11 +1492,11 @@ var Glider = function () {
   Glider.prototype.goTo = function goTo(n) {
     if (n > this.state.currentSlide) {
       this.setState({ requestedNext: n });
-      this.nextSlide();
+      return this.nextSlide();
       /* istanbul ignore next */
     } else /* istanbul ignore next */if (n < this.state.currentSlide) {
         this.setState({ requestedPrevious: n });
-        this.prevSlide();
+        return this.prevSlide();
       }
   };
 
@@ -1529,6 +1534,7 @@ var Glider = function () {
     }
     /**
      * Animation flag. Calls the animation and stores the function to allow `cancelAnimationFrame`
+     * @private
      * @type {loop}
      */
     this.animation = (0, _helpers.animate)(duration, progress, theEnd, function (p) {
@@ -1814,7 +1820,11 @@ exports.default = Glider;
 'use strict';
 
 exports.__esModule = true;
-exports.arrayOrValue = exports.eitherOr = exports.modLoop = exports.animate = exports.toggleClass = exports.findFirst = exports.findAll = undefined;
+exports.preventDefault = exports.parseObject = exports.arrayOrValue = exports.eitherOr = exports.modLoop = exports.animate = exports.toggleClass = exports.findFirst = exports.findAll = undefined;
+
+var _keys = require(4);
+
+var _keys2 = _interopRequireDefault(_keys);
 
 var _from = require(1);
 
@@ -1953,9 +1963,9 @@ var toggleClass = function toggleClass(el, className) {
  * Returns either the first or second value depending on truthness.
  * Any number is considered true.
  * @private
- * @param {*} either
- * @param {*} or
- * @returns {*} One of the two input values
+ * @param {any} either
+ * @param {any} or
+ * @returns {any} One of the two input values
  * @example
  * eiterOr(0, 4) // => 0
  * eiterOr('0', 4) // => '0'
@@ -1994,18 +2004,54 @@ var modLoop = function modLoop(current, addition, length) {
  * Takes an array and returns a single value if it is the only item.
  * Otherwise it returns the original array.
  * @private
- * @param {array} current Current value
- * @param {number} addition Addition to the current value
- * @param {number} length Maximum value.
- * @returns {number} Resulting number
+ * @param {array} arr Array to check
+ * @returns {?any}
  * @example
  * arrayOrValue([null, 1, 2]) // => [null, 1, 2]
  * arrayOrValue([1]) // => 1
+ * arrayOrValue(['a']) // => 'a'
  * arrayOrValue([1,'1']) // => [1,'1']
  * arrayOrValue([null]) // => null
  */
 var arrayOrValue = function arrayOrValue(arr) {
   return arr.length > 1 ? arr : arr[0];
+};
+
+/* istanbul ignore next */
+/**
+ * Parse dataset with nested object strings to a true object
+ * @param {dataset} dataset
+ * @returns {object} valid JSON
+ * @example
+ * const data = parseObject(document.querySelector('.foo').dataset)
+ */
+var parseObject = function parseObject(dataset) {
+  var obj = {};
+  (0, _keys2.default)(dataset).forEach(function (key) {
+    var value = dataset[key];
+    try {
+      value = isNaN(value) ? JSON.parse(value) : Number(value);
+    } catch (err) {
+      // Ignore error
+    }
+    obj[key] = value;
+  });
+  return obj;
+};
+
+/* istanbul ignore next */
+/**
+ * Prevents default event
+ * @param {event} e
+ * @example
+ * el.addEventListener('mousemove', preventDefault)
+ * el.addEventListener('dragstart', e => {
+ *   preventDefault(e)
+ *   // ...
+ * })
+ */
+var preventDefault = function preventDefault(e) {
+  return e.preventDefault();
 };
 
 exports.findAll = findAll;
@@ -2015,9 +2061,11 @@ exports.animate = animate;
 exports.modLoop = modLoop;
 exports.eitherOr = eitherOr;
 exports.arrayOrValue = arrayOrValue;
+exports.parseObject = parseObject;
+exports.preventDefault = preventDefault;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"1":1}],74:[function(require,module,exports){
+},{"1":1,"4":4}],74:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2026,7 +2074,7 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(81);
+var _wrapper = require(82);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -2093,7 +2141,7 @@ var belt = function belt(glider, opts) {
 
 exports.default = belt;
 
-},{"7":7,"81":81}],75:[function(require,module,exports){
+},{"7":7,"82":82}],75:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2102,7 +2150,7 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(81);
+var _wrapper = require(82);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -2164,7 +2212,7 @@ var coverLeftRight = function coverLeftRight(glider, opts) {
 
 exports.default = coverLeftRight;
 
-},{"7":7,"81":81}],76:[function(require,module,exports){
+},{"7":7,"82":82}],76:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2173,7 +2221,7 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(81);
+var _wrapper = require(82);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -2235,7 +2283,7 @@ var coverLeft = function coverLeft(glider, opts) {
 
 exports.default = coverLeft;
 
-},{"7":7,"81":81}],77:[function(require,module,exports){
+},{"7":7,"82":82}],77:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2244,7 +2292,7 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _wrapper = require(81);
+var _wrapper = require(82);
 
 var _wrapper2 = _interopRequireDefault(_wrapper);
 
@@ -2306,13 +2354,417 @@ var coverRight = function coverRight(glider, opts) {
 
 exports.default = coverRight;
 
-},{"7":7,"81":81}],78:[function(require,module,exports){
+},{"7":7,"82":82}],78:[function(require,module,exports){
+(function (global){
+'use strict';
+
+exports.__esModule = true;
+
+var _extends2 = require(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _glider = require(72);
+
+var _glider2 = _interopRequireDefault(_glider);
+
+var _config = require(70);
+
+var _helpers = require(73);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var classNames = {
+  pager: 'pager',
+  dot: 'dot',
+  active: 'active',
+  previousButton: 'previousButton',
+  nextButton: 'nextButton',
+  disabled: 'disabled',
+  dragging: 'dragging',
+  draggable: 'draggable',
+  caption: 'caption',
+  headline: 'headline',
+  subline: 'subline',
+  description: 'description'
+};
+
+/**
+ * Defaults for the data wrapper
+ * @private
+ * @type {object}
+ */
+/* global document */
+/**
+ * @file presets/data-wrapper.js
+ * @module  presets
+ * @author Gregor Adams <greg@pixelass.com>
+ */
+var DATA_DEFAULTS = {
+  PLUGIN_DEFAULTS: _config.PLUGIN_DEFAULTS,
+  classNames: (0, _extends3.default)({}, _config.PLUGIN_DEFAULTS.classNames, classNames)
+};
+
+var _document = document,
+    documentElement = _document.documentElement;
+
+/**
+ * Autorunner. Continiously loops play. Disables when interacting or hovering
+ * @param {Element} el
+ * @param {contructor} instance
+ * @param {number} duration
+ * @param {number} rewind
+ */
+
+var autoRunner = function autoRunner(el, instance, duration, rewind) {
+  var running = true;
+  var down = void 0;
+  var inside = void 0;
+  var timer = void 0;
+  var runHandler = void 0;
+  var slideCount = void 0;
+  var autoplay = function autoplay(run) {
+    global.requestAnimationFrame(run);
+    return run;
+  };
+  var runner = function runner(wait) {
+    if (running) {
+      timer = setTimeout(runner, duration);
+      if (!wait) {
+        if (slideCount === rewind) {
+          slideCount = instance.goTo(0);
+        } else {
+          slideCount = instance.nextSlide();
+        }
+      }
+    } else {
+      timer = clearTimeout(timer);
+    }
+  };
+  // Defines a waiting runner.
+  // Does not trigger but calls the timeout
+  var waitingRunner = function waitingRunner() {
+    return runner(true);
+  };
+
+  el.addEventListener('mouseenter', function () {
+    running = false;
+    inside = true;
+    global.cancelAnimationFrame(runHandler);
+    timer = clearTimeout(timer);
+  });
+
+  el.addEventListener('mousedown', function () {
+    running = false;
+    down = true;
+    inside = true;
+    global.cancelAnimationFrame(runHandler);
+    timer = clearTimeout(timer);
+  });
+
+  el.addEventListener('mousemove', function () {
+    running = false;
+    inside = true;
+    global.cancelAnimationFrame(runHandler);
+    timer = clearTimeout(timer);
+  });
+
+  el.addEventListener('mouseleave', function () {
+    inside = false;
+    if (!down) {
+      running = true;
+      runHandler = autoplay(waitingRunner);
+    }
+  });
+
+  document.addEventListener('mouseup', function () {
+    if (down && !inside) {
+      running = true;
+      runHandler = autoplay(waitingRunner);
+    }
+    down = false;
+  });
+
+  document.addEventListener('visibilitychange', function (e) {
+    var hidden = e.target.hidden;
+
+    if (hidden) {
+      running = false;
+      global.cancelAnimationFrame(runHandler);
+      timer = clearTimeout(timer);
+    } else {
+      running = true;
+      runHandler = autoplay(waitingRunner);
+    }
+  });
+  // The first handler waits
+  runHandler = autoplay(waitingRunner);
+};
+
+/**
+ * Wraps Paraglider to apply pagers and navigation buttons and autoplay.
+ * This wrapper simplifies the usage of Paraglider by offering some basic
+ * functionality.
+ * Data attributes are used to configure the plugin.
+ * @param {Element} glider
+ * @param {DATA_DEFAULTS} opts
+ * @returns {function} returns the destroy method
+ */
+var dataWrapper = function dataWrapper(glider, opts) {
+  // Get options from data attributes
+  var data = (0, _helpers.parseObject)(glider.dataset);
+  // Find draggable elements to disable dragstart
+  // This prevents images and anchors from affecting swiping
+  var draggables = [].concat((0, _helpers.findAll)('img', glider), (0, _helpers.findAll)('a', glider));
+  var _opts$classNames = opts.classNames,
+      pager = _opts$classNames.pager,
+      dot = _opts$classNames.dot,
+      nextButton = _opts$classNames.nextButton,
+      previousButton = _opts$classNames.previousButton,
+      caption = _opts$classNames.caption,
+      headline = _opts$classNames.headline,
+      subline = _opts$classNames.subline,
+      description = _opts$classNames.description;
+  // Elements potentially used by the wrapper
+
+  var pagers = (0, _helpers.findAll)('.' + pager, glider);
+  var nextTrigger = (0, _helpers.findFirst)('.' + nextButton, glider);
+  var prevTrigger = (0, _helpers.findFirst)('.' + previousButton, glider);
+  // Get elements from context
+  var dots = pagers.map(function (el) {
+    return (0, _helpers.findFirst)('.' + dot, el);
+  });
+  var captions = (0, _helpers.findAll)('.' + caption, glider);
+  var headlines = captions.map(function (l) {
+    return (0, _helpers.findFirst)('.' + headline, l);
+  });
+  var sublines = captions.map(function (l) {
+    return (0, _helpers.findFirst)('.' + subline, l);
+  });
+  var descriptions = captions.map(function (l) {
+    return (0, _helpers.findFirst)('.' + description, l);
+  });
+  // Flag do determine in clicks are allowed or blocked
+  var block = void 0;
+  // Ensure instance identifier
+  var instance = null;
+  // Collect handlers.
+  // Allows removing them when destroying
+  var pagerHandlers = [];
+  /**
+   * Handle the previous button
+   * @param {event} e
+   */
+  var handlePrev = function handlePrev(e) {
+    if (block) {
+      (0, _helpers.preventDefault)(e);
+    } else {
+      block = true;
+      if (instance) {
+        instance.prevSlide(e);
+      }
+    }
+  };
+  /**
+   * Handle the next button
+   * @param {event} e
+   */
+  var handleNext = function handleNext(e) {
+    if (block) {
+      (0, _helpers.preventDefault)(e);
+    } else {
+      block = true;
+      if (instance) {
+        instance.nextSlide(e);
+      }
+    }
+  };
+  /**
+   * Handle mousedown
+   * Adds dragging class name
+   */
+  var handleMouseDown = function handleMouseDown() {
+    return documentElement.classList.add(opts.classNames.dragging);
+  };
+  /**
+   * Handle mouseup
+   * Removes dragging class name
+   */
+  var handleMouseUp = function handleMouseUp() {
+    return documentElement.classList.remove(opts.classNames.dragging);
+  };
+  /**
+   * Paraglider instance
+   *
+   * A paraglider with several options.
+   */
+  instance = new _glider2.default((0, _extends3.default)({}, DATA_DEFAULTS, opts, data, {
+    classNames: (0, _extends3.default)({}, DATA_DEFAULTS.classNames, opts.classNames),
+    onInit: function onInit(_ref, slides, options) {
+      var previous = _ref.previous,
+          next = _ref.next,
+          current = _ref.current,
+          rest = _ref.rest;
+
+      draggables.forEach(function (draggable) {
+        draggable.addEventListener('dragstart', _helpers.preventDefault);
+      });
+      if (options.autoplay) {
+        autoRunner(glider, instance, options.autoplay, options.loop ? false : slides.length - 1);
+      }
+      pagers.forEach(function (pager, index) {
+        var handler = function handler(e) {
+          (0, _helpers.preventDefault)(e);
+          if (!block) {
+            block = true;
+            if (instance) {
+              instance.goTo(index);
+            }
+          }
+        };
+        pager.addEventListener('click', handler);
+        pagerHandlers.push(handler);
+      });
+      if (nextTrigger) {
+        nextTrigger.addEventListener('click', handleNext);
+      }
+      if (prevTrigger) {
+        prevTrigger.addEventListener('click', handlePrev);
+      }
+      if (options.enableSwipe !== 0) {
+        slides.forEach(function (el) {
+          el.classList.add(options.classNames.draggable);
+          el.addEventListener('mousedown', handleMouseDown);
+        });
+      }
+      document.addEventListener('mouseup', handleMouseUp);
+      if (pagers[current]) {
+        pagers[current].classList.add(options.classNames.active);
+      }
+      if (!options.loop && prevTrigger && nextTrigger) {
+        if (current === 0 && prevTrigger && nextTrigger) {
+          prevTrigger.classList.add(options.classNames.disabled);
+        } else if (current === slides.length - 1) {
+          nextTrigger.classList.add(options.classNames.disabled);
+        }
+      }
+      if (typeof opts.onInit === 'function') {
+        opts.onInit({ previous: previous, next: next, current: current, rest: rest }, {
+          slides: slides,
+          captions: captions,
+          headlines: headlines,
+          sublines: sublines,
+          descriptions: descriptions,
+          pagers: pagers,
+          dots: dots,
+          nextTrigger: nextTrigger,
+          prevTrigger: prevTrigger
+        }, options);
+      }
+    },
+    onEnd: function onEnd(_ref2, slides, options) {
+      var previous = _ref2.previous,
+          next = _ref2.next,
+          current = _ref2.current,
+          rest = _ref2.rest;
+
+      var notCurrent = [previous, next].concat(rest);
+      notCurrent.forEach(function (id) {
+        if (pagers[id]) {
+          pagers[id].classList.remove(options.classNames.active);
+        }
+      });
+      if (pagers[current]) {
+        pagers[current].classList.remove(options.classNames.active);
+      }
+      if (!options.loop && prevTrigger && nextTrigger) {
+        if (current === 0) {
+          prevTrigger.classList.add(options.classNames.disabled);
+          nextTrigger.classList.remove(options.classNames.disabled);
+        } else if (current === slides.length - 1) {
+          nextTrigger.classList.add(options.classNames.disabled);
+          prevTrigger.classList.remove(options.classNames.disabled);
+        } else {
+          prevTrigger.classList.remove(options.classNames.disabled);
+          nextTrigger.classList.remove(options.classNames.disabled);
+        }
+      }
+      block = false;
+      if (typeof opts.onEnd === 'function') {
+        opts.onEnd({ previous: previous, next: next, current: current, rest: rest }, {
+          slides: slides,
+          captions: captions,
+          headlines: headlines,
+          sublines: sublines,
+          descriptions: descriptions,
+          pagers: pagers,
+          dots: dots,
+          nextTrigger: nextTrigger,
+          prevTrigger: prevTrigger
+        }, options);
+      }
+    },
+    onSlide: function onSlide(progress, _ref3, slides, options) {
+      var previous = _ref3.previous,
+          next = _ref3.next,
+          current = _ref3.current,
+          rest = _ref3.rest;
+
+      if (typeof opts.onSlide === 'function') {
+        opts.onSlide(progress, { previous: previous, next: next, current: current, rest: rest }, {
+          slides: slides,
+          captions: captions,
+          headlines: headlines,
+          sublines: sublines,
+          descriptions: descriptions,
+          pagers: pagers,
+          dots: dots,
+          nextTrigger: nextTrigger,
+          prevTrigger: prevTrigger
+        }, options);
+      }
+    },
+    onDestroy: function onDestroy(options) {
+      draggables.forEach(function (draggable) {
+        draggable.removeEventListener('dragstart', _helpers.preventDefault);
+      });
+      pagers.forEach(function (pager, index) {
+        pager.removeEventListener('click', pagerHandlers[index]);
+      });
+      document.removeEventListener('mouseup', handleMouseUp);
+      if (nextTrigger) {
+        nextTrigger.removeEventListener('click', handleNext);
+      }
+      if (prevTrigger) {
+        prevTrigger.removeEventListener('click', handlePrev);
+      }
+      if (options.enableSwipe !== 0) {
+        (0, _helpers.findAll)('.' + options.classNames.slide, glider).forEach(function (el) {
+          el.classList.remove(options.classNames.draggable);
+          el.removeEventListener('mousedown', handleMouseDown);
+        });
+      }
+      if (typeof opts.onDestroy === 'function') {
+        opts.onDestroy(options);
+      }
+    }
+  }));
+  if (instance) {
+    instance.init(glider);
+    return instance.destroy;
+  }
+};
+
+exports.default = dataWrapper;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"7":7,"70":70,"72":72,"73":73}],79:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 exports.coverLeftRight = exports.coverRight = exports.coverLeft = exports.belt = exports.multiBelt = undefined;
 
-var _multiBelt = require(79);
+var _multiBelt = require(80);
 
 var _multiBelt2 = _interopRequireDefault(_multiBelt);
 
@@ -2340,7 +2792,7 @@ exports.coverLeft = _coverLeft2.default;
 exports.coverRight = _coverRight2.default;
 exports.coverLeftRight = _coverLeftRight2.default;
 
-},{"74":74,"75":75,"76":76,"77":77,"79":79}],79:[function(require,module,exports){
+},{"74":74,"75":75,"76":76,"77":77,"80":80}],80:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2349,7 +2801,7 @@ var _extends2 = require(7);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _multiWrapper = require(80);
+var _multiWrapper = require(81);
 
 var _multiWrapper2 = _interopRequireDefault(_multiWrapper);
 
@@ -2453,7 +2905,7 @@ var multiBelt = function multiBelt(glider, opts) {
 
 exports.default = multiBelt;
 
-},{"7":7,"80":80}],80:[function(require,module,exports){
+},{"7":7,"81":81}],81:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2491,7 +2943,7 @@ var multiWrapper = function multiWrapper(glider, opts) {
   var prevButton = (0, _helpers.findFirst)('.' + opts.classNames.prevButton, glider);
   // Prepare the options to ensure correct behavior
   // `slideBy` must be smaller or equal to `visibleSlides` and greater or equal to `1`
-  var preparedOptions = (0, _extends3.default)({}, _config.PLUGIN_DEFAULTS, _config.PRESET_DEFAULTS, opts);
+  var preparedOptions = (0, _extends3.default)({}, _config.PRESET_DEFAULTS, opts);
   var options = (0, _extends3.default)({}, preparedOptions, {
     slideBy: Math.min(preparedOptions.visibleSlides, Math.max(1, preparedOptions.slideBy)),
     onInit: function onInit(_ref, slides, _ref2) {
@@ -2550,18 +3002,14 @@ var multiWrapper = function multiWrapper(glider, opts) {
   }
   return instance.destroy;
 }; /**
-    * Wraps Paraglider to apply pagers and navigation buttons.
-    * This wrapper simplifies the usage of Paraglider by offering some basic
-    * functionality.
-    *
-    * @file presets/wrapper.js
+    * @file presets/multi-wrapper.js
     * @module  presets
     * @author Gregor Adams <greg@pixelass.com>
     */
 
 exports.default = multiWrapper;
 
-},{"7":7,"70":70,"72":72,"73":73}],81:[function(require,module,exports){
+},{"7":7,"70":70,"72":72,"73":73}],82:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2584,7 +3032,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Simple wrapper including pagers and navigation arrows.
  *
  * Use this helper to create custom sliders with pager dots and arrows, to
- * navigate to diferent slides.
+ * navigate to different slides.
  * The options are extended by additional class names.
  * @param {Element} glider
  * @param {PRESET_DEFAULTS} opts
@@ -2597,7 +3045,7 @@ var wrapper = function wrapper(glider, opts) {
   var pagers = (0, _helpers.findAll)('.' + opts.classNames.dot, glider);
   var nextButton = (0, _helpers.findFirst)('.' + opts.classNames.nextButton, glider);
   var prevButton = (0, _helpers.findFirst)('.' + opts.classNames.prevButton, glider);
-  var options = (0, _extends3.default)({}, _config.PLUGIN_DEFAULTS, _config.PRESET_DEFAULTS, opts, {
+  var options = (0, _extends3.default)({}, _config.PRESET_DEFAULTS, opts, {
     onSlide: function onSlide(progress, _ref, slides) {
       var next = _ref.next,
           previous = _ref.previous,
@@ -2648,10 +3096,6 @@ var wrapper = function wrapper(glider, opts) {
   }
   return instance.destroy;
 }; /**
-    * Wraps Paraglider to apply pagers and navigation buttons.
-    * This wrapper simplifies the usage of Paraglider by offering some basic
-    * functionality.
-    *
     * @file presets/wrapper.js
     * @module  presets
     * @author Gregor Adams <greg@pixelass.com>
