@@ -71,11 +71,10 @@
  * @typedef onDestroy
  * @memberof Glider
  * @type {function}
- * @param {callbackData} data Data about the slider activity
- * @param {Array.<Element>} slides Array of all slides
+ * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options
  * @example
  * new Glider({
- *  onDestroy() {
+ *  onDestroy(options) {
  *    // Slider has been destroyed
  *  }
  *})

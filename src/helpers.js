@@ -176,6 +176,7 @@ const arrayOrValue = arr => arr.length > 1 ? arr : arr[0]
 /* istanbul ignore next */
 /**
  * Parse dataset with nested object strings to a true object
+ * @private
  * @param {dataset} dataset
  * @returns {object} valid JSON
  * @example
@@ -198,6 +199,7 @@ const parseObject = dataset => {
 /* istanbul ignore next */
 /**
  * Prevents default event
+ * @private
  * @param {event} e
  * @example
  * el.addEventListener('mousemove', preventDefault)
