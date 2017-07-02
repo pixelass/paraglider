@@ -38,16 +38,21 @@ jspm_packages
 
 # tests
 **/spec
+**/__tests_
+**/test
 
 # source
 views
-config
 src
 scripts
+manual
 docs
 demo
 .bithoundrc
 .travis.yml
 .spelling
-jsdoc.json
-package.config.json
+esdoc.json
+*.jpg
+*.svg
+*.md
+!README.md
