@@ -82,16 +82,22 @@ const build = (watch = false) => new Promise((resolve, reject) => {
         const bundle = () => {
           b.bundle().pipe(createWriteStream(`${outFile}.js`))
         }
-
+        b.transform(['babelify'])
         // Either uglify or watch
         if (watch) {
           b.on('update', bundle)
           b.plugin(watchify)
         } else {
-          b.transform({
+          b.transform('uglifyify', {
+            ignore: ['**/*.css'],
             global: true,
-            ignore: ['**/*.css']
-          }, 'uglifyify')
+            mangle: true,
+            compress: {
+              sequences: true,
+              dead_code: true,
+              booleans: true
+            }
+          })
         }
 
         b.on('log', message => log.info(message))

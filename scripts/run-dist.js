@@ -4,16 +4,17 @@ import mkdirp from 'mkdirp'
 import rm from 'rimraf'
 import log from 'winston'
 import browserify from 'browserify'
+import dependify from 'dependify'
 import watchify from 'watchify'
 import errorify from 'errorify'
 import collapse from 'bundle-collapser/plugin'
 
-const distFile = path.join(__dirname, '../src/dist.js')
+const inFile = path.join(__dirname, '../src/index.js')
 const distFolder = path.join(__dirname, '../dist')
 
 const dist = (minify) => {
   const b = browserify({
-    entries: [distFile],
+    entries: [inFile],
     plugin: [errorify, collapse]
   })
   const bundle = () => {
@@ -23,9 +24,19 @@ const dist = (minify) => {
   b.on('error', message => log.error(message))
   if (minify) {
     b.transform({
-      global: true
+      exts: ['.js'],
+      global: true,
+      mangle: true,
+      compress: {
+        sequences: true,
+        dead_code: true,
+        booleans: true
+      }
     }, 'uglifyify')
   }
+  b.plugin(dependify, {
+    name: 'Paraglider'
+  })
   const ext = minify ? 'min.js' : 'js'
   rm(distFolder, err => {
     if (err) {
