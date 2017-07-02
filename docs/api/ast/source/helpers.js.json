@@ -10305,7 +10305,7 @@
             },
             {
               "type": "CommentBlock",
-              "value": "*\n * Prevents default event\n * @private\n * @param {event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
+              "value": "*\n * Prevents default event\n * @private\n * @param {Event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
               "start": 5459,
               "end": 5672,
               "loc": {
@@ -10530,7 +10530,7 @@
             },
             {
               "type": "CommentBlock",
-              "value": "*\n * Prevents default event\n * @private\n * @param {event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
+              "value": "*\n * Prevents default event\n * @private\n * @param {Event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
               "start": 5459,
               "end": 5672,
               "loc": {
@@ -10861,7 +10861,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * Prevents default event\n * @private\n * @param {event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
+      "value": "*\n * Prevents default event\n * @private\n * @param {Event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
       "start": 5459,
       "end": 5672,
       "loc": {
@@ -19638,7 +19638,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * Prevents default event\n * @private\n * @param {event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
+      "value": "*\n * Prevents default event\n * @private\n * @param {Event} e\n * @example\n * el.addEventListener('mousemove', preventDefault)\n * el.addEventListener('dragstart', e => {\n *   preventDefault(e)\n *   // ...\n * })\n ",
       "start": 5459,
       "end": 5672,
       "loc": {

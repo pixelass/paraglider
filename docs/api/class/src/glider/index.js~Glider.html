@@ -618,7 +618,7 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-getClientX">getClientX</a></span></span><span data-ice="signature">(e: <span>event</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-getClientX">getClientX</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
         </p>
       </div>
       <div>
@@ -674,7 +674,7 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-handleDown">handleDown</a></span></span><span data-ice="signature">(e: <span>event</span>)</span>
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-handleDown">handleDown</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
         </p>
       </div>
       <div>
@@ -731,7 +731,7 @@ define initial values.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-handleMove">handleMove</a></span></span><span data-ice="signature">(e: <span>event</span>)</span>
+          <span data-ice="name"><span><a href="class/src/glider/index.js~Glider.html#instance-method-handleMove">handleMove</a></span></span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
         </p>
       </div>
       <div>
@@ -1809,19 +1809,19 @@ Movement and release should be tracked on window or document.</p>
       </tr>
 <tr class="listen" data-ice="listen">
         <td><p data-ice="listenName"><span>mousemove</span></p></td>
-        <td data-ice="listenDesc"><p>Listens to mousemove if <code>enableTouch === true</code>
+        <td data-ice="listenDesc"><p>Listens to mousemove if <code>enableSwipe === true</code>
   global listener to allow out of bounds movement.</p>
 </td>
       </tr>
 <tr class="listen" data-ice="listen">
         <td><p data-ice="listenName"><span>mouseup</span></p></td>
-        <td data-ice="listenDesc"><p>Listens to mouseup if <code>enableTouch === true</code>
+        <td data-ice="listenDesc"><p>Listens to mouseup if <code>enableSwipe === true</code>
   global listener to allow out of bounds movement.</p>
 </td>
       </tr>
 <tr class="listen" data-ice="listen">
         <td><p data-ice="listenName"><span>mousedown</span></p></td>
-        <td data-ice="listenDesc"><p>Listens to mousedown if <code>enableTouch === true</code>
+        <td data-ice="listenDesc"><p>Listens to mousedown if <code>enableSwipe === true</code>
   scoped listener to determine activity</p>
 </td>
       </tr>
@@ -1893,7 +1893,7 @@ This function respects pager clicks, which modify the next or previous element.<
     
     
     
-    <span data-ice="name">getClientX</span><span data-ice="signature">(e: <span>event</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
+    <span data-ice="name">getClientX</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
     <span class="right-info">
       
       
@@ -1920,7 +1920,7 @@ This helper will return the correct value for touch or mouse.</p>
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">e</td>
-      <td data-ice="type"><span>event</span></td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>Mouse or touch event</p>
 </td>
@@ -2040,7 +2040,7 @@ This helper will return the correct value for touch or mouse.</p>
     
     
     
-    <span data-ice="name">handleDown</span><span data-ice="signature">(e: <span>event</span>)</span>
+    <span data-ice="name">handleDown</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
     <span class="right-info">
       
       
@@ -2067,7 +2067,7 @@ define initial values.</p>
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">e</td>
-      <td data-ice="type"><span>event</span></td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>Mouse or touch event</p>
 </td>
@@ -2164,7 +2164,7 @@ If there is a callback called <code>onEnd</code> call it.</p>
     
     
     
-    <span data-ice="name">handleMove</span><span data-ice="signature">(e: <span>event</span>)</span>
+    <span data-ice="name">handleMove</span><span data-ice="signature">(e: <span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span>)</span>
     <span class="right-info">
       
       
@@ -2191,7 +2191,7 @@ Waits for a threshold and then records the movement on the <code>x</code> axis</
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">e</td>
-      <td data-ice="type"><span>event</span></td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>Mouse or touch move event</p>
 </td>

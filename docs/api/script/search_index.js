@@ -462,12 +462,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/dist.js",
-    "file/src/dist.js.html",
-    "src/dist.js",
-    "file"
-  ],
-  [
     "src/glider/index.js",
     "file/src/glider/index.js.html",
     "src/glider/index.js",

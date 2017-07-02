@@ -10103,7 +10103,7 @@
                     "trailingComments": [
                       {
                         "type": "CommentBlock",
-                        "value": "*\n   * Handle the previous button\n   * @param {event} e\n   ",
+                        "value": "*\n   * Handle the previous button\n   * @param {Event} e\n   ",
                         "start": 4400,
                         "end": 4463,
                         "loc": {
@@ -10580,7 +10580,7 @@
                     "leadingComments": [
                       {
                         "type": "CommentBlock",
-                        "value": "*\n   * Handle the previous button\n   * @param {event} e\n   ",
+                        "value": "*\n   * Handle the previous button\n   * @param {Event} e\n   ",
                         "start": 4400,
                         "end": 4463,
                         "loc": {
@@ -10598,7 +10598,7 @@
                     "trailingComments": [
                       {
                         "type": "CommentBlock",
-                        "value": "*\n   * Handle the next button\n   * @param {event} e\n   ",
+                        "value": "*\n   * Handle the next button\n   * @param {Event} e\n   ",
                         "start": 4637,
                         "end": 4696,
                         "loc": {
@@ -11075,7 +11075,7 @@
                     "leadingComments": [
                       {
                         "type": "CommentBlock",
-                        "value": "*\n   * Handle the next button\n   * @param {event} e\n   ",
+                        "value": "*\n   * Handle the next button\n   * @param {Event} e\n   ",
                         "start": 4637,
                         "end": 4696,
                         "loc": {
@@ -28129,7 +28129,7 @@
                       "trailingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n   * Handle the previous button\n   * @param {event} e\n   ",
+                          "value": "*\n   * Handle the previous button\n   * @param {Event} e\n   ",
                           "start": 4400,
                           "end": 4463,
                           "loc": {
@@ -28606,7 +28606,7 @@
                       "leadingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n   * Handle the previous button\n   * @param {event} e\n   ",
+                          "value": "*\n   * Handle the previous button\n   * @param {Event} e\n   ",
                           "start": 4400,
                           "end": 4463,
                           "loc": {
@@ -28624,7 +28624,7 @@
                       "trailingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n   * Handle the next button\n   * @param {event} e\n   ",
+                          "value": "*\n   * Handle the next button\n   * @param {Event} e\n   ",
                           "start": 4637,
                           "end": 4696,
                           "loc": {
@@ -29101,7 +29101,7 @@
                       "leadingComments": [
                         {
                           "type": "CommentBlock",
-                          "value": "*\n   * Handle the next button\n   * @param {event} e\n   ",
+                          "value": "*\n   * Handle the next button\n   * @param {Event} e\n   ",
                           "start": 4637,
                           "end": 4696,
                           "loc": {
@@ -43005,7 +43005,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * Handle the previous button\n   * @param {event} e\n   ",
+      "value": "*\n   * Handle the previous button\n   * @param {Event} e\n   ",
       "start": 4400,
       "end": 4463,
       "loc": {
@@ -43021,7 +43021,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * Handle the next button\n   * @param {event} e\n   ",
+      "value": "*\n   * Handle the next button\n   * @param {Event} e\n   ",
       "start": 4637,
       "end": 4696,
       "loc": {
@@ -60381,7 +60381,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * Handle the previous button\n   * @param {event} e\n   ",
+      "value": "*\n   * Handle the previous button\n   * @param {Event} e\n   ",
       "start": 4400,
       "end": 4463,
       "loc": {
@@ -61303,7 +61303,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * Handle the next button\n   * @param {event} e\n   ",
+      "value": "*\n   * Handle the next button\n   * @param {Event} e\n   ",
       "start": 4637,
       "end": 4696,
       "loc": {
