@@ -53,7 +53,7 @@ effects like animating SVGs or drawing on a canvas.
 ![Firefox](https://img.shields.io/badge/Firefox-last_2-44aa44.svg?style=flat-square)
 ![Safari](https://img.shields.io/badge/Safari-last_2-44aa44.svg?style=flat-square)
 ![iOS](https://img.shields.io/badge/iOS-last_2-44aa44.svg?style=flat-square)
-![ChromeAndroid](https://img.shields.io/badge/ChromeAndroid-last-44aa44.svg?style=flat-square)
+![ChromeAndroid](https://img.shields.io/badge/ChromeAndroid-last_2-44aa44.svg?style=flat-square)
 
 ```
 yarn add paraglider
