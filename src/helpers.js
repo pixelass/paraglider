@@ -123,9 +123,9 @@ const toggleClass = (el, className, bool = null) => {
  * Returns either the first or second value depending on truthness.
  * Any number is considered true.
  * @private
- * @param {*} either
- * @param {*} or
- * @returns {*} One of the two input values
+ * @param {any} either
+ * @param {any} or
+ * @returns {any} One of the two input values
  * @example
  * eiterOr(0, 4) // => 0
  * eiterOr('0', 4) // => '0'
@@ -162,13 +162,12 @@ const modLoop = (current, addition, length) =>
  * Takes an array and returns a single value if it is the only item.
  * Otherwise it returns the original array.
  * @private
- * @param {array} current Current value
- * @param {number} addition Addition to the current value
- * @param {number} length Maximum value.
- * @returns {number} Resulting number
+ * @param {array} arr Array to check
+ * @returns {?any}
  * @example
  * arrayOrValue([null, 1, 2]) // => [null, 1, 2]
  * arrayOrValue([1]) // => 1
+ * arrayOrValue(['a']) // => 'a'
  * arrayOrValue([1,'1']) // => [1,'1']
  * arrayOrValue([null]) // => null
  */
