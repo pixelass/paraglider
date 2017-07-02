@@ -145,7 +145,7 @@ class Glider {
        * @public
        * @type {onDestroy}
        */
-      onDestroy()
+      onDestroy(this.options)
     }
   }
 
