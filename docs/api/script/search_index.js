@@ -18,10 +18,28 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "paraglider/src/helpers.js~animate",
+    "function/index.html#static-function-animate",
+    "<span>animate</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~arrayorvalue",
+    "function/index.html#static-function-arrayOrValue",
+    "<span>arrayOrValue</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
     "paraglider/src/presets/belt.js~belt",
     "function/index.html#static-function-belt",
     "<span>belt</span> <span class=\"search-result-import-path\">paraglider/src/presets/belt.js</span>",
     "function"
+  ],
+  [
+    "paraglider/src/config.js~classnames",
+    "variable/index.html#static-variable-classNames",
+    "<span>classNames</span> <span class=\"search-result-import-path\">paraglider/src/config.js</span>",
+    "variable"
   ],
   [
     "paraglider/src/presets/cover-left.js~coverleft",
@@ -48,6 +66,30 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "paraglider/src/helpers.js~eitheror",
+    "function/index.html#static-function-eitherOr",
+    "<span>eitherOr</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~findall",
+    "function/index.html#static-function-findAll",
+    "<span>findAll</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~findfirst",
+    "function/index.html#static-function-findFirst",
+    "<span>findFirst</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~modloop",
+    "function/index.html#static-function-modLoop",
+    "<span>modLoop</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
     "paraglider/src/presets/multi-belt.js~multibelt",
     "function/index.html#static-function-multiBelt",
     "<span>multiBelt</span> <span class=\"search-result-import-path\">paraglider/src/presets/multi-belt.js</span>",
@@ -69,6 +111,12 @@ window.esdocSearchIndex = [
     "paraglider/src/helpers.js~preventdefault",
     "function/index.html#static-function-preventDefault",
     "<span>preventDefault</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
+    "function"
+  ],
+  [
+    "paraglider/src/helpers.js~toggleclass",
+    "function/index.html#static-function-toggleClass",
+    "<span>toggleClass</span> <span class=\"search-result-import-path\">paraglider/src/helpers.js</span>",
     "function"
   ],
   [
@@ -426,6 +474,42 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/glider/index.js~glider#_state",
+    "class/src/glider/index.js~Glider.html#instance-member-_state",
+    "src/glider/index.js~Glider#_state",
+    "member"
+  ],
+  [
+    "src/glider/index.js~glider#addclassnames",
+    "class/src/glider/index.js~Glider.html#instance-method-addClassNames",
+    "src/glider/index.js~Glider#addClassNames",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#addinitclassnames",
+    "class/src/glider/index.js~Glider.html#instance-method-addInitClassNames",
+    "src/glider/index.js~Glider#addInitClassNames",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#addlisteners",
+    "class/src/glider/index.js~Glider.html#instance-method-addListeners",
+    "src/glider/index.js~Glider#addListeners",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#addsides",
+    "class/src/glider/index.js~Glider.html#instance-method-addSides",
+    "src/glider/index.js~Glider#addSides",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#animation",
+    "class/src/glider/index.js~Glider.html#instance-member-animation",
+    "src/glider/index.js~Glider#animation",
+    "member"
+  ],
+  [
     "src/glider/index.js~glider#constructor",
     "class/src/glider/index.js~Glider.html#instance-constructor-constructor",
     "src/glider/index.js~Glider#constructor",
@@ -438,9 +522,57 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/glider/index.js~glider#el",
+    "class/src/glider/index.js~Glider.html#instance-member-el",
+    "src/glider/index.js~Glider#el",
+    "member"
+  ],
+  [
+    "src/glider/index.js~glider#getclientx",
+    "class/src/glider/index.js~Glider.html#instance-method-getClientX",
+    "src/glider/index.js~Glider#getClientX",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#getreturnvalues",
+    "class/src/glider/index.js~Glider.html#instance-method-getReturnValues",
+    "src/glider/index.js~Glider#getReturnValues",
+    "method"
+  ],
+  [
     "src/glider/index.js~glider#goto",
     "class/src/glider/index.js~Glider.html#instance-method-goTo",
     "src/glider/index.js~Glider#goTo",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#handledown",
+    "class/src/glider/index.js~Glider.html#instance-method-handleDown",
+    "src/glider/index.js~Glider#handleDown",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#handleend",
+    "class/src/glider/index.js~Glider.html#instance-method-handleEnd",
+    "src/glider/index.js~Glider#handleEnd",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#handlemove",
+    "class/src/glider/index.js~Glider.html#instance-method-handleMove",
+    "src/glider/index.js~Glider#handleMove",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#handleprogress",
+    "class/src/glider/index.js~Glider.html#instance-method-handleProgress",
+    "src/glider/index.js~Glider#handleProgress",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#handleup",
+    "class/src/glider/index.js~Glider.html#instance-method-handleUp",
+    "src/glider/index.js~Glider#handleUp",
     "method"
   ],
   [
@@ -456,10 +588,58 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/glider/index.js~glider#options",
+    "class/src/glider/index.js~Glider.html#instance-member-options",
+    "src/glider/index.js~Glider#options",
+    "member"
+  ],
+  [
     "src/glider/index.js~glider#prevslide",
     "class/src/glider/index.js~Glider.html#instance-method-prevSlide",
     "src/glider/index.js~Glider#prevSlide",
     "method"
+  ],
+  [
+    "src/glider/index.js~glider#removeclassnames",
+    "class/src/glider/index.js~Glider.html#instance-method-removeClassNames",
+    "src/glider/index.js~Glider#removeClassNames",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#removelisteners",
+    "class/src/glider/index.js~Glider.html#instance-method-removeListeners",
+    "src/glider/index.js~Glider#removeListeners",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#setstate",
+    "class/src/glider/index.js~Glider.html#instance-method-setState",
+    "src/glider/index.js~Glider#setState",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#slides",
+    "class/src/glider/index.js~Glider.html#instance-member-slides",
+    "src/glider/index.js~Glider#slides",
+    "member"
+  ],
+  [
+    "src/glider/index.js~glider#slideswrapper",
+    "class/src/glider/index.js~Glider.html#instance-member-slidesWrapper",
+    "src/glider/index.js~Glider#slidesWrapper",
+    "member"
+  ],
+  [
+    "src/glider/index.js~glider#spring",
+    "class/src/glider/index.js~Glider.html#instance-method-spring",
+    "src/glider/index.js~Glider#spring",
+    "method"
+  ],
+  [
+    "src/glider/index.js~glider#state",
+    "class/src/glider/index.js~Glider.html#instance-get-state",
+    "src/glider/index.js~Glider#state",
+    "member"
   ],
   [
     "src/glider/types.js",
@@ -502,6 +682,12 @@ window.esdocSearchIndex = [
     "file/src/helpers.js.html",
     "src/helpers.js",
     "file"
+  ],
+  [
+    "src/helpers.js~animationcallback",
+    "typedef/index.html#static-typedef-animationCallback",
+    "src/helpers.js~animationCallback",
+    "typedef"
   ],
   [
     "src/index.js",

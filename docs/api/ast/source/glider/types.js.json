@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 3141,
+  "end": 3084,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 105,
+      "line": 104,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 3141,
+    "end": 3084,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 105,
+        "line": 104,
         "column": 0
       }
     },
@@ -97,16 +97,16 @@
       },
       {
         "type": "CommentBlock",
-        "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @example\n * new Glider({\n *  onDestroy() {\n *    // Slider has been destroyed\n *  }\n *})\n ",
+        "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options\n * @example\n * new Glider({\n *  onDestroy(options) {\n *    // Slider has been destroyed\n *  }\n *})\n ",
         "start": 2069,
-        "end": 2393,
+        "end": 2336,
         "loc": {
           "start": {
             "line": 69,
             "column": 0
           },
           "end": {
-            "line": 82,
+            "line": 81,
             "column": 3
           }
         }
@@ -114,15 +114,15 @@
       {
         "type": "CommentBlock",
         "value": "*\n * @typedef callbackData\n * @property {?(number|Array.<number>)} previous\n *   Could be an Array, a number or null.\n *   * `null`: no items available\n *   * `number`: one item available\n *   * `array`: multiple items available\n * @property {?(number|Array.<number>)} current\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {?(number|Array.<number>)} next\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {Array.<number>} rest\n *   Array of all remaining slide indexes.\n *   If none are left the array is just empty\n ",
-        "start": 2395,
-        "end": 3140,
+        "start": 2338,
+        "end": 3083,
         "loc": {
           "start": {
-            "line": 84,
+            "line": 83,
             "column": 0
           },
           "end": {
-            "line": 104,
+            "line": 103,
             "column": 3
           }
         }
@@ -196,16 +196,16 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @example\n * new Glider({\n *  onDestroy() {\n *    // Slider has been destroyed\n *  }\n *})\n ",
+      "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options\n * @example\n * new Glider({\n *  onDestroy(options) {\n *    // Slider has been destroyed\n *  }\n *})\n ",
       "start": 2069,
-      "end": 2393,
+      "end": 2336,
       "loc": {
         "start": {
           "line": 69,
           "column": 0
         },
         "end": {
-          "line": 82,
+          "line": 81,
           "column": 3
         }
       }
@@ -213,15 +213,15 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @typedef callbackData\n * @property {?(number|Array.<number>)} previous\n *   Could be an Array, a number or null.\n *   * `null`: no items available\n *   * `number`: one item available\n *   * `array`: multiple items available\n * @property {?(number|Array.<number>)} current\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {?(number|Array.<number>)} next\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {Array.<number>} rest\n *   Array of all remaining slide indexes.\n *   If none are left the array is just empty\n ",
-      "start": 2395,
-      "end": 3140,
+      "start": 2338,
+      "end": 3083,
       "loc": {
         "start": {
-          "line": 84,
+          "line": 83,
           "column": 0
         },
         "end": {
-          "line": 104,
+          "line": 103,
           "column": 3
         }
       }
@@ -294,16 +294,16 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {callbackData} data Data about the slider activity\n * @param {Array.<Element>} slides Array of all slides\n * @example\n * new Glider({\n *  onDestroy() {\n *    // Slider has been destroyed\n *  }\n *})\n ",
+      "value": "*\n * Callback when the Glider has been destroyed\n * @typedef onDestroy\n * @memberof Glider\n * @type {function}\n * @param {PLUGIN_DEFAULTS|PRESET_DEFAULTS} options\n * @example\n * new Glider({\n *  onDestroy(options) {\n *    // Slider has been destroyed\n *  }\n *})\n ",
       "start": 2069,
-      "end": 2393,
+      "end": 2336,
       "loc": {
         "start": {
           "line": 69,
           "column": 0
         },
         "end": {
-          "line": 82,
+          "line": 81,
           "column": 3
         }
       }
@@ -311,15 +311,15 @@
     {
       "type": "CommentBlock",
       "value": "*\n * @typedef callbackData\n * @property {?(number|Array.<number>)} previous\n *   Could be an Array, a number or null.\n *   * `null`: no items available\n *   * `number`: one item available\n *   * `array`: multiple items available\n * @property {?(number|Array.<number>)} current\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {?(number|Array.<number>)} next\n *   Could be an Array, a number or null.\n * * `null`: no items available\n * * `number`: one item available\n * * `array`: multiple items available\n * @property {Array.<number>} rest\n *   Array of all remaining slide indexes.\n *   If none are left the array is just empty\n ",
-      "start": 2395,
-      "end": 3140,
+      "start": 2338,
+      "end": 3083,
       "loc": {
         "start": {
-          "line": 84,
+          "line": 83,
           "column": 0
         },
         "end": {
-          "line": 104,
+          "line": 103,
           "column": 3
         }
       }
@@ -337,15 +337,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 3141,
-      "end": 3141,
+      "start": 3084,
+      "end": 3084,
       "loc": {
         "start": {
-          "line": 105,
+          "line": 104,
           "column": 0
         },
         "end": {
-          "line": 105,
+          "line": 104,
           "column": 0
         }
       }
