@@ -179,7 +179,7 @@ const dataWrapper = (glider, opts) => {
   const pagerHandlers = []
   /**
    * Handle the previous button
-   * @param {event} e
+   * @param {Event} e
    */
   const handlePrev = e => {
     if (block) {
@@ -193,7 +193,7 @@ const dataWrapper = (glider, opts) => {
   }
   /**
    * Handle the next button
-   * @param {event} e
+   * @param {Event} e
    */
   const handleNext = e => {
     if (block) {

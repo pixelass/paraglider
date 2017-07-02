@@ -200,7 +200,7 @@ const parseObject = dataset => {
 /**
  * Prevents default event
  * @private
- * @param {event} e
+ * @param {Event} e
  * @example
  * el.addEventListener('mousemove', preventDefault)
  * el.addEventListener('dragstart', e => {

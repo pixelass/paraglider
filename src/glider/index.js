@@ -163,13 +163,13 @@ class Glider {
    *   Listens to touchstart if `enableTouch === true`
    *   scoped listener to determine activity
    * @listens {mousemove}
-   *   Listens to mousemove if `enableTouch === true`
+   *   Listens to mousemove if `enableSwipe === true`
    *   global listener to allow out of bounds movement.
    * @listens {mouseup}
-   *   Listens to mouseup if `enableTouch === true`
+   *   Listens to mouseup if `enableSwipe === true`
    *   global listener to allow out of bounds movement.
    * @listens {mousedown}
-   *   Listens to mousedown if `enableTouch === true`
+   *   Listens to mousedown if `enableSwipe === true`
    *   scoped listener to determine activity
    */
   addListeners() {
@@ -398,7 +398,7 @@ class Glider {
    * Find clientX from the event.
    * This helper will return the correct value for touch or mouse.
    * @private
-   * @param {event} e Mouse or touch event
+   * @param {Event} e Mouse or touch event
    * @returns {number} THe clientX of the event
    */
   getClientX(e) {
@@ -465,7 +465,7 @@ class Glider {
    * First interaction with the mouse or per touch will be used to set flags and
    * define initial values.
    * @private
-   * @param {event} e Mouse or touch event
+   * @param {Event} e Mouse or touch event
    */
   handleDown(e) {
     const clientX = this.getClientX(e)
@@ -516,7 +516,7 @@ class Glider {
    * Handler for mouse or touch movement.
    * Waits for a threshold and then records the movement on the `x` axis
    * @private
-   * @param {event} e Mouse or touch move event
+   * @param {Event} e Mouse or touch move event
    */
   handleMove(e) {
     if (this.state.down) {
