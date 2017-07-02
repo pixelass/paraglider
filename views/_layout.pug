@@ -32,5 +32,6 @@ html
       block main
     footer(class=layout.footer)
       p= `Copyright © ${currentYear} by Gregor Adams`
+    script(src="https://cdn.polyfill.io/v2/polyfill.min.js")
     block scripts
     script(src=`${data.fileName}.js?${timestamp}`)
