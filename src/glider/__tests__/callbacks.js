@@ -1,4 +1,5 @@
 /* global document */
+import 'babel-polyfill' // eslint-disable-line import/no-unassigned-import
 import test from 'ava'
 import initDom from '../../../test/jsdom'
 import Glider from '../'
