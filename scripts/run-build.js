@@ -48,8 +48,14 @@ const build = (watch = false) => new Promise((resolve, reject) => {
       if (ext.match(/.jpg/)) {
         sharp(file)
           .rotate()
-          .resize(1500, 1000)
+          .resize(1600, 1200)
+          .crop(sharp.strategy.entropy)
           .toFile(file.replace(demoFolder, buildFolder))
+        sharp(file)
+          .rotate()
+          .resize(200, 100)
+          .crop(sharp.strategy.attention)
+          .toFile(file.replace(demoFolder, buildFolder).replace('.jpg', '_thumbnail.jpg'))
         return
       }
       copy(file, buildFolder, {srcBase: demoFolder}, err => {

@@ -3,7 +3,7 @@ import path from 'path'
 function Longid() {
   const longid = (selector, file) => {
     const {name} = path.parse(file)
-    return `${name}--${selector}`
+    return `${name}__${selector}`
   }
   this.names = {}
   return (name, file) => {
