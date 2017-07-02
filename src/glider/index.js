@@ -376,6 +376,7 @@ class Glider {
     }
     /**
      * Animation flag. Calls the animation and stores the function to allow `cancelAnimationFrame`
+     * @private
      * @type {loop}
      */
     this.animation = animate(duration, progress, theEnd,
