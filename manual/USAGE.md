@@ -170,6 +170,3 @@ coverLeftRight(document.querySelector('.coverLeftRight'))
 ```
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
-
-Images in Demos via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)  
-Logo via [onlinewebfonts](http://www.onlinewebfonts.com)

@@ -14,12 +14,6 @@ Take a look at the [examples](https://github.com/pixelass/paraglider/blob/master
 ## Demos
 * [Main Examples](https://github.com/pixelass/paraglider/blob/master/demo/index.js)
 * [Main Demo](https://pixelass.github.io/paraglider/)
-* [Dist Examples](https://github.com/pixelass/paraglider/blob/master/demo/dist.js)
-* [Dist Demo](https://pixelass.github.io/paraglider/dist.html)
-* [Presets Examples](https://github.com/pixelass/paraglider/blob/master/demo/presets.js)
-* [Presets Demo](https://pixelass.github.io/paraglider/presets.html)
-* [Visible Slides Examples](https://github.com/pixelass/paraglider/blob/master/demo/visible-slides.js)
-* [Visible Slides Demo](https://pixelass.github.io/paraglider/visible-slides.html
 
 ## Codepen
 
@@ -28,6 +22,3 @@ Take a look at the [examples](https://github.com/pixelass/paraglider/blob/master
 * [Flubber](https://github.com/veltman/flubber/): [example](https://codepen.io/pixelass/pen/GEMvaG) on CodePen.
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
-
-Images in Demos via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)  
-Logo via [onlinewebfonts](http://www.onlinewebfonts.com)

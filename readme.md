@@ -69,5 +69,5 @@ You can use this plugin as a global plugin.
 
 © 2017 by [Gregor Adams](greg@pixelass.com)
 
-Images in Demos via [chrisaitken](https://www.flickr.com/photos/chrisaitken/) on [Flickr](https://www.flickr.com)  
+Images in Demos via [Beau Rogers](https://www.flickr.com/photos/beaurogers/) on [Flickr](https://www.flickr.com)  
 Logo via [onlinewebfonts](http://www.onlinewebfonts.com)
