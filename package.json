@@ -129,12 +129,11 @@
   },
   "babel": {
     "presets": [
-      "es2015",
       "stage-2",
       [
         "env",
         {
-          "debug": false,
+          "debug": true,
           "loose": true,
           "useBuiltIns": true,
           "targets": {
