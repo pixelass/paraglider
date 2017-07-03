@@ -42,7 +42,6 @@
     "docs": "babel-node ./scripts/jsdoc && esdoc",
     "eslint": "xo '{demo,src}/**/*.js'",
     "lint": "npm run eslint; npm run stylelint",
-    "prepush": "npm test",
     "prerelease": "npm run babel; npm test",
     "pretest": "bundlesize",
     "posttest": "npm run lint",
