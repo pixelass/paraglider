@@ -159,7 +159,7 @@
   "bundlesize": [
     {
       "path": "./dist/paraglider.min.js",
-      "threshold": "4 Kb"
+      "threshold": "40 Kb"
     }
   ],
   "xo": {
