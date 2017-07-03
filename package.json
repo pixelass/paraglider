@@ -114,13 +114,7 @@
     "xo": "^0.18.2"
   },
   "browserslist": [
-    "ie 11",
-    "last 2 chrome versions",
-    "last 2 safari versions",
-    "last 2 firefox versions",
-    "last 2 edge versions",
-    "last 2 ios versions",
-    "last 2 chromeandroid versions"
+     "chrome 59"
   ],
   "browserify": {
     "transform": [
@@ -138,13 +132,7 @@
           "useBuiltIns": true,
           "targets": {
             "browsers": [
-              "ie 11",
-              "last 2 chrome versions",
-              "last 2 safari versions",
-              "last 2 firefox versions",
-              "last 2 edge versions",
-              "last 2 ios versions",
-              "last 2 chromeandroid versions"
+              "chrome 59"
             ]
           }
         }
@@ -228,13 +216,7 @@
           "severity": "warning",
           "ignore": [],
           "browsers": [
-            "ie 11",
-            "last 2 chrome versions",
-            "last 2 chromeandroid versions",
-            "last 2 edge versions",
-            "last 2 ios versions",
-            "last 2 safari versions",
-            "last 2 firefox versions"
+            "chrome 59"
           ]
         }
       ],
