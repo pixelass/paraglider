@@ -22,6 +22,7 @@ const dist = (minify) => {
   }
   b.on('log', message => log.info(message))
   b.on('error', message => log.error(message))
+  b.transform(['babelify'])
   if (minify) {
     b.transform({
       exts: ['.js'],

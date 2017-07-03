@@ -88,16 +88,16 @@ const build = (watch = false) => new Promise((resolve, reject) => {
           b.on('update', bundle)
           b.plugin(watchify)
         } else {
-          b.transform('uglifyify', {
-            ignore: ['**/*.css'],
-            global: true,
-            mangle: true,
-            compress: {
-              sequences: true,
-              dead_code: true,
-              booleans: true
-            }
-          })
+          // b.transform('uglifyify', {
+          //   ignore: ['**/*.css'],
+          //   global: true,
+          //   mangle: true,
+          //   compress: {
+          //     sequences: true,
+          //     dead_code: true,
+          //     booleans: true
+          //   }
+          // })
         }
 
         b.on('log', message => log.info(message))
